@@ -26,13 +26,6 @@ export const transferAndWatch = async (seedWords, keypairType, transaction) => {
   });
 };
 
-export const transferContractTokenAndWatch = async (transaction) => {
-  const signedTransaction = await signTokenTransation(transaction)
-  const txnHash = signedTransaction.hash.toHex();
-  await updateTransactionState(transaction, txnHash, Transaction.PENDING);
-  tokenTransaction(transaction, signedTransaction, txnHash);
-}
-
 export const transferCandyAndWatch = async (transaction) => {
   const signedTransaction = await signCandyTransaction(transaction);
   const txnHash = signedTransaction.hash.toHex();
