@@ -1,0 +1,26 @@
+import React, { Component } from 'react';
+import FontMedium from '../common/fonts/font-medium';
+import FontRegular from '../common/fonts/font-regular';
+import {convertBalanceToShow} from '../../../lib/services/numberFormatter'
+import './styles.css';
+
+export default class TokenList extends Component {
+  render() {
+    const {
+      tokens, onTokenSelected, ...otherProps
+    } = this.props;
+    return (
+      <div {...otherProps}>
+        {
+          tokens.map(token => (
+            <div key={token.tokenSymbol} className='token-item-container' onClick={() => onTokenSelected(token)}>
+              <FontMedium text={token.tokenSymbol} className='token-item-details-symbol'/>
+              <FontRegular className="token-item-details-amount" text={convertBalanceToShow(token.balance, token.decimals)} />
+            </div>
+          ))
+        }
+        
+      </div>
+    );
+  }
+}
