@@ -159,12 +159,31 @@ const getTokenBalance = async (senderAddress, token) => {
   return balance;
 }
 
-const isValidTokenAmount = (balanceInBN, totalAmount, network, famountInBN, token) => {
+const isValidTokenAmount = async (balanceInBN, totalAmount, network, famountInBN, feeInBN, token, senderAddress) => {
   if (token.tokenSymbol === ChainApi.getTokenSymbol()) {
     return isValidTxnAmount(balanceInBN, totalAmount, network);
+  } else if (token.tokenSymbol === 'Candy') {
+    const { balance } = await getBalance(senderAddress);
+    const defaultBalance = new BN(balance);
+    return balanceInBN.gte(famountInBN) && defaultBalance.gte(feeInBN)
+  } else {
+    throw new Error('Invalid Token Type');
   }
+}
 
-  return balanceInBN.gte(famountInBN)
+const getFeesByPaymentInfo = async (txnType, senderAddress, toAddress, amountInBn, tokenSelected) => {
+  switch (txnType) {
+    case Transaction.TRANSFER_COINS: {
+      if (tokenSelected.tokenSymbol === ChainApi.getTokenSymbol() || tokenSelected.tokenSymbol === 'Candy') {
+        const fees = FeeService.getTrasactionFees(senderAddress, toAddress, amountInBn, tokenSelected);
+        return fees;
+      } else {
+        throw new Error('Invalid Token Type');
+      }
+    }
+    default:
+      throw new Error('Invalid Transaction Type');
+  }
 }
 
 const validateAmount = async (senderAddress, network, transaction, seedWords, keypairType) => {
@@ -176,12 +195,12 @@ const validateAmount = async (senderAddress, network, transaction, seedWords, ke
   // TODO MM: Take 0 Signature size to show 10 milli fees like polkadot
   // const transactionLength = await getTxnEncodedLength(to, fAmount, seedWords, keypairType);
   const transactionLength = Transaction.SIGNATURE_SIZE;
-  const fees = await getTransactionFees(txnType, senderAddress, to, transactionLength); // in femto
+  const fees = await getFeesByPaymentInfo(txnType, senderAddress, to, new BN(fAmount), tokenSelected); // in femto
   const balance = await getTokenBalance(senderAddress, tokenSelected); // in femto
   const { totalFee } = fees;
   const totalAmount = new BN(fAmount).add(new BN(totalFee));
   const balanceInBN = new BN(balance);
-  const isValidAmount = isValidTokenAmount(balanceInBN, totalAmount, network, new BN(fAmount), tokenSelected);
+  const isValidAmount = await isValidTokenAmount(balanceInBN, totalAmount, network, new BN(fAmount), new BN(totalFee), tokenSelected, senderAddress);
   if (isValidAmount) {
     return {
       to,

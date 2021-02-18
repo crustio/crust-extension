@@ -81,7 +81,7 @@ export default class TokenDetailsPage extends Component {
     } = this.props;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
-    const transDisplay = transactions.filter(trans => trans.metadata.tokenSelected.address === token.address)
+    const transDisplay = transactions.filter(trans => trans.metadata.tokenSelected !== undefined && trans.metadata.tokenSelected.tokenSymbol === token.tokenSymbol)
     return (
       <div>
         <SubHeader
