@@ -45,7 +45,7 @@ export const ADD_ADDRESS = {
   value: 'add_address',
 };
 
-export const OPTIONS = [MANAGE_ACCOUNT, ADDRESS_BOOK, ADD_TOKEN, ABOUT, DEVELOPER_MODE];
+export const OPTIONS = [MANAGE_ACCOUNT, ADDRESS_BOOK, ABOUT];
 
 export const ACCOUNT_MENU_OPTIONS = [RENAME];
 
