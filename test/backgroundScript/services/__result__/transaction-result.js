@@ -51,8 +51,8 @@ export const SUBMIT_TRANSACTION = {
   internal: {
     address: '5D2RgkSCXrFJpMa54CakuMhHsyVE96iouvRVtStRrwmh7JYE',
     network: {
-      faucetText: 'Universal Faucet (at BlockX Labs).',
-      faucetUrl: 'https://faucets.blockxlabs.com/',
+      faucetText: 'Universal Faucet (at Crust network).',
+      faucetUrl: 'https://apps.crust.network/',
       networkFullUrl: 'wss://poc3-rpc.polkadot.io/',
       networkPort: '',
       networkURL: 'wss://poc3-rpc.polkadot.io/',
@@ -92,8 +92,8 @@ export const SUBMITED_SUCCESS_TRANSACTION = {
   internal: {
     address: '5D2RgkSCXrFJpMa54CakuMhHsyVE96iouvRVtStRrwmh7JYE',
     network: {
-      faucetText: 'Universal Faucet (at BlockX Labs).',
-      faucetUrl: 'https://faucets.blockxlabs.com/',
+      faucetText: 'Universal Faucet (at Crust Labs).',
+      faucetUrl: 'https://apps.crust.network/',
       networkFullUrl: 'wss://poc3-rpc.polkadot.io/',
       networkPort: '',
       networkURL: 'wss://poc3-rpc.polkadot.io/',
@@ -133,8 +133,8 @@ export const SUBMITED_FAIL_TRANSACTION = {
   internal: {
     address: '5D2RgkSCXrFJpMa54CakuMhHsyVE96iouvRVtStRrwmh7JYE',
     network: {
-      faucetText: 'Universal Faucet (at BlockX Labs).',
-      faucetUrl: 'https://faucets.blockxlabs.com/',
+      faucetText: 'Universal Faucet (at Crust Network).',
+      faucetUrl: 'https://apps.crust.network/',
       networkFullUrl: 'wss://poc3-rpc.polkadot.io/',
       networkPort: '',
       networkURL: 'wss://poc3-rpc.polkadot.io/',

@@ -2,7 +2,7 @@
   "version": "0.1.0",
   "applications": {
     "gecko": {
-      "id": "info@blockxlabs.com",
+      "id": "info@crust.network",
       "strict_min_version": "48.0"
     }
   },

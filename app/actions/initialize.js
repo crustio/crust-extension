@@ -8,20 +8,14 @@ import { navigateAndServiceIfDappRequest } from './dapp';
 
 export const onBoard = () => async dispatch => {
   try {
-    const { isAgree } = await dispatch(verifyTermsVersion());
-    if (!isAgree) {
+    await dispatch(AccountActions.fetchAndSetAccounts);
+    const { result } = await OnBoarding.getIsAppOnBoarded();
+    if (Object.prototype.hasOwnProperty.call(result, 'App') && result.App.isAppOnBoarded) {
+      dispatch(navigateAndServiceIfDappRequest());
       dispatch(AppActions.updateAppLoading(false));
-      dispatch(AppActions.changePage(NavConstants.TERMS_PAGE));
     } else {
-      await dispatch(AccountActions.fetchAndSetAccounts);
-      const { result } = await OnBoarding.getIsAppOnBoarded();
-      if (Object.prototype.hasOwnProperty.call(result, 'App') && result.App.isAppOnBoarded) {
-        dispatch(navigateAndServiceIfDappRequest());
-        dispatch(AppActions.updateAppLoading(false));
-      } else {
-        dispatch(AppActions.updateAppLoading(false));
-        dispatch(AppActions.changePage(NavConstants.CREATE_ACCOUNT_PAGE));
-      }
+      dispatch(AppActions.updateAppLoading(false));
+      dispatch(AppActions.changePage(NavConstants.CREATE_ACCOUNT_PAGE));
     }
   } catch (e) {
     dispatch(AppActions.updateAppLoading(false));

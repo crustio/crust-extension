@@ -43,13 +43,6 @@ const reducer = (state = initialState, action) => {
           balance: action.balance,
         },
       };
-    case Types.UPDATE_IS_LINK_TO_BLOCKXLABS_FAUCET:
-      return {
-        ...state,
-        ...{
-          isLinkToFaucet: action.isLinkToFaucet,
-        },
-      };
     default:
       return state;
   }

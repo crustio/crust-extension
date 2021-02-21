@@ -28,11 +28,6 @@ export const updateSelectedAccountBalance = balance => ({
   balance,
 });
 
-export const updateIsLinkToBlockxLabFaucet = isLinkToFaucet => ({
-  type: AccountActionTypes.UPDATE_IS_LINK_TO_BLOCKXLABS_FAUCET,
-  isLinkToFaucet,
-});
-
 export const setSeedWords = seedWords => ({
   type: AccountActionTypes.SET_SEED_WORDS,
   seedWords,
@@ -60,7 +55,6 @@ export const fetchAndSetBalances = async (dispatch, getState) => {
   const isLinkToFaucet = network.faucetUrl && balObj.balance === '0';
   dispatch(updateAccountBalance(balances));
   dispatch(updateSelectedAccountBalance(balObj));
-  dispatch(updateIsLinkToBlockxLabFaucet(isLinkToFaucet));
 };
 
 export const setInitialBalance = async (dispatch, getState) => {
