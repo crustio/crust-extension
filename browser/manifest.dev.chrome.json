@@ -3,7 +3,7 @@
   "background": {
     "page": "background.html"
   },
-  "name": "Crust",
+  "name": "Crust Wallet",
   "manifest_version": 2,
   "description": "Crust network Wallet",
   "browser_action": {

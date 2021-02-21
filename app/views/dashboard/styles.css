@@ -1,5 +1,5 @@
 .wallet-container {
-  background-color: rgba(163, 44, 113, 1);
+  background-image: linear-gradient(94.54deg, #FF8212 0%, #ED4454 100%);
   display: flex;
   flex-direction: row;
   color: rgba(255, 255, 255, 1);
@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: linear-gradient(to bottom, #a32c71, #d75fa0);
+  background-image: linear-gradient(94.54deg, #FF8212 0%, #ED4454 100%) !important;
   height: 142px;
   width: 100%;
   padding: 4px 18px 16px 18px;

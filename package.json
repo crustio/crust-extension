@@ -1,5 +1,5 @@
 {
-  "name": "Crust",
+  "name": "crust-wallet",
   "version": "0.1.0",
   "description": "Crust Wallet - polkadot web extension wallet",
   "scripts": {

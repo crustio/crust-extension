@@ -107,6 +107,7 @@ export default class CreateAccount extends Component {
 
   handleAliasChange = prop => e => {
     const { value } = e.target;
+
     this.setState({
       [prop]: value,
     });
@@ -333,7 +334,10 @@ export default class CreateAccount extends Component {
             nextButtonName={buttonName}
           />
         ) : (
-          <FooterButton onClick={onSubmit} name={buttonName} />
+          <div className='create-account-button'>
+            <FooterButton onClick={onSubmit} name={buttonName} />
+          </div>
+          
         )}
       </div>
     );

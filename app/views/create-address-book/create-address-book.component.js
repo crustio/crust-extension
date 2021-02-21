@@ -110,7 +110,7 @@ export default class CreateAddressBook extends Component {
     });
   };
 
-  handelNetworkChnage = e => {
+  handelNetworkChange = e => {
     const network = e.target.value;
     this.setState({ network });
   };
@@ -241,7 +241,7 @@ export default class CreateAddressBook extends Component {
           onSubmit={this.onSubmit}
           networks={networks}
           network={network}
-          onNetworkChange={this.handelNetworkChnage}
+          onNetworkChange={this.handelNetworkChange}
         />
       </div>
     );

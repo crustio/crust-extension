@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Avatar from '../../common/identicon';
 import CrustInput from '../../common/crust-input';
+import './styles.css';
 
 export default class TransferTo extends Component {
   render() {
@@ -19,33 +20,35 @@ export default class TransferTo extends Component {
       ...otherProps
     } = this.props;
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-        {...otherProps}
-      >
-        <Avatar value={addressValue} size={size} theme={theme} />
-        <CrustInput
+      <div>
+        <div
           style={{
-            width: '251px',
-            justifySelf: 'flex-start',
-            marginLeft: '22px',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
-          value={toValue}
-          error={isError}
-          label={label}
-          name={propName}
-          helperText={errorMessage}
-          onChange={onChange(propName)}
-          onBlur={onBlur}
-          inputRef={inputRef}
-          spellCheck={false}
-        />
+          {...otherProps}
+        >
+          <Avatar value={addressValue} size={size} theme={theme} />
+          <div>
+            <CrustInput
+              className="transfer-to-input"
+              onChange={onChange(propName)}
+              placeholder={label}
+              value={toValue}
+              spellCheck={false}
+            />
+            {isError ? (
+              <span className="tranfer-to-error-msg">{errorMessage}</span>
+            ) : (
+              <span className="place-holder"> </span>
+            )}
+          </div>
+        </div>
+
       </div>
+      
     );
   }
 }

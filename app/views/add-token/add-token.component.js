@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Clear from '@material-ui/icons/Clear';
 import SubHeader from '../../components/common/sub-header';
-import FooterButton from '../../components/common/footer-button';
+import FooterButton from '../../components/common/footer-button-old';
 import CrustInput from '../../components/common/crust-input';
 import { DASHBOARD_PAGE } from '../../constants/navigation';
 import './styles.css';

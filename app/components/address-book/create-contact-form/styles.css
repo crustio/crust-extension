@@ -1,10 +1,58 @@
+.contact-fname-input-container {
+  margin-top: 22.7px;
+}
+
 .contact-fname-input {
-  margin: 22.7px 0 0 0 !important;
+  width: 100%;
+}
+
+.contact-fname-input fieldset {
+  border: 0;
+  font-size: 14px;
+  background-color: rgba(65, 72, 93, 0.1);
+}
+
+.contact-fname-input:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.contact-fname-input-meter {
+  margin-top: 50px;
+}
+
+.contact-lname-input-container {
+  margin-top: 22.7px;
 }
 
 .contact-lname-input {
-  margin: 22.7px 0 0 0 !important;
+  width: 100%;
 }
+
+.contact-lname-input fieldset {
+  border: 0;
+  font-size: 14px;
+  background-color: rgba(65, 72, 93, 0.1);
+}
+
+.contact-lname-input:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.contact-lname-input-meter {
+  margin-top: 50px;
+}
+
 .contact-network-dropdown {
   margin: 22.7px 0 0 0 !important;
+}
+
+.error-msg {
+  color: #FA5050;
+  height: 20px;
+}
+
+.place-holder {
+  height: 20px;
 }

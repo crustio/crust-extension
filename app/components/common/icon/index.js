@@ -15,6 +15,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import Settings from '@material-ui/icons/Settings';
 import MoreVert from '@material-ui/icons/MoreVert';
 import WifiOff from '@material-ui/icons/WifiOff';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 const IconEdit = props => (
   <FontAwesomeIcon icon={faEdit} style={{ color: '#2f112b', fontSize: props.size }} {...props} />
@@ -54,6 +55,8 @@ const IconTransfer = props => (
 const IconSettings = props => <Settings style={{ ...props.style }} {...props} />;
 
 const IconVisibility = props => <Visibility style={{ ...props.style }} {...props} />;
+
+const IconVisibilityOff = props => <VisibilityOff style={{ ...props.style }} {...props} />;
 
 const WalletDropDownIcon = props => (
   <div {...props}>
@@ -204,4 +207,5 @@ export {
   MoreVertIcon,
   AddressBook,
   File,
+  IconVisibilityOff
 };

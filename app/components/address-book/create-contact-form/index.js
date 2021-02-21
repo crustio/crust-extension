@@ -51,28 +51,33 @@ export default class CreateContactForm extends Component {
           onChange={handleToChange}
           inputRef={addressInputRef}
         />
-        <CrustInput
-          className="contact-fname-input"
-          value={fname}
-          onChange={handleFnameChange(fnamePropName)}
-          label={fnameLabel}
-          error={isFnameError}
-          helperText={fnameErrorMessage}
-          name={fnamePropName}
-          inputRef={fnameInputRef}
-          onBlur={handleFnameOnBlur}
-        />
-        <CrustInput
-          className="contact-lname-input"
-          value={lname}
-          onChange={handleLnameChange(lnamePropName)}
-          label={lnameLabel}
-          error={isLnameError}
-          helperText={lnameErrorMessage}
-          name={lnamePropName}
-          inputRef={lnameInputRef}
-          onBlur={handleLnameOnBlur}
-        />
+        <div className='contact-fname-input-container'>
+          <CrustInput
+            className="contact-fname-input"
+            value={fname}
+            onChange={handleFnameChange(fnamePropName)}
+            placeholder={fnameLabel}
+          />
+          {isFnameError ? (
+              <span className="error-msg">{fnameErrorMessage}</span>
+            ) : (
+              <span className="place-holder"> </span>
+            )}
+        </div>
+        <div className='contact-lname-input-container'>
+          <CrustInput
+            className="contact-lname-input"
+            value={lname}
+            onChange={handleLnameChange(lnamePropName)}
+            placeholder={lnameLabel}
+          />
+          {isLnameError ? (
+              <span className="error-msg">{lnameErrorMessage}</span>
+            ) : (
+              <span className="place-holder"> </span>
+            )}
+        </div>
+        
         <DropDown
           className="contact-network-dropdown"
           options={networks}

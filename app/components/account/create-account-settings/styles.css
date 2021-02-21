@@ -5,4 +5,35 @@
 
 .account-alias-input {
   width: 100%;
+  display: flex;
+  width: 321px;
+  height: 54.82px;
+}
+
+.account-alias-input fieldset {
+  border: 0;
+  font-size: 14px;
+  background-color: rgba(65, 72, 93, 0.1);
+}
+
+.account-alias-input:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.input-margin {
+  margin-top: 12px !important;
+}
+
+.account-alias-input-meter {
+  margin-top: 50px;
+}
+
+.error-msg {
+  color: #FA5050;
+  height: 20px;
+}
+
+.place-holder {
+  height: 20px;
 }

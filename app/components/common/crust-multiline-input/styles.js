@@ -6,6 +6,15 @@ export const styles = () => ({
   textField: {
     width: '320px',
   },
+  underline: {
+    borderBottom: 'none !important',
+    '&:after': {
+      borderBottom: 'none !important',
+    },
+    '&:before': {
+      borderBottom: 'none !important',
+    },
+  },
   inputRoot: {
     backgroundColor: 'rgba(0, 0, 0, 0.06)',
     borderRadius: '4px',
@@ -20,25 +29,15 @@ export const styles = () => ({
     '&::placeholder': {
       color: '#000000',
       opacity: '0.6',
-      fontSize: '16px',
+      fontSize: '14px',
       fontFamily: 'Roboto-Regular',
-    },
-  },
-  inputUnderline: {
-    '&::before': { border: 'none' },
-    '&::after': { borderBottom: '2px solid rgba(215, 95, 160, 1)' },
-  },
-  inputErrorUnderline: {
-    '&$inputError': {
-      '&::before': { border: 'none' },
-      '&::after': { borderBottom: '2px solid rgba(0, 0, 0, 0.3)' },
     },
   },
   inputError: {},
   helperText: {
     paddingLeft: '16px',
     '&$helperTextError': {
-      color: 'rgba(176, 0, 32, 1)',
+      color: '#FA5050',
       fontFamily: 'Roboto-Regular',
       fontSize: '11px',
     },

@@ -15,7 +15,7 @@ export default class TermsText extends Component {
         </p>
         <ol className="c7 lst-kix_ibdn0zobuwho-0 start" start="1">
           <li className="c1 c3">
-            <span>Crust Network </span>
+            <span>API Consulting dba Crust Network </span>
             <span>
               provides Crust Wallet as a platform for managing Polkadot Network accounts, and
               allowing ordinary websites to interact with the Polkadot Network, while keeping the

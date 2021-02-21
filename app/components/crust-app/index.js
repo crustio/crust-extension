@@ -10,6 +10,7 @@ import Options from '../options';
 import FontRegular from '../common/fonts/font-regular';
 import { NetworkDisconnectionIcon } from '../common/icon';
 import './styles.css';
+import CrustLogo from '../common/crust-logo';
 
 export default class CrustApp extends Component {
   render() {
@@ -71,7 +72,10 @@ export default class CrustApp extends Component {
       <CrustContainer blocking={isLoading}>
         <div {...otherProps}>
           <Header page={page} className={CrustHeaderClassNames}>
-            <FontRegular className="crust-header-text" text="Crust" />
+            <div className="crust-row">
+              <CrustLogo className="crust-logo"/>
+              <div className="crust-header-text">Crust Wallet</div>
+            </div>
             <div className={CrustConfigClassNames}>
               <NetworkDisconnectionIcon
                 title="Network unavailable"

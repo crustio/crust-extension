@@ -26,14 +26,10 @@ export default class AccountDetails extends Component {
         )}
         {editMode && (
           <CrustInput
-            inputRef={inputRef}
-            value={aliasValue}
             className="account-input"
-            inputStyles={{ style: { padding: '1px 1px 1px 2px' } }}
-            onBlur={onAliasInputBlur}
             onChange={onAliasChange}
-            onKeyPress={onAliasInputKeyPress}
-            withWhiteColor
+            onBlur={onAliasInputBlur}
+            value={aliasValue}
           />
         )}
         {!editMode && (

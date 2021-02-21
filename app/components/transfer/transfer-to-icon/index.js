@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Avatar from '../../common/identicon';
 import CrustInput from '../../common/crust-input';
 import AddressBookAdorment from '../address-book-adornment';
+import './styles.css';
 
 export default class TransferToIcon extends Component {
   render() {
@@ -30,26 +31,30 @@ export default class TransferToIcon extends Component {
         }}
         {...otherProps}
       >
-        <Avatar value={addressValue} size={size} theme={theme} />
-        <CrustInput
-          style={{
-            width: '251px',
-            justifySelf: 'flex-start',
-            marginLeft: '22px',
-          }}
-          value={toValue}
-          error={isError}
-          label={label}
-          name={propName}
-          helperText={errorMessage}
-          onChange={onChange(propName)}
-          onBlur={onBlur}
-          inputRef={inputRef}
-          spellCheck={false}
-          InputProps={{
-            endAdornment: <AddressBookAdorment position="end" onClick={onAddressBookClick} />,
-          }}
-        />
+        <div>
+          <Avatar value={addressValue} size={size} theme={theme} />
+          <span className="place-holder"> </span>
+        </div>
+        
+
+        <div>
+          <CrustInput
+            className='transfer-to-icon-input'
+            value={toValue}
+            onChange={onChange(propName)}
+            placeholder={label}
+            spellCheck={false}
+            endAdornment={(
+              <AddressBookAdorment position="end" onClick={onAddressBookClick} />
+            )}
+          />
+          {isError ? (
+            <span className="tranfer-to-icon-error-msg">{errorMessage}</span>
+          ) : (
+            <span className="place-holder"> </span>
+          )}
+        </div>
+        
       </div>
     );
   }

@@ -1,0 +1,35 @@
+
+.transfer-to-icon-input {
+  width: 251px;
+  justify-self: flex-start;
+  margin-left: 22px;
+}
+
+.transfer-to-icon-input fieldset {
+  border: 0;
+  font-size: 14px;
+  background-color: rgba(65, 72, 93, 0.1);
+}
+
+.transfer-to-icon-input:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.input-margin {
+  margin-top: 12px !important;
+}
+
+.transfer-to-icon-input-meter {
+  margin-top: 50px;
+}
+
+.tranfer-to-icon-error-msg {
+  color: #FA5050;
+  height: 20px;
+  margin-left: 22px;
+}
+
+.place-holder {
+  height: 20px;
+}

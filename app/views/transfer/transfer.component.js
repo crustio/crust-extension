@@ -61,13 +61,13 @@ export default class Transfer extends Component {
       this.props.updateAppLoading(false);
       this.props.changePage(NavConstants.CONFIRM_PAGE);
     }
-    if (props.error && props.error.isError) {
-      if (props.isToAddressError) {
-        this.toInput.focus();
-      } else {
-        this.amountInput.focus();
-      }
-    }
+    // if (props.error && props.error.isError) {
+    //   if (props.isToAddressError) {
+    //     this.toInput.focus();
+    //   } else {
+    //     this.amountInput.focus();
+    //   }
+    // }
   }
 
   handleSubheaderBackBtn = () => {
