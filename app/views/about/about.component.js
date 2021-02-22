@@ -5,10 +5,13 @@ import FontRegular from '../../components/common/fonts/font-regular';
 import FooterButton from '../../components/common/footer-button';
 import './styles.css';
 import Link from '../../components/common/link';
+import { withTranslation } from 'react-i18next';
+import * as NavConstants from '../../constants/navigation';
 
-export default class About extends Component {
+class About extends Component {
   onClick = () => {
     this.props.changePage(this.props.backupPage);
+    this.props.updateBackupPage(NavConstants.DASHBOARD_PAGE);
   };
 
   renderInfoLinks() {
@@ -29,7 +32,7 @@ export default class About extends Component {
       <div>
         <SubHeader
           icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
-          title="About"
+          title={this.props.t('About')}
           backBtnOnClick={this.onClick}
         />
         <div className="about-container">
@@ -44,3 +47,5 @@ export default class About extends Component {
     );
   }
 }
+
+export default withTranslation()(About);

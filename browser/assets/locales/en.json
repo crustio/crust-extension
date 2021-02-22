@@ -1,0 +1,22 @@
+{
+  "Receive": "Receive",
+  "Send": "Send",
+  "Assets": "Assets",
+  "Activity": "Activity",
+  "Amount": "Amount",
+  "Next": "Next",
+  "About": "About",
+  "Transactions": "Transactions",
+  "No transactions yet.": "No transactions yet.",
+  "Account Management": "Account Management",
+  "Add Account": "Add Account",
+  "Rename": "Rename",
+  "IMPORT": "IMPORT",
+  "GENERATE": "GENERATE",
+  "Go Back": "Go Back",
+  "Advanced": "Advanced",
+  "Click to copy": "Click to copy",
+  "Address Book": "Address Book",
+  "Chinese": "Chinese",
+  "English": "English"
+}

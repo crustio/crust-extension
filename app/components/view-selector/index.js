@@ -19,6 +19,7 @@ import ConnectRequest from '../../views/connect-request';
 import DAppRequests from '../../views/dapp-requests';
 import * as NavConstant from '../../constants/navigation';
 import TokenDetailsPage from '../../views/token-details';
+import LanguageSetting from '../../views/language-setting';
 
 const getView = page => {
   switch (page) {
@@ -60,6 +61,8 @@ const getView = page => {
       return <AddToken />;
     case NavConstant.TOKEN_DETAILS_PAGE:
       return <TokenDetailsPage />
+    case NavConstant.LANGUAGE_SETTING_PAGE:
+      return <LanguageSetting />
     default:
       return <Dashboard />;
   }

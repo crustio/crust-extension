@@ -31,6 +31,14 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
             ResponseService.setHashKey(request, sendResponse);
             break;
           }
+          case MessageTypes.BG_APP_SET_LANGUAGE: {
+            ResponseService.setLanguage(request, sendResponse);
+            break;
+          }
+          case MessageTypes.BG_APP_GET_LANGUAGE: {
+            ResponseService.getLanguage(request, sendResponse);
+            break;
+          }
           case MessageTypes.BG_ACCOUNTS_UPDATE_ALIAS: {
             ResponseService.updateAccountAlias(request, sendResponse);
             break;

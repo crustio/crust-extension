@@ -1,4 +1,4 @@
-import { MANAGE_ACCOUNT_PAGE, ADDRESS_BOOK_PAGE, ADD_TOKEN_PAGE } from './navigation';
+import { MANAGE_ACCOUNT_PAGE, ADDRESS_BOOK_PAGE, ADD_TOKEN_PAGE, LANGUAGE_SETTING_PAGE } from './navigation';
 
 export const ADD_TOKEN = {
   text: 'Add Token',
@@ -45,7 +45,12 @@ export const ADD_ADDRESS = {
   value: 'add_address',
 };
 
-export const OPTIONS = [MANAGE_ACCOUNT, ADDRESS_BOOK, ABOUT];
+export const LANGUAGE_SETTING = {
+  text: 'Language Setting',
+  value: LANGUAGE_SETTING_PAGE,
+};
+
+export const OPTIONS = [MANAGE_ACCOUNT, ADDRESS_BOOK, LANGUAGE_SETTING, ABOUT];
 
 export const ACCOUNT_MENU_OPTIONS = [RENAME];
 

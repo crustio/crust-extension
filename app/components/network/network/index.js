@@ -4,8 +4,9 @@ import FontRegular from '../../common/fonts/font-regular';
 import { DISABLE_NETWORKS_PAGES_GROUP } from '../../../constants/navigation';
 import { shortenName } from '../../../services/wallet-service';
 import './styles.css';
+import { withTranslation } from 'react-i18next';
 
-export default class Network extends Component {
+class Network extends Component {
   state = {
     anchorEl: null,
   };
@@ -44,3 +45,5 @@ export default class Network extends Component {
     );
   }
 }
+
+export default withTranslation()(Network);

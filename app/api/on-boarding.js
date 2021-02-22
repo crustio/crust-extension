@@ -31,3 +31,20 @@ export const fetchManifest = async () => {
   const manifest = await getManifest();
   return manifest;
 };
+
+export const fetchLanguage = async () => {
+  const { message, status, result } = await sendMessage({
+    type: MessageTypes.BG_APP_GET_LANGUAGE,
+  });
+  throwIfNoSuccess({ message, status });
+  return { result };
+}
+
+export const setLangeuage = async language => {
+  const { message, status, result } = await sendMessage({
+    type: MessageTypes.BG_APP_SET_LANGUAGE,
+    data: language,
+  });
+  throwIfNoSuccess({ message, status });
+  return { result };
+}
