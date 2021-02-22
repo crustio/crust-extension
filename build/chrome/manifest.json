@@ -1,11 +1,11 @@
 {
-  "version": "0.1.0",
+  "version": "0.5.0",
   "background": {
     "page": "background.html"
   },
-  "name": "Crust",
+  "name": "Crust Wallet",
   "manifest_version": 2,
-  "description": "Crust network Wallet",
+  "description": "Crust Network Wallet",
   "browser_action": {
     "default_title": "Crust Wallet",
     "default_popup": "popup.html"

@@ -33,7 +33,7 @@ export default class About extends Component {
           backBtnOnClick={this.onClick}
         />
         <div className="about-container">
-          <FontRegular className="about-title" text={'Crust Wallet'} />
+          <FontRegular className="about-title" text={manifest.name} />
           <FontRegular className="about-version" text={`Version ${manifest.version}`} />
           {this.renderInfoLinks()}
           <div className="about-button">
