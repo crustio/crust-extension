@@ -27,8 +27,8 @@ export default class TokenDetails extends Component {
           className="token-detail-footer"
           handleDeposit={handleDeposit}
           handleSend={handleSend}
-          receiveButtonName="receive"
-          sendButtonName="send"
+          receiveButtonName="Receive"
+          sendButtonName="Send"
         />
       </div>
     );

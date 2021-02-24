@@ -89,7 +89,6 @@ class ListItemCard extends Component {
             onClose={this.handleClose}
           />
         </ListItem>
-        <DarkDivider style={{ width: '100%' }} />
       </div>
     );
   }

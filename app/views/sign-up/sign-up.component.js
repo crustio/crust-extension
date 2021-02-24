@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import CrustPassword from '../../components/common/password/crust-password';
 import CrustInput from '../../components/common/crust-input';
 import ContentHeader from '../../components/common/content-header';
-import PasswordStrength from '../../components/common/password/password-strength';
 import FooterButton from '../../components/common/footer-button';
+import LogoBig from '../../images/crust-logo-big.svg';
 import './styles.css';
 
 const errorMessage = 'Must be 8 characters or more in length.';
@@ -113,12 +113,16 @@ export default class SignUp extends Component {
     } = this.state;
     return (
       <div className="sign-up-container">
+        <div className="sign-up-img-contianer">
+          <img src={LogoBig} alt="logo1" />
+        </div>
         <ContentHeader
           className="sign-up-content-header"
           title="Create A Password To Secure Your Account"
           description="The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them."
         />
         <CrustPassword
+          standardInput={true}
           className="sign-up-password"
           onChange={e => this.handleOnChange('password', e)}
           password={password}
@@ -131,6 +135,7 @@ export default class SignUp extends Component {
           <span className="place-holder"> </span>
         )}
         <CrustInput
+          standardInput={true}
           className="sign-up-password"
           onChange={this.handleOnChange('passwordRepeat')}
           type="password"
@@ -142,7 +147,7 @@ export default class SignUp extends Component {
         ) : (
           <span className="place-holder"> </span>
         )}
-        <FooterButton onClick={this.handleClick} disabled={this.state.disabled} name="create" />
+        <FooterButton onClick={this.handleClick} disabled={this.state.disabled} name="Create" />
       </div>
     );
   }

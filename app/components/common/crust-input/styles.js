@@ -3,7 +3,7 @@ export const styles = () => ({
     fontSize: '14px',
     '&:focus': {
       border: 'none',
-      color: 'black',
+      color: '#858B9C',
     },
   },
   helperText: {
@@ -20,7 +20,7 @@ export const styles = () => ({
   },
   inputUnderline: {
     '&:before': { border: 'none' },
-    '&:after': { borderBottom: '2px solid rgba(215, 95, 160, 1)' },
+    '&:after': { borderBottom: 'none' },
     '&:hover': { border: 'none' },
   },
   inputErrorUnderline: {

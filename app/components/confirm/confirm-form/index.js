@@ -23,24 +23,27 @@ export default class ConfirmForm extends Component {
     } = this.props;
     return (
       <div className="confirm-form-container">
-        <ConfirmFromTo to={to} theme={theme} from={address} alias={alias} />
-        <DarkDivider className="confirm-form-amount-divider" />
-        <ConfirmParticular
-          className="confirm-form-amount-container"
-          description="AMOUNT"
-          price={`${transferAmount}`}
-        />
-        <ConfirmParticular
-          className="confirm-form-fee-container"
-          description="FEE"
-          price={`${transferFee}`}
-        />
-        <DarkDivider className="confirm-form-total-amount-divider" />
-        <ConfirmParticular
-          className="confirm-form-total-container"
-          description="TOTAL"
-          price={`${totalTransferAmount}`}
-        />
+        <div className="confirm-form-top-container">
+          <ConfirmFromTo to={to} theme={theme} from={address} alias={alias} />
+          <DarkDivider className="confirm-form-amount-divider" />
+          <ConfirmParticular
+            className="confirm-form-amount-container"
+            description="AMOUNT"
+            price={`${transferAmount}`}
+          />
+          <ConfirmParticular
+            className="confirm-form-fee-container"
+            description="FEE"
+            price={`${transferFee}`}
+          />
+          <DarkDivider className="confirm-form-total-amount-divider" />
+          <ConfirmParticular
+            className="confirm-form-total-container"
+            description="TOTAL"
+            price={`${totalTransferAmount}`}
+          />
+        </div>
+        
         <FooterButton onClick={handleSend} name={buttonText} />
       </div>
     );

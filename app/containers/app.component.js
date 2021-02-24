@@ -5,6 +5,7 @@ import {
   CUSTOM_NETWORK_PAGE,
   LOADER_OVERLAY,
   ONBOARDING_PAGES_GROUP,
+  SIGN_UP_PAGE,
 } from '../constants/navigation';
 import CrustApp from '../components/crust-app';
 import './styles.css';
@@ -33,6 +34,15 @@ export default class App extends Component {
 
     if (prevProps.page !== LOADER_OVERLAY) {
       if (ONBOARDING_PAGES_GROUP.indexOf(prevProps.page) !== -1) {
+        if (prevProps.page === SIGN_UP_PAGE) {
+          return {
+            showHeader: false, // no change
+            showLogo: false,
+            showBanner: true,
+            showNetwork: false,
+            showSettings: false,
+          };
+        }
         return {
           showHeader: true, // no change
           showLogo: false,
@@ -80,12 +90,8 @@ export default class App extends Component {
 
   render() {
     const {
-      props: {
-        page, isLoading, networks, network, isConnected, isDeveloperMode, options
-      },
-      state: {
-        showLogo, showBanner, showNetwork, showSettings, showHeader
-      },
+      props: { page, isLoading, networks, network, isConnected, isDeveloperMode, options },
+      state: { showLogo, showBanner, showNetwork, showSettings, showHeader },
     } = this;
     return (
       <CrustApp

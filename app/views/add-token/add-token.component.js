@@ -58,12 +58,12 @@ export default class AddToken extends Component {
     const result = await this.props.addToken(tname);
 
     if (!result || result.status >= 400) {
-      return
+      return;
     }
 
-    this.props.tokens.push(result)
-    this.props.updateTokenList(this.props.tokens)
-    this.props.changePage(DASHBOARD_PAGE)
+    this.props.tokens.push(result);
+    this.props.updateTokenList(this.props.tokens);
+    this.props.changePage(DASHBOARD_PAGE);
   };
 
   render() {
@@ -90,7 +90,7 @@ export default class AddToken extends Component {
             }}
             onBlur={this.handleOnBlur}
           />
-          <FooterButton onClick={this.handleAddToken} name="ok" />
+          <FooterButton onClick={this.handleAddToken} name="OK" />
         </div>
       </div>
     );

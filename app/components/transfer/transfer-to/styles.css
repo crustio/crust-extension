@@ -1,8 +1,9 @@
 
+.transfer-to-input-contianer {
+  flex: 1;
+}
 .transfer-to-input {
-  width: 251px;
-  justify-self: flex-start;
-  margin-left: 22px;
+  width: 100%;
 }
 
 .transfer-to-input fieldset {

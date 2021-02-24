@@ -8,16 +8,19 @@ class ButtonXL extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
+    custom: PropTypes.bool,
   };
 
   static defaultProps = {
     disabled: false,
+    custom: false,
   };
 
   render() {
-    const { className, ...otherProps } = this.props;
+    const { className, custom, ...otherProps } = this.props;
     const buttonXLClassNames = classNames({
       'button-xl': true,
+      'button-xl-custom1': custom,
     });
     return (
       <div className={buttonXLClassNames}>

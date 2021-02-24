@@ -1,17 +1,18 @@
 
 .transfer-from-amount-input {
-  width: 171.23px;
+  flex: 1;
+  color: #858B9C !important;
 }
 
 .transfer-from-amount-input fieldset {
   border: 0;
   font-size: 14px;
-  background-color: rgba(65, 72, 93, 0.1);
+  border: 1px solid #C5CAD5;
 }
 
 .transfer-from-amount-input:focus-within fieldset {
   background-color: transparent;
-  border: 2px solid #ECEDEF !important;
+  border: 1px solid #C5CAD5 !important;
 }
 
 .input-margin {
@@ -26,9 +27,49 @@
   display: block;
   color: #FA5050;
   height: 20px;
+  margin-left: 80px;
 }
 
 .transfer-from-amount-input-place-holder {
   height: 20px;
   display: block;
+}
+
+.transfer-form-amount-dropdown-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.transfer-form-amount-dropdown-label {
+  font-size: 14px;
+  color: #858B9C;
+  width: 80px;
+}
+
+.transfer-form-amount-dropdown {
+  flex: 1;
+  border-radius: 8px;
+  border: 1px solid #C5CAD5;
+}
+
+.transfer-form-amount-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.transfer-form-amount-input-label {
+  font-size: 14px;
+  color: #858B9C;
+  width: 80px;
+}
+
+.transfer-form-amount-balance {
+  font-size: 12px;
+  color: #858B9C;
+  width: 100%;
+  margin-left: 100px;
+  margin-top: 6px;
 }

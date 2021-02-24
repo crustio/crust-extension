@@ -20,18 +20,16 @@ export default class TransferTo extends Component {
       ...otherProps
     } = this.props;
     return (
-      <div>
         <div
           style={{
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'space-between',
           }}
           {...otherProps}
         >
-          <Avatar value={addressValue} size={size} theme={theme} />
-          <div>
+          <Avatar style={{marginRight: 22}} value={addressValue} size={size} theme={theme} />
+          <div className="transfer-to-input-contianer">
             <CrustInput
               className="transfer-to-input"
               onChange={onChange(propName)}
@@ -46,9 +44,6 @@ export default class TransferTo extends Component {
             )}
           </div>
         </div>
-
-      </div>
-      
     );
   }
 }

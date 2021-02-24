@@ -98,15 +98,13 @@ export default class AddressBook extends Component {
 
   render() {
     const { addressBook, network } = this.props;
-    const {
-      isOpen, showSettings, headerText, isMoreVertIconVisible
-    } = this.state;
+    const { isOpen, showSettings, headerText, isMoreVertIconVisible } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     return (
-      <div>
+      <div className="address-book-root-container">
         <SubHeader
-          icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
+          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
           title={headerText}
           backBtnOnClick={this.handleSubheaderBackBtn}
           subMenu={showSettings ? ADDRESS_BOOK_MENU_OPTIONS : null}
@@ -127,15 +125,15 @@ export default class AddressBook extends Component {
                 handelChangeToAddress={this.handelChangeToAddress}
               />
             ) : (
-              <EmptyDashboard className="empty-list-text" text="Click here to add an address!" />
-            )}
-            {addressBook.length === 0 ? (
-              <div className="address-book-add-button">
-                <ButtonMD color="dashboard" onClick={this.handleAddAddressClick}>
-                  Add Address
-                </ButtonMD>
+              <div className="empty-address-book-container">
+                <EmptyDashboard className="empty-list-text" text="Click here to add an address!" />
+                <div className="address-book-add-button">
+                  <ButtonMD color="dashboard" onClick={this.handleAddAddressClick}>
+                    Add Address
+                  </ButtonMD>
+                </div>
               </div>
-            ) : null}
+            )}
 
             <div>
               <DraggableDialog

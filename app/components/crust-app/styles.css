@@ -22,7 +22,7 @@
 .crust-header {
   display: flex;
   flex-direction: row;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: #FF8D00;
   padding: 11px 17.1px 11px 15px;
   height: 50px;
   width: 360px;
@@ -55,6 +55,7 @@
   align-self: center;
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .crust-header-text {

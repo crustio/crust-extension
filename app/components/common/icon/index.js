@@ -11,8 +11,10 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExcla
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 import { faAddressBook } from '@fortawesome/free-solid-svg-icons/faAddressBook';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons/faAngleRight';
 import Visibility from '@material-ui/icons/Visibility';
 import Settings from '@material-ui/icons/Settings';
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import MoreVert from '@material-ui/icons/MoreVert';
 import WifiOff from '@material-ui/icons/WifiOff';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -21,11 +23,15 @@ const IconEdit = props => (
   <FontAwesomeIcon icon={faEdit} style={{ color: '#2f112b', fontSize: props.size }} {...props} />
 );
 
+const IconAngleRight = props => (
+  <FontAwesomeIcon icon={faAngleRight} style={{ color: 'white', fontSize: props.size }} {...props} />
+);
+
 const IconTransferFromTo = props => (
   <div
     style={{
       marginTop: '6px',
-      paddingLeft: '38px',
+      paddingLeft: '28px',
       display: 'flex',
       flexDirection: 'row',
       width: '50%',
@@ -52,7 +58,7 @@ const IconTransfer = props => (
   </div>
 );
 
-const IconSettings = props => <Settings style={{ ...props.style }} {...props} />;
+const IconSettings = props => <SettingsOutlinedIcon style={{ ...props.style }} {...props} />;
 
 const IconVisibility = props => <Visibility style={{ ...props.style }} {...props} />;
 
@@ -60,18 +66,10 @@ const IconVisibilityOff = props => <VisibilityOff style={{ ...props.style }} {..
 
 const WalletDropDownIcon = props => (
   <div {...props}>
-    <FontAwesomeIcon
-      icon={faWallet}
-      style={{
-        width: '18.29px',
-        height: 16,
-        color: 'rgba(255, 255, 255, 1)',
-      }}
-    />
     <MoreVert
       style={{
         fontSize: '1.5em',
-        color: 'rgba(255, 255, 255, 1)',
+        color: '#111A34',
       }}
     />
   </div>
@@ -115,7 +113,7 @@ const SolidWallet = props => (
       style={{
         width: 40,
         height: 35,
-        color: 'rgba(208, 56, 107, 1)',
+        color: '#FF8D00',
       }}
     />
   </div>
@@ -207,5 +205,6 @@ export {
   MoreVertIcon,
   AddressBook,
   File,
-  IconVisibilityOff
+  IconVisibilityOff,
+  IconAngleRight
 };

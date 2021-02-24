@@ -4,6 +4,13 @@
   flex-direction: column;
 }
 
+.sign-up-img-contianer {
+  align-self: center;
+  width: 98px;
+  margin-top: 18px;
+  margin-bottom: 30px;
+}
+
 .sign-up-content-header {
   margin-bottom: 40px;
 }
@@ -11,7 +18,8 @@
 .sign-up-password {
   display: flex;
   width: 321px;
-  height: 54.82px;
+  height: 30px;
+  border-bottom: 1px solid #858B9C;
 }
 
 .sign-up-password fieldset {

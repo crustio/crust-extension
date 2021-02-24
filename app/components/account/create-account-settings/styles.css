@@ -8,6 +8,7 @@
   display: flex;
   width: 321px;
   height: 54.82px;
+  border-bottom: 1px solid #858B9C;
 }
 
 .account-alias-input fieldset {

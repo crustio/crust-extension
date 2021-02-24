@@ -22,6 +22,7 @@ const mapStateToProps = state => ({
   isAmountError: state.transferReducer.isAmountError,
   toAmountErrorMessage: state.transferReducer.toAmountErrorMessage,
   page: state.appStateReducer.page,
+  backupPage: state.appStateReducer.backupPage,
   toAddress: state.addressBookReducer.toAddress,
   network: state.networkReducer.network,
   tokens: state.dashboardReducer.tokens,

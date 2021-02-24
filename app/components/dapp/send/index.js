@@ -89,8 +89,8 @@ export default class Send extends Component {
 
           <FooterTwoSMButton
             className="send-footer-container"
-            namePrimary="cancel"
-            nameSecondary="allow"
+            namePrimary="Cancel"
+            nameSecondary="Allow"
             onClickPrimary={onCancel}
             onClickSecondary={onAllow}
             isSecondaryDisabled={!!errorMessage}

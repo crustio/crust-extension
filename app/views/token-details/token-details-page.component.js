@@ -7,7 +7,7 @@ import { copyAccountMessage } from '../../../lib/services/static-message-factory
 import './styles.css';
 import { RENAME } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
-import { convertBalanceToShow } from '../../../lib/services/numberFormatter'
+import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import SubHeader from '../../components/common/sub-header';
 import Clear from '@material-ui/icons/Clear';
 
@@ -23,11 +23,13 @@ export default class TokenDetailsPage extends Component {
     } else {
       this.props.getUnits();
       this.props.resetToAddress();
+      this.props.updateBackupPage(this.props.page);
       this.props.changePage(TRANSFER_PAGE);
     }
   };
 
   handleDeposit = () => {
+    this.props.updateBackupPage(this.props.page);
     this.props.changePage(QR_CODE_PAGE);
   };
 
@@ -63,7 +65,7 @@ export default class TokenDetailsPage extends Component {
 
   onTokenSelected = token => {
     this.props.changePage(QR_CODE_PAGE);
-  }
+  };
 
   onClick = () => {
     this.props.changePage(DASHBOARD_PAGE);
@@ -77,40 +79,47 @@ export default class TokenDetailsPage extends Component {
       isLinkToFaucet,
       network,
       accountMenu,
-      token
+      token,
     } = this.props;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
-    const transDisplay = transactions.filter(trans => trans.metadata.tokenSelected !== undefined && trans.metadata.tokenSelected.tokenSymbol === token.tokenSymbol)
+    const transDisplay = transactions.filter(
+      trans =>
+        trans.metadata.tokenSelected !== undefined &&
+        trans.metadata.tokenSelected.tokenSymbol === token.tokenSymbol,
+    );
     return (
-      <div>
+      <div className="token-details-page-container">
         <SubHeader
-          icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
+          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
           title="Token details"
           backBtnOnClick={this.onClick}
         />
-        <Wallet
-          className="wallet-container"
-          inputRef={this.textInput}
-          accounts={accounts}
-          selectedAccount={account}
-          theme={theme}
-          onAliasChange={this.handleAliasChange}
-          onAliasInputBlur={this.handleAliasInputBlur}
-          onAliasInputKeyPress={this.handleOnKeyPress}
-          onCopyAddress={this.onCopyAddress}
-          accountMenu={accountMenu}
-          onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
-        />
-        <TokenDetails
-          unit={token.tokenSymbol}
-          className="token-container"
-          balance={convertBalanceToShow(token.balance, token.decimals)}
-          marketData={undefined}
-          amount={convertBalanceToShow(token.balance, token.decimals)}
-          handleSend={this.handleSend}
-          handleDeposit={this.handleDeposit}
-        />
+        <div className="account-content-container">
+          <Wallet
+            className="wallet-container"
+            inputRef={this.textInput}
+            accounts={accounts}
+            selectedAccount={account}
+            theme={theme}
+            onAliasChange={this.handleAliasChange}
+            onAliasInputBlur={this.handleAliasInputBlur}
+            onAliasInputKeyPress={this.handleOnKeyPress}
+            onCopyAddress={this.onCopyAddress}
+            accountMenu={accountMenu}
+            onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
+          />
+          <TokenDetails
+            unit={token.tokenSymbol}
+            className="token-container"
+            balance={convertBalanceToShow(token.balance, token.decimals)}
+            marketData={undefined}
+            amount={convertBalanceToShow(token.balance, token.decimals)}
+            handleSend={this.handleSend}
+            handleDeposit={this.handleDeposit}
+          />
+        </div>
+
         <Transaction
           className="transaction-container"
           network={network}
