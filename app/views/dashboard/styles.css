@@ -1,8 +1,25 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #F5F5F5;
+  height: 100vh;
+}
+
+.account-container {
+  background-image: url("../../../app/images/crust-home-bg.svg");
+  background-repeat: no-repeat;
+}
+
+.account-content-container {
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin: 0 16px;
+}
+
 .wallet-container {
-  background-image: linear-gradient(94.54deg, #FF8212 0%, #ED4454 100%);
   display: flex;
   flex-direction: row;
-  color: rgba(255, 255, 255, 1);
+  color: #111A34;
   height: 75px;
   width: 100%;
   padding: 18px 21.83px 13px 19px;
@@ -12,7 +29,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: linear-gradient(94.54deg, #FF8212 0%, #ED4454 100%) !important;
   height: 142px;
   width: 100%;
   padding: 4px 18px 16px 18px;
@@ -40,5 +56,23 @@
 .token-list-container {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+}
+
+.dashboard-footer {
+  color: white;
+  text-decoration: none;
+  line-height: 45px;
+  text-align: center;
+  font-family: "Roboto-Regular";
+  font-size: 14px;
+  background: #FF8D00;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+}
+
+.dashboard-icon {
+  margin-left: 15px;
+  font-size: 14px !important;
 }

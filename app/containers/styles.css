@@ -108,7 +108,7 @@ p {
 .block-ui-message-container {
   position: absolute;
   top: 46% !important;
-  left: 43% !important;
+  left: 50% !important;
   right: 0;
   text-align: center;
   -webkit-transform: translateY(-50%);

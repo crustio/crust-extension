@@ -13,8 +13,8 @@ export default class TransferFrom extends Component {
         style={{
           display: 'flex',
           flexDirection: 'row',
-          paddingLeft: '26px',
-          paddingRight: '14px',
+          paddingLeft: '16px',
+          paddingRight: '16px',
           paddingTop: '21.27px',
         }}
         {...otherProps}

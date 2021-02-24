@@ -76,9 +76,9 @@ export default class ManageAccount extends Component {
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     return (
-      <div>
+      <div className="manage-accounts-root-container">
         <SubHeader
-          icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
+          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
           title="Account Management"
           backBtnOnClick={this.handleSubheaderBackBtn}
           subMenu={ACCOUNT_MANAGEMENT_MENU_OPTIONS}

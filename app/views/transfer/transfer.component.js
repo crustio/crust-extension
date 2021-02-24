@@ -6,6 +6,7 @@ import TransferForm from '../../components/transfer/transfer-form';
 import * as NavConstants from '../../constants/navigation';
 import { INPUT_NUMBER_REGEX } from '../../../lib/constants/regex';
 import { findChainByName } from '../../../lib/constants/chain';
+import './styles.css';
 
 export default class Transfer extends Component {
   constructor(props) {
@@ -19,17 +20,17 @@ export default class Transfer extends Component {
     //TODO DP: Can be improved by using optional chaining operator
     this.state = {
       to: metadata ? metadata.to : '',
-      amount: metadata ? metadata.amount : '',
+      amount: metadata ? metadata.amount : '0',
       unit: metadata ? metadata.unit : '',
       alias: metadata ? metadata.account.alias : account.alias,
       from: metadata ? metadata.account.address : account.address,
-      buttonText: 'next',
-      dropDownSelected: {...token, value: token.tokenSymbol, text: token.tokenSymbol},
+      buttonText: 'Next',
+      dropDownSelected: { ...token, value: token.tokenSymbol, text: token.tokenSymbol },
       dropDownList: tokens.map(t => {
-        t.value = t.tokenSymbol
-        t.text = t.tokenSymbol
-        return t
-      })
+        t.value = t.tokenSymbol;
+        t.text = t.tokenSymbol;
+        return t;
+      }),
     };
     this.toInput = React.createRef();
     this.amountInput = React.createRef();
@@ -48,7 +49,7 @@ export default class Transfer extends Component {
         ...this.props.confirmDetails.metadata,
         account: this.props.account,
         unit: this.state.unit,
-        dropDownSelected: this.state.dropDownSelected
+        dropDownSelected: this.state.dropDownSelected,
       },
     });
   }
@@ -73,7 +74,7 @@ export default class Transfer extends Component {
   handleSubheaderBackBtn = () => {
     this.props.resetConfirmOnBoarding();
     this.props.clearTransferDetails();
-    this.props.changePage(NavConstants.DASHBOARD_PAGE);
+    this.props.changePage(this.props.backupPage);
   };
 
   handleToChange = prop => e => {
@@ -139,17 +140,24 @@ export default class Transfer extends Component {
       toAddress,
       network,
       tokens,
-      token
+      token,
     } = this.props;
     const {
-      to, amount, unit, alias, from, buttonText, dropDownList, dropDownSelected
+      to,
+      amount,
+      unit,
+      alias,
+      from,
+      buttonText,
+      dropDownList,
+      dropDownSelected,
     } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     return (
-      <div>
+      <div className="tranfer-page-container">
         <SubHeader
-          icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
+          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
           title="Send"
           backBtnOnClick={this.handleSubheaderBackBtn}
         />

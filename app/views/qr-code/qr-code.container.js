@@ -6,6 +6,7 @@ import { createToast } from '../../constants/toast';
 const mapStateToProps = state => ({
   account: state.accountReducer.account,
   network: state.networkReducer.network,
+  backupPage: state.appStateReducer.backupPage,
 });
 
 const mapDispatchToProps = {

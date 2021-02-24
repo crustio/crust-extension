@@ -43,9 +43,7 @@ export default class CreateAddressBook extends Component {
   }
 
   onSubmit = () => {
-    const {
-      address, fname, lname, network
-    } = this.state;
+    const { address, fname, lname, network } = this.state;
     const { isFnameError, fnameErrorMessage } = this.validateFname(fname);
     this.setState({
       isFnameError,
@@ -200,9 +198,9 @@ export default class CreateAddressBook extends Component {
     const chain = findChainByName(this.props.network.value);
     const theme = chain.icon || 'polkadot';
     return (
-      <div>
+      <div className="create-address-book-container">
         <SubHeader
-          icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
+          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
           title="Address Book"
           backBtnOnClick={this.handleSubheaderBackBtn}
         />

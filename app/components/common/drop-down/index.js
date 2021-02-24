@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import withStyles from '@material-ui/core/styles/withStyles';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { styles } from './styles';
 
 class DropDown extends Component {
@@ -21,6 +22,9 @@ class DropDown extends Component {
           value={value.value}
           disableUnderline
           disabled={disabled}
+          IconComponent={props => (
+            <ExpandMoreIcon {...props} className={`material-icons ${props.className}`}/>
+          )}
         >
           {options.map(opt => (
             <option key={opt.value} value={opt.value}>

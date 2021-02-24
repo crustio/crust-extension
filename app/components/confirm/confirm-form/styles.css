@@ -3,11 +3,19 @@
   flex-direction: column;
 }
 
+.confirm-form-top-container {
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin: 0 16px;
+  padding-bottom: 10px;
+}
+
 .confirm-form-amount-divider {
-  margin-top: 37.25px;
+  margin-top: 10px;
 }
 
 .confirm-form-total-amount-divider {
+  width: 100% !important;
   margin-top: 12px;
 }
 

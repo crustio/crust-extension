@@ -40,7 +40,7 @@ class About extends Component {
           <FontRegular className="about-version" text={`Version ${manifest.version}`} />
           {this.renderInfoLinks()}
           <div className="about-button">
-            <FooterButton onClick={this.onClick} name="ok" />
+            <FooterButton onClick={this.onClick} name="OK" />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CrustInputAdornment from '../../common/crust-input-adornment';
 import IconContainer from '../../common/icon-container';
-import { AddressBook } from '../../common/icon';
+import AddressIcon from '../../../images/address-icon.png';
 
 export default class AddressBookAdornment extends Component {
   render() {
@@ -9,7 +9,8 @@ export default class AddressBookAdornment extends Component {
     return (
       <CrustInputAdornment {...otherProps}>
         <IconContainer aria-label="Toggle password visibility" onClick={onClick}>
-          <AddressBook />
+          {/* <AddressBook /> */}
+          <img src={AddressIcon} width={'14px'} alt="addressIcon" />
         </IconContainer>
       </CrustInputAdornment>
     );

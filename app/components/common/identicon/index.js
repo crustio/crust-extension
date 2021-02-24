@@ -8,7 +8,7 @@ export default class Avatar extends Component {
       size, style, value, theme, onCopyAddress, ...otherProps
     } = this.props;
     return (
-      <div style={{ style }} {...otherProps} onClick={onCopyAddress}>
+      <div style={{ ...style }} {...otherProps} onClick={onCopyAddress}>
         <Identicon value={value} size={size} theme={theme} />
       </div>
     );

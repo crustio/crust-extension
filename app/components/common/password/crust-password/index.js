@@ -3,11 +3,11 @@ import PasswordAdornment from '../password-adornment';
 import CrustInput from '../../crust-input';
 
 const showColor = {
-  color: 'black',
+  color: '#666F83',
 };
 
 const hideColor = {
-  color: 'black',
+  color: '#666F83',
 };
 
 export default class CrustPassword extends Component {
