@@ -6,6 +6,7 @@ import Switch from '@material-ui/core/Switch';
 import { styles } from './styles';
 import { IconCheckCircle } from '../icon/index';
 import FontRegular from '../fonts/font-regular';
+import { withTranslation } from 'react-i18next';
 
 class CrustMenu extends Component {
   handleClose = prop => () => {
@@ -24,6 +25,7 @@ class CrustMenu extends Component {
       anchorEl,
       selected,
       width,
+      t
     } = this.props;
 
     return (
@@ -51,7 +53,7 @@ class CrustMenu extends Component {
               root: classes.root,
             }}
           >
-            <FontRegular style={{ fontSize: '14px' }} text={option.text} />
+            <FontRegular style={{ fontSize: '14px' }} text={t(option.text)} />
             {selected
               && (selected.value !== option.value ? null : (
                 <IconCheckCircle style={{ marginLeft: 5 }} />
@@ -71,4 +73,4 @@ class CrustMenu extends Component {
   }
 }
 
-export default withStyles(styles)(CrustMenu);
+export default withStyles(styles)(withTranslation()(CrustMenu));

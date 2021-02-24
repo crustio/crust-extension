@@ -9,9 +9,10 @@ import CreateAccountSettings from '../../components/account/create-account-setti
 import FooterButton from '../../components/common/footer-button';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import * as Account from '../../constants/account';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
-export default class CreateAccount extends Component {
+class CreateAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -258,7 +259,7 @@ export default class CreateAccount extends Component {
   }
 
   render() {
-    const { seedWords, keypairType, keypairTypes, account } = this.props;
+    const { seedWords, keypairType, keypairTypes, account, t } = this.props;
     const {
       value,
       formValue,
@@ -279,9 +280,10 @@ export default class CreateAccount extends Component {
       backButtonName,
     } = this.state;
 
+    const labelsT = labels.map(l => t(l));
     return (
       <div>
-        <CrustTabs value={value} onChange={this.handleChange} labels={labels} />
+        <CrustTabs value={value} onChange={this.handleChange} labels={labelsT} />
         <CreateAccountForm
           value={formValue}
           generatedSeedWords={seedWords}
@@ -309,7 +311,7 @@ export default class CreateAccount extends Component {
           alias={alias}
           handleAliasChange={this.handleAliasChange}
           aliasPropName="alias"
-          aliasLabel="Nickname"
+          aliasLabel={t("Nickname")}
           isAliasError={isAliasError}
           aliasErrorMessage={aliasErrorMessage}
           keypairType={keypairType}
@@ -326,8 +328,8 @@ export default class CreateAccount extends Component {
           <FooterWithTwoButton
             onNextClick={onSubmit}
             onBackClick={this.handelBack}
-            backButtonName={backButtonName}
-            nextButtonName={buttonName}
+            backButtonName={t(backButtonName)}
+            nextButtonName={t(buttonName)}
           />
         ) : (
           <div className="create-account-button">
@@ -338,6 +340,8 @@ export default class CreateAccount extends Component {
     );
   }
 }
+
+export default withTranslation()(CreateAccount);
 
 CreateAccount.defaultProps = {
   seedWords: '',

@@ -3,11 +3,12 @@ import TransferFrom from '../../transfer/transfer-from';
 import FooterButton from '../../common/footer-button';
 import QR from '../../common/qr';
 import './styles.css';
+import { withTranslation } from 'react-i18next';
 
-export default class QRCodeForm extends Component {
+class QRCodeForm extends Component {
   render() {
     const {
-      account, theme, onClick, onCopyAddress, ...otherProps
+      account, theme, onClick, onCopyAddress, t, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -26,10 +27,12 @@ export default class QRCodeForm extends Component {
           value={account.address}
         />
         <div className='qr-button-container'>
-          <FooterButton name="done" onClick={onClick} />
+          <FooterButton name={t("Done")} onClick={onClick} />
         </div>
         
       </div>
     );
   }
 }
+
+export default withTranslation()(QRCodeForm);

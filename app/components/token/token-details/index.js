@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import TokenBalance from '../token-balance';
 import TokenDetailFooter from '../token-detail-footer';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
-export default class TokenDetails extends Component {
+class TokenDetails extends Component {
   render() {
     const {
       balance,
@@ -12,6 +13,7 @@ export default class TokenDetails extends Component {
       handleSend,
       marketData,
       amount,
+      t,
       ...otherProps
     } = this.props;
     return (
@@ -27,10 +29,13 @@ export default class TokenDetails extends Component {
           className="token-detail-footer"
           handleDeposit={handleDeposit}
           handleSend={handleSend}
-          receiveButtonName="Receive"
-          sendButtonName="Send"
+          receiveButtonName={t("Receive")}
+          sendButtonName={t("Send")}
         />
       </div>
     );
   }
 }
+
+export default withTranslation()(TokenDetails);
+

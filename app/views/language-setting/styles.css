@@ -1,11 +1,10 @@
-.token-add-container {
+.language-setting-container {
   display: flex;
   flex-direction: column;
-  padding: 34px 23px 80px 23px;
-  font-weight: 400;
-  font-size: 14px;
+  background-color: #F5F5F5;
+  height: 100vh;
 }
 
-.token-address-input {
-  margin: 0 0 0 0 !important;
+.language-setting-option-container {
+  margin: 0 16px;
 }

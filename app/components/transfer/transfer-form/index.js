@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import DarkDivider from '../../common/divider/dark-divider';
 import TransferFromTo from '../transfer-from-to';
 import FooterButton from '../../common/footer-button';
 import TransferFormAmount from '../transfer-form-amount';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
-export default class TransferForm extends Component {
+class TransferForm extends Component {
   render() {
     const {
       address,
@@ -30,6 +30,7 @@ export default class TransferForm extends Component {
       handleSendButton,
       handleUnitOnChange,
       onAddressBookClick,
+      t
     } = this.props;
     return (
       <div className="transfer-form-container">
@@ -51,7 +52,7 @@ export default class TransferForm extends Component {
         <TransferFormAmount
           className="transfer-form-amount-container"
           error={isAmountError}
-          label="Amount"
+          label={t("Amount")}
           value={amount}
           helperText={amountErrorText}
           onChange={handleAmountChange}
@@ -66,3 +67,5 @@ export default class TransferForm extends Component {
     );
   }
 }
+
+export default withTranslation()(TransferForm)

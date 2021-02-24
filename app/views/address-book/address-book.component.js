@@ -14,9 +14,10 @@ import {
   REMOVE,
 } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
-export default class AddressBook extends Component {
+class AddressBook extends Component {
   constructor(props) {
     super(props);
     this.textInput = React.createRef();
@@ -97,17 +98,27 @@ export default class AddressBook extends Component {
   };
 
   render() {
-    const { addressBook, network } = this.props;
+    const { addressBook, network, t } = this.props;
     const { isOpen, showSettings, headerText, isMoreVertIconVisible } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
+    const optionsHeader = ADDRESS_BOOK_MENU_OPTIONS.map(o => {
+      o.text = t(o.text)
+      return o
+    })
+
+    const options = ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
+      o.text = t(o.text)
+      return o
+    })
+    const headerTextT = t(headerText);
     return (
       <div className="address-book-root-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title={headerText}
+          title={headerTextT}
           backBtnOnClick={this.handleSubheaderBackBtn}
-          subMenu={showSettings ? ADDRESS_BOOK_MENU_OPTIONS : null}
+          subMenu={showSettings ? optionsHeader : null}
           showSettings={showSettings}
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
         />
@@ -117,7 +128,7 @@ export default class AddressBook extends Component {
               <AddressList
                 className="address-book-container"
                 addressBook={addressBook}
-                moreMenu={ACCOUNT_MANAGEMENT_OPTIONS}
+                moreMenu={options}
                 onMoreMenuOptionsChange={this.handleAddressBookOptionsChange}
                 theme={theme}
                 isMoreVertIconVisible={isMoreVertIconVisible}
@@ -126,10 +137,10 @@ export default class AddressBook extends Component {
               />
             ) : (
               <div className="empty-address-book-container">
-                <EmptyDashboard className="empty-list-text" text="Click here to add an address!" />
+                <EmptyDashboard className="empty-list-text" text={t("Click here to add an address!")} />
                 <div className="address-book-add-button">
                   <ButtonMD color="dashboard" onClick={this.handleAddAddressClick}>
-                    Add Address
+                    {t("Add Address")}
                   </ButtonMD>
                 </div>
               </div>
@@ -140,10 +151,10 @@ export default class AddressBook extends Component {
                 isOpen={isOpen}
                 handleClose={this.handleCloseDialog}
                 handleYes={this.handleYes}
-                noText="No"
-                yesText="Yes"
-                title="Remove contact"
-                msg="Do you want to remove this address ?"
+                noText={t("No")}
+                yesText={t("Yes")}
+                title={t("Remove contact")}
+                msg={t("Do you want to remove this address?")}
               />
             </div>
           </div>
@@ -152,3 +163,5 @@ export default class AddressBook extends Component {
     );
   }
 }
+
+export default  withTranslation()(AddressBook);

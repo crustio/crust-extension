@@ -27,12 +27,12 @@ class About extends Component {
   }
 
   render() {
-    const { manifest } = this.props;
+    const { manifest, t } = this.props;
     return (
       <div>
         <SubHeader
-          icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
-          title={this.props.t('About')}
+          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
+          title={t('About')}
           backBtnOnClick={this.onClick}
         />
         <div className="about-container">
@@ -40,7 +40,7 @@ class About extends Component {
           <FontRegular className="about-version" text={`Version ${manifest.version}`} />
           {this.renderInfoLinks()}
           <div className="about-button">
-            <FooterButton onClick={this.onClick} name="OK" />
+            <FooterButton onClick={this.onClick} name={t("OK")} />
           </div>
         </div>
       </div>

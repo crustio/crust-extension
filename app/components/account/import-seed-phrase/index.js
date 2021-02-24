@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ContentHeader from '../../common/content-header';
 import CrustMultilineInput from '../../common/crust-multiline-input';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
-export default class ImportSeedPhrase extends Component {
+class ImportSeedPhrase extends Component {
   constructor(props) {
     super(props);
     this.seedWordsInput = React.createRef();
@@ -22,16 +23,17 @@ export default class ImportSeedPhrase extends Component {
       importSeedPhraseInputName,
       seedRef,
       handleSeedWordsOnBlur,
+      t,
     } = this.props;
     return (
       <div>
         <ContentHeader
-          title="Import Seed Phrase"
-          description="This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it."
+          title={t("Import Seed Phrase")}
+          description={t("Please input your seed phrase to import account.")}
         />
         <CrustMultilineInput
           className="import-seed-phrase-input"
-          placeholder="Type or paste your seed phrase..."
+          placeholder={t("Type or paste your seed phrase...")}
           error={isError}
           helperText={errorMessage}
           onChange={onChange(importSeedPhraseInputName)}
@@ -44,3 +46,5 @@ export default class ImportSeedPhrase extends Component {
     );
   }
 }
+
+export default withTranslation()(ImportSeedPhrase);

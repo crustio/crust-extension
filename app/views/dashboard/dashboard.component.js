@@ -10,9 +10,10 @@ import { RENAME } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
 import TokenList from '../../components/token-list';
 import CrustTabs from '../../components/common/crust-tabs';
+import { withTranslation } from 'react-i18next';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.textInput = React.createRef();
@@ -97,8 +98,10 @@ export default class Dashboard extends Component {
       unit,
       accountMenu,
       tokens,
+      t
     } = this.props;
     const { labels, value } = this.state;
+    const tLabels = labels.map(l => t(l));
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     const defaultToken = tokens.find(token => token.address === undefined);
@@ -132,7 +135,7 @@ export default class Dashboard extends Component {
             />
           </div>
         </div>
-        <CrustTabs value={value} onChange={this.handleChange} labels={labels} />
+        <CrustTabs value={value} onChange={this.handleChange} labels={tLabels} />
         {value === 0 && (
           <TokenList
             tokens={tokens}
@@ -185,3 +188,5 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+export default withTranslation()(Dashboard);

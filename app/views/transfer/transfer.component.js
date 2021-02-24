@@ -6,9 +6,10 @@ import TransferForm from '../../components/transfer/transfer-form';
 import * as NavConstants from '../../constants/navigation';
 import { INPUT_NUMBER_REGEX } from '../../../lib/constants/regex';
 import { findChainByName } from '../../../lib/constants/chain';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
-export default class Transfer extends Component {
+class Transfer extends Component {
   constructor(props) {
     super(props);
     const {
@@ -62,13 +63,6 @@ export default class Transfer extends Component {
       this.props.updateAppLoading(false);
       this.props.changePage(NavConstants.CONFIRM_PAGE);
     }
-    // if (props.error && props.error.isError) {
-    //   if (props.isToAddressError) {
-    //     this.toInput.focus();
-    //   } else {
-    //     this.amountInput.focus();
-    //   }
-    // }
   }
 
   handleSubheaderBackBtn = () => {
@@ -141,6 +135,7 @@ export default class Transfer extends Component {
       network,
       tokens,
       token,
+      t,
     } = this.props;
     const {
       to,
@@ -154,11 +149,12 @@ export default class Transfer extends Component {
     } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
+    const buttonTextT = t(buttonText);
     return (
       <div className="tranfer-page-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title="Send"
+          title={t("Send")}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
         <TransferForm
@@ -177,7 +173,7 @@ export default class Transfer extends Component {
             this.amountInput = input;
           }}
           amount={amount}
-          buttonText={buttonText}
+          buttonText={buttonTextT}
           isToError={isToAddressError}
           toErrorText={toAddressErrorMessage}
           isAmountError={isAmountError}
@@ -192,6 +188,8 @@ export default class Transfer extends Component {
     );
   }
 }
+
+export default withTranslation()(Transfer)
 
 Transfer.defaultProps = {
   changePage: undefined,

@@ -6,6 +6,7 @@ import ButtonMD from '../../components/common/buttons/button-md';
 import { withTranslation } from 'react-i18next';
 import * as NavConstants from '../../constants/navigation';
 import { CHINESE, ENGLISH } from '../../constants/language';
+import CrustRadioButtonGroup from '../../components/common/crust-radio-button-group';
 
 class LanguageSetting extends Component {
   constructor(props) {
@@ -30,6 +31,13 @@ class LanguageSetting extends Component {
     this.props.updateBackupPage(NavConstants.DASHBOARD_PAGE);
   };
 
+  onLanguageChange = (e, i18n) => {
+    console.log(e.target.value);
+    if (e.target.value === CHINESE || e.target.value === ENGLISH) {
+      this.props.updateAppLanguage(e.target.value, i18n);
+    }
+  }
+
   handleZhClick = async (i18n) => {
     this.props.updateAppLanguage(CHINESE, i18n);
   };
@@ -39,21 +47,22 @@ class LanguageSetting extends Component {
   };
 
   render() {
-    const { t, i18n } = this.props;
+    const { t, i18n, language } = this.props;
+    const options = [{value: 'en-US', text: t('English')}, {value: 'zh-CN', text: t('Chinese')} ]
     return (
-      <div>
+      <div className="language-setting-container">
         <SubHeader
-          icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
-          title="Language Setting"
+          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
+          title={t("Language Setting")}
           backBtnOnClick={this.onClick}
         />
-        <div className="token-add-container">
-          <ButtonMD color="dashboard" onClick={() => this.handleZhClick(i18n)}>
-            {t("Chinese")}
-          </ButtonMD>
-          <ButtonMD color="dashboard" onClick={() => this.handleEnClick(i18n)}>
-            {t("English")}
-          </ButtonMD>
+        <div className="language-setting-option-container">
+          <CrustRadioButtonGroup
+            vertical={true}
+            options={options}
+            value={options.find(o => o.value === language)}
+            onChange={e => this.onLanguageChange(e, i18n)}
+          />
         </div>
       </div>
     );
