@@ -28,7 +28,7 @@ export default class About extends Component {
     return (
       <div>
         <SubHeader
-          icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
+          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
           title="About"
           backBtnOnClick={this.onClick}
         />
@@ -36,7 +36,9 @@ export default class About extends Component {
           <FontRegular className="about-title" text={manifest.name} />
           <FontRegular className="about-version" text={`Version ${manifest.version}`} />
           {this.renderInfoLinks()}
-          <FooterButton onClick={this.onClick} name="ok" />
+          <div className="about-button">
+            <FooterButton onClick={this.onClick} name="OK" />
+          </div>
         </div>
       </div>
     );

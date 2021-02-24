@@ -3,18 +3,26 @@
 }
 
 .crust-logo {
-  width: 36px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
 }
 
 .crust-banner {
   height: 23px;
 }
 
+.crust-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .crust-header {
   display: flex;
   flex-direction: row;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: #FF8D00;
   padding: 11px 17.1px 11px 15px;
   height: 50px;
   width: 360px;
@@ -22,7 +30,7 @@
 }
 
 .crust-header-banner {
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .crust-header-boarded {
@@ -47,10 +55,12 @@
   align-self: center;
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .crust-header-text {
-  font-size: 16px;
+  font-size: 18px;
   color: white;
   font-weight: bold;
+  font-family: Inter-Bold;
 }

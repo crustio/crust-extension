@@ -64,18 +64,18 @@ export default class ConnectRequest extends Component {
         <SubHeader title={title} />
         {this.renderHeader()}
         <FontRegular
-          text={(
+          text={
             <div>
               {`${request.request.metadata.url} is requesting access to a/an `}
               account. Click allow to grant access any account or click DENY to prevent access to
               any account.
             </div>
-          )}
+          }
           className="connect-request-center connect-request-account-selection-header"
         />
         <FooterTwoMDButton
-          namePrimary="deny"
-          nameSecondary="allow"
+          namePrimary="Deny"
+          nameSecondary="Allow"
           onClickPrimary={this.onDeny}
           onClickSecondary={this.onAllow}
         />

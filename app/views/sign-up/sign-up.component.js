@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CrustPassword from '../../components/common/password/crust-password';
+import CrustInput from '../../components/common/crust-input';
 import ContentHeader from '../../components/common/content-header';
-import PasswordStrength from '../../components/common/password/password-strength';
 import FooterButton from '../../components/common/footer-button';
+import LogoBig from '../../images/crust-logo-big.svg';
 import './styles.css';
 
 const errorMessage = 'Must be 8 characters or more in length.';
@@ -13,27 +14,59 @@ export default class SignUp extends Component {
     super(props);
     this.state = {
       password: '',
-      isError: false,
-      label: 'Password',
-      errorText: '',
+      isPasswordError: true,
+      passwordError: '',
+      // password repeat
+      passwordRepeat: '',
+      isPasswordRepeatError: true,
+      passwordRepeatError: '',
+      // button status
+      disabled: true,
     };
     this.passwordInput = React.createRef();
   }
 
   handleOnChange = prop => e => {
     const { value } = e.target;
-    const { password } = this.state;
-    let { isError } = this.state;
-
-    this.props.setPasswordMeterScore(value);
-
-    if (isError && password && password.length >= 8) {
-      isError = false;
+    const {
+      password,
+      passwordRepeat,
+      isWalletNameError,
+      isPasswordError,
+      isPasswordRepeatError,
+    } = this.state;
+    if (prop === 'walletName') {
+      const isWalletNameErrorN = value.trim() === '';
+      const valid = !isWalletNameErrorN && !isPasswordError && !isPasswordRepeatError;
+      this.setState({
+        [prop]: value,
+        isWalletNameError: isWalletNameErrorN,
+        wallNameError: isWalletNameErrorN ? 'Wallet name cannot be empty' : '',
+        disabled: !valid,
+      });
+    } else if (prop === 'password') {
+      const isPasswordErrorN = value.length < 8;
+      const isPasswordRepeatErrorN = passwordRepeat !== value;
+      const valid = !isWalletNameError && !isPasswordErrorN && !isPasswordRepeatErrorN;
+      this.setState({
+        [prop]: value,
+        isPasswordError: isPasswordErrorN,
+        passwordError: isPasswordErrorN ? 'Must be 8 characters or more in length.' : '',
+        isPasswordRepeatError: isPasswordRepeatErrorN,
+        passwordRepeatError:
+          passwordRepeat && isPasswordRepeatErrorN ? 'Passwords are not the same.' : '',
+        disabled: !valid,
+      });
+    } else {
+      const isPasswordRepeatErrorN = password !== value;
+      const valid = !isWalletNameError && !isPasswordError && !isPasswordRepeatErrorN;
+      this.setState({
+        [prop]: value,
+        isPasswordRepeatError: isPasswordRepeatErrorN,
+        passwordRepeatError: isPasswordRepeatErrorN ? 'Passwords are not the same.' : '',
+        disabled: !valid,
+      });
     }
-    this.setState({
-      [prop]: value,
-      isError,
-    });
   };
 
   handleOnBlur = () => {
@@ -70,36 +103,51 @@ export default class SignUp extends Component {
   render() {
     const { score } = this.props;
     const {
-      isError, password, label, errorText
+      isPasswordError,
+      password,
+      passwordError,
+
+      passwordRepeat,
+      isPasswordRepeatError,
+      passwordRepeatError,
     } = this.state;
     return (
       <div className="sign-up-container">
+        <div className="sign-up-img-contianer">
+          <img src={LogoBig} alt="logo1" />
+        </div>
         <ContentHeader
           className="sign-up-content-header"
-          title="Create a password to secure your account"
+          title="Create A Password To Secure Your Account"
           description="The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them."
         />
         <CrustPassword
+          standardInput={true}
           className="sign-up-password"
-          onChange={this.handleOnChange}
-          isError={isError}
-          onBlur={this.handleOnBlur}
-          inputRef={input => {
-            this.passwordInput = input;
-          }}
+          onChange={e => this.handleOnChange('password', e)}
           password={password}
-          errorMessage={isError ? errorText : null}
-          label={label}
+          placeholder="Password"
           handleClickShowPassword={this.handleClickShowPassword}
         />
-        <PasswordStrength
-          className="sign-up-password-meter"
-          title="Password Strength"
-          max="4"
-          score={score}
-          min="0"
+        {isPasswordError ? (
+          <span className="error-msg">{passwordError}</span>
+        ) : (
+          <span className="place-holder"> </span>
+        )}
+        <CrustInput
+          standardInput={true}
+          className="sign-up-password"
+          onChange={this.handleOnChange('passwordRepeat')}
+          type="password"
+          placeholder="Repeat Password"
+          value={passwordRepeat}
         />
-        <FooterButton onClick={this.handleClick} name="create" />
+        {isPasswordRepeatError ? (
+          <span className="error-msg">{passwordRepeatError}</span>
+        ) : (
+          <span className="place-holder"> </span>
+        )}
+        <FooterButton onClick={this.handleClick} disabled={this.state.disabled} name="Create" />
       </div>
     );
   }

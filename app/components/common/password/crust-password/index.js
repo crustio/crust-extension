@@ -3,11 +3,11 @@ import PasswordAdornment from '../password-adornment';
 import CrustInput from '../../crust-input';
 
 const showColor = {
-  color: 'rgba(215, 95, 160, 1)',
+  color: '#666F83',
 };
 
 const hideColor = {
-  color: 'rgba(0, 0, 0, 0.5)',
+  color: '#666F83',
 };
 
 export default class CrustPassword extends Component {
@@ -26,8 +26,6 @@ export default class CrustPassword extends Component {
       onChange,
       isError,
       password,
-      errorMessage,
-      label,
       className,
       handleClickShowPassword,
       ...otherProps
@@ -40,12 +38,9 @@ export default class CrustPassword extends Component {
           className={className}
           error={isError}
           type={showPassword ? 'text' : 'password'}
-          label={label}
           value={password}
           onChange={onChange('password')}
-          helperText={errorMessage}
-          InputProps={{
-            endAdornment: (
+          endAdornment={(
               <PasswordAdornment
                 position="end"
                 onClick={this.handleClickShowPassword}
@@ -53,8 +48,7 @@ export default class CrustPassword extends Component {
                 showColor={showColor}
                 hideColor={hideColor}
               />
-            ),
-          }}
+            )}
         />
       </div>
     );

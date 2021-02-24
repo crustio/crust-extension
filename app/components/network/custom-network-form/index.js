@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CrustInput from '../../common/crust-input';
-import FooterButton from '../../common/footer-button';
+import FooterButton from '../../common/footer-button-old';
 import './styles.css';
 
 export default class CustomNetworkForm extends Component {

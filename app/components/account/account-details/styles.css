@@ -16,3 +16,25 @@
   color: rgba(255, 255, 255, 1);
   font-size: 12px;
 }
+
+.account-input {
+  width: 100%;
+  display: flex;
+  width: 100px;
+  height: 54.82px;
+}
+
+.account-input fieldset {
+  border: 0;
+  font-size: 14px;
+  background-color: rgba(65, 72, 93, 0.1);
+}
+
+.account-input:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.input-margin {
+  margin-top: 12px !important;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ButtonMD from '../buttons/button-md';
+import ButtonCustom from '../buttons/button-custom';
 
 export default class FooterWithTwoButton extends Component {
   render() {
@@ -15,17 +15,30 @@ export default class FooterWithTwoButton extends Component {
       <div
         style={{
           position: 'absolute',
-          top: '524px',
-          right: '18px',
-          left: '18px',
+          bottom: '11px',
+          right: '20px',
+          left: '20px',
           justifyContent: 'space-between',
           display: 'flex',
           ...style,
         }}
         {...otherProps}
       >
-        <ButtonMD onClick={onBackClick}>{backButtonName}</ButtonMD>
-        <ButtonMD onClick={onNextClick}>{nextButtonName}</ButtonMD>
+        <ButtonCustom
+          onClick={onBackClick}
+          width="155px"
+          color="#41485D"
+          background="white"
+          border="1px solid rgba(65, 72, 93, 0.5);"
+          custom={true}
+        >
+          {backButtonName}
+        </ButtonCustom>
+        <ButtonCustom onClick={onNextClick} 
+          border="1px solid #FF8D00;"
+          width="155px">
+          {nextButtonName}
+        </ButtonCustom>
       </div>
     );
   }

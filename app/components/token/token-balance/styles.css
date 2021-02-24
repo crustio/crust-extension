@@ -1,6 +1,6 @@
 .token-balance-unit {
   font-size: 48px;
-  text-transform: uppercase;
+  text-transform: none;
   line-height: 63px;
   align-self: flex-start;
   justify-self: flex-start;

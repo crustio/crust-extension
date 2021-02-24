@@ -24,7 +24,7 @@ export default class CreateAccount extends Component {
       confirmSeedPhrase: '',
       isError: false,
       errorMessage: null,
-      labels: ['generate', 'import'],
+      labels: ['Generate', 'Import'],
       alias: '',
       disableAccountSettings: false,
       isAliasError: false,
@@ -62,9 +62,7 @@ export default class CreateAccount extends Component {
   }
 
   handleChange = (e, value) => {
-    let {
-      buttonName, formValue, onSubmit, disableAccountSettings
-    } = this.state;
+    let { buttonName, formValue, onSubmit, disableAccountSettings } = this.state;
     if (value === Account.CREATE_ACCOUNT) {
       buttonName = Account.TO_CONFIRM_BUTTON_TEXT;
       onSubmit = this.handleNext;
@@ -107,6 +105,7 @@ export default class CreateAccount extends Component {
 
   handleAliasChange = prop => e => {
     const { value } = e.target;
+
     this.setState({
       [prop]: value,
     });
@@ -120,8 +119,8 @@ export default class CreateAccount extends Component {
 
   handelBack = () => {
     if (
-      this.state.formValue === Account.CREATE_ACCOUNT
-      || this.state.formValue === Account.IMPORT_ACCOUNT
+      this.state.formValue === Account.CREATE_ACCOUNT ||
+      this.state.formValue === Account.IMPORT_ACCOUNT
     ) {
       this.props.changePage(MANAGE_ACCOUNT_PAGE);
     } else if (this.state.formValue === Account.CONFIRM_ACCOUNT) {
@@ -259,9 +258,7 @@ export default class CreateAccount extends Component {
   }
 
   render() {
-    const {
-      seedWords, keypairType, keypairTypes, account
-    } = this.props;
+    const { seedWords, keypairType, keypairTypes, account } = this.props;
     const {
       value,
       formValue,
@@ -333,7 +330,9 @@ export default class CreateAccount extends Component {
             nextButtonName={buttonName}
           />
         ) : (
-          <FooterButton onClick={onSubmit} name={buttonName} />
+          <div className="create-account-button">
+            <FooterButton onClick={onSubmit} name={buttonName} />
+          </div>
         )}
       </div>
     );

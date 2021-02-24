@@ -22,17 +22,19 @@ export default class SubHeader extends Component {
     const { anchorEl } = this.state;
     const { icon, subMenu, onSubMenuOptionsChange } = this.props;
     return (
-      <div className="sub-header-container sub-header-shadow">
-        <IconContainer
-          className="sub-header-icon clickable-icon"
-          onClick={this.props.backBtnOnClick}
-        >
-          {icon}
-        </IconContainer>
-        <FontMedium className="sub-header-title" text={this.props.title} />
+      <div className="sub-header-container">
+        <div className="sub-header-left">
+          <IconContainer
+            className="sub-header-icon clickable-icon"
+            onClick={this.props.backBtnOnClick}
+          >
+            {icon}
+          </IconContainer>
+          <FontMedium className="sub-header-title" text={this.props.title} />
+        </div>
         {subMenu && subMenu.length > 0 && (
           <div>
-            <MoreVertIcon onClick={this.handleClick} className="more-list-icon" />
+            <MoreVertIcon onClick={this.handleClick} color={"#858B9C"} className="more-list-icon" />
             <CrustMenu
               options={subMenu}
               onChange={option => {

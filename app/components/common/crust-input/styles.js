@@ -1,8 +1,15 @@
 export const styles = () => ({
+  crustInput: {
+    fontSize: '14px',
+    '&:focus': {
+      border: 'none',
+      color: '#858B9C',
+    },
+  },
   helperText: {
     '&$helperTextError': {
-      color: 'rgba(176, 0, 32, 1)',
-      fontFamily: 'Roboto-Regular',
+      color: '#FA5050',
+      fontFamily: 'Inter-Regular',
       fontSize: '11px',
     },
   },
@@ -13,7 +20,7 @@ export const styles = () => ({
   },
   inputUnderline: {
     '&:before': { border: 'none' },
-    '&:after': { borderBottom: '2px solid rgba(215, 95, 160, 1)' },
+    '&:after': { borderBottom: 'none' },
     '&:hover': { border: 'none' },
   },
   inputErrorUnderline: {
@@ -26,21 +33,21 @@ export const styles = () => ({
   inputError: {},
   rootLabel: {
     color: 'rgba(0, 0, 0, 0.6)',
-    fontSize: '15px',
-    fontFamily: 'Roboto-Regular',
+    fontSize: '13px',
+    fontFamily: 'Inter-Regular',
     '&$focusedLabel': {
-      color: 'rgba(215, 95, 160, 1)',
-      fontFamily: 'Roboto-Regular',
+      color: '#E11B7B',
+      fontFamily: 'Inter-Regular',
       transform: 'translate(10px,12px) scale(0.73)',
     },
   },
   rootErrorLabel: {
     color: 'rgba(0, 0, 0, 0.6)',
-    fontSize: '15px',
-    fontFamily: 'Roboto-Regular',
+    fontSize: '13px',
+    fontFamily: 'Inter-Regular',
     '&$errorLabel': {
-      color: 'rgba(176, 0, 32, 1)',
-      fontFamily: 'Roboto-Regular',
+      color: '#FA5050',
+      fontFamily: 'Inter-Regular',
       transform: 'translate(10px,12px) scale(0.73)',
     },
   },
@@ -49,7 +56,7 @@ export const styles = () => ({
       color: '#000000',
       opacity: '0.6',
       fontSize: '16px',
-      fontFamily: 'Roboto-Regular',
+      fontFamily: 'Inter-Regular',
     },
   },
   inputWithWhiteColor: {
@@ -58,7 +65,7 @@ export const styles = () => ({
       color: '#000000',
       opacity: '0.6',
       fontSize: '16px',
-      fontFamily: 'Roboto-Regular',
+      fontFamily: 'Inter-Regular',
     },
   },
   focusedLabel: {},

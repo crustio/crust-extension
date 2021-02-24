@@ -15,9 +15,10 @@ class ButtonMD extends Component {
   };
 
   render() {
-    const { className, ...otherProps } = this.props;
+    const { className, custom, ...otherProps } = this.props;
     const buttonMDClassNames = classNames({
       'button-md': true,
+      'button-md-custom': custom
     });
     return (
       <div className={buttonMDClassNames}>

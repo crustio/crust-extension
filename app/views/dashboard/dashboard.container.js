@@ -1,9 +1,13 @@
 import { connect } from 'react-redux';
 import Dashboard from './dashboard.component';
 import {
-  configEditAccount, configAliasAccount, connectionError, renameAlias, onTokenSelected
+  configEditAccount,
+  configAliasAccount,
+  connectionError,
+  renameAlias,
+  onTokenSelected,
 } from './actions';
-import { changePage } from '../../containers/actions';
+import { changePage, updateBackupPage } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
 import { resetToAddress } from '../../actions/address-book';
 import { getUnits } from '../../actions/network';
@@ -24,6 +28,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   changePage,
+  updateBackupPage,
   createToast,
   configEditAccount,
   configAliasAccount,
@@ -31,7 +36,7 @@ const mapDispatchToProps = {
   resetToAddress,
   getUnits,
   connectionError,
-  onTokenSelected
+  onTokenSelected,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

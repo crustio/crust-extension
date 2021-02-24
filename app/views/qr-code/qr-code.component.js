@@ -5,10 +5,11 @@ import { DASHBOARD_PAGE } from '../../constants/navigation';
 import QRCodeForm from '../../components/qr-code/qr-code-form';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import { findChainByName } from '../../../lib/constants/chain';
+import './styles.css';
 
 export default class QRCode extends Component {
   handleSubheaderBackBtn = () => {
-    this.props.changePage(DASHBOARD_PAGE);
+    this.props.changePage(this.props.backupPage);
   };
 
   onCopy = () => {
@@ -20,13 +21,14 @@ export default class QRCode extends Component {
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     return (
-      <div>
+      <div className="qr-code-container">
         <SubHeader
-          icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
+          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
           title="Receive"
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
         <QRCodeForm
+          className="qr-code-form-container"
           theme={theme}
           account={account}
           onCopyAddress={this.onCopy}

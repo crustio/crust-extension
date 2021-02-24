@@ -1,57 +1,34 @@
 import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import TextField from '@material-ui/core/TextField';
-import classNames from 'classnames';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input';
 import { styles } from './styles';
 
 class CrustInput extends Component {
   render() {
     const {
-      classes,
-      helperText,
-      error,
-      InputProps,
-      inputStyles,
-      withWhiteColor,
-      ...otherProps
+      classes, InputProps, placeholderText, standardInput, ...otherProps
     } = this.props;
-    const rootLabelClassNames = classNames({
-      [classes.rootErrorLabel]: error,
-      [classes.rootLabel]: !error,
-    });
     return (
-      <TextField
-        {...otherProps}
-        error={error}
-        helperText={helperText}
-        variant="filled"
-        FormHelperTextProps={{
-          classes: {
-            root: classes.helperText,
-            error: classes.helperTextError,
-          },
-        }}
-        InputLabelProps={{
-          classes: {
-            root: rootLabelClassNames,
-            focused: classes.focusedLabel,
-            error: classes.errorLabel,
-          },
-        }}
-        InputProps={{
-          classes: {
-            root: classes.inputRoot,
-            underline: error ? classes.inputErrorUnderline : classes.inputUnderline,
-            error: classes.inputError,
-            input: withWhiteColor ? classes.inputWithWhiteColor : classes.input,
-          },
-          ...InputProps,
-        }}
-        //eslint-disable-next-line
-        inputProps={{
-          ...inputStyles,
-        }}
-      />
+      standardInput ? 
+        <Input
+          placeholder={placeholderText}
+          labelWidth={0}
+          inputProps={{
+            className: classes.crustInput,
+          }}
+          disableUnderline={true}
+          {...otherProps}
+        />
+        :
+        <OutlinedInput
+          placeholder={placeholderText}
+          labelWidth={0}
+          inputProps={{
+            className: classes.crustInput,
+          }}
+          {...otherProps}
+        />
     );
   }
 }

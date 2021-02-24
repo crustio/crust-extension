@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import ArrowBack from '@material-ui/icons/ArrowBack';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import ConfirmForm from '../../components/confirm/confirm-form';
 import SubHeader from '../../components/common/sub-header';
 import { TRANSFER_PAGE, CREATE_ADDRESS_BOOK_PAGE } from '../../constants/navigation';
 import { shortenAddress } from '../../services/wallet-service';
 import { findChainByName } from '../../../lib/constants/chain';
+import './styles.css';
 
 export default class Confirm extends Component {
   constructor(props) {
@@ -53,9 +54,9 @@ export default class Confirm extends Component {
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     return (
-      <div>
+      <div className="confirm-container">
         <SubHeader
-          icon={<ArrowBack style={{ color: 'rgba(255, 255, 255, 1)' }} />}
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '18px' }} />}
           title="Send"
           backBtnOnClick={this.handleSubheaderBackBtn}
         />

@@ -1,28 +1,31 @@
+import { CRUST_COLOR1 } from '../../../constants/colors';
 export const styles = () => ({
   tabsRoot: {
-    backgroundColor: 'rgba(255, 255, 255, 1)',
+    backgroundColor: 'transparent',
   },
   tabsIndicator: {
-    backgroundColor: 'rgba(215, 95, 160, 1)',
+    backgroundColor: CRUST_COLOR1,
     height: '2px',
   },
   tabRoot: {
-    color: 'rgba(0, 0, 0, 0.6)',
+    color: '#858B9C',
     width: '180px',
     height: '48px',
-    textTransform: 'capitalise',
+    textTransform: 'none',
     fontSize: '14px',
     fontFamily: 'Roboto-Medium',
+    borderBottom: '1px solid #C5CAD5',
     '&:hover': {
-      color: 'rgba(215, 95, 160, 1)',
+      color: CRUST_COLOR1,
       opacity: 1,
     },
     '&$tabSelected': {
-      color: 'rgba(215, 95, 160, 1)',
+      color: CRUST_COLOR1,
       fontSize: '14px',
+      borderBottom: '1px solid #FF8D00'
     },
     '&:focus': {
-      color: 'rgba(215, 95, 160, 1)',
+      color: CRUST_COLOR1,
     },
   },
   tabSelected: {},

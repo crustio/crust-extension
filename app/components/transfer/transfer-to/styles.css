@@ -1,0 +1,36 @@
+
+.transfer-to-input-contianer {
+  flex: 1;
+}
+.transfer-to-input {
+  width: 100%;
+}
+
+.transfer-to-input fieldset {
+  border: 0;
+  font-size: 14px;
+  background-color: rgba(65, 72, 93, 0.1);
+}
+
+.transfer-to-input:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.input-margin {
+  margin-top: 12px !important;
+}
+
+.transfer-to-input-meter {
+  margin-top: 50px;
+}
+
+.tranfer-to-error-msg {
+  color: #FA5050;
+  height: 20px;
+  margin-left: 22px;
+}
+
+.place-holder {
+  height: 20px;
+}

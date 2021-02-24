@@ -25,17 +25,17 @@ export default class CreateAccountSettings extends Component {
     return (
       <div {...otherProps}>
         <CrustInput
+          standardInput={true}
           className="account-alias-input"
-          value={alias}
           onChange={handleAliasChange(aliasPropName)}
-          label={aliasLabel}
-          error={isAliasError}
-          helperText={aliasErrorMessage}
-          name={aliasInputName}
-          inputRef={aliasRef}
-          onBlur={handleAliasOnBlur}
-          disabled={disableAccountSettings && !isAliasError}
+          placeholder={aliasLabel}
+          value={alias}
         />
+        {isAliasError ? (
+          <span className="error-msg">{aliasErrorMessage}</span>
+        ) : (
+          <span className="place-holder"> </span>
+        )}
         <CreateAccountAdvancedConfig
           keypairType={keypairType}
           keypairTypes={keypairTypes}

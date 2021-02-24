@@ -33,20 +33,21 @@ export default class TransferForm extends Component {
     } = this.props;
     return (
       <div className="transfer-form-container">
-        <TransferFromTo
-          address={address}
-          theme={theme}
-          alias={alias}
-          isToError={isToError}
-          isAddressEncoded={isAddressEncoded}
-          toPropName={toPropName}
-          to={to}
-          toRef={toRef}
-          toErrorText={toErrorText}
-          handleToChange={handleToChange}
-          onAddressBookClick={onAddressBookClick}
-        />
-        <DarkDivider className="transfer-form-divider" />
+        <div className="transfer-form-top-container">
+          <TransferFromTo
+            address={address}
+            theme={theme}
+            alias={alias}
+            isToError={isToError}
+            isAddressEncoded={isAddressEncoded}
+            toPropName={toPropName}
+            to={to}
+            toRef={toRef}
+            toErrorText={toErrorText}
+            handleToChange={handleToChange}
+            onAddressBookClick={onAddressBookClick}
+          />
+        </div>
         <TransferFormAmount
           className="transfer-form-amount-container"
           error={isAmountError}
@@ -60,7 +61,6 @@ export default class TransferForm extends Component {
           dropDownValue={unit}
           onDropDownChange={handleUnitOnChange}
         />
-        <DarkDivider className="transfer-form-divider" />
         <FooterButton onClick={handleSendButton} name={buttonText} />
       </div>
     );

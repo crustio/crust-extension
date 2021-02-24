@@ -25,7 +25,10 @@ export default class QRCodeForm extends Component {
           size={200}
           value={account.address}
         />
-        <FooterButton name="done" onClick={onClick} />
+        <div className='qr-button-container'>
+          <FooterButton name="done" onClick={onClick} />
+        </div>
+        
       </div>
     );
   }

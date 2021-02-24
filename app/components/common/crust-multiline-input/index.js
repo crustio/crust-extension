@@ -40,9 +40,9 @@ class CrustMultilineInput extends Component {
           }}
           InputProps={{
             classes: {
+              underline: classes.underline,
               root: classes.inputRoot,
               input: classes.input,
-              underline: classes.inputUnderline,
               error: classes.inputError,
             },
           }}

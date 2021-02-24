@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #f5f5f6;
+  background: white;
   min-height: 600px !important;
   height: 600px !important;
   max-height: 600px !important;
@@ -108,7 +108,7 @@ p {
 .block-ui-message-container {
   position: absolute;
   top: 46% !important;
-  left: 43% !important;
+  left: 50% !important;
   right: 0;
   text-align: center;
   -webkit-transform: translateY(-50%);

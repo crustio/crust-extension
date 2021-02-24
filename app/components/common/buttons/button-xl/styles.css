@@ -4,11 +4,23 @@
   font-style: normal;
   height: 45px;
   width: 320px;
-  background: linear-gradient(94.54deg, #FF8212 0%, #ED4454 100%);
-  color: #FFFFFF;
+  color: #FF8D00;
+  border-radius: 4px;
+  border: 1px solid #FF8D00;
+  text-transform: none;
 }
 
 .button-xl button:disabled, .button-xl button[disabled] {
-  background: #F4F4F4;
-  color: rgba(0, 0, 0, 0.5);
+  color: #858B9C;
+  border-radius: 4px;
+  border: 1px solid #C5CAD5;
+}
+
+.button-xl button:hover, .button-xl button[hover] {
+  background: #FF8D00;
+  color: white;
+}
+
+.button-xl-custom1 button {
+  color: white !important;
 }

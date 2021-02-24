@@ -18,7 +18,7 @@ export default class ConfirmFromTo extends Component {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            paddingLeft: '26px',
+            paddingLeft: '16px',
             height: '54.8px',
           }}
           address={to}

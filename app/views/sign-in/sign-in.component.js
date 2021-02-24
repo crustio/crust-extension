@@ -43,9 +43,7 @@ export default class SignIn extends Component {
   };
 
   render() {
-    const {
-      isError, password, label, errorText
-    } = this.state;
+    const { isError, password, label, errorText } = this.state;
     return (
       <div>
         <div className="sign-in-container">
@@ -53,15 +51,22 @@ export default class SignIn extends Component {
             title="Enter Password"
             description="The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them."
           />
-          <CrustPassword
-            className="sign-in-password-container"
-            onChange={this.handleOnChange}
-            isError={isError}
-            password={password}
-            errorMessage={isError ? errorText : null}
-            label={label}
-          />
-          <FooterButton onClick={this.handleClick} name="unlock" />
+          <div className="sign-in-container-password">
+            <CrustPassword
+              standardInput={true}
+              className="sign-in-password-container"
+              onChange={this.handleOnChange}
+              password={password}
+              placeholder="Password"
+            />
+          </div>
+
+          {isError ? (
+            <span className="error-msg">{errorText}</span>
+          ) : (
+            <span className="place-holder"> </span>
+          )}
+          <FooterButton onClick={this.handleClick} name="Unlock" />
         </div>
       </div>
     );

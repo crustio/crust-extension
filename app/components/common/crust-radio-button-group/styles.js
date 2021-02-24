@@ -1,3 +1,4 @@
+import { CRUST_COLOR1 } from '../../../constants/colors';
 export const styles = () => ({
   root: { marginRight: 0, marginLeft: 0 },
   label: {
@@ -9,7 +10,7 @@ export const styles = () => ({
     color: 'none',
     padding: '0px 3px 0px 0px',
     '&$checked': {
-      color: 'rgba(215, 95, 160, 1)',
+      color: CRUST_COLOR1,
       padding: '0px 3px 0px 0px',
     },
   },

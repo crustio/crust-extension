@@ -1,11 +1,15 @@
 import { connect } from 'react-redux';
 import TokenDetailsPage from './token-details-page.component';
-import { changePage } from '../../containers/actions';
+import { changePage, updateBackupPage } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
 import { resetToAddress } from '../../actions/address-book';
 import { getUnits } from '../../actions/network';
 import {
-  configEditAccount, configAliasAccount, connectionError, renameAlias, onTokenSelected
+  configEditAccount,
+  configAliasAccount,
+  connectionError,
+  renameAlias,
+  onTokenSelected,
 } from '../dashboard/actions';
 
 const mapStateToProps = state => ({
@@ -13,6 +17,8 @@ const mapStateToProps = state => ({
   account: state.accountReducer.account,
   balances: state.accountReducer.balances,
   balance: state.accountReducer.balance,
+  page: state.appStateReducer.page,
+  backupPage: state.appStateReducer.backupPage,
   isLinkToFaucet: state.accountReducer.isLinkToFaucet,
   transactions: state.dashboardReducer.transactions,
   network: state.networkReducer.network,
@@ -23,6 +29,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   changePage,
+  updateBackupPage,
   createToast,
   configEditAccount,
   configAliasAccount,
@@ -30,7 +37,7 @@ const mapDispatchToProps = {
   resetToAddress,
   getUnits,
   connectionError,
-  onTokenSelected
+  onTokenSelected,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TokenDetailsPage);

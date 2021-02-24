@@ -1,7 +1,7 @@
 export const WEBSITE = {
   text: 'Website',
   value: 'website',
-  url: 'https://github.com/securityin/crust-wallet',
+  url: 'https://crust.network/',
 };
 
 export const FAQ = {
@@ -19,7 +19,7 @@ export const GITHUB = {
 export const TERMS_OF_USE = {
   text: 'Terms of Use',
   value: 'tou',
-  url: 'https://github.com/securityin/crust-wallet',
+  url: 'https://crust.network/wallet/privacy.html',
 };
 
-export const LINKS = [WEBSITE, FAQ, GITHUB, TERMS_OF_USE];
+export const LINKS = [WEBSITE, TERMS_OF_USE];

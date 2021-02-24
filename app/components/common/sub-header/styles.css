@@ -6,17 +6,22 @@
   position: relative;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   padding: 21px 16px 21px 0px;
-  background-color: rgba(38, 38, 38, 1);
   height: 55.53px;
-  color: rgba(255, 255, 255, 1);
+  color: #858B9C;
+}
+
+.sub-header-left {
+  display: flex;
+  flex-direction: row;
 }
 
 .sub-header-title {
   align-self: center;
   justify-content: flex-start;
-  font-size: 18px;
-  margin-left: 35px;
+  font-size: 14px;
+  margin-left: 5px;
   width: 240px;
 }
 
@@ -31,4 +36,5 @@
   justify-content: space-between;
   align-items: end;
   margin-left: 5px;
+  cursor: pointer;
 }
