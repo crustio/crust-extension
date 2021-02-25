@@ -62,6 +62,7 @@ class AddressBook extends Component {
         if (address) {
           this.props.updateToAddress(address);
           this.props.changePage(NavConstants.TRANSFER_PAGE);
+          this.props.updateBackupPage(NavConstants.DASHBOARD_PAGE);
         }
       }
     }
