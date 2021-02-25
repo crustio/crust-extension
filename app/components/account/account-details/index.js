@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FontRegular from '../../common/fonts/font-regular';
 import ClickToCopyAddress from '../../common/click-to-copy-address';
 import CrustInput from '../../common/crust-input';
+import Tooltip from '@material-ui/core/Tooltip';
 import './styles.css';
 
 export default class AccountDetails extends Component {
@@ -22,7 +23,9 @@ export default class AccountDetails extends Component {
     return (
       <div {...otherProps}>
         {!editMode && (
-          <FontRegular className="account-alias" text={alias} style={fontSize && { fontSize }} />
+          <Tooltip title={alias}>
+            <FontRegular className="account-alias" text={alias} style={fontSize && { fontSize }} />
+          </Tooltip>
         )}
         {editMode && (
           <CrustInput
@@ -30,6 +33,7 @@ export default class AccountDetails extends Component {
             onChange={onAliasChange}
             onBlur={onAliasInputBlur}
             value={aliasValue}
+            inputRef={inputRef}
           />
         )}
         {!editMode && (

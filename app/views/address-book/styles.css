@@ -1,5 +1,5 @@
 .address-book-root-container {
-  height: 100vh;
+  height: 550px;
   background: #F5F5F5;
 }
 
@@ -20,7 +20,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  right: -10px; /* Increase/Decrease this value for cross-browser compatibility */
+  right: -5px; /* Increase/Decrease this value for cross-browser compatibility */
   overflow-y: scroll;
 }
 .address-book-container {

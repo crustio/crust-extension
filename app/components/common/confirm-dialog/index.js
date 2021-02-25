@@ -8,6 +8,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { styles } from './styles';
 import './styles.css';
 
 function PaperComponent(props) {
@@ -18,7 +20,7 @@ function PaperComponent(props) {
   );
 }
 
-export default function DraggableDialog({
+function DraggableDialog({
   isOpen,
   handleClose,
   title,
@@ -32,6 +34,7 @@ export default function DraggableDialog({
   textFieldLabel,
   textFieldType,
   importVaultFileName,
+  classes,
 }) {
   return (
     <div>
@@ -60,7 +63,7 @@ export default function DraggableDialog({
             />
           )}
         </DialogContent>
-        <DialogActions>
+        <DialogActions classes={{ root: classes.root }}>
           <div className="button-secondary">
             <Button onClick={handleClose} color="primary" variant="contained" autoFocus>
               {noText}
@@ -76,3 +79,5 @@ export default function DraggableDialog({
     </div>
   );
 }
+
+export default withStyles(styles)(DraggableDialog);
