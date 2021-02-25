@@ -1,21 +1,25 @@
 .button-primary button {
     background-color: rgba(255, 255, 255, 1);
     color: #FB822A;
-    width: 57.12px;
+    width: 100px;
     height: 36px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 transparent;
     font-size: 14px;
     font-family: "Roboto-Medium";
+    color: #41485D;
+    border: 1px solid rgba(65, 72, 93, 0.5);
+    flex-shrink: 1;
   }
   
   .button-secondary button {
     background-color: #FB822A;
     color: rgba(255, 255, 255, 1);
-    width: 57.12px;
+    width: 100px;
     height: 36px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 transparent;
     font-size: 14px;
     font-family: "Roboto-Medium";
+    flex-shrink: 1;
   }
   
   .button-md-dashboard button {
@@ -23,7 +27,7 @@
     color: rgba(255, 255, 255, 1);
     width: 147.12px;
     height: 36px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 transparent;
     font-size: 14px;
     font-family: "Roboto-Medium";
   }

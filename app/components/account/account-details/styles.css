@@ -1,6 +1,10 @@
 .account-alias {
   font-size: 28px;
   line-height: 27px;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .account-address {

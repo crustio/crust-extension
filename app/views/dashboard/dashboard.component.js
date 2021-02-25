@@ -18,7 +18,7 @@ class Dashboard extends Component {
     super(props);
     this.textInput = React.createRef();
     this.state = {
-      labels: ['Asset', 'Activity'],
+      labels: ['Assets', 'Activity'],
       value: 0,
     };
   }
@@ -49,6 +49,7 @@ class Dashboard extends Component {
   handleAccountMenuOptionsChange = async (option, account, transactionsUrl) => {
     await this.props.configEditAccount(option, account, transactionsUrl);
     if (option.value === RENAME.value) {
+      console.log('this:', this);
       this.textInput.current.focus();
       this.textInput.current.maxLength = 20;
     }

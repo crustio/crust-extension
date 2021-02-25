@@ -123,9 +123,9 @@ const createTransactionObj = transaction => {
   } = transaction;
 
   const feeStr = convertBalanceToShow(fees.totalFee, ChainApi.getTokenDecimals(), 9) + ChainApi.getTokenSymbol();
-  const amountStr = convertBalanceToShow(fAmount, tokenSelected.decimals) + tokenSelected.tokenSymbol;
+  const amountStr = convertBalanceToShow(fAmount, tokenSelected.decimals, tokenSelected.decimals) + tokenSelected.tokenSymbol;
 
-  let total = convertBalanceToShow(totalAmount.toString(), tokenSelected.decimals) + tokenSelected.tokenSymbol;
+  let total = convertBalanceToShow(totalAmount.toString(), tokenSelected.decimals, tokenSelected.decimals) + tokenSelected.tokenSymbol;
   if (ChainApi.getTokenSymbol() !== tokenSelected.tokenSymbol) {
     total = amountStr + ' + ' + feeStr;
   }

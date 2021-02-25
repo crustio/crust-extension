@@ -107,9 +107,9 @@ class Transfer extends Component {
     if (toAddress !== '' && amount !== '') {
       this.props.confirmTransaction(toAddress, this.props.account, amount, unit, dropDownSelected);
     } else if (toAddress === '') {
-      this.toInput.focus();
+      // this.toInput.focus();
     } else {
-      this.amountInput.focus();
+      // this.amountInput.focus();
     }
   };
 

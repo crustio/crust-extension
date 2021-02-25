@@ -3,7 +3,7 @@ import SubHeader from '../../components/common/sub-header';
 import FavIcon from '../../components/common/fav-icon';
 import FontRegular from '../../components/common/fonts/font-regular';
 import { trimUrl } from '../../services/wallet-service';
-import FooterTwoMDButton from '../../components/common/footer-two-md-button';
+import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { SolidWallet, SolidPlug, File } from '../../components/common/icon';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import { withTranslation } from 'react-i18next';
@@ -73,11 +73,17 @@ class ConnectRequest extends Component {
           }
           className="connect-request-center connect-request-account-selection-header"
         />
-        <FooterTwoMDButton
+        {/* <FooterTwoMDButton
           namePrimary={t("Deny")}
           nameSecondary={t("Allow")}
           onClickPrimary={this.onDeny}
           onClickSecondary={this.onAllow}
+        /> */}
+        <FooterWithTwoButton
+          onNextClick={this.onAllow}
+          onBackClick={this.onDeny}
+          backButtonName={t("Deny")}
+          nextButtonName={t("Allow")}
         />
       </div>
     );

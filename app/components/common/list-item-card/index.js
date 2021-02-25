@@ -7,7 +7,8 @@ import Avatar from '../identicon';
 import { MoreVertIcon } from '../icon';
 import CrustMenu from '../crust-menu';
 import ClickToCopyAddress from '../click-to-copy-address';
-import DarkDivider from '../divider/dark-divider';
+import Tooltip from '@material-ui/core/Tooltip';
+import FontRegular from '../../common/fonts/font-regular';
 import './styles.css';
 
 class ListItemCard extends Component {
@@ -63,7 +64,7 @@ class ListItemCard extends Component {
           </ListItemAvatar>
           <ListItemText
             onClick={event => handleListItemClick(event, listItem)}
-            primary={primaryText}
+            primary={(<Tooltip title={primaryText}><FontRegular className="account-card-text" text={primaryText} /></Tooltip>)}
             className={classes.primaryWidth}
             secondary={(
               <ClickToCopyAddress

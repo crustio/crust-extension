@@ -22,9 +22,9 @@ export const failure = {
 
 export const enableResponse = {
   accounts: {},
-  name: 'crust',
+  name: 'crust wallet',
   signer: {},
-  version: '0.0.1',
+  version: '0.5.1',
 };
 
 export const isAuthorized = async () => false;
