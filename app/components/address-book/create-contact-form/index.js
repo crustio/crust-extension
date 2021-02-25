@@ -3,9 +3,10 @@ import TransferTo from '../../transfer/transfer-to';
 import CrustInput from '../../common/crust-input';
 import FooterButton from '../../common/footer-button';
 import DropDown from '../../common/drop-down';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
-export default class CreateContactForm extends Component {
+class CreateContactForm extends Component {
   render() {
     const {
       address,
@@ -36,6 +37,7 @@ export default class CreateContactForm extends Component {
       networks,
       network,
       onNetworkChange,
+      t,
     } = this.props;
     return (
       <div className="create-address-book-form">
@@ -45,7 +47,7 @@ export default class CreateContactForm extends Component {
             addressValue={address}
             theme={theme}
             isError={isAddressError}
-            label="Address"
+            label={t("Address")}
             propName={addressPropName}
             toValue={address}
             errorMessage={addressErrorMessage}
@@ -93,3 +95,5 @@ export default class CreateContactForm extends Component {
     );
   }
 }
+
+export default  withTranslation()(CreateContactForm);

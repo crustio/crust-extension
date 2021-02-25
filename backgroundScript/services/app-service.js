@@ -3,7 +3,7 @@ import { hydrateStore } from './hydration-service';
 import { startListener } from './storage-service';
 import * as MigrationService from './migration-service';
 import * as StorageService from '../../lib/services/extension/storage';
-import { APP } from '../../lib/constants/storage-keys';
+import { APP, LANGUAGE } from '../../lib/constants/storage-keys';
 import * as API from '../apis/api';
 import { DEFAULT_NETWORK } from '../../lib/constants/networks';
 import * as Store from './store-service';
@@ -48,4 +48,14 @@ export const getAppIsOnBoarded = async () => {
   const { isAppOnBoarded } = appState;
   await Store.updateAppOnBoarded(isAppOnBoarded);
   return appState;
+};
+
+export const setLanguage = async language => {
+  const ret = await StorageService.setLocalStorage(LANGUAGE, language);
+  return ret;
+};
+
+export const getLanguage = async () => {
+  const ret = await StorageService.getLocalStorage(LANGUAGE);
+  return ret;
 };

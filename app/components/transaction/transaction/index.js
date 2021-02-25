@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import FontMedium from '../../common/fonts/font-medium';
 import TransactionItems from '../transaction-items';
 import TransactionMessage from '../transaction-message';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
-export default class Transaction extends Component {
+class Transaction extends Component {
   render() {
     const {
-      transactions, isLinkToFaucet, network, ...otherProps
+      transactions, isLinkToFaucet, network, t, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
-        <FontMedium className="transactions-header" text="Transactions" />
+        <FontMedium className="transactions-header" text={t("Transactions")} />
         {transactions.length > 0 ? (
           <TransactionItems className="transaction-list-container" transactions={transactions} />
         ) : (
@@ -25,3 +26,5 @@ export default class Transaction extends Component {
     );
   }
 }
+
+export default withTranslation()(Transaction);

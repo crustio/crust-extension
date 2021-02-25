@@ -8,12 +8,12 @@ import { styles } from './styles';
 class CrustRadioButtonGroup extends Component {
   render() {
     const {
-      classes, options, value, onChange, disabled, ...otherProps
+      classes, options, value, onChange, disabled, vertical, ...otherProps
     } = this.props;
     return (
       <RadioGroup
         onChange={onChange}
-        classes={{ root: classes.radioGroupRoot }}
+        classes={{ root: vertical ? classes.radioGroupRootVertical : classes.radioGroupRoot }}
         value={value.value}
         {...otherProps}
       >
@@ -32,9 +32,10 @@ class CrustRadioButtonGroup extends Component {
             )}
             label={option.text}
             classes={{
-              root: classes.root,
-              label: classes.label,
+              root: vertical ? classes.rootVertical : classes.root,
+              label: vertical ? classes.labelVertical : classes.label,
             }}
+            labelPlacement={vertical ? "start" : "end"}
             disabled={disabled}
           />
         ))}

@@ -6,6 +6,7 @@ import { trimUrl } from '../../services/wallet-service';
 import FooterTwoMDButton from '../../components/common/footer-two-md-button';
 import { SolidWallet, SolidPlug, File } from '../../components/common/icon';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 const DAppURL = ({ favIconUrl, url, ...otherProps }) => (
@@ -19,7 +20,7 @@ const DAppURL = ({ favIconUrl, url, ...otherProps }) => (
   </div>
 );
 
-export default class ConnectRequest extends Component {
+class ConnectRequest extends Component {
   componentDidMount() {
     this.props.updateAppLoading(true);
     this.props.initializeRequest();
@@ -58,24 +59,23 @@ export default class ConnectRequest extends Component {
   }
 
   render() {
-    const { request, title } = this.props;
+    const { request, title, t } = this.props;
+    const content = "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access to any account.";
     return (
       <div>
-        <SubHeader title={title} />
+        <SubHeader title={t(title)} />
         {this.renderHeader()}
         <FontRegular
           text={
             <div>
-              {`${request.request.metadata.url} is requesting access to a/an `}
-              account. Click allow to grant access any account or click DENY to prevent access to
-              any account.
+              {`${request.request.metadata.url} ${t(content)}`}
             </div>
           }
           className="connect-request-center connect-request-account-selection-header"
         />
         <FooterTwoMDButton
-          namePrimary="Deny"
-          nameSecondary="Allow"
+          namePrimary={t("Deny")}
+          nameSecondary={t("Allow")}
           onClickPrimary={this.onDeny}
           onClickSecondary={this.onAllow}
         />
@@ -83,3 +83,5 @@ export default class ConnectRequest extends Component {
     );
   }
 }
+
+export default withTranslation()(ConnectRequest);

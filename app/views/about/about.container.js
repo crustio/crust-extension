@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import About from './about.component';
-import { changePage } from '../../containers/actions';
+import { changePage, updateBackupPage } from '../../containers/actions';
 
 const mapStateToProps = state => ({
   manifest: state.appStateReducer.manifest,
@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   changePage,
+  updateBackupPage
 };
 
 export default connect(

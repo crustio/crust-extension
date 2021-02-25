@@ -1,0 +1,85 @@
+{
+  "Receive": "Receive",
+  "Send": "Send",
+  "Asset": "Asset",
+  "Activity": "Activity",
+  "Amount": "Amount",
+  "Next": "Next",
+  "About": "About",
+  "Transactions": "Transactions",
+  "No transactions yet.": "No transactions yet.",
+  "Account Management": "Account Management",
+  "Add Account": "Add Account",
+  "Rename": "Rename",
+  "Import": "Import",
+  "Generate": "Generate",
+  "Go Back": "Go Back",
+  "Advanced": "Advanced",
+  "Click to copy": "Click to copy",
+  "Address Book": "Address Book",
+  "Language Setting": "Language Setting",
+  
+  "Create A Password To Secure Your Account": "Create A Password To Secure Your Account",
+  "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.": "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.",
+  "Password": "Password",
+  "Repeat Password": "Repeate Password",
+  "Create": "Create",
+
+  "Done": "Done",
+
+  "Assets": "Assets",
+  "Balance": "Balance",
+
+  "Fee": "Fee",
+  "Total": "Total",
+
+  "No": "No",
+  "Yes": "Yes",
+  "Remove account": "Remove account",
+  "Please make sure you have saved the seed phrase or private key for this account before continuing.": "Please make sure you have saved the seed phrase or private key for this account before continuing.",
+
+  "Remove": "Remove",
+  "Add Address": "Add Address",
+
+  "Select To Address": "Select To Address",
+  "Click here to add an address!": "Click here to add an address!",
+  "Remove contact": "Remove contact",
+  "Do you want to remove this address?": "Do you want to remove this address?",
+
+  "Firstname": "Firstname",
+  "Lastname": "Lastname",
+  "Submit": "Submit",
+  "Address": "Address",
+
+  "OK": "OK",
+
+  "Token Details": "Token Details",
+
+  "Enter Password": "Enter Password",
+  "Unlock": "Unlock",
+  "Password is incorrect.": "Password is incorrect.",
+  "Password is required.": "Password is required.",
+
+  "Generate Seed Phrase": "Generate Seed Phrase",
+  "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.": "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.",
+  "Nickname": "Nickname",
+  "Keypair Crypto Type": "Keypair Crypto Type",
+  "Import Seed Phrase": "Import Seed Phrase",
+  "Please input your seed phrase to import account.": "Please input your seed phrase to import account.",
+  "Type or paste your seed phrase...": "Type or paste your seed phrase...",
+  "Seed phrase must be 12 words long": "Seed phrase must be 12 words long",
+  "It contains invalid seed words": "It contains invalid seed words",
+  "Invalid seed words": "Invalid seed words",
+
+  "Alias must be less than 12 characters.": "Alias must be less than 12 characters.",
+  "Firstname must be less than 12 characters.": "Firstname must be less than 12 characters.",
+  "Lastname must be less than 12 characters.": "Lastname must be less than 12 characters.",
+
+  "Connect Request": "Connect Request",
+  "Deny": "Deny",
+  "Allow": "Allow",
+  "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.": "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.",
+
+  "Chinese": "Chinese",
+  "English": "English"
+}

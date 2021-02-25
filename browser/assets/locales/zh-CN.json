@@ -1,0 +1,85 @@
+{
+  "Receive": "收款",
+  "Send": "转账",
+  "Asset": "资产",
+  "Activity": "交易记录",
+  "Amount": "数量",
+  "Next": "下一步",
+  "About": "关于",
+  "Transactions": "交易",
+  "No transactions yet.": "无交易记录.",
+  "Account Management": "账户管理",
+  "Add Account": "添加账户",
+  "Rename": "重命名",
+  "Import": "导入",
+  "Generate": "生成",
+  "Go Back": "返回",
+  "Advanced": "高级",
+  "Click to copy": "拷贝",
+  "Address Book": "地址簿",
+  "Language Setting": "语言",
+
+  "Create A Password To Secure Your Account": "创建密码来保护您的账户",
+  "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.": "此密码用来保护您的助记词，以防Chrome浏览器扩展获取它们。",
+  "Password": "密码",
+  "Repeat Password": "确认密码",
+  "Create": "创建",
+
+  "Done": "完成",
+
+  "Assets": "资产",
+  "Balance": "余额",
+
+  "Fee": "手续费",
+  "Total": "总计",
+
+  "No": "否",
+  "Yes": "是",
+  "Remove account": "移除账户",
+  "Please make sure you have saved the seed phrase or private key for this account before continuing.": "再继续删除操作之前，请确认您已经备份了这个账户的助记词或私钥。",
+
+  "Remove": "移除",
+  "Add Address": "添加地址",
+
+  "Select To Address": "选择地址",
+  "Click here to add an address!": "点击这里，添加地址！",
+  "Remove contact": "移除地址",
+  "Do you want to remove this address?": "您想要移除这个地址吗？",
+
+  "Firstname": "名",
+  "Lastname": "姓",
+  "Submit": "提交",
+  "Address": "地址",
+
+  "OK": "好的",
+
+  "Token Details": "代币详情",
+
+  "Enter Password": "输入密码",
+  "Unlock": "解锁",
+  "Password is incorrect.": "密码输入错误。",
+  "Password is required.": "请输入密码",
+
+  "Generate Seed Phrase": "生成助记词",
+  "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.": "这个助记词用来生成您的首个账户。安全地保存好并且不要分享给别人。",
+  "Nickname": "昵称",
+  "Keypair Crypto Type": "Keypair加密类型",
+  "Import Seed Phrase": "导入助记词",
+  "Please input your seed phrase to import account.": "请您输入助记词来导入账户",
+  "Type or paste your seed phrase...": "输入或粘贴你的助记词...",
+  "Seed phrase must be 12 words long": "助记词长度必须为12个单词",
+  "It contains invalid seed words": "包含了非法的助记词",
+  "Invalid seed words": "非法的助记词",
+
+  "Alias must be less than 12 characters.": "别名长度必须少于12个字符。",
+  "Firstname must be less than 12 characters.": "名必须少于12个字符。",
+  "Lastname must be less than 12 characters.": "姓必须少于12个字符。",
+
+  "Connect Request": "连接请求",
+  "Deny": "拒绝",
+  "Allow": "同意",
+  "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access to any account.": "请求访问账户。点击同意按钮允许账户访问或点击拒绝按钮拒绝账户访问。",
+
+  "Chinese": "中文",
+  "English": "英文"
+}

@@ -3,9 +3,10 @@ import DarkDivider from '../../common/divider/dark-divider';
 import FooterButton from '../../common/footer-button';
 import ConfirmParticular from '../confirm-particular';
 import ConfirmFromTo from '../confirm-from-to';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
-export default class ConfirmForm extends Component {
+class ConfirmForm extends Component {
   render() {
     const {
       confirmDetails: {
@@ -20,6 +21,7 @@ export default class ConfirmForm extends Component {
       handleSend,
       buttonText,
       theme,
+      t
     } = this.props;
     return (
       <div className="confirm-form-container">
@@ -28,18 +30,18 @@ export default class ConfirmForm extends Component {
           <DarkDivider className="confirm-form-amount-divider" />
           <ConfirmParticular
             className="confirm-form-amount-container"
-            description="AMOUNT"
+            description={t("Amount")}
             price={`${transferAmount}`}
           />
           <ConfirmParticular
             className="confirm-form-fee-container"
-            description="FEE"
+            description={t("Fee")}
             price={`${transferFee}`}
           />
           <DarkDivider className="confirm-form-total-amount-divider" />
           <ConfirmParticular
             className="confirm-form-total-container"
-            description="TOTAL"
+            description={t("Total")}
             price={`${totalTransferAmount}`}
           />
         </div>
@@ -49,3 +51,5 @@ export default class ConfirmForm extends Component {
     );
   }
 }
+
+export default withTranslation()(ConfirmForm);

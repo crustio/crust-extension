@@ -1,0 +1,10 @@
+.language-setting-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #F5F5F5;
+  height: 100vh;
+}
+
+.language-setting-option-container {
+  margin: 0 16px;
+}

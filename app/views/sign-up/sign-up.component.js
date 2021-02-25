@@ -5,11 +5,12 @@ import CrustInput from '../../components/common/crust-input';
 import ContentHeader from '../../components/common/content-header';
 import FooterButton from '../../components/common/footer-button';
 import LogoBig from '../../images/crust-logo-big.svg';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 const errorMessage = 'Must be 8 characters or more in length.';
 const requiredErrorMessage = 'Password required';
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -118,15 +119,15 @@ export default class SignUp extends Component {
         </div>
         <ContentHeader
           className="sign-up-content-header"
-          title="Create A Password To Secure Your Account"
-          description="The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them."
+          title={this.props.t("Create A Password To Secure Your Account")}
+          description={this.props.t("The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.")}
         />
         <CrustPassword
           standardInput={true}
           className="sign-up-password"
           onChange={e => this.handleOnChange('password', e)}
           password={password}
-          placeholder="Password"
+          placeholder={this.props.t("Password")}
           handleClickShowPassword={this.handleClickShowPassword}
         />
         {isPasswordError ? (
@@ -139,7 +140,7 @@ export default class SignUp extends Component {
           className="sign-up-password"
           onChange={this.handleOnChange('passwordRepeat')}
           type="password"
-          placeholder="Repeat Password"
+          placeholder={this.props.t("Repeat Password")}
           value={passwordRepeat}
         />
         {isPasswordRepeatError ? (
@@ -147,11 +148,13 @@ export default class SignUp extends Component {
         ) : (
           <span className="place-holder"> </span>
         )}
-        <FooterButton onClick={this.handleClick} disabled={this.state.disabled} name="Create" />
+        <FooterButton onClick={this.handleClick} disabled={this.state.disabled} name={this.props.t("Create")} />
       </div>
     );
   }
 }
+
+export default withTranslation()(SignUp);
 
 SignUp.defaultProps = {
   signUp: undefined,

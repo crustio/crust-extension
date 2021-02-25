@@ -2,6 +2,7 @@ import * as Types from './action-types';
 import { LOADER_OVERLAY, DASHBOARD_PAGE } from '../constants/navigation';
 import { OPTIONS } from '../constants/options';
 import { LINKS } from '../constants/links';
+import { ENGLISH } from '../constants/language'
 
 const initialState = {
   page: LOADER_OVERLAY,
@@ -11,6 +12,7 @@ const initialState = {
   manifest: undefined,
   links: LINKS,
   backupPage: DASHBOARD_PAGE,
+  language: ENGLISH,
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,6 +52,13 @@ const reducer = (state = initialState, action) => {
           backupPage: action.backupPage,
         },
       };
+    case Types.APPSTATE_LANGUAGE:
+      return {
+        ...state,
+        ...{
+          language: action.language,
+        },
+      }
     default:
       return state;
   }

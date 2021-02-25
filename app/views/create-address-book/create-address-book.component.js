@@ -7,11 +7,12 @@ import { DASHBOARD_PAGE } from '../../constants/navigation';
 import validator from '../../utils/crust-validator/validator';
 import './styles.css';
 import { findChainByName } from '../../../lib/constants/chain';
+import { withTranslation } from 'react-i18next';
 
 const FnameRequiredErrorMessage = 'Firstname required';
 const AddressRequiredErrorMessage = 'Address required';
 
-export default class CreateAddressBook extends Component {
+class CreateAddressBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -194,14 +195,17 @@ export default class CreateAddressBook extends Component {
       buttonText,
       network,
     } = this.state;
-    const { networks } = this.props;
+    const { networks, t } = this.props;
     const chain = findChainByName(this.props.network.value);
     const theme = chain.icon || 'polkadot';
+    const fnameLabelT = t('Firstname');
+    const lnameLabelT = t('Lastname');
+    const buttonTextT = t('Submit');
     return (
       <div className="create-address-book-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title="Address Book"
+          title={t("Address Book")}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
         <CreateContactForm
@@ -216,7 +220,7 @@ export default class CreateAddressBook extends Component {
           }}
           handleToChange={this.handleInputChange}
           fname={fname}
-          fnameLabel={fnameLabel}
+          fnameLabel={fnameLabelT}
           fnamePropName={fnamePropName}
           isFnameError={isFnameError}
           fnameErrorMessage={fnameErrorMessage}
@@ -226,7 +230,7 @@ export default class CreateAddressBook extends Component {
           handleFnameChange={this.handleInputChange}
           handleFnameOnBlur={this.handleFnameOnBlur}
           lname={lname}
-          lnameLabel={lnameLabel}
+          lnameLabel={lnameLabelT}
           lnamePropName={lnamePropName}
           isLnameError={isLnameError}
           lnameErrorMessage={lnameErrorMessage}
@@ -235,7 +239,7 @@ export default class CreateAddressBook extends Component {
           }}
           handleLnameChange={this.handleInputChange}
           handleLnameOnBlur={this.handleLnameOnBlur}
-          buttonName={buttonText}
+          buttonName={buttonTextT}
           onSubmit={this.onSubmit}
           networks={networks}
           network={network}
@@ -245,3 +249,5 @@ export default class CreateAddressBook extends Component {
     );
   }
 }
+
+export default  withTranslation()(CreateAddressBook);

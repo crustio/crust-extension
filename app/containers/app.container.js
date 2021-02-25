@@ -7,6 +7,7 @@ import {
   updateAppLoading,
   fetchAndUpdateAppManifest,
   updateBackupPage,
+  fetchAndUpdateLanguage
 } from './actions';
 import { clearTransferDetails, resetConfirmOnBoarding } from '../views/transfer/actions';
 
@@ -18,6 +19,7 @@ const mapStateToProps = state => ({
   isConnected: state.networkReducer.isConnected,
   isDeveloperMode: state.networkReducer.isDeveloperMode,
   options: state.appStateReducer.options,
+  language: state.appStateReducer.language
 });
 
 const mapDispatchToProps = {
@@ -30,6 +32,7 @@ const mapDispatchToProps = {
   fetchAndUpdateAppManifest,
   updateBackupPage,
   onToggleDeveloperMode,
+  fetchAndUpdateLanguage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

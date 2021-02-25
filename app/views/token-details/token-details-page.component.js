@@ -10,8 +10,9 @@ import { findChainByName } from '../../../lib/constants/chain';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import SubHeader from '../../components/common/sub-header';
 import Clear from '@material-ui/icons/Clear';
+import { withTranslation } from 'react-i18next';
 
-export default class TokenDetailsPage extends Component {
+class TokenDetailsPage extends Component {
   constructor(props) {
     super(props);
     this.textInput = React.createRef();
@@ -80,6 +81,7 @@ export default class TokenDetailsPage extends Component {
       network,
       accountMenu,
       token,
+      t,
     } = this.props;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
@@ -92,7 +94,7 @@ export default class TokenDetailsPage extends Component {
       <div className="token-details-page-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title="Token details"
+          title={t("Token Details")}
           backBtnOnClick={this.onClick}
         />
         <div className="account-content-container">
@@ -130,3 +132,5 @@ export default class TokenDetailsPage extends Component {
     );
   }
 }
+
+export default  withTranslation()(TokenDetailsPage);

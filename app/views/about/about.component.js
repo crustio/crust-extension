@@ -5,10 +5,13 @@ import FontRegular from '../../components/common/fonts/font-regular';
 import FooterButton from '../../components/common/footer-button';
 import './styles.css';
 import Link from '../../components/common/link';
+import { withTranslation } from 'react-i18next';
+import * as NavConstants from '../../constants/navigation';
 
-export default class About extends Component {
+class About extends Component {
   onClick = () => {
     this.props.changePage(this.props.backupPage);
+    this.props.updateBackupPage(NavConstants.DASHBOARD_PAGE);
   };
 
   renderInfoLinks() {
@@ -24,12 +27,12 @@ export default class About extends Component {
   }
 
   render() {
-    const { manifest } = this.props;
+    const { manifest, t } = this.props;
     return (
       <div>
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title="About"
+          title={t('About')}
           backBtnOnClick={this.onClick}
         />
         <div className="about-container">
@@ -37,10 +40,12 @@ export default class About extends Component {
           <FontRegular className="about-version" text={`Version ${manifest.version}`} />
           {this.renderInfoLinks()}
           <div className="about-button">
-            <FooterButton onClick={this.onClick} name="OK" />
+            <FooterButton onClick={this.onClick} name={t("OK")} />
           </div>
         </div>
       </div>
     );
   }
 }
+
+export default withTranslation()(About);

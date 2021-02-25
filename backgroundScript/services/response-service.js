@@ -279,6 +279,25 @@ export const setIsAppOnBoarded = async (request, sendResponse) => {
   }
 };
 
+export const setLanguage = async (request, sendResponse) => {
+  try {
+    const { data: language } = request;
+    const result = await AppService.setLanguage(language);
+    sendResponse({ ...success, result });
+  } catch (err) {
+    sendResponse({ ...failure, message: 'Error in set language.' });
+  }
+};
+
+export const getLanguage = async (request, sendResponse) => {
+  try {
+    const result = await AppService.getLanguage();
+    sendResponse({ ...success, result });
+  } catch (err) {
+    sendResponse({ ...failure, message: 'Error in get language.' });
+  }
+};
+
 export const isConnected = (request, sendResponse) => {
   try {
     const result = NetworkService.isConnected();
