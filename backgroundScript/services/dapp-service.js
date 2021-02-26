@@ -1,4 +1,5 @@
 import { getWallet } from './wallet-service';
+import AppConfig from '../../lib/constants/config';
 import * as status from '../../lib/constants/api';
 import * as dapp from '../apis/dapp';
 import * as AccountService from './account-service';
@@ -22,9 +23,9 @@ export const failure = {
 
 export const enableResponse = {
   accounts: {},
-  name: 'crust wallet',
+  name: AppConfig.name,
   signer: {},
-  version: '0.5.1',
+  version: AppConfig.version,
 };
 
 export const isAuthorized = async () => false;
