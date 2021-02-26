@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import FavIcon from '../../components/common/fav-icon';
 import FontRegular from '../../components/common/fonts/font-regular';
@@ -6,7 +7,6 @@ import { trimUrl } from '../../services/wallet-service';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { SolidWallet, SolidPlug, File } from '../../components/common/icon';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 const DAppURL = ({ favIconUrl, url, ...otherProps }) => (
@@ -60,30 +60,24 @@ class ConnectRequest extends Component {
 
   render() {
     const { request, title, t } = this.props;
-    const content = "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access to any account.";
+    const content = 'is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access to any account.';
     return (
       <div>
         <SubHeader title={t(title)} />
         {this.renderHeader()}
         <FontRegular
-          text={
+          text={(
             <div>
               {`${request.request.metadata.url} ${t(content)}`}
             </div>
-          }
+          )}
           className="connect-request-center connect-request-account-selection-header"
         />
-        {/* <FooterTwoMDButton
-          namePrimary={t("Deny")}
-          nameSecondary={t("Allow")}
-          onClickPrimary={this.onDeny}
-          onClickSecondary={this.onAllow}
-        /> */}
         <FooterWithTwoButton
           onNextClick={this.onAllow}
           onBackClick={this.onDeny}
-          backButtonName={t("Deny")}
-          nextButtonName={t("Allow")}
+          backButtonName={t('Deny')}
+          nextButtonName={t('Allow')}
         />
       </div>
     );

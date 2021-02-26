@@ -41,13 +41,13 @@ export default class CrustPassword extends Component {
           value={password}
           onChange={onChange('password')}
           endAdornment={(
-              <PasswordAdornment
-                position="end"
-                onClick={this.handleClickShowPassword}
-                showPassword={showPassword}
-                showColor={showColor}
-                hideColor={hideColor}
-              />
+            <PasswordAdornment
+              position="end"
+              onClick={this.handleClickShowPassword}
+              showPassword={showPassword}
+              showColor={showColor}
+              hideColor={hideColor}
+            />
             )}
         />
       </div>

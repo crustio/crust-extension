@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Clear from '@material-ui/icons/Clear';
+import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import * as NavConstants from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
@@ -14,7 +15,6 @@ import {
   REMOVE,
 } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class AddressBook extends Component {
@@ -100,18 +100,22 @@ class AddressBook extends Component {
 
   render() {
     const { addressBook, network, t } = this.props;
-    const { isOpen, showSettings, headerText, isMoreVertIconVisible } = this.state;
+    const {
+      isOpen, showSettings, headerText, isMoreVertIconVisible
+    } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     const optionsHeader = ADDRESS_BOOK_MENU_OPTIONS.map(o => {
-      o.text = t(o.text)
-      return o
-    })
+      // eslint-disable-next-line
+      o.text = t(o.text);
+      return o;
+    });
 
     const options = ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
-      o.text = t(o.text)
-      return o
-    })
+      // eslint-disable-next-line
+      o.text = t(o.text);
+      return o;
+    });
     const headerTextT = t(headerText);
     return (
       <div className="address-book-root-container">
@@ -138,10 +142,13 @@ class AddressBook extends Component {
               />
             ) : (
               <div className="empty-address-book-container">
-                <EmptyDashboard className="empty-list-text" text={t("Click here to add an address!")} />
+                <EmptyDashboard
+                  className="empty-list-text"
+                  text={t('Click here to add an address!')}
+                />
                 <div className="address-book-add-button">
                   <ButtonMD color="dashboard" onClick={this.handleAddAddressClick}>
-                    {t("Add Address")}
+                    {t('Add Address')}
                   </ButtonMD>
                 </div>
               </div>
@@ -152,10 +159,10 @@ class AddressBook extends Component {
                 isOpen={isOpen}
                 handleClose={this.handleCloseDialog}
                 handleYes={this.handleYes}
-                noText={t("No")}
-                yesText={t("Yes")}
-                title={t("Remove contact")}
-                msg={t("Do you want to remove this address?")}
+                noText={t('No')}
+                yesText={t('Yes')}
+                title={t('Remove contact')}
+                msg={t('Do you want to remove this address?')}
               />
             </div>
           </div>
@@ -165,4 +172,4 @@ class AddressBook extends Component {
   }
 }
 
-export default  withTranslation()(AddressBook);
+export default withTranslation()(AddressBook);

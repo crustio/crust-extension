@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import CrustPassword from '../../components/common/password/crust-password';
 import ContentHeader from '../../components/common/content-header';
 import FooterButton from '../../components/common/footer-button';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class SignIn extends Component {
@@ -12,7 +12,6 @@ class SignIn extends Component {
     this.state = {
       password: '',
       isError: false,
-      label: 'Password',
       errorText: '',
     };
   }
@@ -44,22 +43,24 @@ class SignIn extends Component {
   };
 
   render() {
-    const { isError, password, label, errorText } = this.state;
+    const { isError, password, errorText } = this.state;
     const { t } = this.props;
     return (
       <div>
         <div className="sign-in-container">
           <ContentHeader
-            title={t("Enter Password")}
+            title={t('Enter Password')}
+            // eslint-disable-next-line
             description={t("The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.")}
           />
           <div className="sign-in-container-password">
             <CrustPassword
+              // eslint-disable-next-line
               standardInput={true}
               className="sign-in-password-container"
               onChange={this.handleOnChange}
               password={password}
-              placeholder={t("Password")}
+              placeholder={t('Password')}
             />
           </div>
 
@@ -68,7 +69,7 @@ class SignIn extends Component {
           ) : (
             <span className="place-holder"> </span>
           )}
-          <FooterButton onClick={this.handleClick} name={t("Unlock")} />
+          <FooterButton onClick={this.handleClick} name={t('Unlock')} />
         </div>
       </div>
     );

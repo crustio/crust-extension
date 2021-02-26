@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { addToken } from './actions';
 import { changePage } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
-import { updateTokenList } from '../dashboard/actions'
+import { updateTokenList } from '../dashboard/actions';
 import AddToken from './add-token.component';
 
 const mapStateToProps = state => ({

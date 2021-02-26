@@ -34,8 +34,7 @@ test('Confirm Transaction', async () => {
     unit: { power: -3, value: 'm', text: 'milli' },
     txnType: 'TRANSFER_COINS',
   };
-  const seedWords =
-    'trumpet knife surface whale shoulder vague feed island original curve laundry dolphin';
+  const seedWords = 'trumpet knife surface whale shoulder vague feed island original curve laundry dolphin';
   const keypairType = 'sr25519';
   const confirmedTransactionResult = await TransactionService.confirmTransaction(
     address,

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import TransferTo from '../../transfer/transfer-to';
 import CrustInput from '../../common/crust-input';
 import FooterButton from '../../common/footer-button';
-import DropDown from '../../common/drop-down';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class CreateContactForm extends Component {
@@ -22,39 +21,32 @@ class CreateContactForm extends Component {
       fnameErrorMessage,
       fnamePropName,
       handleFnameChange,
-      handleFnameOnBlur,
-      fnameInputRef,
       lname,
       lnameLabel,
       lnamePropName,
-      lnameInputRef,
       isLnameError,
       lnameErrorMessage,
       handleLnameChange,
-      handleLnameOnBlur,
       onSubmit,
       buttonName,
-      networks,
-      network,
-      onNetworkChange,
       t,
     } = this.props;
     return (
       <div className="create-address-book-form">
-        <div  className="create-address-book-top">
+        <div className="create-address-book-top">
           <TransferTo
             className="contact-to-container"
             addressValue={address}
             theme={theme}
             isError={isAddressError}
-            label={t("Address")}
+            label={t('Address')}
             propName={addressPropName}
             toValue={address}
             errorMessage={addressErrorMessage}
             onChange={handleToChange}
             inputRef={addressInputRef}
           />
-          <div className='contact-fname-input-container'>
+          <div className="contact-fname-input-container">
             <CrustInput
               className="contact-fname-input"
               value={fname}
@@ -62,12 +54,12 @@ class CreateContactForm extends Component {
               placeholder={fnameLabel}
             />
             {isFnameError ? (
-                <span className="error-msg">{fnameErrorMessage}</span>
-              ) : (
-                <span className="place-holder"> </span>
-              )}
+              <span className="error-msg">{fnameErrorMessage}</span>
+            ) : (
+              <span className="place-holder"> </span>
+            )}
           </div>
-          <div className='contact-lname-input-container'>
+          <div className="contact-lname-input-container">
             <CrustInput
               className="contact-lname-input"
               value={lname}
@@ -75,18 +67,18 @@ class CreateContactForm extends Component {
               placeholder={lnameLabel}
             />
             {isLnameError ? (
-                <span className="error-msg">{lnameErrorMessage}</span>
-              ) : (
-                <span className="place-holder"> </span>
-              )}
+              <span className="error-msg">{lnameErrorMessage}</span>
+            ) : (
+              <span className="place-holder"> </span>
+            )}
           </div>
-{/*           
+          {/*
           <DropDown
             className="contact-network-dropdown"
             options={networks}
             disabled
             value={network}
-            onChange={onNetworkChange} 
+            onChange={onNetworkChange}
           />*/}
         </div>
 
@@ -96,4 +88,4 @@ class CreateContactForm extends Component {
   }
 }
 
-export default  withTranslation()(CreateContactForm);
+export default withTranslation()(CreateContactForm);

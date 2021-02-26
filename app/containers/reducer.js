@@ -2,7 +2,7 @@ import * as Types from './action-types';
 import { LOADER_OVERLAY, DASHBOARD_PAGE } from '../constants/navigation';
 import { OPTIONS } from '../constants/options';
 import { LINKS } from '../constants/links';
-import { ENGLISH } from '../constants/language'
+import { ENGLISH } from '../constants/language';
 
 const initialState = {
   page: LOADER_OVERLAY,
@@ -58,7 +58,7 @@ const reducer = (state = initialState, action) => {
         ...{
           language: action.language,
         },
-      }
+      };
     default:
       return state;
   }

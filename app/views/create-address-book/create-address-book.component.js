@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Clear from '@material-ui/icons/Clear';
+import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import CreateContactForm from '../../components/address-book/create-contact-form';
 import CrustValidator from '../../utils/crust-validator';
@@ -7,7 +8,6 @@ import { DASHBOARD_PAGE } from '../../constants/navigation';
 import validator from '../../utils/crust-validator/validator';
 import './styles.css';
 import { findChainByName } from '../../../lib/constants/chain';
-import { withTranslation } from 'react-i18next';
 
 const FnameRequiredErrorMessage = 'Firstname required';
 const AddressRequiredErrorMessage = 'Address required';
@@ -22,13 +22,10 @@ class CreateAddressBook extends Component {
       addressPropName: 'address',
       fnamePropName: 'fname',
       fname: '',
-      fnameLabel: 'Firstname',
       isFnameError: false,
       fnameErrorMessage: '',
       lnamePropName: 'lname',
       lname: '',
-      lnameLabel: 'Lastname',
-      buttonText: 'Submit',
       network: '',
     };
     this.lnameValidator = new CrustValidator(validator.lnameValidation);
@@ -44,8 +41,12 @@ class CreateAddressBook extends Component {
   }
 
   onSubmit = () => {
-    const { address, fname, lname, network } = this.state;
-    const { isFnameError, fnameErrorMessage } = this.validateFname(fname);
+    const {
+      address, fname, lname, network
+    } = this.state;
+    const {
+      isFnameError, fnameErrorMessage
+    } = this.validateFname(fname);
     this.setState({
       isFnameError,
       fnameErrorMessage,
@@ -183,16 +184,13 @@ class CreateAddressBook extends Component {
       addressPropName,
       addressErrorMessage,
       fname,
-      fnameLabel,
       fnamePropName,
       isFnameError,
       fnameErrorMessage,
       lname,
-      lnameLabel,
       lnamePropName,
       isLnameError,
       lnameErrorMessage,
-      buttonText,
       network,
     } = this.state;
     const { networks, t } = this.props;
@@ -205,7 +203,7 @@ class CreateAddressBook extends Component {
       <div className="create-address-book-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title={t("Address Book")}
+          title={t('Address Book')}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
         <CreateContactForm
@@ -250,4 +248,4 @@ class CreateAddressBook extends Component {
   }
 }
 
-export default  withTranslation()(CreateAddressBook);
+export default withTranslation()(CreateAddressBook);

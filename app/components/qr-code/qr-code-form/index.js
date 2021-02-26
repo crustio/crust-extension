@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import TransferFrom from '../../transfer/transfer-from';
 import FooterButton from '../../common/footer-button';
 import QR from '../../common/qr';
 import './styles.css';
-import { withTranslation } from 'react-i18next';
 
 class QRCodeForm extends Component {
   render() {
@@ -26,10 +26,9 @@ class QRCodeForm extends Component {
           size={200}
           value={account.address}
         />
-        <div className='qr-button-container'>
-          <FooterButton name={t("Done")} onClick={onClick} />
+        <div className="qr-button-container">
+          <FooterButton name={t('Done')} onClick={onClick} />
         </div>
-        
       </div>
     );
   }

@@ -1,4 +1,6 @@
-import { MANAGE_ACCOUNT_PAGE, ADDRESS_BOOK_PAGE, ADD_TOKEN_PAGE, LANGUAGE_SETTING_PAGE } from './navigation';
+import {
+  MANAGE_ACCOUNT_PAGE, ADDRESS_BOOK_PAGE, ADD_TOKEN_PAGE, LANGUAGE_SETTING_PAGE
+} from './navigation';
 
 export const ADD_TOKEN = {
   text: 'Add Token',

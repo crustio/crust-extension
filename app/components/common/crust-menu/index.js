@@ -3,10 +3,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Switch from '@material-ui/core/Switch';
+import { withTranslation } from 'react-i18next';
 import { styles } from './styles';
 import { IconCheckCircle } from '../icon/index';
 import FontRegular from '../fonts/font-regular';
-import { withTranslation } from 'react-i18next';
 
 class CrustMenu extends Component {
   handleClose = prop => () => {

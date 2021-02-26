@@ -10,7 +10,7 @@ export default class AddressBookAdornment extends Component {
       <CrustInputAdornment {...otherProps}>
         <IconContainer aria-label="Toggle password visibility" onClick={onClick}>
           {/* <AddressBook /> */}
-          <img src={AddressIcon} width={'14px'} alt="addressIcon" />
+          <img src={AddressIcon} width="14px" alt="addressIcon" />
         </IconContainer>
       </CrustInputAdornment>
     );

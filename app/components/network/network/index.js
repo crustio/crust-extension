@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import CrustMenu from '../../common/crust-menu';
 import FontRegular from '../../common/fonts/font-regular';
 import { DISABLE_NETWORKS_PAGES_GROUP } from '../../../constants/navigation';
 import { shortenName } from '../../../services/wallet-service';
 import './styles.css';
-import { withTranslation } from 'react-i18next';
 
 class Network extends Component {
   state = {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import TokenBalance from '../token-balance';
 import TokenDetailFooter from '../token-detail-footer';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class TokenDetails extends Component {
@@ -29,8 +29,8 @@ class TokenDetails extends Component {
           className="token-detail-footer"
           handleDeposit={handleDeposit}
           handleSend={handleSend}
-          receiveButtonName={t("Receive")}
-          sendButtonName={t("Send")}
+          receiveButtonName={t('Receive')}
+          sendButtonName={t('Send')}
         />
       </div>
     );
@@ -38,4 +38,3 @@ class TokenDetails extends Component {
 }
 
 export default withTranslation()(TokenDetails);
-

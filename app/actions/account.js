@@ -51,8 +51,6 @@ export const fetchAndSetBalances = async (dispatch, getState) => {
   const { result: balances } = await Account.getCurrentBalance(addrArray);
   const balObj = balances.find(acc => acc.address === account.address);
   // Link Faucets with No Transaction yet.
-  const { network } = getState().networkReducer;
-  const isLinkToFaucet = network.faucetUrl && balObj.balance === '0';
   dispatch(updateAccountBalance(balances));
   dispatch(updateSelectedAccountBalance(balObj));
 };

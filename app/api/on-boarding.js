@@ -38,7 +38,7 @@ export const fetchLanguage = async () => {
   });
   throwIfNoSuccess({ message, status });
   return { result };
-}
+};
 
 export const setLangeuage = async language => {
   const { message, status, result } = await sendMessage({
@@ -47,4 +47,4 @@ export const setLangeuage = async language => {
   });
   throwIfNoSuccess({ message, status });
   return { result };
-}
+};

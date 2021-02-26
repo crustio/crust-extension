@@ -12,8 +12,8 @@ export default class TokenDetailFooter extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <ButtonMD onClick={handleDeposit} custom={true}>{receiveButtonName}</ButtonMD>
-        <ButtonMD onClick={handleSend} custom={true}>{sendButtonName}</ButtonMD>
+        <ButtonMD onClick={handleDeposit} custom>{receiveButtonName}</ButtonMD>
+        <ButtonMD onClick={handleSend} custom>{sendButtonName}</ButtonMD>
       </div>
     );
   }

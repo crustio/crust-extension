@@ -1,11 +1,10 @@
 import { CRUST_UPDATE_TIME } from '../../lib/constants/update';
-import { Transaction, Network, Contract, Tokens } from '../api';
+import { Transaction, Network, Tokens } from '../api';
 import { SUCCESS, FAIL } from '../../lib/constants/transaction';
-import { getTransactions, updateTransactions } from '../views/dashboard/actions';
+import { getTransactions, updateTransactions, updateTokenList } from '../views/dashboard/actions';
 import * as AccountActions from '../actions/account';
 import { getTransfersWithMoment } from '../../lib/services/static-message-factory-service';
 import { updateNetworkStatus } from '../actions/network';
-import { updateTokenList } from '../views/dashboard/actions'
 
 export async function pollPendingTransactions(store) {
   try {
@@ -35,14 +34,17 @@ export async function pollPendingTransactions(store) {
 
 export async function updateBalance(store) {
   try {
-    const { tokens } = store.getState().dashboardReducer
+    const { tokens } = store.getState().dashboardReducer;
     store.dispatch(AccountActions.fetchAndSetBalances);
     const { balance } = store.getState().accountReducer;
+
+    /* eslint-disable */
     for (const token of tokens) {
       if (token.tokenSymbol === 'CRU') {
-        token.balance = balance.balance
+        token.balance = balance.balance;
       }
     }
+    /* eslint-enable */
 
     store.dispatch(updateTokenList(tokens));
   } catch (e) {
@@ -75,29 +77,32 @@ export async function getAndUpdateNetworkStatus(store) {
 
 export async function updateAllTokenBalance(store) {
   try {
-    const { result } = await Tokens.getTokens()
-    const { tokens } = store.getState().dashboardReducer
+    const { result } = await Tokens.getTokens();
+    const { tokens } = store.getState().dashboardReducer;
 
     if (!result || result.length === 0) {
-      const t = tokens.filter(token => token.tokenSymbol === 'CRU')
+      const t = tokens.filter(token => token.tokenSymbol === 'CRU');
       store.dispatch(updateTokenList(t));
-      return
-    }
-    
-    if (!tokens || tokens.length === 0) {
-      return
+      return;
     }
 
+    if (!tokens || tokens.length === 0) {
+      return;
+    }
+
+    /* eslint-disable */
     for (const token of tokens) {
       for (const r of result) {
         if (token.tokenSymbol === r.tokenSymbol) {
-          token.balance = r.balance
+          token.balance = r.balance;
         }
       }
     }
+    /* eslint-enable */
 
     store.dispatch(updateTokenList(tokens));
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log('Error in updating all tokens balance');
   }
 }
@@ -109,7 +114,7 @@ async function updateApplicationStateHelper(store) {
     updateBalance(store);
     updateTransactionItemTime(store);
     getAndUpdateNetworkStatus(store);
-    updateAllTokenBalance(store)
+    updateAllTokenBalance(store);
   }
 }
 

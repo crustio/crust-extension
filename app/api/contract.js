@@ -17,7 +17,7 @@ export const getTokens = async () => {
   });
   throwIfNoSuccess({ message, status });
   return { result };
-}
+};
 
 export const updateAllTokenBalance = async () => {
   const { message, status, result } = await sendMessage({
@@ -25,4 +25,4 @@ export const updateAllTokenBalance = async () => {
   });
   throwIfNoSuccess({ message, status });
   return { result };
-}
+};

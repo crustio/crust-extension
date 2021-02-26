@@ -1,7 +1,8 @@
 import { CRUST_COLOR1 } from '../../../constants/colors';
+
 export const styles = () => ({
-  root: { 
-    marginRight: 0, 
+  root: {
+    marginRight: 0,
     marginLeft: 0
   },
   label: {
@@ -41,7 +42,7 @@ export const styles = () => ({
   },
 
   rootVertical: {
-    marginRight: 0, 
+    marginRight: 0,
     marginLeft: 0,
     padding: '16px',
     borderRadius: '8px',

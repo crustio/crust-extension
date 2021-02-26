@@ -87,7 +87,7 @@ export const propagateUpdates = async dispatch => {
   await dispatch(AccountActions.fetchAndSetBalances);
   dispatch(getTransactions);
   dispatch(getUnits());
-  dispatch(getTokens)
+  dispatch(getTokens);
   dispatch(updateAppLoading(false));
 };
 
@@ -145,11 +145,9 @@ export const getDeveloperMode = () => async dispatch => {
 
 export const restoreNetwork = async (dispatch, getState) => {
   const { network } = getState().networkReducer;
-  const {
-    account, balance
-  } = getState().accountReducer;
+  const { balance } = getState().accountReducer;
 
   if (balance.status >= 400) {
     await Network.restoreCurrentNetwork(network);
   }
-}
+};

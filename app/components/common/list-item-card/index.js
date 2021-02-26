@@ -3,11 +3,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import withStyles from '@material-ui/core/styles/withStyles';
+import ReactTooltip from 'react-tooltip';
 import Avatar from '../identicon';
 import { MoreVertIcon } from '../icon';
 import CrustMenu from '../crust-menu';
 import ClickToCopyAddress from '../click-to-copy-address';
-import ReactTooltip from 'react-tooltip';
 import './styles.css';
 
 class ListItemCard extends Component {
@@ -63,7 +63,14 @@ class ListItemCard extends Component {
           </ListItemAvatar>
           <ListItemText
             onClick={event => handleListItemClick(event, listItem)}
-            primary={(<span style={{display: 'flex'}}><span className="account-card-text" data-tip={primaryText}>{primaryText} </span><ReactTooltip effect={"solid"} place={"bottom"}/></span>)}
+            primary={(
+              <span style={{ display: 'flex' }}>
+                <span className="account-card-text" data-tip={primaryText}>
+                  {primaryText}
+                </span>
+                <ReactTooltip effect="solid" place="bottom" />
+              </span>
+            )}
             className={classes.primaryWidth}
             secondary={(
               <ClickToCopyAddress

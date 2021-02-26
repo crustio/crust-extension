@@ -23,7 +23,7 @@ class DropDown extends Component {
           disableUnderline
           disabled={disabled}
           IconComponent={props => (
-            <ExpandMoreIcon {...props} className={`material-icons ${props.className}`}/>
+            <ExpandMoreIcon {...props} className={`material-icons ${props.className}`} />
           )}
         >
           {options.map(opt => (

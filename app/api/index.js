@@ -6,4 +6,6 @@ import * as DApp from './dapp';
 import * as Contract from './contract';
 import * as Tokens from './tokens';
 
-export { OnBoarding, Account, Transaction, Network, DApp, Contract, Tokens };
+export {
+  OnBoarding, Account, Transaction, Network, DApp, Contract, Tokens
+};

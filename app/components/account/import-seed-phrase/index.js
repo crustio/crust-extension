@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import ContentHeader from '../../common/content-header';
 import CrustMultilineInput from '../../common/crust-multiline-input';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class ImportSeedPhrase extends Component {
@@ -28,12 +28,12 @@ class ImportSeedPhrase extends Component {
     return (
       <div>
         <ContentHeader
-          title={t("Import Seed Phrase")}
-          description={t("Please input your seed phrase to import account.")}
+          title={t('Import Seed Phrase')}
+          description={t('Please input your seed phrase to import account.')}
         />
         <CrustMultilineInput
           className="import-seed-phrase-input"
-          placeholder={t("Type or paste your seed phrase...")}
+          placeholder={t('Type or paste your seed phrase...')}
           error={isError}
           helperText={errorMessage}
           onChange={onChange(importSeedPhraseInputName)}

@@ -60,9 +60,9 @@ const getView = page => {
     case NavConstant.ADD_TOKEN_PAGE:
       return <AddToken />;
     case NavConstant.TOKEN_DETAILS_PAGE:
-      return <TokenDetailsPage />
+      return <TokenDetailsPage />;
     case NavConstant.LANGUAGE_SETTING_PAGE:
-      return <LanguageSetting />
+      return <LanguageSetting />;
     default:
       return <Dashboard />;
   }

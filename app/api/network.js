@@ -68,4 +68,4 @@ export const getChainDecimals = async () => {
   });
   throwIfNoSuccess({ message, status });
   return { result };
-}
+};

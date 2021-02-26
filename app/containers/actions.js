@@ -38,15 +38,17 @@ export const fetchAndUpdateAppManifest = () => async dispatch => {
   dispatch(updateAppManifest(manifest));
 };
 
-export const fetchAndUpdateLanguage = () => async dispatch => {
+export const fetchAndUpdateLanguage = i18n => async dispatch => {
   const { result } = await fetchLanguage();
 
   if (result.language !== undefined) {
     dispatch(updateLanguage(result.language));
+    i18n.changeLanguage(result.language);
   } else {
     dispatch(updateLanguage(ENGLISH));
+    i18n.changeLanguage(ENGLISH);
   }
-}
+};
 
 export const updateAppLanguage = (language, i18n) => async dispatch => {
   try {
@@ -56,4 +58,4 @@ export const updateAppLanguage = (language, i18n) => async dispatch => {
   } catch (e) {
     dispatch(createToast({ message: 'Error set language', type: 'error' }));
   }
-}
+};
