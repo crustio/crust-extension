@@ -22,7 +22,7 @@ const confirmTransactionError = error => ({
   error,
 });
 
-const setTransferValidationError = error => ({
+export const setTransferValidationError = error => ({
   type: TransferActionTypes.SET_TRANSFER_VALIDATION_ERROR,
   error,
 });

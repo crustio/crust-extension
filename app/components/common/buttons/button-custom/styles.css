@@ -4,11 +4,11 @@
 }
 
 .button-custom button:hover {
-  background-color: #FF8D00;
-  color: white;
+  background-color: #FF8D00 !important;
+  color: white !important;
 }
 
 .button-custom1 button:hover {
   background-color: #eee !important;
-  color: black;
+  color: black !important;
 }

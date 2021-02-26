@@ -37,8 +37,10 @@ wallet-card-item-container {
 }
 
 .account-card-text {
-  max-width: 270px;
+  max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: 'Roboto-Regular';
+  display: block;
 }
