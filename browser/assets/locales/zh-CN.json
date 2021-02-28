@@ -80,6 +80,9 @@
   "Allow": "同意",
   "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access to any account.": "请求访问账户。点击同意按钮允许账户访问或点击拒绝按钮拒绝账户访问。",
 
+  "Please input address.": "请输入账户。",
+  "Please input amount.": "请输入数量。",
+
   "Chinese": "中文",
   "English": "英文"
 }

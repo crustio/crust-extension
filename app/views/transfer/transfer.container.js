@@ -7,6 +7,7 @@ import {
   confirmTransaction,
   resetConfirmOnBoarding,
   dispatchSetTransferDetails,
+  setTransferValidationError,
 } from './actions';
 
 const mapStateToProps = state => ({
@@ -38,6 +39,7 @@ const mapDispatchToProps = {
   resetConfirmOnBoarding,
   dispatchSetTransferDetails,
   updateToAddress,
+  setTransferValidationError
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Transfer);

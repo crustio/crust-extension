@@ -80,6 +80,9 @@
   "Allow": "Allow",
   "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.": "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.",
 
+  "Please input address.": "Please input address.",
+  "Please input amount.": "Please input amount.",
+
   "Chinese": "Chinese",
   "English": "English"
 }

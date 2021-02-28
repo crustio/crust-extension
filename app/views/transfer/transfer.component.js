@@ -21,7 +21,7 @@ class Transfer extends Component {
     //TODO DP: Can be improved by using optional chaining operator
     this.state = {
       to: metadata ? metadata.to : '',
-      amount: metadata ? metadata.amount : '0',
+      amount: metadata ? metadata.amount : '',
       unit: metadata ? metadata.unit : '',
       alias: metadata ? metadata.account.alias : account.alias,
       from: metadata ? metadata.account.address : account.address,
@@ -104,12 +104,20 @@ class Transfer extends Component {
   handleSendButton = () => {
     const { amount, unit, dropDownSelected } = this.state;
     const { toAddress } = this.props;
-    if (toAddress !== '' && amount !== '') {
+    if (toAddress !== '' && amount !== '' && amount != undefined) {
       this.props.confirmTransaction(toAddress, this.props.account, amount, unit, dropDownSelected);
-    } else if (toAddress === '') {
-      // this.toInput.focus();
     } else {
-      // this.amountInput.focus();
+      const error = {};
+      if (toAddress === '') {
+        error.isToAddressError = true;
+        error.toAddressErrorMessage = this.props.t('Please input address.');
+      }
+
+      if (amount === "" || amount === undefined) {
+        error.isAmountError = true;
+        error.toAmountErrorMessage = this.props.t('Please input amount.');
+      }
+      this.props.setTransferValidationError(error);
     }
   };
 

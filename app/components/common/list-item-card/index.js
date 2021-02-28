@@ -7,8 +7,7 @@ import Avatar from '../identicon';
 import { MoreVertIcon } from '../icon';
 import CrustMenu from '../crust-menu';
 import ClickToCopyAddress from '../click-to-copy-address';
-import Tooltip from '@material-ui/core/Tooltip';
-import FontRegular from '../../common/fonts/font-regular';
+import ReactTooltip from 'react-tooltip';
 import './styles.css';
 
 class ListItemCard extends Component {
@@ -64,7 +63,7 @@ class ListItemCard extends Component {
           </ListItemAvatar>
           <ListItemText
             onClick={event => handleListItemClick(event, listItem)}
-            primary={(<Tooltip title={primaryText}><FontRegular className="account-card-text" text={primaryText} /></Tooltip>)}
+            primary={(<span style={{display: 'flex'}}><span className="account-card-text" data-tip={primaryText}>{primaryText} </span><ReactTooltip effect={"solid"} place={"bottom"}/></span>)}
             className={classes.primaryWidth}
             secondary={(
               <ClickToCopyAddress
