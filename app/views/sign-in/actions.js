@@ -13,6 +13,10 @@ const unlockCrustError = error => ({
   error,
 });
 
+export const unlockCrustSuccessFalse = () => ({
+  type: SignInActionTypes.UNLOCK_CRUST_SUCCESS_FALSE,
+});
+
 export const unlockCrust = password => async dispatch => {
   try {
     dispatch(updateAppLoading(true));

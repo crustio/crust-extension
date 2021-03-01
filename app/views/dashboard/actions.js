@@ -11,7 +11,6 @@ import {
 import { createToast } from '../../constants/toast';
 import * as AccountActions from '../../actions/account';
 
-
 const updateTokens = tokens => ({
   type: DashboardActionTypes.UPDATE_TOKEN_LIST,
   tokens,
@@ -113,5 +112,18 @@ export const onTokenSelected = (token) => dispatch => {
 };
 
 export const updateTokenList = tokens => dispatch => {
-  dispatch(updateTokens(tokens));
+  dispatch(updateTokens(tokens))
+};
+
+export const lockApp = () => async dispatch => {
+  try {
+    dispatch(AppActions.updateAppLoading(true));
+    await OnBoarding.clearHashKey();
+    dispatch(SignInActions.unlockCrustSuccessFalse());
+    dispatch(AppActions.updateAppLoading(false));
+    dispatch(AppActions.changePage(NavConstants.SIGN_IN_PAGE));
+  } catch (err) {
+    dispatch(AppActions.updateAppLoading(false));
+    console.log(err);
+  }
 };

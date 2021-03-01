@@ -59,3 +59,8 @@ export const getLanguage = async () => {
   const ret = await StorageService.getLocalStorage(LANGUAGE);
   return ret;
 };
+
+export const clearHashKeyState = async () => {
+  await Store.updateClearHashKeyState();
+  return true;
+}

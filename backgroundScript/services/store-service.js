@@ -12,6 +12,8 @@ export const updateHashKeyState = async hashKey =>
 
 export const updateAppState = async () => getStore().dispatch(appActions.appStateReady());
 
+export const updateClearHashKeyState = async () => getStore().dispatch(appActions.appStateClearHashKey());
+
 export const updateAppOnBoarded = async () => getStore().dispatch(appActions.appStateOnBoarded());
 
 export const updatesAccountsState = async accounts =>

@@ -1,4 +1,4 @@
-import { APP_STATE_READY, APP_STATE_SET_HASH_KEY, APP_STATE_ONBOARDED } from '../actions/app-state';
+import { APP_STATE_READY, APP_STATE_SET_HASH_KEY, APP_STATE_ONBOARDED, APP_STATE_CLEAR_HASH_KEY } from '../actions/app-state';
 
 const initialState = {
   isAppReady: false,
@@ -14,6 +14,8 @@ const appState = (state = initialState, action) => {
       return { ...state, isAppOnBoarded: action.ready };
     case APP_STATE_SET_HASH_KEY:
       return { ...state, hashKey: action.hashKey };
+    case APP_STATE_CLEAR_HASH_KEY:
+      return { ...state, hashKey: undefined };
     default:
       return state;
   }

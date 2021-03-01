@@ -86,6 +86,10 @@ class Dashboard extends Component {
     });
   };
 
+  handleLock = () => {
+    this.props.lockApp();
+  }
+
   render() {
     const {
       accounts,
@@ -184,6 +188,7 @@ class Dashboard extends Component {
             </div>
           </a>
         </div>
+        <button onClick={this.handleLock}></button>
       </div>
     );
   }

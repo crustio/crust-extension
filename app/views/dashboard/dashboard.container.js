@@ -6,6 +6,7 @@ import {
   connectionError,
   renameAlias,
   onTokenSelected,
+  lockApp
 } from './actions';
 import { changePage, updateBackupPage } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
@@ -37,6 +38,7 @@ const mapDispatchToProps = {
   getUnits,
   connectionError,
   onTokenSelected,
+  lockApp,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
