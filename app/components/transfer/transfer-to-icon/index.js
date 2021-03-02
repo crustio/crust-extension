@@ -35,11 +35,11 @@ export default class TransferToIcon extends Component {
           <Avatar value={addressValue} size={size} theme={theme} />
           <span className="place-holder"> </span>
         </div>
-        
+
 
         <div>
           <CrustInput
-            className='transfer-to-icon-input'
+            className="transfer-to-icon-input"
             value={toValue}
             onChange={onChange(propName)}
             placeholder={label}
@@ -54,7 +54,7 @@ export default class TransferToIcon extends Component {
             <span className="place-holder"> </span>
           )}
         </div>
-        
+
       </div>
     );
   }

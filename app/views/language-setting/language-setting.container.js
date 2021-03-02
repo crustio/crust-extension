@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { createToast } from '../../constants/toast';
-import { updateTokenList } from '../dashboard/actions'
+import { updateTokenList } from '../dashboard/actions';
 import LanguageSetting from './language-setting.component';
 import { changePage, updateBackupPage, updateAppLanguage } from '../../containers/actions';
 

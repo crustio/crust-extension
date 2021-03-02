@@ -8,7 +8,7 @@ export const getTokens = async () => {
   });
   throwIfNoSuccess({ message, status });
   return { result };
-}
+};
 
 export const updateCandyBalance = async () => {
   const { message, status, result } = await sendMessage({
@@ -16,4 +16,4 @@ export const updateCandyBalance = async () => {
   });
   throwIfNoSuccess({ message, status });
   return { result };
-}
+};

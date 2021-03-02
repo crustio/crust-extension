@@ -25,7 +25,7 @@ export default class CreateAccountSettings extends Component {
     return (
       <div {...otherProps}>
         <CrustInput
-          standardInput={true}
+          standardInput
           className="account-alias-input"
           onChange={handleAliasChange(aliasPropName)}
           placeholder={aliasLabel}

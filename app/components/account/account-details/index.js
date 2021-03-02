@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import ReactTooltip from 'react-tooltip';
 import FontRegular from '../../common/fonts/font-regular';
 import ClickToCopyAddress from '../../common/click-to-copy-address';
 import CrustInput from '../../common/crust-input';
-import ReactTooltip from 'react-tooltip';
 import './styles.css';
 
 export default class AccountDetails extends Component {
@@ -25,7 +25,7 @@ export default class AccountDetails extends Component {
         {!editMode && (
           <div>
             <FontRegular className="account-alias" text={alias} data-tip={alias} style={fontSize && { fontSize }} />
-            <ReactTooltip effect={"solid"} place={"bottom"}/>
+            <ReactTooltip effect="solid" place="bottom" />
           </div>
         )}
         {editMode && (

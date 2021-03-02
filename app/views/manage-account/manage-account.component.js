@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Clear from '@material-ui/icons/Clear';
+import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import { DASHBOARD_PAGE, CREATE_ACCOUNT_PAGE } from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
@@ -12,7 +13,6 @@ import {
   REMOVE,
 } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class ManageAccount extends Component {
@@ -72,19 +72,22 @@ class ManageAccount extends Component {
   };
 
   render() {
-    const { accounts, account, network, t } = this.props;
+    const {
+      accounts, account, network, t
+    } = this.props;
     const { isOpen } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     const options = ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
-      o.text = t(o.text)
-      return o
-    })
+      // eslint-disable-next-line
+      o.text = t(o.text);
+      return o;
+    });
     return (
       <div className="manage-accounts-root-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title={t("Account Management")}
+          title={t('Account Management')}
           backBtnOnClick={this.handleSubheaderBackBtn}
           subMenu={ACCOUNT_MANAGEMENT_MENU_OPTIONS}
           showSettings
@@ -110,10 +113,10 @@ class ManageAccount extends Component {
                 isOpen={isOpen}
                 handleClose={this.handleCloseDialog}
                 handleYes={this.handleYes}
-                noText={t("No")}
-                yesText={t("Yes")}
-                title={t("Remove account")}
-                msg={t("Please make sure you have saved the seed phrase or private key for this account before continuing.")}
+                noText={t('No')}
+                yesText={t('Yes')}
+                title={t('Remove account')}
+                msg={t('Please make sure you have saved the seed phrase or private key for this account before continuing.')}
               />
             </div>
           </div>
@@ -123,4 +126,4 @@ class ManageAccount extends Component {
   }
 }
 
-export default  withTranslation()(ManageAccount);
+export default withTranslation()(ManageAccount);

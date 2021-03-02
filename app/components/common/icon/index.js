@@ -13,7 +13,6 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 import { faAddressBook } from '@fortawesome/free-solid-svg-icons/faAddressBook';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons/faAngleRight';
 import Visibility from '@material-ui/icons/Visibility';
-import Settings from '@material-ui/icons/Settings';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import MoreVert from '@material-ui/icons/MoreVert';
 import WifiOff from '@material-ui/icons/WifiOff';
@@ -24,7 +23,11 @@ const IconEdit = props => (
 );
 
 const IconAngleRight = props => (
-  <FontAwesomeIcon icon={faAngleRight} style={{ color: 'white', fontSize: props.size }} {...props} />
+  <FontAwesomeIcon
+    icon={faAngleRight}
+    style={{ color: 'white', fontSize: props.size }}
+    {...props}
+  />
 );
 
 const IconTransferFromTo = props => (
@@ -206,5 +209,5 @@ export {
   AddressBook,
   File,
   IconVisibilityOff,
-  IconAngleRight
+  IconAngleRight,
 };

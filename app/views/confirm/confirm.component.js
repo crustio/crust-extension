@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
+import { withTranslation } from 'react-i18next';
 import ConfirmForm from '../../components/confirm/confirm-form';
 import SubHeader from '../../components/common/sub-header';
 import { TRANSFER_PAGE, CREATE_ADDRESS_BOOK_PAGE } from '../../constants/navigation';
 import { shortenAddress } from '../../services/wallet-service';
 import { findChainByName } from '../../../lib/constants/chain';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class Confirm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      buttonText: 'Send',
-    };
-  }
-
   componentDidMount() {
     this.props.resetConfirmOnBoarding();
   }
@@ -57,13 +50,13 @@ class Confirm extends Component {
       <div className="confirm-container">
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title={t("Send")}
+          title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
         <ConfirmForm
           confirmDetails={confirmDetails}
           handleSend={this.handleSend}
-          buttonText={t("Send")}
+          buttonText={t('Send')}
           theme={theme}
         />
       </div>

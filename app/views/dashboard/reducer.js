@@ -31,14 +31,14 @@ const reducer = (state = initialState, action) => {
         ...{
           tokens: action.tokens
         }
-      }
+      };
     case Types.UPDATE_SELECTED_TOKEN:
       return {
         ...state,
         ...{
           token: action.token
         }
-      }
+      };
     default:
       return state;
   }

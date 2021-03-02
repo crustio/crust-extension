@@ -30,13 +30,15 @@ export default class FooterWithTwoButton extends Component {
           color="#41485D"
           background="white"
           border="1px solid rgba(65, 72, 93, 0.5)"
-          custom={true}
+          custom
         >
           {backButtonName}
         </ButtonCustom>
-        <ButtonCustom onClick={onNextClick} 
+        <ButtonCustom
+          onClick={onNextClick}
           border="1px solid #FF8D00"
-          width="155px">
+          width="155px"
+        >
           {nextButtonName}
         </ButtonCustom>
       </div>

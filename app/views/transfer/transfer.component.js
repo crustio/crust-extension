@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Clear from '@material-ui/icons/Clear';
+import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import TransferForm from '../../components/transfer/transfer-form';
 import * as NavConstants from '../../constants/navigation';
 import { INPUT_NUMBER_REGEX } from '../../../lib/constants/regex';
 import { findChainByName } from '../../../lib/constants/chain';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class Transfer extends Component {
@@ -28,8 +28,10 @@ class Transfer extends Component {
       buttonText: 'Next',
       dropDownSelected: { ...token, value: token.tokenSymbol, text: token.tokenSymbol },
       dropDownList: tokens.map(t => {
+        /* eslint-disable */
         t.value = t.tokenSymbol;
         t.text = t.tokenSymbol;
+        /* eslint-enable */
         return t;
       }),
     };
@@ -104,7 +106,7 @@ class Transfer extends Component {
   handleSendButton = () => {
     const { amount, unit, dropDownSelected } = this.state;
     const { toAddress } = this.props;
-    if (toAddress !== '' && amount !== '' && amount != undefined) {
+    if (toAddress !== '' && amount !== '' && amount !== undefined) {
       this.props.confirmTransaction(toAddress, this.props.account, amount, unit, dropDownSelected);
     } else {
       const error = {};
@@ -113,7 +115,7 @@ class Transfer extends Component {
         error.toAddressErrorMessage = this.props.t('Please input address.');
       }
 
-      if (amount === "" || amount === undefined) {
+      if (amount === '' || amount === undefined) {
         error.isAmountError = true;
         error.toAmountErrorMessage = this.props.t('Please input amount.');
       }
@@ -134,21 +136,17 @@ class Transfer extends Component {
 
   render() {
     const {
-      units,
       isToAddressError,
       toAddressErrorMessage,
       isAmountError,
       toAmountErrorMessage,
       toAddress,
       network,
-      tokens,
-      token,
       t,
     } = this.props;
     const {
       to,
       amount,
-      unit,
       alias,
       from,
       buttonText,
@@ -162,7 +160,7 @@ class Transfer extends Component {
       <div className="tranfer-page-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title={t("Send")}
+          title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
         <TransferForm
@@ -197,7 +195,7 @@ class Transfer extends Component {
   }
 }
 
-export default withTranslation()(Transfer)
+export default withTranslation()(Transfer);
 
 Transfer.defaultProps = {
   changePage: undefined,

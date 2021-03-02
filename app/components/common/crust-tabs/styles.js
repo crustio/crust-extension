@@ -1,4 +1,5 @@
 import { CRUST_COLOR1 } from '../../../constants/colors';
+
 export const styles = () => ({
   tabsRoot: {
     backgroundColor: 'transparent',

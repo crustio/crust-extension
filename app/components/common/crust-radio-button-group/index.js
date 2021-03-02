@@ -35,7 +35,7 @@ class CrustRadioButtonGroup extends Component {
               root: vertical ? classes.rootVertical : classes.root,
               label: vertical ? classes.labelVertical : classes.label,
             }}
-            labelPlacement={vertical ? "start" : "end"}
+            labelPlacement={vertical ? 'start' : 'end'}
             disabled={disabled}
           />
         ))}

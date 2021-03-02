@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Clear from '@material-ui/icons/Clear';
+import { withTranslation } from 'react-i18next';
 import TokenDetails from '../../components/token/token-details';
 import Wallet from '../../components/wallet';
 import { TRANSFER_PAGE, QR_CODE_PAGE, DASHBOARD_PAGE } from '../../constants/navigation';
@@ -9,8 +11,6 @@ import { RENAME } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import SubHeader from '../../components/common/sub-header';
-import Clear from '@material-ui/icons/Clear';
-import { withTranslation } from 'react-i18next';
 
 class TokenDetailsPage extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class TokenDetailsPage extends Component {
     });
   };
 
-  onTokenSelected = token => {
+  onTokenSelected = () => {
     this.props.changePage(QR_CODE_PAGE);
   };
 
@@ -86,15 +86,14 @@ class TokenDetailsPage extends Component {
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     const transDisplay = transactions.filter(
-      trans =>
-        trans.metadata.tokenSelected !== undefined &&
-        trans.metadata.tokenSelected.tokenSymbol === token.tokenSymbol,
+      trans => trans.metadata.tokenSelected !== undefined
+        && trans.metadata.tokenSelected.tokenSymbol === token.tokenSymbol,
     );
     return (
       <div className="token-details-page-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title={t("Token Details")}
+          title={t('Token Details')}
           backBtnOnClick={this.onClick}
         />
         <div className="account-content-container">
@@ -133,4 +132,4 @@ class TokenDetailsPage extends Component {
   }
 }
 
-export default  withTranslation()(TokenDetailsPage);
+export default withTranslation()(TokenDetailsPage);

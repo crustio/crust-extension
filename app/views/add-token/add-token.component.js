@@ -10,10 +10,6 @@ export default class AddToken extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: '',
-      isAddressError: false,
-      addressErrorMessage: '',
-      addressPropName: 'address',
       propName: 'tname',
       tname: '',
       tokenLabel: 'Token contract address',
@@ -39,7 +35,7 @@ export default class AddToken extends Component {
   handleOnBlur = () => {};
 
   handleAddToken = async () => {
-    const { isConnected, account } = this.props;
+    const { isConnected } = this.props;
     const { tname } = this.state;
     if (!isConnected) {
       this.props.createToast({
@@ -67,7 +63,9 @@ export default class AddToken extends Component {
   };
 
   render() {
-    const { tname, propName, tokenLabel, tokenError, tokenErrorMessage } = this.state;
+    const {
+      tname, propName, tokenLabel, tokenError, tokenErrorMessage
+    } = this.state;
 
     return (
       <div>

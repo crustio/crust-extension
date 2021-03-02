@@ -2,7 +2,6 @@ import * as AccountActions from './account';
 import * as NavConstants from '../constants/navigation';
 import * as APIConstants from '../../lib/constants/api';
 import * as AppActions from '../containers/actions';
-import { verifyTermsVersion } from '../views/terms/actions';
 import { OnBoarding } from '../api';
 import { navigateAndServiceIfDappRequest } from './dapp';
 

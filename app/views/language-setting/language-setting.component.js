@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Clear from '@material-ui/icons/Clear';
+import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import './styles.css';
-import ButtonMD from '../../components/common/buttons/button-md';
-import { withTranslation } from 'react-i18next';
 import * as NavConstants from '../../constants/navigation';
 import { CHINESE, ENGLISH } from '../../constants/language';
 import CrustRadioButtonGroup from '../../components/common/crust-radio-button-group';
@@ -11,18 +10,6 @@ import CrustRadioButtonGroup from '../../components/common/crust-radio-button-gr
 class LanguageSetting extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      address: '',
-      isAddressError: false,
-      addressErrorMessage: '',
-      addressPropName: 'address',
-      propName: 'tname',
-      tname: '',
-      tokenLabel: 'Token contract address',
-      tokenError: false,
-      tokenErrorMessage: '',
-    };
-
     this.inputRef = React.createRef();
   }
 
@@ -32,7 +19,6 @@ class LanguageSetting extends Component {
   };
 
   onLanguageChange = (e, i18n) => {
-    console.log(e.target.value);
     if (e.target.value === CHINESE || e.target.value === ENGLISH) {
       this.props.updateAppLanguage(e.target.value, i18n);
     }
@@ -48,16 +34,17 @@ class LanguageSetting extends Component {
 
   render() {
     const { t, i18n, language } = this.props;
-    const options = [{value: 'en-US', text: t('English')}, {value: 'zh-CN', text: t('Chinese')} ]
+    const options = [{ value: 'en-US', text: t('English') }, { value: 'zh-CN', text: t('Chinese') }];
     return (
       <div className="language-setting-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title={t("Language Setting")}
+          title={t('Language Setting')}
           backBtnOnClick={this.onClick}
         />
         <div className="language-setting-option-container">
           <CrustRadioButtonGroup
+            // eslint-disable-next-line
             vertical={true}
             options={options}
             value={options.find(o => o.value === language)}

@@ -6,7 +6,7 @@ import {
   onRemoveAccount,
   onUpdateCurrentAccount,
 } from '../../../lib/services/static-message-factory-service';
-import { getTransactions, getTokens } from '../../views/dashboard/actions';
+import { getTransactions, getTokens } from '../dashboard/actions';
 
 export const addAccount = () => async dispatch => {
   dispatch(AppActions.updateAppLoading(true));
@@ -22,7 +22,7 @@ export const changeAccount = account => async dispatch => {
     await AccountActions.fetchAndSetAccounts(dispatch);
     await dispatch(AccountActions.fetchAndSetBalances);
     await dispatch(getTransactions);
-    await dispatch(getTokens)
+    await dispatch(getTokens);
     dispatch(AppActions.updateAppLoading(false));
     dispatch(createToast({ message: onUpdateCurrentAccount(alias), type: 'success' }));
   } catch (e) {

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import CrustInput from '../../common/crust-input';
 import DropDown from '../../common/drop-down';
 import FontRegular from '../../common/fonts/font-regular';
-import {convertBalanceToShow} from '../../../../lib/services/numberFormatter';
-import { withTranslation } from 'react-i18next';
+import { convertBalanceToShow } from '../../../../lib/services/numberFormatter';
 import './styles.css';
+
 class TransferFormAmount extends Component {
   render() {
     const {
@@ -30,16 +31,16 @@ class TransferFormAmount extends Component {
         {...otherProps}
       >
         <div className="transfer-form-amount-dropdown-container">
-          <FontRegular className="transfer-form-amount-dropdown-label" text={t('Assets')+':'} />
+          <FontRegular className="transfer-form-amount-dropdown-label" text={`${t('Assets')}:`} />
           <DropDown className="transfer-form-amount-dropdown" options={options} value={dropDownValue} onChange={onDropDownChange} />
         </div>
 
-        <FontRegular className="transfer-form-amount-balance" text={`${t("Balance")}:  ${convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)}`} />
-        
+        <FontRegular className="transfer-form-amount-balance" text={`${t('Balance')}:  ${convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)}`} />
+
         <div className="transfer-form-amount-input-container">
-          <FontRegular className="transfer-form-amount-input-label" text={t('Amount')+':'} />
+          <FontRegular className="transfer-form-amount-input-label" text={`${t('Amount')}:`} />
           <CrustInput
-            className='transfer-from-amount-input'
+            className="transfer-from-amount-input"
             onChange={onChange(propName)}
             value={value}
           />
@@ -54,4 +55,4 @@ class TransferFormAmount extends Component {
   }
 }
 
-export default withTranslation()(TransferFormAmount)
+export default withTranslation()(TransferFormAmount);

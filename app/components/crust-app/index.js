@@ -7,7 +7,6 @@ import Header from '../common/header/header.component';
 import ViewSelector from '../view-selector';
 import Network from '../network/network';
 import Options from '../options';
-import FontRegular from '../common/fonts/font-regular';
 import { NetworkDisconnectionIcon } from '../common/icon';
 import './styles.css';
 import CrustLogo from '../common/crust-logo';
@@ -36,18 +35,11 @@ export default class CrustApp extends Component {
 
     const CrustHeaderClassNames = classnames({
       'crust-header': showHeader,
-      'crust-header-banner':
-        showHeader && showBanner && !showLogo && !showNetwork && !showSettings,
-      'crust-header-boarded':
-        showHeader && !showBanner && showLogo && showNetwork && showSettings,
+      'crust-header-banner': showHeader && showBanner && !showLogo && !showNetwork && !showSettings,
+      'crust-header-boarded': showHeader && !showBanner && showLogo && showNetwork && showSettings,
       'display-none': !showHeader,
     });
 
-    const CrustLogoClassNames = classnames({
-      'crust-logo': showLogo,
-      'display-none': !showLogo,
-      'clickable-icon': showLogo,
-    });
     const CrustNetworkClassNames = classnames({
       'crust-network': showNetwork,
       'display-none': !isDeveloperMode,
@@ -55,10 +47,6 @@ export default class CrustApp extends Component {
     const CrustNetworkStatusClassNames = classnames({
       'display-none': isConnected,
       'crust-network-status': !isConnected,
-    });
-    const CrustBannerClassNames = classnames({
-      'crust-banner': showBanner,
-      'display-none': !showBanner,
     });
     const CrustSettingsClassNames = classnames({
       'crust-settings': showSettings,
@@ -73,7 +61,7 @@ export default class CrustApp extends Component {
         <div {...otherProps}>
           <Header page={page} className={CrustHeaderClassNames}>
             <div className="crust-row">
-              <CrustLogo className="crust-logo"/>
+              <CrustLogo className="crust-logo" />
               <div className="crust-header-text">Crust Wallet</div>
             </div>
             <div className={CrustConfigClassNames}>

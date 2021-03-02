@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Clear from '@material-ui/icons/Clear';
+import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import FontRegular from '../../components/common/fonts/font-regular';
 import FooterButton from '../../components/common/footer-button';
 import './styles.css';
 import Link from '../../components/common/link';
-import { withTranslation } from 'react-i18next';
 import * as NavConstants from '../../constants/navigation';
 
 class About extends Component {
@@ -40,7 +40,7 @@ class About extends Component {
           <FontRegular className="about-version" text={`Version ${manifest.version}`} />
           {this.renderInfoLinks()}
           <div className="about-button">
-            <FooterButton onClick={this.onClick} name={t("OK")} />
+            <FooterButton onClick={this.onClick} name={t('OK')} />
           </div>
         </div>
       </div>

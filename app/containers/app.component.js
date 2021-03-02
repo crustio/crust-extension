@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import {
   DASHBOARD_PAGE,
   CUSTOM_NETWORK_PAGE,
@@ -8,7 +9,6 @@ import {
   SIGN_UP_PAGE,
 } from '../constants/navigation';
 import CrustApp from '../components/crust-app';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class App extends Component {
@@ -20,26 +20,15 @@ class App extends Component {
       showBanner: false,
       showNetwork: false,
       showSettings: false,
-      language: '',
     };
   }
 
   componentDidMount() {
     this.props.updateBackupPage(this.props.page);
     this.props.fetchAndUpdateAppManifest();
-    this.props.fetchAndUpdateLanguage();
+    this.props.fetchAndUpdateLanguage(this.props.i18n);
     this.props.updateAppLoading(true);
     this.props.onBoard();
-  }
-
-  componentDidUpdate() {
-    const { language } = this.props;
-    if (this.state.language != language) {
-      this.setState({
-        language: language
-      });
-      this.props.i18n.changeLanguage(language)
-    }
   }
 
   static getDerivedStateFromProps(prevProps, nextState) {
@@ -104,7 +93,7 @@ class App extends Component {
   render() {
     const {
       props: {
-        page, isLoading, networks, network, isConnected, isDeveloperMode, options, language
+        page, isLoading, networks, network, isConnected, isDeveloperMode, options
       },
       state: {
         showLogo, showBanner, showNetwork, showSettings, showHeader

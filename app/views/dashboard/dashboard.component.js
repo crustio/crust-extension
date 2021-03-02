@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
+import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import TokenDetails from '../../components/token/token-details';
 import Wallet from '../../components/wallet';
 import { TRANSFER_PAGE, QR_CODE_PAGE, TOKEN_DETAILS_PAGE } from '../../constants/navigation';
@@ -10,8 +12,6 @@ import { RENAME } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
 import TokenList from '../../components/token-list';
 import CrustTabs from '../../components/common/crust-tabs';
-import { withTranslation } from 'react-i18next';
-import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -49,7 +49,6 @@ class Dashboard extends Component {
   handleAccountMenuOptionsChange = async (option, account, transactionsUrl) => {
     await this.props.configEditAccount(option, account, transactionsUrl);
     if (option.value === RENAME.value) {
-      console.log('this:', this);
       this.textInput.current.focus();
       this.textInput.current.maxLength = 20;
     }
@@ -167,7 +166,7 @@ class Dashboard extends Component {
           <a
             className="dashboard-footer"
             target="_blank"
-            href={'https://apps.crust.network'}
+            href="https://apps.crust.network"
             rel="noopener noreferrer"
           >
             <div

@@ -1,13 +1,13 @@
-import i18next from 'i18next'
-import { initReactI18next } from 'react-i18next'
-import XHR from 'i18next-xhr-backend'
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import XHR from 'i18next-xhr-backend';
 
 i18next
   .use(XHR)
   .use(initReactI18next)
   .init({
     backend: {
-      loadPath: `./locales/{{lng}}.json`
+      loadPath: './locales/{{lng}}.json'
     },
     react: {
       useSuspense: false
@@ -16,6 +16,6 @@ i18next
     preload: ['en'],
     keySeparator: false,
     interpolation: { escapeValue: false }
-  })
+  });
 
-export default i18next
+export default i18next;

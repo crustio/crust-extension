@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Clear from '@material-ui/icons/Clear';
+import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
-import { DASHBOARD_PAGE } from '../../constants/navigation';
 import QRCodeForm from '../../components/qr-code/qr-code-form';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import { findChainByName } from '../../../lib/constants/chain';
 import './styles.css';
-import { withTranslation } from 'react-i18next';
 
 class QRCode extends Component {
   handleSubheaderBackBtn = () => {
@@ -18,14 +17,14 @@ class QRCode extends Component {
   };
 
   render() {
-    const { account, network,t } = this.props;
+    const { account, network, t } = this.props;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     return (
       <div className="qr-code-container">
         <SubHeader
           icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
-          title={t("Receive")}
+          title={t('Receive')}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
         <QRCodeForm

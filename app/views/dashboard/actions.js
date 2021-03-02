@@ -1,5 +1,7 @@
 import * as DashboardActionTypes from './action-types';
-import { Transaction, Account, Tokens, Network } from '../../api';
+import {
+  Transaction, Account, Tokens, Network
+} from '../../api';
 import { RENAME } from '../../constants/options';
 import { PENDING } from '../../../lib/constants/transaction';
 import {
@@ -13,7 +15,7 @@ import * as AccountActions from '../../actions/account';
 const updateTokens = tokens => ({
   type: DashboardActionTypes.UPDATE_TOKEN_LIST,
   tokens,
-})
+});
 
 const updateSelectedToken = token => ({
   type: DashboardActionTypes.UPDATE_SELECTED_TOKEN,
@@ -85,31 +87,31 @@ export const getTokens = async (dispatch, getState) => {
   } = getState().accountReducer;
   const { network } = getState().networkReducer;
   const decimals = await Network.getChainDecimals();
-  
+
   const chainToken = {
-    network, 
-    accountAddress: account.address, 
-    tokenName: network.unit, 
-    tokenSymbol: network.unit, 
+    network,
+    accountAddress: account.address,
+    tokenName: network.unit,
+    tokenSymbol: network.unit,
     balance: balance.balance,
     decimals: decimals.result,
-  }
+  };
 
-  let allTokens = [chainToken]
+  let allTokens = [chainToken];
 
   const {
     result
   } = await Tokens.getTokens();
 
-  allTokens = allTokens.concat(result)
-  dispatch(updateTokens(allTokens))
-  dispatch(updateSelectedToken(chainToken))
-}
+  allTokens = allTokens.concat(result);
+  dispatch(updateTokens(allTokens));
+  dispatch(updateSelectedToken(chainToken));
+};
 
 export const onTokenSelected = (token) => dispatch => {
-  dispatch(updateSelectedToken(token))
-}
+  dispatch(updateSelectedToken(token));
+};
 
 export const updateTokenList = tokens => dispatch => {
-  dispatch(updateTokens(tokens))
-}
+  dispatch(updateTokens(tokens));
+};

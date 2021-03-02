@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import TransferFromTo from '../transfer-from-to';
 import FooterButton from '../../common/footer-button';
 import TransferFormAmount from '../transfer-form-amount';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class TransferForm extends Component {
@@ -52,7 +52,7 @@ class TransferForm extends Component {
         <TransferFormAmount
           className="transfer-form-amount-container"
           error={isAmountError}
-          label={t("Amount")}
+          label={t('Amount')}
           value={amount}
           helperText={amountErrorText}
           onChange={handleAmountChange}
@@ -68,4 +68,4 @@ class TransferForm extends Component {
   }
 }
 
-export default withTranslation()(TransferForm)
+export default withTranslation()(TransferForm);

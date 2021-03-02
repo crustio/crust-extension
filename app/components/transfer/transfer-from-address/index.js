@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
 import FontRegular from '../../common/fonts/font-regular';
 import Address from '../../common/address';
 import './styles.css';
 import ClickToCopyAddress from '../../common/click-to-copy-address';
-import Tooltip from '@material-ui/core/Tooltip';
 
 export default class TransferFromAddress extends Component {
   render() {
@@ -12,7 +12,7 @@ export default class TransferFromAddress extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <Tooltip title={alias} >
+        <Tooltip title={alias}>
           <FontRegular className="transfer-form-address-alias" text={alias} />
         </Tooltip>
         {canCopy ? (

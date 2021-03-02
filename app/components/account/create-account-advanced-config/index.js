@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import CrustExpansionPanel from '../../common/crust-expansion-panel';
 import CrustRadioButtonGroup from '../../common/crust-radio-button-group';
 import FontRegular from '../../common/fonts/font-regular';
-import { withTranslation } from 'react-i18next';
 
 class CreateAccountAdvancedConfig extends Component {
   render() {
@@ -17,9 +17,9 @@ class CreateAccountAdvancedConfig extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <CrustExpansionPanel disabled={disableAccountSettings} title={t("Advanced")}>
+        <CrustExpansionPanel disabled={disableAccountSettings} title={t('Advanced')}>
           <FontRegular
-            text={t("Keypair Crypto Type")}
+            text={t('Keypair Crypto Type')}
             style={{
               fontSize: 14,
               fontWeight: 'bolder',

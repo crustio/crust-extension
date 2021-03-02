@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './styles.css';
-import Link from '../../../components/common/link';
 
 export default class TermsText extends Component {
   render() {

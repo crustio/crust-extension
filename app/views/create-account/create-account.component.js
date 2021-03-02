@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import CrustValidator from '../../utils/crust-validator';
 import validator from '../../utils/crust-validator/validator';
 import CreateAccountForm from '../../components/account/create-account-form';
@@ -9,7 +10,6 @@ import CreateAccountSettings from '../../components/account/create-account-setti
 import FooterButton from '../../components/common/footer-button';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import * as Account from '../../constants/account';
-import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class CreateAccount extends Component {
@@ -63,7 +63,9 @@ class CreateAccount extends Component {
   }
 
   handleChange = (e, value) => {
-    let { buttonName, formValue, onSubmit, disableAccountSettings } = this.state;
+    let {
+      buttonName, formValue, onSubmit, disableAccountSettings
+    } = this.state;
     if (value === Account.CREATE_ACCOUNT) {
       buttonName = Account.TO_CONFIRM_BUTTON_TEXT;
       onSubmit = this.handleNext;
@@ -120,8 +122,8 @@ class CreateAccount extends Component {
 
   handelBack = () => {
     if (
-      this.state.formValue === Account.CREATE_ACCOUNT ||
-      this.state.formValue === Account.IMPORT_ACCOUNT
+      this.state.formValue === Account.CREATE_ACCOUNT
+      || this.state.formValue === Account.IMPORT_ACCOUNT
     ) {
       this.props.changePage(MANAGE_ACCOUNT_PAGE);
     } else if (this.state.formValue === Account.CONFIRM_ACCOUNT) {
@@ -259,7 +261,9 @@ class CreateAccount extends Component {
   }
 
   render() {
-    const { seedWords, keypairType, keypairTypes, account, t } = this.props;
+    const {
+      seedWords, keypairType, keypairTypes, account, t
+    } = this.props;
     const {
       value,
       formValue,
@@ -311,7 +315,7 @@ class CreateAccount extends Component {
           alias={alias}
           handleAliasChange={this.handleAliasChange}
           aliasPropName="alias"
-          aliasLabel={t("Nickname")}
+          aliasLabel={t('Nickname')}
           isAliasError={isAliasError}
           aliasErrorMessage={aliasErrorMessage}
           keypairType={keypairType}

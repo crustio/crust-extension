@@ -20,30 +20,30 @@ export default class TransferTo extends Component {
       ...otherProps
     } = this.props;
     return (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-          {...otherProps}
-        >
-          <Avatar style={{marginRight: 22}} value={addressValue} size={size} theme={theme} />
-          <div className="transfer-to-input-contianer">
-            <CrustInput
-              className="transfer-to-input"
-              onChange={onChange(propName)}
-              placeholder={label}
-              value={toValue}
-              spellCheck={false}
-            />
-            {isError ? (
-              <span className="tranfer-to-error-msg">{errorMessage}</span>
-            ) : (
-              <span className="place-holder"> </span>
-            )}
-          </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+        {...otherProps}
+      >
+        <Avatar style={{ marginRight: 22 }} value={addressValue} size={size} theme={theme} />
+        <div className="transfer-to-input-contianer">
+          <CrustInput
+            className="transfer-to-input"
+            onChange={onChange(propName)}
+            placeholder={label}
+            value={toValue}
+            spellCheck={false}
+          />
+          {isError ? (
+            <span className="tranfer-to-error-msg">{errorMessage}</span>
+          ) : (
+            <span className="place-holder"> </span>
+          )}
         </div>
+      </div>
     );
   }
 }

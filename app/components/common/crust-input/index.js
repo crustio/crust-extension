@@ -10,25 +10,28 @@ class CrustInput extends Component {
       classes, InputProps, placeholderText, standardInput, ...otherProps
     } = this.props;
     return (
-      standardInput ? 
-        <Input
-          placeholder={placeholderText}
-          labelWidth={0}
-          inputProps={{
-            className: classes.crustInput,
-          }}
-          disableUnderline={true}
-          {...otherProps}
-        />
-        :
-        <OutlinedInput
-          placeholder={placeholderText}
-          labelWidth={0}
-          inputProps={{
-            className: classes.crustInput,
-          }}
-          {...otherProps}
-        />
+      standardInput
+        ? (
+          <Input
+            placeholder={placeholderText}
+            labelWidth={0}
+            inputProps={{
+              className: classes.crustInput,
+            }}
+            disableUnderline
+            {...otherProps}
+          />
+        )
+        : (
+          <OutlinedInput
+            placeholder={placeholderText}
+            labelWidth={0}
+            inputProps={{
+              className: classes.crustInput,
+            }}
+            {...otherProps}
+          />
+        )
     );
   }
 }
