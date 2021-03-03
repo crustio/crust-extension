@@ -100,3 +100,14 @@ export const removeContact = async contact => {
   throwIfNoSuccess({ message, status });
   return { result };
 };
+
+export const exportAccount = async (address, pwd) => {
+  const { message, status, result } = await sendMessage({
+    type: MessageTypes.BG_ACCOUNTS_EXPORT,
+    address,
+    pwd,
+  });
+  console.log(result);
+  throwIfNoSuccess({ message, status });
+  return { result };
+};

@@ -1,4 +1,5 @@
 import { decodeAddress } from '@polkadot/keyring';
+import { keccak512 } from 'js-sha3';
 import { getWallet } from './wallet-service';
 import { getStore } from '../store/store-provider';
 import * as accountActions from '../actions/accounts';
@@ -45,8 +46,8 @@ export const createSeedWords = () => {
   return seedWords;
 };
 
-export const createAccountWithSeed = (seedWords, keypairType, isOnBoarding, alias) => {
-  const address = DotWallet.getAddress(seedWords, keypairType);
+export const createAccountWithSeed = (seedWords, keypairType, isOnBoarding, alias, password) => {
+  const address = DotWallet.getAddressWithPassword(seedWords, keypairType, alias, password);
   const accountAlias = alias === undefined ? constructAlias(1) : validateAlias(alias);
   return {
     seedWords,
@@ -116,15 +117,30 @@ export const getAccounts = async () => {
   return localAccountObj;
 };
 
-export const createAccount = async (seedWords, keypairType, isOnBoarding, alias) => {
+export const validPassword = async (password) => {
+  const encryptedPwd = keccak512(password);
+  const { appState } = getStore().getState();
+  return appState.hashKey && appState.hashKey === encryptedPwd;
+}
+
+export const createAccount = async (seedWords, keypairType, isOnBoarding, alias, password) => {
   // default keypair type Edwards
   const keypairTypeValue = keypairType === undefined ? KEYPAIR_EDWARDS.value : keypairType.value;
 
+  if (seedWords == undefined) {
+    throw new Error('invalid seed words');
+  }
+
+  const validPwd = await validPassword(password);
+  if (!validPwd) {
+    throw new Error('wallet password is incorrect');
+  }
+
   // grab all the data
-  const account =
-    seedWords === undefined
-      ? createNewAccount(keypairTypeValue)
-      : createAccountWithSeed(seedWords, keypairTypeValue, isOnBoarding, alias);
+  // const account = seedWords === undefined
+  //   ? createNewAccount(keypairTypeValue)
+  //   : createAccountWithSeed(seedWords, keypairTypeValue, isOnBoarding, alias, password);
+  const account = createAccountWithSeed(seedWords, keypairTypeValue, isOnBoarding, alias, password);
   const { accounts } = getAccountState();
   // find duplication
   const newAccount = accountExists(accounts, account);
@@ -135,6 +151,41 @@ export const createAccount = async (seedWords, keypairType, isOnBoarding, alias)
   // return  created account address
   return account;
 };
+
+export const createAccountWithJson = async (json, oldPwd, isOnBoarding, password) => {
+  const validPwd = await validPassword(password);
+  if (!validPwd) {
+    throw new Error('wallet password is incorrect');
+  }
+  
+  let keypair = undefined;
+  try {
+    keypair = keyring.restoreAccount(json, oldPwd);
+  } catch (error) {
+    throw new Error('invalid json file or json password');
+  }
+
+  if (!keypair) {
+    throw new Error('invalid json file or json password');
+  }
+
+  try {
+    keyring.encryptAccount(keypair, password);
+  } catch (error) {
+    throw new Error('import account failed.');
+  }
+
+  const account = {
+    address: keypair.address,
+    alias: 'abcdefg',
+    // keypairType,
+    // alias: accountAlias,
+  };
+  const newAccount = accountExists(accounts, account);
+  mergeAccounts(accounts, newAccount);
+  return account
+
+}
 
 export const updateCurrentAccount = async address => {
   // default keypair type Edwards
@@ -241,8 +292,7 @@ export const getAccount = address => {
     return account;
   });
   const account = accountsWithAddress.find(
-    account =>
-      JSON.stringify(decodeAddress(account.address)) === JSON.stringify(decodeAddress(address)),
+    account => JSON.stringify(decodeAddress(account.address)) === JSON.stringify(decodeAddress(address)),
   );
   if (account) {
     return account;
@@ -258,4 +308,16 @@ export const existedAccount = acc => {
   }
 
   return false;
+};
+
+export const exportAccount = address => {
+  const { accounts } = getAccountState();
+  const account = accounts.find(a => a.address === address);
+
+  if (account === undefined) {
+    throw new Error('Account is not exist');
+  }
+
+  const wallet = getWallet();
+  return wallet.exportAccount(address, account.keypairType, account.seedWords, 'abcdefgh');
 };

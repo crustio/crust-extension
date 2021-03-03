@@ -12,6 +12,7 @@ import dashboardReducer from '../views/dashboard/reducer';
 import connectRequestReducer from '../views/connect-request/reducer';
 import dAppReducer from './dapp';
 import addressBookReducer from './address-book';
+import exportAccountReducer from '../views/export-account/reducer';
 
 export default combineReducers({
   networkReducer,
@@ -27,4 +28,5 @@ export default combineReducers({
   connectRequestReducer,
   dAppReducer,
   addressBookReducer,
+  exportAccountReducer,
 });

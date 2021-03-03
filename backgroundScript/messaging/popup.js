@@ -59,6 +59,10 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
             ResponseService.createAccount(request, sendResponse);
             break;
           }
+          case MessageTypes.BG_ACCOUNTS_CREATE_ACCOUNT_WITH_JSON: {
+            ResponseService.createAccountWithJson(request, sendResponse);
+            break;
+          }
           case MessageTypes.BG_ACCOUNTS_CREATE_SEED_WORDS: {
             ResponseService.getSeedWords(request, sendResponse);
             break;
@@ -73,6 +77,10 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
           }
           case MessageTypes.BG_ACCOUNTS_CURRENT_ACCOUNT: {
             ResponseService.getCurrentAccount(request, sendResponse);
+            break;
+          }
+          case MessageTypes.BG_ACCOUNTS_EXPORT: {
+            ResponseService.exportAccount(request, sendResponse);
             break;
           }
 
@@ -202,7 +210,7 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
           }
 
           case MessageTypes.BG_CONTRACT_UPDATE_TOKEN_BALANCES: {
-            ResponseService.updateTokenBalances(request, sender, sendResponse)
+            ResponseService.updateTokenBalances(request, sender, sendResponse);
             break;
           }
 

@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
-import { DASHBOARD_PAGE, CREATE_ACCOUNT_PAGE } from '../../constants/navigation';
+import {
+  DASHBOARD_PAGE,
+  CREATE_ACCOUNT_PAGE,
+  EXPORT_ACCOUNT_PAGE,
+} from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AccountList from '../../components/account-list';
 import DraggableDialog from '../../components/common/confirm-dialog';
@@ -10,6 +14,7 @@ import {
   ACCOUNT_MANAGEMENT_MENU_OPTIONS,
   ACCOUNT_MANAGEMENT_OPTIONS,
   ADD_ACCOUNT,
+  EXPORT_ACCOUNT,
   REMOVE,
 } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
@@ -56,6 +61,9 @@ class ManageAccount extends Component {
   handleAccountMenuOptionsChange = async (option, account) => {
     if (option.value === REMOVE.value) {
       this.setState({ isOpen: true, account });
+    } else if (option.value === EXPORT_ACCOUNT.value) {
+      this.props.updateExportingAccount(account.address);
+      this.props.changePage(EXPORT_ACCOUNT_PAGE);
     }
   };
 
@@ -78,11 +86,14 @@ class ManageAccount extends Component {
     const { isOpen } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
-    const options = ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
-      // eslint-disable-next-line
-      o.text = t(o.text);
-      return o;
-    });
+    const options = accounts.length > 1
+      ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
+        // eslint-disable-next-line
+            o.text = t(o.text);
+        return o;
+      })
+      : ACCOUNT_MANAGEMENT_OPTIONS.filter(o => o.value === REMOVE.value);
+
     return (
       <div className="manage-accounts-root-container">
         <SubHeader
@@ -100,7 +111,7 @@ class ManageAccount extends Component {
                 className="accounts-container"
                 accounts={accounts}
                 currentAccount={account}
-                isMoreVertIconVisible={accounts.length > 1}
+                isMoreVertIconVisible
                 moreMenu={options}
                 onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
                 theme={theme}

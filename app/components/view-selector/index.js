@@ -20,6 +20,7 @@ import DAppRequests from '../../views/dapp-requests';
 import * as NavConstant from '../../constants/navigation';
 import TokenDetailsPage from '../../views/token-details';
 import LanguageSetting from '../../views/language-setting';
+import ExportAccount from '../../views/export-account';
 
 const getView = page => {
   switch (page) {
@@ -63,6 +64,8 @@ const getView = page => {
       return <TokenDetailsPage />;
     case NavConstant.LANGUAGE_SETTING_PAGE:
       return <LanguageSetting />;
+    case NavConstant.EXPORT_ACCOUNT_PAGE:
+      return <ExportAccount />;
     default:
       return <Dashboard />;
   }

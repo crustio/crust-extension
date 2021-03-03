@@ -5,6 +5,7 @@ import { mnemonicGenerate } from '@polkadot/util-crypto';
 import {
   Keyring, setSS58Format, encodeAddress, decodeAddress
 } from '@polkadot/keyring';
+import keyring from '@polkadot/ui-keyring';
 import {
   formatBalance, isHex, hexToU8a, u8aToHex, u8aToString, stringToU8a
 } from '@polkadot/util';
@@ -100,3 +101,11 @@ export const getSignMessage = async (account, message) => {
 };
 
 export const getStringMessageFromHex = message => u8aToString(hexToU8a(message));
+
+export const exportAccount = (address, keypairType, seedWords, password) => {
+  // const keyring = new Keyring({ type: keypairType });
+  // keyring.addFromUri(seedWords);
+  // return { exportedJson: JSON.stringify(keyring.toJson(address)) };
+
+  return { exportedJson: JSON.stringify(keyring.backupAccount(keyring.getPair(address), password)) };
+};

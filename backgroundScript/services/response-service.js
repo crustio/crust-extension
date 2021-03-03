@@ -13,7 +13,7 @@ import * as AppService from './app-service';
 import * as AddressBookService from './address-book-service';
 import * as ResponseType from '../../lib/constants/response-types';
 import { sendErrorMessage } from '../../lib/services/static-message-factory-service';
-import { getTokenDecimals } from '../apis/chain'
+import { getTokenDecimals } from '../apis/chain';
 // use below messages if no return message is needed
 export const success = {
   status: status.SUCCESS,
@@ -86,8 +86,10 @@ export const updateAccountAlias = async (request, sendResponse) => {
 export const createAccount = async (request, sendResponse) => {
   try {
     // seedWords is not define its automatically create wallet using new seedwords
-    const { seedWords, keypairType, isOnBoarding, alias } = request;
-    const account = await AccountService.createAccount(seedWords, keypairType, isOnBoarding, alias);
+    const {
+      seedWords, keypairType, isOnBoarding, alias, password
+    } = request;
+    const account = await AccountService.createAccount(seedWords, keypairType, isOnBoarding, alias, password);
     sendResponse({ ...success, result: account });
   } catch (err) {
     sendResponse({
@@ -96,6 +98,22 @@ export const createAccount = async (request, sendResponse) => {
     });
   }
 };
+
+export const createAccountWithJson = async (request, sendResponse) => {
+  try {
+    // seedWords is not define its automatically create wallet using new seedwords
+    const {
+      json, oldPwd, isOnBoarding, alias, password, encryptedPwd
+    } = request;
+    const account = await AccountService.createAccountWithJson(json, oldPwd, isOnBoarding, alias, password, encryptedPwd);
+    sendResponse({ ...success, result: account });
+  } catch (err) {
+    sendResponse({
+      ...failure,
+      message: err.message === undefined ? 'Error while creating new account.' : err.message,
+    });
+  }
+}
 
 export const getBalances = async (request, sendResponse) => {
   try {
@@ -113,6 +131,16 @@ export const getCurrentAccount = async (request, sendResponse) => {
     sendResponse({ ...success, result: currentAccount });
   } catch (err) {
     sendResponse({ ...failure, message: 'Error in getting current account' });
+  }
+};
+
+export const exportAccount = async (request, sendResponse) => {
+  try {
+    const { address, pwd } = request;
+    const accountJson = await AccountService.exportAccount(address, pwd);
+    sendResponse({ ...success, result: accountJson });
+  } catch (err) {
+    sendResponse({ ...failure, message: 'Error in exporting account' });
   }
 };
 
@@ -587,7 +615,7 @@ export const getChainDecimals = async (request, sendResponse) => {
   } catch (err) {
     sendResponse({ ...failure, message: 'Error while getting units.' });
   }
-}
+};
 
 export const addContract = async (request, sender, sendResponse) => {
   try {
@@ -615,7 +643,7 @@ export const updateTokenBalances = async (request, sender, sendResponse) => {
   } catch (err) {
     sendResponse({ ...failure, message: 'Error while get token list.' });
   }
-}
+};
 
 export const forceConnectNetwork = async (request, sendResponse) => {
   try {
@@ -644,4 +672,4 @@ export const updateCandyBalance = async (request, sender, sendResponse) => {
   } catch (err) {
     sendResponse({ ...failure, message: 'Error while update candy balance.' });
   }
-}
+};

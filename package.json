@@ -152,6 +152,7 @@
     "react-i18next": "^11.8.7",
     "react-loaders": "^3.0.1",
     "react-redux": "^4.3.0",
+    "react-simple-file-input": "^2.1.0",
     "react-toastify": "^4.3.1",
     "react-tooltip": "^4.2.15",
     "redux": "^3.2.1",

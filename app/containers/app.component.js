@@ -9,10 +9,7 @@ import {
   SIGN_UP_PAGE,
   SIGN_IN_PAGE,
   CONNECT_REQUEST_PAGE,
-<<<<<<< HEAD
   DAPP_REQUESTS_PAGE,
-=======
->>>>>>> Improve Layout
 } from '../constants/navigation';
 import CrustApp from '../components/crust-app';
 import './styles.css';

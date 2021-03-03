@@ -1,5 +1,8 @@
 import {
-  MANAGE_ACCOUNT_PAGE, ADDRESS_BOOK_PAGE, ADD_TOKEN_PAGE, LANGUAGE_SETTING_PAGE
+  MANAGE_ACCOUNT_PAGE,
+  ADDRESS_BOOK_PAGE,
+  ADD_TOKEN_PAGE,
+  LANGUAGE_SETTING_PAGE,
 } from './navigation';
 
 export const ADD_TOKEN = {
@@ -32,6 +35,11 @@ export const RENAME = {
   value: 'rename',
 };
 
+export const EXPORT_ACCOUNT = {
+  text: 'Export Account',
+  value: 'export_account',
+};
+
 export const REMOVE = {
   text: 'Remove',
   value: 'remove',
@@ -58,6 +66,6 @@ export const ACCOUNT_MENU_OPTIONS = [RENAME];
 
 export const ACCOUNT_MANAGEMENT_MENU_OPTIONS = [ADD_ACCOUNT];
 
-export const ACCOUNT_MANAGEMENT_OPTIONS = [REMOVE];
+export const ACCOUNT_MANAGEMENT_OPTIONS = [EXPORT_ACCOUNT, REMOVE];
 
 export const ADDRESS_BOOK_MENU_OPTIONS = [ADD_ADDRESS];
