@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Clear from '@material-ui/icons/Clear';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import TransferForm from '../../components/transfer/transfer-form';
@@ -145,13 +145,7 @@ class Transfer extends Component {
       t,
     } = this.props;
     const {
-      to,
-      amount,
-      alias,
-      from,
-      buttonText,
-      dropDownList,
-      dropDownSelected,
+      to, amount, alias, from, buttonText, dropDownList, dropDownSelected
     } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
@@ -159,7 +153,7 @@ class Transfer extends Component {
     return (
       <div className="tranfer-page-container">
         <SubHeader
-          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />

@@ -8,13 +8,12 @@
   display: flex;
   width: 321px;
   height: 54.82px;
-  border-bottom: 1px solid #858B9C;
 }
 
 .account-alias-input fieldset {
   border: 0;
   font-size: 14px;
-  background-color: rgba(65, 72, 93, 0.1);
+  background: #F0F1F5;
 }
 
 .account-alias-input:focus-within fieldset {

@@ -9,7 +9,8 @@
 .transfer-to-input fieldset {
   border: 0;
   font-size: 14px;
-  background-color: rgba(65, 72, 93, 0.1);
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
 }
 
 .transfer-to-input:focus-within fieldset {

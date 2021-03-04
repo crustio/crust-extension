@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
-import { IconTransfer } from '../../common/icon';
+import SendIcon from '../../../images/send-icon.png';
 import TransactionItemDetails from '../transaction-item-details';
 import { DAPP } from '../../../../lib/constants/transaction';
+import { CRUST_TRANSACTION_EXPLORE } from '../../../constants/links';
 import './styles.css';
 
 export default class TransactionItem extends Component {
   render() {
     const { transaction, ...otherProps } = this.props;
-    const {
-      internal: {
-        network: { transactionUrl },
-      },
-    } = transaction;
+    // const {
+    //   internal: {
+    //     network: { transactionUrl },
+    //   },
+    // } = transaction;
     return (
       <div>
-        {transactionUrl && transaction.status !== DAPP ? (
+        {transaction.status !== DAPP ? (
           <a
-            href={`${transactionUrl}/${transaction.txnHash}`}
+            href={`${CRUST_TRANSACTION_EXPLORE}${transaction.txnHash}`}
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: 'none' }}
           >
             <div {...otherProps}>
-              <IconTransfer className="transfer-item-icon" />
+              <img src={SendIcon} alt="send-icon" className="transfer-item-icon" />
               <TransactionItemDetails
                 amount={transaction.transferAmount}
                 address={transaction.metadata.to}
@@ -34,7 +35,7 @@ export default class TransactionItem extends Component {
           </a>
         ) : (
           <div {...otherProps}>
-            <IconTransfer className="transfer-item-icon" />
+            <img src={SendIcon} alt="send-icon-dapp" className="transfer-item-icon" />
             <TransactionItemDetails
               amount={transaction.transferAmount}
               address={transaction.metadata.to}

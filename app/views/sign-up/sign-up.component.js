@@ -122,11 +122,11 @@ class SignUp extends Component {
           className="sign-up-content-header"
           title={this.props.t('Create A Password To Secure Your Account')}
           // eslint-disable-next-line
-          description={this.props.t("The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.")}
+          description={this.props.t(
+            "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.",
+          )}
         />
         <CrustPassword
-          // eslint-disable-next-line
-          standardInput={true}
           className="sign-up-password"
           onChange={e => this.handleOnChange('password', e)}
           password={password}
@@ -139,8 +139,6 @@ class SignUp extends Component {
           <span className="place-holder"> </span>
         )}
         <CrustInput
-          // eslint-disable-next-line
-          standardInput={true}
           className="sign-up-password"
           onChange={this.handleOnChange('passwordRepeat')}
           type="password"
@@ -152,7 +150,11 @@ class SignUp extends Component {
         ) : (
           <span className="place-holder"> </span>
         )}
-        <FooterButton onClick={this.handleClick} disabled={this.state.disabled} name={this.props.t('Create')} />
+        <FooterButton
+          onClick={this.handleClick}
+          disabled={this.state.disabled}
+          name={this.props.t('Create')}
+        />
       </div>
     );
   }

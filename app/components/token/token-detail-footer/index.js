@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ButtonMD from '../../common/buttons/button-md';
+import ButtonCustom from '../../common/buttons/button-custom';
 
 export default class TokenDetailFooter extends Component {
   render() {
@@ -12,8 +12,17 @@ export default class TokenDetailFooter extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <ButtonMD onClick={handleDeposit} custom>{receiveButtonName}</ButtonMD>
-        <ButtonMD onClick={handleSend} custom>{sendButtonName}</ButtonMD>
+        <ButtonCustom
+          onClick={handleDeposit}
+          border="1px solid #FF8D00"
+          width="142px"
+          height="38px"
+        >
+          {receiveButtonName}
+        </ButtonCustom>
+        <ButtonCustom onClick={handleSend} border="1px solid #FF8D00" width="142px" height="38px">
+          {sendButtonName}
+        </ButtonCustom>
       </div>
     );
   }

@@ -103,7 +103,7 @@ const NetworkDisconnectionIcon = props => (
     <WifiOff
       style={{
         fontSize: '1.5em',
-        color: 'rgba(255, 255, 255, 1)',
+        color: '#111A34',
       }}
     />
   </div>

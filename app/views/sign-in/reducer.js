@@ -14,6 +14,13 @@ const reducer = (state = initialState, action) => {
           success: true,
         },
       };
+    case Types.UNLOCK_CRUST_SUCCESS_FALSE:
+      return {
+        ...state,
+        ...{
+          success: false,
+        },
+      };
     case Types.UNLOCK_CRUST_ERROR:
       return {
         ...state,

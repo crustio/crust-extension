@@ -22,4 +22,6 @@ export const TERMS_OF_USE = {
   url: 'https://crust.network/wallet/privacy.html',
 };
 
+export const CRUST_TRANSACTION_EXPLORE = 'https://crust.subscan.io/extrinsic/';
+
 export const LINKS = [WEBSITE, TERMS_OF_USE];

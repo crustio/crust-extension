@@ -64,6 +64,15 @@ export const setHashKey = async (request, sendResponse) => {
   }
 };
 
+export const clearHashKey = async (request, sendResponse) => {
+  try {
+    await AppService.clearHashKeyState();
+    sendResponse({ ...success, message: 'cleared hash key' });
+  } catch (err) {
+    sendResponse({ ...failure, message: 'Error clearing hashkey' });
+  }
+};
+
 export const updateAccountAlias = async (request, sendResponse) => {
   try {
     // seedWords is not define its automatically create wallet using new seedwords

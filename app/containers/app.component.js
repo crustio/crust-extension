@@ -7,6 +7,9 @@ import {
   LOADER_OVERLAY,
   ONBOARDING_PAGES_GROUP,
   SIGN_UP_PAGE,
+  SIGN_IN_PAGE,
+  CONNECT_REQUEST_PAGE,
+  DAPP_REQUESTS_PAGE,
 } from '../constants/navigation';
 import CrustApp from '../components/crust-app';
 import './styles.css';
@@ -20,6 +23,7 @@ class App extends Component {
       showBanner: false,
       showNetwork: false,
       showSettings: false,
+      showGrayHeader: false,
     };
   }
 
@@ -36,13 +40,14 @@ class App extends Component {
 
     if (prevProps.page !== LOADER_OVERLAY) {
       if (ONBOARDING_PAGES_GROUP.indexOf(prevProps.page) !== -1) {
-        if (prevProps.page === SIGN_UP_PAGE) {
+        if (prevProps.page === SIGN_UP_PAGE || prevProps.page === SIGN_IN_PAGE) {
           return {
             showHeader: false, // no change
             showLogo: false,
             showBanner: true,
             showNetwork: false,
             showSettings: false,
+            showGrayHeader: false,
           };
         }
         return {
@@ -51,6 +56,17 @@ class App extends Component {
           showBanner: true,
           showNetwork: false,
           showSettings: false,
+          showGrayHeader: false,
+        };
+      }
+      if (prevProps.page === CONNECT_REQUEST_PAGE || prevProps.page === DAPP_REQUESTS_PAGE) {
+        return {
+          showHeader: true, // no change
+          showLogo: true,
+          showBanner: false,
+          showNetwork: true,
+          showSettings: false,
+          showGrayHeader: false,
         };
       }
       return {
@@ -59,6 +75,7 @@ class App extends Component {
         showBanner: false,
         showNetwork: true,
         showSettings: true,
+        showGrayHeader: true,
       };
     }
 
@@ -96,7 +113,7 @@ class App extends Component {
         page, isLoading, networks, network, isConnected, isDeveloperMode, options
       },
       state: {
-        showLogo, showBanner, showNetwork, showSettings, showHeader
+        showLogo, showBanner, showNetwork, showSettings, showHeader, showGrayHeader
       },
     } = this;
     return (
@@ -113,6 +130,7 @@ class App extends Component {
         showNetwork={showNetwork}
         showSettings={showSettings}
         showHeader={showHeader}
+        showGrayHeader={showGrayHeader}
         onLogoClick={this.onClick}
         options={options}
         onOptionsChange={this.handleOptionsChange}

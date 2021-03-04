@@ -48,3 +48,11 @@ export const setLangeuage = async language => {
   throwIfNoSuccess({ message, status });
   return { result };
 };
+
+export const clearHashKey = async () => {
+  const { message, status, result } = await sendMessage({
+    type: MessageTypes.BG_CLEAR_HASH_KEY,
+  });
+  throwIfNoSuccess({ message, status });
+  return { result };
+};

@@ -13,10 +13,20 @@ const unlockCrustError = error => ({
   error,
 });
 
+const clearUnlockError = () => ({
+  type: SignInActionTypes.UNLOCK_CRUST_ERROR,
+  error: undefined,
+});
+
+export const unlockCrustSuccessFalse = () => ({
+  type: SignInActionTypes.UNLOCK_CRUST_SUCCESS_FALSE,
+});
+
 export const unlockCrust = password => async dispatch => {
   try {
     dispatch(updateAppLoading(true));
     await APITypes.OnBoarding.setHashKey(keccak512(password));
+    dispatch(clearUnlockError());
     dispatch(unlockCrustSuccess());
   } catch (e) {
     dispatch(updateAppLoading(false));

@@ -31,6 +31,10 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
             ResponseService.setHashKey(request, sendResponse);
             break;
           }
+          case MessageTypes.BG_CLEAR_HASH_KEY: {
+            ResponseService.clearHashKey(request, sendResponse);
+            break;
+          }
           case MessageTypes.BG_APP_SET_LANGUAGE: {
             ResponseService.setLanguage(request, sendResponse);
             break;

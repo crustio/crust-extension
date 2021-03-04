@@ -20,7 +20,7 @@ class ButtonCustom extends Component {
       fontSize: '14px',
       fontFamily: 'Inter-Bold',
       fontStyle: 'normal',
-      height: '45px',
+      height: `${this.props.height ? this.props.height : '45px'}`,
       border: `${this.props.border ? this.props.border : 'none'}`,
       width: `${this.props.width ? this.props.width : '320px'}`,
       background: `${this.props.background ? this.props.background : 'white'}`,

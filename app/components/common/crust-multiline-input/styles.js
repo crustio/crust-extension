@@ -16,7 +16,7 @@ export const styles = () => ({
     },
   },
   inputRoot: {
-    backgroundColor: 'rgba(0, 0, 0, 0.06)',
+    background: '#F0F1F5',
     borderRadius: '4px',
     paddingTop: '18px',
     paddingLeft: '18px',

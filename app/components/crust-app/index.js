@@ -25,6 +25,7 @@ export default class CrustApp extends Component {
       isConnected,
       showSettings,
       showHeader,
+      showGrayHeader,
       onLogoClick,
       options,
       onOptionsChange,
@@ -37,6 +38,7 @@ export default class CrustApp extends Component {
       'crust-header': showHeader,
       'crust-header-banner': showHeader && showBanner && !showLogo && !showNetwork && !showSettings,
       'crust-header-boarded': showHeader && !showBanner && showLogo && showNetwork && showSettings,
+      'crust-header-gray': showHeader && showGrayHeader,
       'display-none': !showHeader,
     });
 

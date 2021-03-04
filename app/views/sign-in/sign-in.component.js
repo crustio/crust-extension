@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import CrustPassword from '../../components/common/password/crust-password';
-import ContentHeader from '../../components/common/content-header';
-import FooterButton from '../../components/common/footer-button';
+import CrustUnlockPassword from '../../components/common/password/crust-unlock-password';
+import FontRegular from '../../components/common/fonts/font-regular';
+import LogoBig from '../../images/crust-logo-big.svg';
 import './styles.css';
 
 class SignIn extends Component {
@@ -48,28 +48,28 @@ class SignIn extends Component {
     return (
       <div>
         <div className="sign-in-container">
-          <ContentHeader
-            title={t('Enter Password')}
-            // eslint-disable-next-line
-            description={t("The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.")}
-          />
+          <div className="sign-in-img-contianer">
+            <img src={LogoBig} alt="logo2" />
+          </div>
+          <FontRegular className="sign-in-title" text="Chain to Decentralized Cloud" />
           <div className="sign-in-container-password">
-            <CrustPassword
-              // eslint-disable-next-line
-              standardInput={true}
+            <CrustUnlockPassword
+              isError={isError}
+              errorText={errorText}
               className="sign-in-password-container"
               onChange={this.handleOnChange}
               password={password}
-              placeholder={t('Password')}
+              placeholder={t('Unlock Password')}
+              handleUnlock={this.handleClick}
             />
           </div>
 
-          {isError ? (
+          {/* {isError ? (
             <span className="error-msg">{t(errorText)}</span>
           ) : (
             <span className="place-holder"> </span>
           )}
-          <FooterButton onClick={this.handleClick} name={t('Unlock')} />
+          <FooterButton onClick={this.handleClick} name={t('Unlock')} /> */}
         </div>
       </div>
     );

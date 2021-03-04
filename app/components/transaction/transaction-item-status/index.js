@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Address from '../../common/address';
-import StatusPill from '../../common/status-pill';
 import './styles.css';
 
 export default class TransactionItemStatus extends Component {
@@ -18,7 +17,7 @@ export default class TransactionItemStatus extends Component {
           />
         )}
 
-        <StatusPill text={status} backgroundColor={color} color="rgba(255, 255, 255, 1)" />
+        {/* <StatusPill text={status} backgroundColor={color} color="rgba(255, 255, 255, 1)" /> */}
       </div>
     );
   }

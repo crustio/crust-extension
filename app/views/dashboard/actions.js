@@ -10,7 +10,10 @@ import {
 } from '../../../lib/services/static-message-factory-service';
 import { createToast } from '../../constants/toast';
 import * as AccountActions from '../../actions/account';
-
+import * as AppActions from '../../containers/actions';
+import * as SignInActions from '../sign-in/actions';
+import { clearHashKey } from '../../api/on-boarding';
+import * as NavConstants from '../../constants/navigation';
 
 const updateTokens = tokens => ({
   type: DashboardActionTypes.UPDATE_TOKEN_LIST,
@@ -82,9 +85,7 @@ export const connectionError = () => async dispatch => {
 };
 
 export const getTokens = async (dispatch, getState) => {
-  const {
-    account, balance
-  } = getState().accountReducer;
+  const { account, balance } = getState().accountReducer;
   const { network } = getState().networkReducer;
   const decimals = await Network.getChainDecimals();
 
@@ -99,19 +100,29 @@ export const getTokens = async (dispatch, getState) => {
 
   let allTokens = [chainToken];
 
-  const {
-    result
-  } = await Tokens.getTokens();
+  const { result } = await Tokens.getTokens();
 
   allTokens = allTokens.concat(result);
   dispatch(updateTokens(allTokens));
   dispatch(updateSelectedToken(chainToken));
 };
 
-export const onTokenSelected = (token) => dispatch => {
+export const onTokenSelected = token => dispatch => {
   dispatch(updateSelectedToken(token));
 };
 
 export const updateTokenList = tokens => dispatch => {
   dispatch(updateTokens(tokens));
+};
+
+export const lockApp = () => async dispatch => {
+  try {
+    dispatch(AppActions.updateAppLoading(true));
+    await clearHashKey();
+    dispatch(SignInActions.unlockCrustSuccessFalse());
+    dispatch(AppActions.updateAppLoading(false));
+    dispatch(AppActions.changePage(NavConstants.SIGN_IN_PAGE));
+  } catch (err) {
+    dispatch(AppActions.updateAppLoading(false));
+  }
 };

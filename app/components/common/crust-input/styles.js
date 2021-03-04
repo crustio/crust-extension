@@ -1,6 +1,7 @@
 export const styles = () => ({
   crustInput: {
     fontSize: '14px',
+    zIndex: 100,
     '&:focus': {
       border: 'none',
       color: '#858B9C',
@@ -67,6 +68,9 @@ export const styles = () => ({
       fontSize: '16px',
       fontFamily: 'Inter-Regular',
     },
+  },
+  rootEndAdornment: {
+    paddingRight: '4px',
   },
   focusedLabel: {},
   errorLabel: {},
