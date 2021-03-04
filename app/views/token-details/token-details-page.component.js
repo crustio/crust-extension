@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clear from '@material-ui/icons/Clear';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import TokenDetails from '../../components/token/token-details';
 import Wallet from '../../components/wallet';
@@ -92,7 +92,7 @@ class TokenDetailsPage extends Component {
     return (
       <div className="token-details-page-container">
         <SubHeader
-          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', width: '14px' }} />}
           title={t('Token Details')}
           backBtnOnClick={this.onClick}
         />

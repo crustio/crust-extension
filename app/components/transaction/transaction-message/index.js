@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import './styles.css';
 import { withTranslation } from 'react-i18next';
 import FontRegular from '../../common/fonts/font-regular';
-import FaucetLink from '../faucet-link';
 
 class TransactionMessage extends Component {
   render() {
@@ -11,8 +11,8 @@ class TransactionMessage extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <FontRegular className="transaction-message-text" text={t('No transactions yet.')} />
-        {isLinkToFaucet ? <FaucetLink network={network} className="faucets-message" /> : null}
+        <InfoOutlinedIcon className="transaction-message-icon" />
+        <FontRegular className="transaction-message-text" text={t('No transactions yet')} />
       </div>
     );
   }

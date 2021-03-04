@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Logo from '../../../images/crust-logo-maxwell.svg';
+import Logo from '../../../images/crust-logo-big.svg';
 
 export default class CrustLogo extends Component {
   render() {

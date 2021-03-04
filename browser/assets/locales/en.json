@@ -7,7 +7,7 @@
   "Next": "Next",
   "About": "About",
   "Transactions": "Transactions",
-  "No transactions yet.": "No transactions yet.",
+  "No transactions yet": "No transactions yet",
   "Account Management": "Account Management",
   "Add Account": "Add Account",
   "Rename": "Rename",
@@ -56,7 +56,7 @@
   "Token Details": "Token Details",
 
   "Enter Password": "Enter Password",
-  "Unlock": "Unlock",
+  "Unlock Password": "Unlock Password",
   "Password is incorrect.": "Password is incorrect.",
   "Password is required.": "Password is required.",
 
@@ -79,6 +79,8 @@
   "Deny": "Deny",
   "Allow": "Allow",
   "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.": "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.",
+
+  "Cancel": "Cancel",
 
   "Please input address.": "Please input address.",
   "Please input amount.": "Please input amount.",

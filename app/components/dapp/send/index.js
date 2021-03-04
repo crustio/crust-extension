@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import RequestType from '../request-type';
 import SendToFrom from '../send-to-from';
 import WalletExpansionPanel from '../../common/wallet-expansion-panel';
 import FontRegular from '../../common/fonts/font-regular';
-import FooterTwoSMButton from '../../common/footer-two-sm-button';
+import FooterWithTwoButton from '../../common/footer-with-two-button';
 import TransactionUI from '../transaction-ui';
 import './styles.css';
 import DarkDivider from '../../common/divider/dark-divider';
@@ -40,7 +41,7 @@ const SignedMessage = props => (
     <DarkDivider style={{ width: '100%' }} />
   </div>
 );
-export default class Send extends Component {
+class Send extends Component {
   render() {
     const {
       fromAccount,
@@ -57,6 +58,7 @@ export default class Send extends Component {
       txnUi,
       data,
       onCopyData,
+      t,
       ...otherProps
     } = this.props;
     return (
@@ -87,17 +89,26 @@ export default class Send extends Component {
             />
           )}
 
-          <FooterTwoSMButton
+          <FooterWithTwoButton
+            onNextClick={onAllow}
+            onBackClick={onCancel}
+            backButtonName={t('Cancel')}
+            nextButtonName={t('Allow')}
+          />
+
+          {/* <FooterTwoSMButton
             className="send-footer-container"
             namePrimary="Cancel"
             nameSecondary="Allow"
             onClickPrimary={onCancel}
             onClickSecondary={onAllow}
             isSecondaryDisabled={!!errorMessage}
-          />
+          /> */}
           {errorMessage && <FontRegular text={errorMessage} className="send-error" />}
         </WalletExpansionPanel>
       </div>
     );
   }
 }
+
+export default withTranslation()(Send);

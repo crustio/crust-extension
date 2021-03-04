@@ -3,6 +3,8 @@ import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutli
 import FontMedium from '../common/fonts/font-medium';
 import FontRegular from '../common/fonts/font-regular';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
+import CruTokenIcon from '../../images/crust-logo.png';
+import CandyTokenIcon from '../../images/candy-icon.svg';
 import './styles.css';
 
 export default class TokenList extends Component {
@@ -16,7 +18,14 @@ export default class TokenList extends Component {
             className="token-item-container"
             onClick={() => onTokenSelected(token)}
           >
-            <FontMedium text={token.tokenSymbol} className="token-item-details-symbol" />
+            <div className="token-item-left">
+              <img
+                alt="token-symbol"
+                src={token.tokenSymbol === 'CRU' ? CruTokenIcon : CandyTokenIcon}
+                className="token-icon"
+              />
+              <FontMedium text={token.tokenSymbol} className="token-item-details-symbol" />
+            </div>
             <div className="token-item-right">
               <FontRegular
                 className="token-item-details-amount"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clear from '@material-ui/icons/Clear';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import CreateContactForm from '../../components/address-book/create-contact-form';
@@ -44,9 +44,7 @@ class CreateAddressBook extends Component {
     const {
       address, fname, lname, network
     } = this.state;
-    const {
-      isFnameError, fnameErrorMessage
-    } = this.validateFname(fname);
+    const { isFnameError, fnameErrorMessage } = this.validateFname(fname);
     this.setState({
       isFnameError,
       fnameErrorMessage,
@@ -202,7 +200,7 @@ class CreateAddressBook extends Component {
     return (
       <div className="create-address-book-container">
         <SubHeader
-          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Address Book')}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />

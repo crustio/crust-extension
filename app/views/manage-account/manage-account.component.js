@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clear from '@material-ui/icons/Clear';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import { DASHBOARD_PAGE, CREATE_ACCOUNT_PAGE } from '../../constants/navigation';
@@ -86,7 +86,7 @@ class ManageAccount extends Component {
     return (
       <div className="manage-accounts-root-container">
         <SubHeader
-          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Account Management')}
           backBtnOnClick={this.handleSubheaderBackBtn}
           subMenu={ACCOUNT_MANAGEMENT_MENU_OPTIONS}
@@ -116,7 +116,9 @@ class ManageAccount extends Component {
                 noText={t('No')}
                 yesText={t('Yes')}
                 title={t('Remove account')}
-                msg={t('Please make sure you have saved the seed phrase or private key for this account before continuing.')}
+                msg={t(
+                  'Please make sure you have saved the seed phrase or private key for this account before continuing.',
+                )}
               />
             </div>
           </div>

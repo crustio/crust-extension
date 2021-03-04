@@ -22,7 +22,7 @@
 .crust-header {
   display: flex;
   flex-direction: row;
-  background-color: #FF8D00;
+  background-color: transparent;
   padding: 11px 17.1px 11px 15px;
   height: 50px;
   width: 360px;
@@ -60,7 +60,11 @@
 
 .crust-header-text {
   font-size: 18px;
-  color: white;
+  color: #111A34;
   font-weight: bold;
   font-family: Inter-Bold;
+}
+
+.crust-header-gray {
+  background: #F7F7FA !important;
 }

@@ -30,10 +30,7 @@ export default class Options extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <IconSettings
-          style={{ color: 'rgba(255, 255, 255, 1)', fontSize: '18px' }}
-          onClick={this.handleClick}
-        />
+        <IconSettings style={{ color: '#111A34', fontSize: '18px' }} onClick={this.handleClick} />
         <CrustMenu
           isDeveloperMode={isDeveloperMode}
           onToggleDeveloperMode={onToggleDeveloperMode}

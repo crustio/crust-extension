@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FontMedium from '../../common/fonts/font-medium';
 import TransactionItemStatus from '../transaction-item-status';
-import DarkDivider from '../../common/divider/dark-divider';
 import './styles.css';
 
 export default class TransactionItemDetails extends Component {
@@ -11,15 +10,18 @@ export default class TransactionItemDetails extends Component {
     } = this.props;
     return (
       <div className="transfer-item-details" {...otherProps}>
-        <FontMedium className="transaction-item-details-amount" text={amount} />
+        <div className="transaction-item-status-container">
+          <FontMedium className="transaction-item-details-amount" text={amount} />
+          <FontMedium className="" text={status} style={{ color, fontSize: '14px' }} />
+        </div>
+
         <TransactionItemStatus
           address={address}
           moment={moment}
           status={status}
           color={color}
-          className="transaction-item-status-container"
+          className="transaction-item-info-container"
         />
-        <DarkDivider />
       </div>
     );
   }

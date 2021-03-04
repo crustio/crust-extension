@@ -12,6 +12,7 @@ import { RENAME } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
 import TokenList from '../../components/token-list';
 import CrustTabs from '../../components/common/crust-tabs';
+import ButtonSquare from '../../components/common/buttons/button-square';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -88,7 +89,7 @@ class Dashboard extends Component {
 
   handleLock = () => {
     this.props.lockApp();
-  }
+  };
 
   render() {
     const {
@@ -102,7 +103,7 @@ class Dashboard extends Component {
       unit,
       accountMenu,
       tokens,
-      t
+      t,
     } = this.props;
     const { labels, value } = this.state;
     const tLabels = labels.map(l => t(l));
@@ -111,7 +112,7 @@ class Dashboard extends Component {
     const defaultToken = tokens.find(token => token.address === undefined);
     return (
       <div className="dashboard-container">
-        <div className="account-container">
+        <div>
           <div className="account-content-container">
             <Wallet
               className="wallet-container"
@@ -159,12 +160,11 @@ class Dashboard extends Component {
           style={{
             position: 'absolute',
             top: '524px',
-            alignSelf: 'center',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             display: 'flex',
             width: '100%',
-            padding: '0 20px',
-            height: '45px',
+            padding: '0 16px',
+            height: '38px',
           }}
         >
           <a
@@ -187,8 +187,8 @@ class Dashboard extends Component {
               </div>
             </div>
           </a>
+          <ButtonSquare iconName="lock" onClick={this.handleLock} />
         </div>
-        <button onClick={this.handleLock}></button>
       </div>
     );
   }

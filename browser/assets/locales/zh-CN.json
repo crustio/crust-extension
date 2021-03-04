@@ -7,7 +7,7 @@
   "Next": "下一步",
   "About": "关于",
   "Transactions": "交易",
-  "No transactions yet.": "无交易记录.",
+  "No transactions yet": "无交易记录",
   "Account Management": "账户管理",
   "Add Account": "添加账户",
   "Rename": "重命名",
@@ -56,7 +56,7 @@
   "Token Details": "代币详情",
 
   "Enter Password": "输入密码",
-  "Unlock": "解锁",
+  "Unlock Password": "解锁密码",
   "Password is incorrect.": "密码输入错误。",
   "Password is required.": "请输入密码",
 
@@ -79,6 +79,8 @@
   "Deny": "拒绝",
   "Allow": "同意",
   "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access to any account.": "请求访问账户。点击同意按钮允许账户访问或点击拒绝按钮拒绝账户访问。",
+
+  "Cancel": "取消",
 
   "Please input address.": "请输入账户。",
   "Please input amount.": "请输入数量。",

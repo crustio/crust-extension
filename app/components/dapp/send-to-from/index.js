@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import ArrowForwardOutlinedIcon from '@material-ui/icons/ArrowForwardOutlined';
 import Avatar from '../../common/identicon';
 import AccountDetails from '../../account/account-details';
-import { CaretRight } from '../../common/icon';
 import './styles.css';
 
 export default class SendToFrom extends Component {
@@ -11,22 +11,26 @@ export default class SendToFrom extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <Avatar
-          className="account-avatar"
-          onCopyAddress={onCopyAddress}
-          value={fromAccount.address}
-          size="32"
-        />
-        <AccountDetails
-          className="account-item-identity-container"
-          alias={fromAccount.name}
-          address={fromAccount.address}
-          onCopyAddress={onCopyAddress}
-          fontSize="18px"
-        />
+        <div>
+          <Avatar
+            className="account-avatar"
+            onCopyAddress={onCopyAddress}
+            value={fromAccount.address}
+            size="32"
+          />
+          <AccountDetails
+            className="account-item-identity-container"
+            alias={fromAccount.alias}
+            address={fromAccount.address}
+            onCopyAddress={onCopyAddress}
+            fontSize="18px"
+          />
+        </div>
+
+        <ArrowForwardOutlinedIcon style={{ color: 'black', width: '16px' }} />
+
         {toAccount && (
           <div>
-            <CaretRight />
             <Avatar
               className="account-avatar"
               onCopyAddress={onCopyAddress}
