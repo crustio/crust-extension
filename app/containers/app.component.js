@@ -10,6 +10,7 @@ import {
   SIGN_IN_PAGE,
   CONNECT_REQUEST_PAGE,
   DAPP_REQUESTS_PAGE,
+  CREATE_ACCOUNT_ENTRY_PAGE,
 } from '../constants/navigation';
 import CrustApp from '../components/crust-app';
 import './styles.css';
@@ -40,7 +41,7 @@ class App extends Component {
 
     if (prevProps.page !== LOADER_OVERLAY) {
       if (ONBOARDING_PAGES_GROUP.indexOf(prevProps.page) !== -1) {
-        if (prevProps.page === SIGN_UP_PAGE || prevProps.page === SIGN_IN_PAGE) {
+        if (prevProps.page === SIGN_UP_PAGE || prevProps.page === SIGN_IN_PAGE || prevProps.page === CREATE_ACCOUNT_ENTRY_PAGE) {
           return {
             showHeader: false, // no change
             showLogo: false,
