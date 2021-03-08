@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clear from '@material-ui/icons/Clear';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import FontRegular from '../../components/common/fonts/font-regular';
@@ -15,11 +15,20 @@ class About extends Component {
   };
 
   renderInfoLinks() {
+    const { t } = this.props;
     return (
       <div className="info-container">
+        <FontRegular className="about-link-title" text={t('Link')} />
         {this.props.links.map(link => (
           <div key={link.url} className={link.value === 'tou' ? 'about-tou' : 'about-link'}>
-            <Link href={link.url}>{link.text}</Link>
+            <Link
+              href={link.url}
+              style={{
+                color: '#037DD6',
+              }}
+            >
+              {t(`${link.text}`)}
+            </Link>
           </div>
         ))}
       </div>
@@ -31,7 +40,7 @@ class About extends Component {
     return (
       <div>
         <SubHeader
-          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('About')}
           backBtnOnClick={this.onClick}
         />
@@ -40,7 +49,17 @@ class About extends Component {
           <FontRegular className="about-version" text={`Version ${manifest.version}`} />
           {this.renderInfoLinks()}
           <div className="about-button">
-            <FooterButton onClick={this.onClick} name={t('OK')} />
+            <FooterButton
+              style={{
+                background: '#FF8D00',
+                color: 'white',
+                height: '38px',
+                borderRadius: '4px',
+                top: '547px',
+              }}
+              onClick={this.onClick}
+              name={t('OK')}
+            />
           </div>
         </div>
       </div>
