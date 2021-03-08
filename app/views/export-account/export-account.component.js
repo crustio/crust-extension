@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
+import { saveAs } from 'file-saver';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import CrustPassword from '../../components/common/password/crust-password';
-import FooterButton from '../../components/common/footer-button';
+import AccountInfo from '../../components/account/account-info';
 import * as Account from '../../api/account';
 import './styles.css';
+import { findChainByName } from '../../../lib/constants/chain';
+import FontRegular from '../../components/common/fonts/font-regular';
+import FooterWithTwoButton from '../../components/common/footer-with-two-button';
+import { MANAGE_ACCOUNT_PAGE, DASHBOARD_PAGE } from '../../constants/navigation';
+import { BACK_BUTTON_TEXT, TO_CONFIRM_BUTTON_TEXT } from '../../constants/account'
 
 class ExportAccout extends Component {
   constructor(props) {
     super(props);
     this.state = {
       password: '',
-      isError: false,
       errorText: '',
     };
   }
@@ -31,35 +37,70 @@ class ExportAccout extends Component {
     });
   };
 
+  handelBack = () => {
+    this.props.changePage(MANAGE_ACCOUNT_PAGE);
+    this.props.updateBackupPage(DASHBOARD_PAGE);
+  }
+
   handleClick = () => {
-    Account.exportAccount(this.props.address);
+    this.props.updateAppLoading(true);
+    const { password } = this.state
+    if ( !password || password.trim() === '' ) {
+      this.setState({
+        errorText: 'Password is required.'
+      });
+      this.props.updateAppLoading(false);
+      return;
+    }
+    setTimeout(() => {
+      Account.exportAccount(this.props.account.address, password)
+      .then((json) => {
+        this.props.updateAppLoading(false);
+        console.log(json)
+        const blob = new Blob([json.result.exportedJson], { type: 'application/json; charset=utf-8' });
+        saveAs(blob, `${this.props.account.address}.json`);
+      })
+      .catch((err) => {
+        this.props.updateAppLoading(false);
+        this.setState({
+          errorText: 'Password is incorrect.'
+        });
+      })
+    }, 0)
+    
   };
 
   render() {
     const { isError, password, errorText } = this.state;
-    const { t, address } = this.props;
+    const { t, account, network } = this.props;
+    const chain = findChainByName(network.value);
+    const theme = chain.icon || 'polkadot';
     return (
-      <div>
-        <div className="sign-in-container">
-          <div>{address}</div>
-          <div className="sign-in-container-password">
-            <CrustPassword
-              // eslint-disable-next-line
-              standardInput={true}
-              className="sign-in-password-container"
+      <div className="export-account-container">
+        <div className="export-account-content-container">
+          <AccountInfo account={account} theme={theme}/>
+          <div className="export-account-tip-container">
+            <InfoOutlinedIcon className="export-account-info-icon" />
+            <FontRegular className="export-account-info-text" text={t('You are exporting your account. Keep it safe and don’t share it with anyone.')}></FontRegular>
+          </div>
+          <CrustPassword
+              className="export-account-password"
               onChange={this.handleOnChange}
               password={password}
               placeholder={t('Password')}
             />
-          </div>
-
-          {isError ? (
-            <span className="error-msg">{t(errorText)}</span>
-          ) : (
-            <span className="place-holder"> </span>
-          )}
-          <FooterButton onClick={this.handleClick} name={t('Unlock')} />
+          <FontRegular className="export-account-info-text export-account-margin" text={t('The password for the wallet.')}></FontRegular>
+          {
+            errorText !== '' && <span className="error-msg">{t(errorText)}</span>
+          }
         </div>
+        
+        <FooterWithTwoButton
+          onNextClick={this.handleClick}
+          onBackClick={this.handelBack}
+          backButtonName={t(BACK_BUTTON_TEXT)}
+          nextButtonName={t(TO_CONFIRM_BUTTON_TEXT)}
+        />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import { EXPORTING_ACCOUNT } from './action-types';
 
 const initialState = {
-  address: '',
+  account: undefined,
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ...{
-          address: action.address,
+          account: action.account,
         },
       };
     default:

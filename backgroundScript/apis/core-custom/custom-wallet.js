@@ -120,10 +120,6 @@ export const getSignMessage = async (account, message) => {
 
 export const getStringMessageFromHex = message => u8aToString(hexToU8a(message));
 
-export const exportAccount = (address, keypairType, seedWords, password) => {
-  // const keyring = new Keyring({ type: keypairType });
-  // keyring.addFromUri(seedWords);
-  // return { exportedJson: JSON.stringify(keyring.toJson(address)) };
-
+export const exportAccount = (address, password) => {
   return { exportedJson: JSON.stringify(keyring.backupAccount(keyring.getPair(address), password)) };
 };

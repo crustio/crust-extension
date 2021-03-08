@@ -1,48 +1,56 @@
-/* .sign-in-container {
-  padding: 40px 18px 0px 18px;
+.export-account-container {
   display: flex;
   flex-direction: column;
+  background-color: #F7F7FA;
+  height: 550px;
 }
 
-.sign-in-container-password {
-  margin-top: 28px;
-}
-.sign-in-password-container {
+.export-account-content-container {
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin: 0 16px;
+  height: 455px;
   display: flex;
-  width: 321px;
-  height: 54.82px;
-  border-bottom: 1px solid #858B9C;
+  flex-direction: column;
+  padding: 16px;
 }
 
-.sign-in-password-container fieldset {
+.export-account-password {
+  display: flex;
+  width: 100%;
+  color: #858B9C
+}
+
+.export-account-password fieldset {
   border: 0;
   font-size: 14px;
-  background-color: rgba(65, 72, 93, 0.1);
+  background: #F0F1F5;
 }
 
-.sign-in-password-container:focus-within fieldset {
+.export-account-password:focus-within fieldset {
   background-color: transparent;
   border: 2px solid #ECEDEF !important;
 }
 
-.input-margin {
-  margin-top: 12px !important;
+.export-account-tip-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 24px;
 }
 
-.sign-in-password-container-meter {
-  margin-top: 50px;
+.export-account-info-icon {
+  font-size: 16px;
+  color: #858B9C;
+  margin-right: 6px;
 }
 
-.key-pair-crypto-type {
-  margin-top: 50px;
-  align-self: center;
+.export-account-info-text {
+  color: #858B9C;
+  font-size: 12px;
 }
 
-.error-msg {
-  color: #FA5050;
-  height: 20px;
+.export-account-margin {
+  margin-top: 6px;
 }
-
-.place-holder {
-  height: 20px;
-} */

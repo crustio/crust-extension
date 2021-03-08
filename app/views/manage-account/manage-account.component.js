@@ -62,7 +62,7 @@ class ManageAccount extends Component {
     if (option.value === REMOVE.value) {
       this.setState({ isOpen: true, account });
     } else if (option.value === EXPORT_ACCOUNT.value) {
-      this.props.updateExportingAccount(account.address);
+      this.props.updateExportingAccount(account);
       this.props.changePage(EXPORT_ACCOUNT_PAGE);
     }
   };
@@ -92,7 +92,7 @@ class ManageAccount extends Component {
             o.text = t(o.text);
         return o;
       })
-      : ACCOUNT_MANAGEMENT_OPTIONS.filter(o => o.value === REMOVE.value);
+      : ACCOUNT_MANAGEMENT_OPTIONS.filter(o => o.value !== REMOVE.value);
 
     return (
       <div className="manage-accounts-root-container">

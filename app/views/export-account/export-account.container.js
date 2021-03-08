@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
 import ExportAccout from './export-account.component';
-import { changePage } from '../../containers/actions';
-import { unlockCrust } from '../sign-in/actions';
+import { changePage, updateBackupPage, updateAppLoading } from '../../containers/actions';
+import { createToast } from '../../constants/toast';
+
 
 const mapStateToProps = state => ({
-  address: state.exportAccountReducer.address,
-  error: state.unlockCrustReducer.error,
-  success: state.unlockCrustReducer.success,
+  account: state.exportAccountReducer.account,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {
   changePage,
-  unlockCrust,
+  updateBackupPage,
+  updateAppLoading,
+  createToast,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExportAccout);

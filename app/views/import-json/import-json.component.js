@@ -4,7 +4,8 @@ import ReactTooltip from 'react-tooltip';
 import FileInput from 'react-simple-file-input';
 import FontRegular from '../../components/common/fonts/font-regular';
 import CrustPassword from '../../components/common/password/crust-password';
-import FooterButton from '../../components/common/footer-button';
+import * as Account from '../../constants/account';
+import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import './styles.css';
 
 class ImportJson extends Component {
@@ -36,9 +37,13 @@ class ImportJson extends Component {
     });
   };
 
+  handelBack = () => {
+    this.props.changePage(this.props.backupPage);
+  }
+
   handleClick = () => {
     const { jsonPwd, walletPwd, file } = this.state;
-    const { jsonPwdError, walletPwdError, updateJsonPwdError, updateWalletPwdError, t } = this.props;
+    const { updateJsonPwdError, updateWalletPwdError, t } = this.props;
 
     if (!file || file.trim() === '') {
       this.setState({
@@ -48,12 +53,12 @@ class ImportJson extends Component {
     }
 
     if (!jsonPwd || jsonPwd.trim() === '') {
-      updateJsonPwdError(t('Password is required'));
+      updateJsonPwdError(t('Password is required.'));
       return;
     }
 
     if (!walletPwd || walletPwd.trim() === '') {
-      updateWalletPwdError(t('Password is required'));
+      updateWalletPwdError(t('Password is required.'));
       return;
     }
 
@@ -123,9 +128,11 @@ class ImportJson extends Component {
             <div className="place-holder"> </div>
           )}
         </div>
-        <FooterButton
-          onClick={this.handleClick}
-          name={this.props.t('Next')}
+        <FooterWithTwoButton
+          onNextClick={this.handleClick}
+          onBackClick={this.handelBack}
+          backButtonName={t(Account.BACK_BUTTON_TEXT)}
+          nextButtonName={t(Account.TO_CONFIRM_BUTTON_TEXT)}
         />
       </div>
     );

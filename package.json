@@ -133,6 +133,7 @@
     "crypto-js": "^3.2.1",
     "edgeware-node-types": "^2.3.4",
     "extensionizer": "^1.0.1",
+    "file-saver": "^2.0.5",
     "fs": "0.0.1-security",
     "http-status-codes": "^1.3.0",
     "i18next": "^19.8.9",

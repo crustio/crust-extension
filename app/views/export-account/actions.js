@@ -1,6 +1,6 @@
 import { EXPORTING_ACCOUNT } from './action-types';
 
-export const updateExportingAccount = address => ({
+export const updateExportingAccount = account => ({
   type: EXPORTING_ACCOUNT,
-  address,
+  account,
 });

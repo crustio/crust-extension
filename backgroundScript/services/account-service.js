@@ -318,7 +318,7 @@ export const existedAccount = acc => {
   return false;
 };
 
-export const exportAccount = address => {
+export const exportAccount = (address, password) => {
   const { accounts } = getAccountState();
   const account = accounts.find(a => a.address === address);
 
@@ -327,5 +327,5 @@ export const exportAccount = address => {
   }
 
   const wallet = getWallet();
-  return wallet.exportAccount(address, account.keypairType, account.seedWords, 'abcdefgh');
+  return wallet.exportAccount(address, password);
 };
