@@ -48,7 +48,7 @@ function DraggableDialog({
           {title}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>{importVaultFileName}</DialogContentText>
+          <DialogContentText align="center">{importVaultFileName}</DialogContentText>
           <DialogContentText>{msg}</DialogContentText>
           {isShowTextField && (
             <TextField

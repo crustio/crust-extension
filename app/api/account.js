@@ -10,13 +10,20 @@ export const getSeedWords = async () => {
   return result;
 };
 
-export const createAccount = async (seedWords, isOnBoarding = false, keypairType, alias) => {
+export const createAccount = async (
+  seedWords,
+  isOnBoarding = false,
+  keypairType,
+  alias,
+  password,
+) => {
   const { message, status, result } = await sendMessage({
     type: MessageTypes.BG_ACCOUNTS_CREATE_ACCOUNT,
     seedWords,
     isOnBoarding,
     keypairType,
     alias,
+    password,
   });
   throwIfNoSuccess({ message, status });
   return result;
@@ -32,7 +39,7 @@ export const createAccountWithJson = async (json, oldPwd, isOnBoarding = false, 
   });
   throwIfNoSuccess({ message, status });
   return result;
-}
+};
 
 export const getCurrentAccount = async () => {
   const { message, status, result } = await sendMessage({
@@ -119,7 +126,6 @@ export const exportAccount = async (address, pwd) => {
     address,
     pwd,
   });
-  console.log(result);
   throwIfNoSuccess({ message, status });
   return { result };
 };

@@ -37,6 +37,7 @@
   "Yes": "是",
   "Remove account": "移除账户",
   "Please make sure you have saved the seed phrase or private key for this account before continuing.": "再继续删除操作之前，请确认您已经备份了这个账户的助记词或私钥。",
+  "make sure you have saved the seed phrase": "请确认您已经备份了这个账户的助记词",
 
   "Remove": "移除",
   "Add Address": "添加地址",

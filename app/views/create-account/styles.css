@@ -9,11 +9,17 @@
 
 .create-account-settings {
   position: absolute;
-  top: 337px;
+  top: 287px;
   left: 18px;
   width: 321px;
 }
 
 .create-account-button {
   margin-left: 18px;
+}
+
+.create-account-btns {
+  display: grid;
+  position: absolute;
+  top: 487px
 }
