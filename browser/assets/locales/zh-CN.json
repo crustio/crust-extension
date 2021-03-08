@@ -65,6 +65,7 @@
   "Unlock Password": "解锁密码",
   "Password is incorrect.": "密码输入错误。",
   "Password is required.": "请输入密码",
+  "Duplicate alias.": "账户昵称重复",
 
   "Generate Seed Phrase": "生成助记词",
   "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.": "这个助记词用来生成您的首个账户。安全地保存好并且不要分享给别人。",

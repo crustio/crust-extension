@@ -322,7 +322,7 @@ class CreateAccount extends Component {
           aliasPropName="alias"
           aliasLabel={t('Nickname')}
           isAliasError={isAliasError}
-          aliasErrorMessage={aliasErrorMessage}
+          aliasErrorMessage={t(aliasErrorMessage)}
           keypairType={keypairType}
           keypairTypes={keypairTypes}
           onKeypairTypeChange={this.onKeypairTypeChange}
@@ -336,7 +336,7 @@ class CreateAccount extends Component {
           passwordLabel={t('Password')}
           password={password}
           isPasswordError={isError}
-          passwordErrorMessage={errorMessage}
+          passwordErrorMessage={t(errorMessage)}
           className="create-account-settings"
         />
         <FooterWithTwoButton
