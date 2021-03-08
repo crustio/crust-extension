@@ -15,7 +15,7 @@ export const updateJsonPwdError = jsonPwdError => ({
 export const updateWalletPwdError = walletPwdError => ({
   type: UPDATE_WALLET_PWD_ERROR,
   walletPwdError,
-});
+});2
 
 export const createAccountWithJson = (json, oldPwd, password) => async dispatch => {
   try {

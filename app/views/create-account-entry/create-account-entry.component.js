@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import ButtonCustom from '../../components/common/buttons/button-custom'
 import FontRegular from '../../components/common/fonts/font-regular';
 import LogoBig from '../../images/crust-logo-big.svg';
@@ -12,23 +13,45 @@ class CreateAccountEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttons: ['Generate', 'From Phrase', 'From Json']
+      buttons: ['Generate', 'Import'],
+      buttonsImport: ['From Phrase', 'From Json'],
+      showImport: false,
+      isHover: false,
     };
+  }
+
+  componentDidMount() {
+    this.props.updateBackupPage(this.props.page);
   }
 
   handleClick = (btn) => {
     if (btn === 'Generate') {
       this.props.changePage(CREATE_ACCOUNT_PAGE);
+    } else if (btn === 'Import') {
+      this.setState({
+        showImport: true
+      });
     } else if (btn === 'From Phrase') {
       this.props.changePage(CREATE_ACCOUNT_PAGE);
-    } else {
+    } else if (btn === 'From Json') {
       this.props.changePage(IMPORT_JSON_PAGE);
+    } else {
+      this.setState({
+        showImport: false,
+        isHover: false,
+      })
     }
   };
 
+  handleHover = (hover) => {
+    this.setState({
+      isHover: hover,
+    });
+  }
+
   render() {
     const { t } = this.props;
-    const { buttons } = this.state;
+    const { buttons, buttonsImport, showImport, isHover  } = this.state;
     return (
       <div>
         <div className="entry-container">
@@ -38,10 +61,33 @@ class CreateAccountEntry extends Component {
           <FontRegular className="entry-title" text="Chain to Decentralized Cloud" />
           <div className="entry-container-entries">
             {
-              buttons.map(btn => (
+              !showImport
+              && buttons.map(btn => (
                 <ButtonCustom
                   onClick={() => this.handleClick(btn)}
-                  width="104px"
+                  width="161px"
+                  border="1px solid #FF8D00"
+                >
+                  {t(btn)}
+                </ButtonCustom>
+                )
+              )
+            }
+            {
+              showImport
+              && <div className="entry-square" 
+                    onMouseEnter={() => this.handleHover(true)}
+                    onMouseLeave={() => this.handleHover(false)}
+                    onClick={() => this.handleClick('back')}>
+                  <ArrowBackIosOutlinedIcon style={{ color: isHover ? 'white' : '#FF8D00', fontSize: '14px' }} />
+              </div>
+            }
+            {
+              showImport
+              && buttonsImport.map(btn => (
+                <ButtonCustom
+                  onClick={() => this.handleClick(btn)}
+                  width="137px"
                   border="1px solid #FF8D00"
                 >
                   {t(btn)}

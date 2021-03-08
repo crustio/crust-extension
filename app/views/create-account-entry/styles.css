@@ -66,3 +66,20 @@
   font-size: 20px;
   color: #111A34;
 }
+
+.entry-square {
+  width: 45px;
+  height: 45px;
+  border-radius: 4px;
+  border: 1px solid #FF8D00;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.entry-square:hover {
+  background: #FF8D00;
+  color: white;
+}
