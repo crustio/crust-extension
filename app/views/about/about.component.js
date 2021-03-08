@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ChevronLeft } from '@material-ui/icons';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import FontRegular from '../../components/common/fonts/font-regular';
@@ -40,13 +40,13 @@ class About extends Component {
     return (
       <div>
         <SubHeader
-          icon={<ChevronLeft style={{ color: '#858B9C', fontSize: '18px' }} />}
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('About')}
           backBtnOnClick={this.onClick}
         />
         <div className="about-container">
-          <FontRegular className="about-title" text={t(`${manifest.name}`)} />
-          <FontRegular className="about-version" text={t(`Version ${manifest.version}`)} />
+          <FontRegular className="about-title" text={t(manifest.name)} />
+          <FontRegular className="about-version" text={`Version ${manifest.version}`} />
           {this.renderInfoLinks()}
           <div className="about-button">
             <FooterButton
