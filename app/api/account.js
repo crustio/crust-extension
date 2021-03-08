@@ -22,6 +22,18 @@ export const createAccount = async (seedWords, isOnBoarding = false, keypairType
   return result;
 };
 
+export const createAccountWithJson = async (json, oldPwd, isOnBoarding = false, password) => {
+  const { message, status, result } = await sendMessage({
+    type: MessageTypes.BG_ACCOUNTS_CREATE_ACCOUNT_WITH_JSON,
+    json,
+    oldPwd,
+    isOnBoarding,
+    password,
+  });
+  throwIfNoSuccess({ message, status });
+  return result;
+}
+
 export const getCurrentAccount = async () => {
   const { message, status, result } = await sendMessage({
     type: MessageTypes.BG_ACCOUNTS_CURRENT_ACCOUNT,

@@ -34,6 +34,24 @@ export const getAddress = (seedWords, keypairType) => {
   }
 };
 
+export const getAddressByAddr = (addr) => {
+  try {
+    const { address } = keyring.getPair(addr);
+    return address;
+  } catch (err) {
+    throw new Error('Error in Custom getAddress by address');
+  }
+}
+
+export const updateJsonAccountAlias = (account, newAlias) => {
+  try {
+    const pair = keyring.getPair(account.address);
+    keyring.saveAccountMeta(pair, {...pair.meta, alias: newAlias});
+  } catch (err) {
+    throw new Error('Error in Custom change alias');
+  }
+}
+
 export const getBalance = async address => {
   const unit = ChainApi.getTokenSymbol();
   formatBalance.setDefaults({ unit });

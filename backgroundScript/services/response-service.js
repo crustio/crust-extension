@@ -103,9 +103,9 @@ export const createAccountWithJson = async (request, sendResponse) => {
   try {
     // seedWords is not define its automatically create wallet using new seedwords
     const {
-      json, oldPwd, isOnBoarding, alias, password, encryptedPwd
+      json, oldPwd, isOnBoarding, password
     } = request;
-    const account = await AccountService.createAccountWithJson(json, oldPwd, isOnBoarding, alias, password, encryptedPwd);
+    const account = await AccountService.createAccountWithJson(json, oldPwd, isOnBoarding, password);
     sendResponse({ ...success, result: account });
   } catch (err) {
     sendResponse({

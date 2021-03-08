@@ -4,7 +4,7 @@ import ButtonCustom from '../../components/common/buttons/button-custom'
 import FontRegular from '../../components/common/fonts/font-regular';
 import LogoBig from '../../images/crust-logo-big.svg';
 import {
-  CREATE_ACCOUNT_PAGE,
+  CREATE_ACCOUNT_PAGE, IMPORT_JSON_PAGE,
 } from '../../constants/navigation';
 import './styles.css';
 
@@ -22,7 +22,7 @@ class CreateAccountEntry extends Component {
     } else if (btn === 'From Phrase') {
       this.props.changePage(CREATE_ACCOUNT_PAGE);
     } else {
-      this.props.changePage(CREATE_ACCOUNT_PAGE);
+      this.props.changePage(IMPORT_JSON_PAGE);
     }
   };
 

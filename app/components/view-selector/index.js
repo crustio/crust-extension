@@ -22,6 +22,7 @@ import TokenDetailsPage from '../../views/token-details';
 import LanguageSetting from '../../views/language-setting';
 import ExportAccount from '../../views/export-account';
 import CreateAccountEntry from '../../views/create-account-entry';
+import ImportJson from '../../views/import-json';
 
 const getView = page => {
   switch (page) {
@@ -69,6 +70,8 @@ const getView = page => {
       return <ExportAccount />;
     case NavConstant.CREATE_ACCOUNT_ENTRY_PAGE:
       return <CreateAccountEntry />;
+    case NavConstant.IMPORT_JSON_PAGE:
+      return <ImportJson />;
     default:
       return <Dashboard />;
   }

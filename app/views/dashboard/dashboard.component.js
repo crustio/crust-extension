@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import FileInput from 'react-simple-file-input';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import TokenDetails from '../../components/token/token-details';
 import Wallet from '../../components/wallet';
@@ -22,7 +21,6 @@ class Dashboard extends Component {
     this.state = {
       labels: ['Assets', 'Activity'],
       value: 0,
-      filename: '',
     };
   }
 
@@ -93,12 +91,6 @@ class Dashboard extends Component {
     this.props.lockApp();
   };
 
-  onLoad = (event, file) => {
-    this.setState({filename: file.name});
-    console.log('file name', file.name);
-    console.log('file type', file.type);
-    console.log('file', event.target.result);
-  }
   render() {
     const {
       accounts,
@@ -113,7 +105,7 @@ class Dashboard extends Component {
       tokens,
       t,
     } = this.props;
-    const { labels, value, filename } = this.state;
+    const { labels, value } = this.state;
     const tLabels = labels.map(l => t(l));
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
@@ -156,25 +148,6 @@ class Dashboard extends Component {
               className="token-list-container"
               onTokenSelected={this.onTokenSelected}
             />
-            <label>
-              <FileInput
-                readAs="text"
-                onLoad={this.onLoad.bind(this)}
-                style={{
-                  padding: '20px 0px 12px 15%',
-                  fontSize: '15px',
-                  display: 'none',
-                  justifyContent: 'center',
-                  width: '100%',
-                }}
-                accept="application/json" 
-              />
-              <span >
-                Click Here
-              </span>
-              <span>{filename}</span>
-            </label>
-            
           </div>
           
         )}

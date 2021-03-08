@@ -13,6 +13,7 @@ import connectRequestReducer from '../views/connect-request/reducer';
 import dAppReducer from './dapp';
 import addressBookReducer from './address-book';
 import exportAccountReducer from '../views/export-account/reducer';
+import importJsonReducer from '../views/import-json/reducer';
 
 export default combineReducers({
   networkReducer,
@@ -29,4 +30,5 @@ export default combineReducers({
   dAppReducer,
   addressBookReducer,
   exportAccountReducer,
+  importJsonReducer,
 });

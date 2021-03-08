@@ -34,6 +34,10 @@ export const getAddress = (seedWords, keypairType) => {
   }
 };
 
+export const getAddressByAddr = (addr) => {
+  throw new Error('Not support in dot wallet');
+}
+
 export const getBalance = async address => {
   formatBalance.setDefaults({ unit: 'DOT' });
   try {
@@ -104,6 +108,29 @@ export const getSignMessage = async (account, message) => {
 
 export const getStringMessageFromHex = message => u8aToString(hexToU8a(message));
  // --------------
+
+export const restoreAccount = (json, oldPwd, password) => {
+  let keypair = undefined;
+  try {
+    keypair = keyring.restoreAccount(JSON.parse(json), oldPwd);
+  } catch (error) {
+    throw new Error('invalid json file or json password');
+  }
+
+  const validPass = keyring.isPassValid(password);
+  if (!keypair || !validPass) {
+    throw new Error('invalid json file or json password');
+  }
+
+  try {
+    keypair.decodePkcs8(oldPwd);
+    keyring.encryptAccount(keypair, password);
+  } catch (error) {
+    throw new Error('import account failed.');
+  }
+
+  return keypair;
+}
  export const getAddressWithPassword = (seedWords, keypairType, alias, password) => {
   try {
     const result = keyring.addUri(seedWords, password, { alias }, keypairType);

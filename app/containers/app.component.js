@@ -11,6 +11,7 @@ import {
   CONNECT_REQUEST_PAGE,
   DAPP_REQUESTS_PAGE,
   CREATE_ACCOUNT_ENTRY_PAGE,
+  IMPORT_JSON_PAGE,
 } from '../constants/navigation';
 import CrustApp from '../components/crust-app';
 import './styles.css';
@@ -49,6 +50,17 @@ class App extends Component {
             showNetwork: false,
             showSettings: false,
             showGrayHeader: false,
+          };
+        }
+
+        if (prevProps.page === IMPORT_JSON_PAGE) {
+          return {
+            showHeader: true, // no change
+            showLogo: false,
+            showBanner: true,
+            showNetwork: false,
+            showSettings: false,
+            showGrayHeader: true,
           };
         }
         return {

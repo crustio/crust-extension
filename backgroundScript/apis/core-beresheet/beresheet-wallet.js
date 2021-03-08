@@ -25,6 +25,10 @@ export const getAddress = (seedWords, keypairType) => {
   }
 };
 
+export const getAddressByAddr = (addr) => {
+  throw new Error('Not support in beresheet wallet');
+}
+
 export const createSeedWords = () => mnemonicGenerate();
 
 export const valueFormatter = value => {

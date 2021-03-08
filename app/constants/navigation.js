@@ -20,8 +20,16 @@ export const TOKEN_DETAILS_PAGE = 'token_details_page';
 export const LANGUAGE_SETTING_PAGE = 'language_setting_page';
 export const EXPORT_ACCOUNT_PAGE = 'export_account_page';
 export const CREATE_ACCOUNT_ENTRY_PAGE = 'create_account_entry_page';
+export const IMPORT_JSON_PAGE = 'import_json_page';
 
-export const ONBOARDING_PAGES_GROUP = [TERMS_PAGE, SIGN_IN_PAGE, SIGN_UP_PAGE, CREATE_ACCOUNT_PAGE, CREATE_ACCOUNT_ENTRY_PAGE];
+export const ONBOARDING_PAGES_GROUP = [
+  TERMS_PAGE,
+  SIGN_IN_PAGE,
+  SIGN_UP_PAGE,
+  CREATE_ACCOUNT_PAGE,
+  CREATE_ACCOUNT_ENTRY_PAGE,
+  IMPORT_JSON_PAGE,
+];
 
 export const DISABLE_NETWORKS_PAGES_GROUP = [
   ADDRESS_BOOK_PAGE,
