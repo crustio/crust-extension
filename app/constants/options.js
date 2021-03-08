@@ -3,7 +3,12 @@ import {
   ADDRESS_BOOK_PAGE,
   ADD_TOKEN_PAGE,
   LANGUAGE_SETTING_PAGE,
+  IMPORT_JSON_PAGE,
 } from './navigation';
+
+import {
+  FROM_PHRASE_BUTTON_TEXT, FROM_JSON_BUTTON_TEXT,  CREATE_ACCOUNT_BUTTON_TEXT, EXPORT_ACCOUNT_BUTTON_TEXT
+} from './account'
 
 export const ADD_TOKEN = {
   text: 'Add Token',
@@ -36,7 +41,7 @@ export const RENAME = {
 };
 
 export const EXPORT_ACCOUNT = {
-  text: 'Export Account',
+  text: EXPORT_ACCOUNT_BUTTON_TEXT,
   value: 'export_account',
 };
 
@@ -46,8 +51,18 @@ export const REMOVE = {
 };
 
 export const ADD_ACCOUNT = {
-  text: 'Add Account',
-  value: 'add_account',
+  text: CREATE_ACCOUNT_BUTTON_TEXT,
+  value: 'create_account',
+};
+
+export const IMPORT_PHRASE = {
+  text: FROM_PHRASE_BUTTON_TEXT,
+  value: 'from_phrase',
+};
+
+export const IMPORT_JSON = {
+  text: FROM_JSON_BUTTON_TEXT,
+  value: IMPORT_JSON_PAGE,
 };
 
 export const ADD_ADDRESS = {
@@ -64,7 +79,7 @@ export const OPTIONS = [MANAGE_ACCOUNT, ADDRESS_BOOK, LANGUAGE_SETTING, ABOUT];
 
 export const ACCOUNT_MENU_OPTIONS = [RENAME];
 
-export const ACCOUNT_MANAGEMENT_MENU_OPTIONS = [ADD_ACCOUNT];
+export const ACCOUNT_MANAGEMENT_MENU_OPTIONS = [ADD_ACCOUNT, IMPORT_PHRASE, IMPORT_JSON];
 
 export const ACCOUNT_MANAGEMENT_OPTIONS = [EXPORT_ACCOUNT, REMOVE];
 

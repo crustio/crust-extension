@@ -11,3 +11,7 @@ export const IMPORT_BUTTON_TEXT = 'Import';
 export const BACK_BUTTON_TEXT = 'Go Back';
 export const SET_SEED_WORDS = 'ACCOUNT/SET_SEED_WORDS';
 export const RESET_SEED_WORDS = 'ACCOUNT/RESET_SEED_WORDS';
+export const FROM_PHRASE_BUTTON_TEXT = 'From Phrase';
+export const FROM_JSON_BUTTON_TEXT = 'From Json';
+export const CREATE_ACCOUNT_BUTTON_TEXT = 'Create Account';
+export const EXPORT_ACCOUNT_BUTTON_TEXT = 'Export Account';

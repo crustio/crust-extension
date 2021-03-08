@@ -7,14 +7,17 @@ import LogoBig from '../../images/crust-logo-big.svg';
 import {
   CREATE_ACCOUNT_PAGE, IMPORT_JSON_PAGE,
 } from '../../constants/navigation';
+import {
+  GENERATE_BUTTON_TEXT, IMPORT_BUTTON_TEXT, FROM_PHRASE_BUTTON_TEXT, FROM_JSON_BUTTON_TEXT
+} from '../../constants/account';
 import './styles.css';
 
 class CreateAccountEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttons: ['Generate', 'Import'],
-      buttonsImport: ['From Phrase', 'From Json'],
+      buttons: [GENERATE_BUTTON_TEXT, IMPORT_BUTTON_TEXT],
+      buttonsImport: [FROM_PHRASE_BUTTON_TEXT, FROM_JSON_BUTTON_TEXT],
       showImport: false,
       isHover: false,
     };
