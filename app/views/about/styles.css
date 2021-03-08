@@ -1,7 +1,7 @@
 .about-container {
   display: flex;
   flex-direction: column;
-  padding: 34px 44px 80px 23px;
+  padding: 4px 44px 80px 18px;
   font-weight: 400;
   font-size: 14px;
 }
@@ -14,7 +14,7 @@
 .about-version {
   color: rgba(0, 0, 0, 0.87);
   font-size: 12px;
-  margin-top: 3px;
+  margin-top: 10px;
 }
 
 .about-content {
@@ -32,14 +32,23 @@
   font-size: 14px;
 }
 
+.about-link-title {
+  margin-top: 25px;
+}
+
 .about-link {
   margin-top: 15px;
 }
 
 .about-tou {
-  margin-top: 30px;
+  margin-top: 10px;  
 }
 
 .about-button {
   margin-left: -3px;
+}
+
+.about-button .button-xl button {
+  color: white;
+  height: 38px;
 }
