@@ -22,9 +22,9 @@ export const getAddress = (seedWords, keypairType) => {
   }
 };
 
-export const getAddressByAddr = (addr) => {
+export const getAddressByAddr = () => {
   throw new Error('Not support in wnd wallet');
-}
+};
 
 export const createSeedWords = () => mnemonicGenerate();
 

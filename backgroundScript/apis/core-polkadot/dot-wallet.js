@@ -34,9 +34,9 @@ export const getAddress = (seedWords, keypairType) => {
   }
 };
 
-export const getAddressByAddr = (addr) => {
+export const getAddressByAddr = () => {
   throw new Error('Not support in dot wallet');
-}
+};
 
 export const getBalance = async address => {
   formatBalance.setDefaults({ unit: 'DOT' });
@@ -107,10 +107,10 @@ export const getSignMessage = async (account, message) => {
 };
 
 export const getStringMessageFromHex = message => u8aToString(hexToU8a(message));
- // --------------
+// --------------
 
 export const restoreAccount = (json, oldPwd, password) => {
-  let keypair = undefined;
+  let keypair;
   try {
     keypair = keyring.restoreAccount(JSON.parse(json), oldPwd);
   } catch (error) {
@@ -130,17 +130,12 @@ export const restoreAccount = (json, oldPwd, password) => {
   }
 
   return keypair;
-}
- export const getAddressWithPassword = (seedWords, keypairType, alias, password) => {
+};
+export const getAddressWithPassword = (seedWords, keypairType, alias, password) => {
   try {
-    const result = keyring.addUri(seedWords, password, { alias }, keypairType);
-    console.log('result:', result.pair.address);
+    const result = keyring.addUri(seedWords, password, { name: alias }, keypairType);
     // const pairAlice = keyring.addFromUri(seedWords, {}, keypairType);
     const { address } = keyring.getPair(result.pair.address);
-    console.log('address:', address);
-
-    const ret = keyring.getPair(address);
-    console.log('ret address:', ret.address);
     return address;
   } catch (err) {
     throw new Error('Error in Polkadot getAddress');

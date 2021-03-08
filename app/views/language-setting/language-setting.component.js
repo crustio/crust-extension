@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clear from '@material-ui/icons/Clear';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import './styles.css';
@@ -22,23 +22,26 @@ class LanguageSetting extends Component {
     if (e.target.value === CHINESE || e.target.value === ENGLISH) {
       this.props.updateAppLanguage(e.target.value, i18n);
     }
-  }
+  };
 
-  handleZhClick = async (i18n) => {
+  handleZhClick = async i18n => {
     this.props.updateAppLanguage(CHINESE, i18n);
   };
 
-  handleEnClick = async (i18n) => {
+  handleEnClick = async i18n => {
     this.props.updateAppLanguage(ENGLISH, i18n);
   };
 
   render() {
     const { t, i18n, language } = this.props;
-    const options = [{ value: 'en-US', text: t('English') }, { value: 'zh-CN', text: t('Chinese') }];
+    const options = [
+      { value: 'en-US', text: t('English') },
+      { value: 'zh-CN', text: t('Chinese') },
+    ];
     return (
       <div className="language-setting-container">
         <SubHeader
-          icon={<Clear style={{ color: '#858B9C', fontSize: '18px' }} />}
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Language Setting')}
           backBtnOnClick={this.onClick}
         />

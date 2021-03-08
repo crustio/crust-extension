@@ -9,6 +9,6 @@
 .create-address-book-container {
   display: flex;
   flex-direction: column;
-  background-color: #F5F5F5;
+  background-color: #F7F7FA;
   height: 550px;
 }

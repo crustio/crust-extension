@@ -29,7 +29,7 @@ class ImportJson extends Component {
     }
 
     if (walletPwdError !== '') {
-      this.props.updateWalletPwdError('')
+      this.props.updateWalletPwdError('');
     }
 
     this.setState({
@@ -39,7 +39,7 @@ class ImportJson extends Component {
 
   handelBack = () => {
     this.props.changePage(this.props.backupPage);
-  }
+  };
 
   handleClick = () => {
     const { jsonPwd, walletPwd, file } = this.state;
@@ -47,7 +47,7 @@ class ImportJson extends Component {
 
     if (!file || file.trim() === '') {
       this.setState({
-        fileError: t('Json File is required')
+        fileError: t('Json File is required'),
       });
       return;
     }
@@ -71,38 +71,43 @@ class ImportJson extends Component {
       file: event.target.result,
       fileError: '',
     });
-  }
+  };
 
   render() {
     const { t, jsonPwdError, walletPwdError } = this.props;
-    const { filename, file, jsonPwd, walletPwd, fileError } = this.state;
+    const {
+      filename, jsonPwd, walletPwd, fileError
+    } = this.state;
     return (
       <div className="import-json-container">
         <div className="import-json-content-container">
-          <label className="import-json-label">
+          <label className="import-json-label" htmlFor="file">
             <FileInput
+              id="file"
               readAs="text"
               onLoad={this.onLoad.bind(this)}
               style={{
                 display: 'none',
               }}
-              accept="application/json" 
+              accept="application/json"
             />
             <div className="import-json-select-container">
-              <div className="import-json-file-container">
-                {t('Choose File')}
+              <div className="import-json-file-container">{t('Choose File')}</div>
+              <div data-tip={filename || t('No file chosen')} className="import-json-filename">
+                {filename || t('No file chosen')}
               </div>
-              <div data-tip={filename ? filename : t('No file chosen')} className="import-json-filename">{filename ? filename : t('No file chosen')}</div>
               <ReactTooltip effect="solid" place="bottom" />
             </div>
-            
           </label>
           {fileError !== '' ? (
             <div className="json-file-error-msg">{fileError}</div>
           ) : (
             <div className="json-file-place-holder"> </div>
           )}
-          <FontRegular className="import-json-text import-json-text-margin1" text={`${t('Enter the password previously used to encrypt this account')}:`}/>
+          <FontRegular
+            className="import-json-text import-json-text-margin1"
+            text={`${t('Enter the password previously used to encrypt this account')}:`}
+          />
           <CrustPassword
             className="import-json-password"
             onChange={e => this.handleOnChange('jsonPwd', e)}
@@ -110,20 +115,26 @@ class ImportJson extends Component {
             placeholder={t('Password')}
           />
           {jsonPwdError !== '' ? (
-            <div className="error-msg">{jsonPwdError}</div>
+            <div className="error-msg">{t(jsonPwdError)}</div>
           ) : (
             <div className="place-holder"> </div>
           )}
-          <FontRegular className="import-json-text import-json-text-margin1" text={`${t('Enter the password for this wallet')}:`}/>
+          <FontRegular
+            className="import-json-text import-json-text-margin1"
+            text={`${t('Enter the password for this wallet')}:`}
+          />
           <CrustPassword
             className="import-json-password"
             onChange={e => this.handleOnChange('walletPwd', e)}
             password={walletPwd}
             placeholder={t('Password')}
           />
-          <FontRegular className="import-json-text import-json-text-margin2 json-file-text-red" text={`${t('The JSON file will be re-encripted by this password')}`}/>
+          <FontRegular
+            className="import-json-text import-json-text-margin2 json-file-text-color"
+            text={`${t('The JSON file will be re-encripted by this password')}`}
+          />
           {walletPwdError !== '' ? (
-            <div className="error-msg">{walletPwdError}</div>
+            <div className="error-msg">{t(walletPwdError)}</div>
           ) : (
             <div className="place-holder"> </div>
           )}
