@@ -65,6 +65,8 @@
   "Unlock Password": "Unlock Password",
   "Password is incorrect.": "Password is incorrect.",
   "Password is required.": "Password is required.",
+  "Alias is required": "Alias is required",
+  "Phrase is required": "Phrase is required",
   "Duplicate alias.": "Duplicate alias.",
 
   "Generate Seed Phrase": "Generate Seed Phrase",
@@ -114,5 +116,7 @@
 
   "Link": "Link",
   "Website": "Website",
-  "Terms of Use": "Terms of Use"
+  "Terms of Use": "Terms of Use",
+
+  "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it."
 }

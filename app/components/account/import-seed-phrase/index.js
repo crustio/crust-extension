@@ -29,7 +29,9 @@ class ImportSeedPhrase extends Component {
       <div>
         <ContentHeader
           title={t('Import Seed Phrase')}
-          description={t('Please input your seed phrase to import account.')}
+          description={t(
+            "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.",
+          )}
         />
         <CrustMultilineInput
           className="import-seed-phrase-input"
