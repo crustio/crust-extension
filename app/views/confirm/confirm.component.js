@@ -9,6 +9,14 @@ import { findChainByName } from '../../../lib/constants/chain';
 import './styles.css';
 
 class Confirm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: 'life..dd',
+      errorText: '',
+    };
+  }
+
   componentDidMount() {
     this.props.resetConfirmOnBoarding();
   }
@@ -19,7 +27,15 @@ class Confirm extends Component {
 
   handleSend = async () => {
     const { confirmDetails, submitTransaction, isNewAddress } = this.props;
-    const tx = await submitTransaction(confirmDetails);
+    const { password } = this.state;
+    const tx = await submitTransaction(confirmDetails, password);
+
+    if (tx === 'Password is incorrect.') {
+      this.setState({
+        errorText: tx
+      });
+      return;
+    }
     const result = await isNewAddress(tx.metadata.to);
     if (result.isNewAddress === true) {
       this.props.updateToAddress(tx.metadata.to);
@@ -44,6 +60,7 @@ class Confirm extends Component {
 
   render() {
     const { confirmDetails, network, t } = this.props;
+    const { errorText } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     return (
@@ -53,6 +70,10 @@ class Confirm extends Component {
           title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
+        {
+          errorText && errorText !== '' && <span className="error-msg">{t(errorText)}</span>
+        }
+        
         <ConfirmForm
           confirmDetails={confirmDetails}
           handleSend={this.handleSend}

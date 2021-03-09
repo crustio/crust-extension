@@ -12,10 +12,11 @@ export const getTransactionFee = async (txnType, toAddress) => {
   return { result };
 };
 
-export const submitTransaction = async transferDetails => {
+export const submitTransaction = async (transferDetails, password) => {
   const { message, status, result } = await sendMessage({
     type: MessageTypes.BG_TXN_SUBMIT,
     transaction: transferDetails,
+    password,
   });
   throwIfNoSuccess({ message, status });
   return { result };

@@ -20,6 +20,11 @@ class ImportJson extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.updateJsonPwdError('');
+    this.props.updateWalletPwdError('');
+  }
+
   handleOnChange = prop => e => {
     const { value } = e.target;
     const { jsonPwdError, walletPwdError } = this.props;

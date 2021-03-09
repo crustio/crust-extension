@@ -262,7 +262,7 @@ export const accountForDapp = accountState => {
   if (accounts !== undefined) {
     const reformattedAccounts = accounts.map(obj => {
       const accountsWithoutSeedWords = {
-        address: DotWallet.getAddressByAccount(obj),
+        address: getAddressByAccount(obj),
         name: obj.alias,
         meta: {
           name: obj.alias,

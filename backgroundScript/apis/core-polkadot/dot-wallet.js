@@ -123,6 +123,9 @@ export const restoreAccount = (json, oldPwd, password) => {
   }
 
   try {
+    if (!keypair.isLocked) {
+      keypair.lock();
+    }
     keypair.decodePkcs8(oldPwd);
     keyring.encryptAccount(keypair, password);
   } catch (error) {

@@ -83,6 +83,10 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
             ResponseService.exportAccount(request, sendResponse);
             break;
           }
+          case MessageTypes.BG_ACCOUNTS_VERIFY_PASSWORD: {
+            ResponseService.verifyPassword(request, sendResponse);
+            break;
+          }
 
           //Network
           case MessageTypes.BG_NETWORK_IS_CONNECTED: {

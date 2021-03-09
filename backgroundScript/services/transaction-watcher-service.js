@@ -9,9 +9,10 @@ import * as ChainApi from '../apis/chain'
 import { submitTransaction as tokenTransaction, signTokenTransation } from './contract-service'
 import { signCandyTransaction, sendCandyTransaction } from './tokens-service'
 
-export const transferAndWatch = async (seedWords, keypairType, transaction) => {
+export const transferAndWatch = async (transaction, password) => {
+  const currentAccount = getCurrentAccount();
   // Fetch Transaction State
-  const signedTransaction = await signTransaction(seedWords, keypairType, transaction);
+  const signedTransaction = await signTransaction(transaction, currentAccount, password);
   const txnHash = signedTransaction.hash.toHex();
   await updateTransactionState(transaction, txnHash, Transaction.PENDING);
 
@@ -26,23 +27,21 @@ export const transferAndWatch = async (seedWords, keypairType, transaction) => {
   });
 };
 
-export const transferCandyAndWatch = async (transaction) => {
-  const signedTransaction = await signCandyTransaction(transaction);
+export const transferCandyAndWatch = async (transaction, password) => {
+  const signedTransaction = await signCandyTransaction(transaction, password);
   const txnHash = signedTransaction.hash.toHex();
   await updateTransactionState(transaction, txnHash, Transaction.PENDING);
   sendCandyTransaction(transaction, signedTransaction, txnHash);
 }
 
-export const submitTransaction = async transactionObj => {
-  const { seedWords, keypairType } = getCurrentAccount();
+export const submitTransaction = async (transactionObj, password) => {
   const { tokenSelected } = transactionObj.metadata
-  const tokens = await getTokenList()
 
   if (Transaction.TRANSFER_COINS === transactionObj.txnType) {
     if (tokenSelected.tokenSymbol === ChainApi.getTokenSymbol()) {
-      await transferAndWatch(seedWords, keypairType, transactionObj);
+      await transferAndWatch(transactionObj, password);
     } else if (tokenSelected.tokenSymbol === 'Candy') {
-      await transferCandyAndWatch(transactionObj)
+      await transferCandyAndWatch(transactionObj, password)
     } else {
       throw new Error('Check Token Type and try again');
     }

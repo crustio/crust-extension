@@ -16,6 +16,8 @@ export default class DAppRequests extends Component {
     this.state = {
       requestId: '',
       isInfoExpanded: false,
+      password: 'life..dd',
+      errorText: '',
     };
   }
 
@@ -48,8 +50,14 @@ export default class DAppRequests extends Component {
     this.setState({ isInfoExpanded: !isInfoExpanded });
   };
 
-  handleAllow = request => () => {
-    this.props.allowRequest(request);
+  handleAllow = request => async () => {
+    const ret = await this.props.allowRequest(request, this.state.password);
+    if (ret === 'Password is incorrect.') {
+      this.setState({
+        errorText: ret
+      });
+      return;
+    }
     this.props.updateAppLoading(true);
   };
 
@@ -60,9 +68,12 @@ export default class DAppRequests extends Component {
   renderRequests() {
     const { requests, accounts, balances } = this.props;
     // Use for toggle
-    const { isInfoExpanded } = this.state;
+    const { isInfoExpanded, errorText } = this.state;
     return (
       <div className="dapp-requests-container">
+        {
+          errorText && errorText !== '' && <span className="error-msg">{errorText}</span>
+        }
         {requests.map(request => {
           switch (request.request.requestType) {
             case RequestType.SEND:

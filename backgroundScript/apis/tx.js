@@ -3,12 +3,11 @@
 import { Keyring } from '@polkadot/keyring';
 import { BN } from 'bn.js';
 import { TypeRegistry } from '@polkadot/types';
+import keyring from '@polkadot/ui-keyring';
 import { getApi } from './api';
 
 export const getAccountPair = account => {
-  const { seedWords, keypairType } = account;
-  const keyring = new Keyring({ type: keypairType });
-  const accountPair = keyring.addFromUri(seedWords);
+  const accountPair = keyring.getPair(account);
   return accountPair;
 };
 
@@ -30,29 +29,29 @@ export const getTxnEncodedLength = async (to, fAmount, seedWords, keypairType) =
   }
 };
 
-export const signTransaction = async (seedWords, keypairType, transaction) => {
+export const signTransaction = async (transaction, currentAccount, password) => {
   const {
     to,
     fAmount,
-    account: { address },
   } = transaction.metadata;
-
   const api = getApi();
   //replace this with commented line once edgeware upgrade mainnet
   //const { nonce } = await api.query.system.account(address);
-  const nonce = await api.rpc.system.accountNextIndex(address);
-  const keyring = new Keyring({ type: keypairType });
-  const accountPair = keyring.addFromUri(seedWords);
+  const nonce = await api.rpc.system.accountNextIndex(currentAccount.address);
+  const accountPair = keyring.getPair(currentAccount.address);
 
+  accountPair.decodePkcs8(password);
   const signTransaction = await api.tx.balances
     .transfer(to, new BN(fAmount))
     .sign(accountPair, { nonce });
   return signTransaction;
 };
 
-export const getSignature = async (account, txnPayload) => {
+export const getSignature = async (account, txnPayload, password) => {
   // return to Dapp
-  const accountPair = getAccountPair(account);
+  const accountPair = keyring.getPair(account.address);
+  accountPair.decodePkcs8(password);
+  // const accountPair = getAccountPair(account);
   const registry = new TypeRegistry();
   registry.setSignedExtensions(txnPayload.signedExtensions);
   const signature = registry

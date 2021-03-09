@@ -144,6 +144,19 @@ export const exportAccount = async (request, sendResponse) => {
   }
 };
 
+export const verifyPassword = async (request, sendResponse) => {
+  try {
+    const { password } = request;
+    const validPassword = await AccountService.validPassword(password);
+    if (!validPassword) {
+      throw new Error('incorrect password');
+    }
+    sendResponse({ ...success, result: true });
+  } catch (err) {
+    sendResponse({ ...failure, message: 'Password is incorrect.' });
+  }
+}
+
 export const getCurrentNetwork = async (request, sendResponse) => {
   try {
     const { currentNetwork } = getStore().getState().networkState;
@@ -236,17 +249,18 @@ export const confirmTransaction = async (request, sendResponse) => {
     const { transaction } = request;
     const {
       accountState: {
-        currentAccount: { seedWords, keypairType },
+        currentAccount,
       },
       networkState: { currentNetwork },
     } = getStore().getState();
-    const address = AccountService.getAddress(seedWords, keypairType);
+    // const address = AccountService.getAddress(seedWords, keypairType);
+    const address = AccountService.getAddressByAccount(currentAccount);
     const result = await TransactionService.confirmTransaction(
       address,
       currentNetwork,
       transaction,
-      seedWords,
-      keypairType,
+      currentAccount.seedWords,
+      currentAccount.keypairType,
     );
     sendResponse({ ...success, result });
   } catch (err) {
@@ -255,8 +269,8 @@ export const confirmTransaction = async (request, sendResponse) => {
 };
 export const submitTransaction = async (request, sendResponse) => {
   try {
-    const { transaction } = request;
-    const transactionStatus = await TransactionWatcherService.submitTransaction(transaction);
+    const { transaction, password } = request;
+    const transactionStatus = await TransactionWatcherService.submitTransaction(transaction, password);
     sendResponse({ ...success, result: transactionStatus });
   } catch (err) {
     sendResponse({ ...failure, message: 'Error in submitting  Transaction ' });
@@ -440,8 +454,8 @@ export const getDAppAccounts = async (request, sendResponse) => {
 
 export const submitDappTransaction = async (request, sender, sendResponse) => {
   try {
-    const { data, request: requestData } = request;
-    const result = await DAppTransactionService.signTransaction(data);
+    const { data, request: requestData, password } = request;
+    const result = await DAppTransactionService.signTransaction(data, password);
     DAppService.sendPopupResponse({ ...success, result }, sender, sendResponse);
     if (request.dApp) {
       const { sender, request: dAppRequest } = requestData;
