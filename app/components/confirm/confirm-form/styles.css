@@ -12,31 +12,55 @@
 
 .confirm-form-amount-divider {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .confirm-form-total-amount-divider {
   width: 100% !important;
-  margin-top: 12px;
+  margin-bottom: 16px;
 }
 
 .confirm-form-amount-container,
 .confirm-form-fee-container,
 .confirm-form-total-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   height: 38.83px;
-  padding-left: 28px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .confirm-form-amount-container {
-  margin-top: 10px;
+  margin-top: 10;
 }
 
 .confirm-form-fee-container {
-  margin-top: 23px;
+  margin-top: 0;
 }
 
 .confirm-form-total-container {
-  margin-top: 12px;
+  margin-top: 0;
+}
+
+.confirm-form-password-container {
+  width: 100%;
+  padding: 0 16px;
+}
+
+.confirm-form-password {
+  display: flex;
+  width: 100%;
+  color: #858B9C;
+}
+
+.confirm-form-password fieldset {
+  border: 0;
+  font-size: 14px;
+  background: #F0F1F5;
+}
+
+.confirm-form-password:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
 }

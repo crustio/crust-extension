@@ -137,6 +137,9 @@ export const getAccounts = async () => {
 };
 
 export const validPassword = async password => {
+  if (password === undefined || password === null) {
+    return false;
+  }
   const encryptedPwd = keccak512(password);
   const { appState } = getStore().getState();
   return appState.hashKey && appState.hashKey === encryptedPwd;

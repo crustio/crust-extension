@@ -1,9 +1,9 @@
 .confirm-quote-description {
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.87);
+  font-size: 16px;
+  color: #41485D;
 }
 
 .confirm-quote-price {
-  font-size: 15px;
-  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  color: #858B9C;
 }

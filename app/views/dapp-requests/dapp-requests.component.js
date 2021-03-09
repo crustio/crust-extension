@@ -16,7 +16,7 @@ export default class DAppRequests extends Component {
     this.state = {
       requestId: '',
       isInfoExpanded: false,
-      password: 'life..dd',
+      password: '',
       errorText: '',
     };
   }
@@ -24,6 +24,13 @@ export default class DAppRequests extends Component {
   componentDidMount() {
     this.props.fetchNetwork();
   }
+
+  handleOnChange = prop => e => {
+    const { value } = e.target;
+    this.setState({
+      [prop]: value,
+    });
+  };
 
   onCopyAddress = () => {
     this.props.createToast({
@@ -68,12 +75,9 @@ export default class DAppRequests extends Component {
   renderRequests() {
     const { requests, accounts, balances } = this.props;
     // Use for toggle
-    const { isInfoExpanded, errorText } = this.state;
+    const { isInfoExpanded, errorText, password } = this.state;
     return (
       <div className="dapp-requests-container">
-        {
-          errorText && errorText !== '' && <span className="error-msg">{errorText}</span>
-        }
         {requests.map(request => {
           switch (request.request.requestType) {
             case RequestType.SEND:
@@ -104,6 +108,9 @@ export default class DAppRequests extends Component {
                   onAllow={this.handleAllow(request)}
                   className="dapp-requests-card"
                   key={request.id}
+                  password={password}
+                  errorText={errorText}
+                  handleOnChange={this.handleOnChange}
                 />
               );
             case RequestType.SIGN_MESSAGE:

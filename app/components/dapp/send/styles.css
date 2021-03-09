@@ -65,3 +65,16 @@
 .send-txn {
   margin-top: 14px;
 }
+
+.send-password-wrapper {
+  position: absolute;
+  bottom: 100px;
+}
+
+.send-panel-container {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 16px;
+}

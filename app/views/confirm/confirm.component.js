@@ -12,7 +12,7 @@ class Confirm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      password: 'life..dd',
+      password: '',
       errorText: '',
     };
   }
@@ -23,6 +23,13 @@ class Confirm extends Component {
 
   openAddressBook = () => {
     this.props.changePage(CREATE_ADDRESS_BOOK_PAGE);
+  };
+
+  handleOnChange = prop => e => {
+    const { value } = e.target;
+    this.setState({
+      [prop]: value,
+    });
   };
 
   handleSend = async () => {
@@ -60,7 +67,7 @@ class Confirm extends Component {
 
   render() {
     const { confirmDetails, network, t } = this.props;
-    const { errorText } = this.state;
+    const { errorText, password } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     return (
@@ -70,15 +77,15 @@ class Confirm extends Component {
           title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
-        {
-          errorText && errorText !== '' && <span className="error-msg">{t(errorText)}</span>
-        }
         
         <ConfirmForm
           confirmDetails={confirmDetails}
           handleSend={this.handleSend}
           buttonText={t('Send')}
           theme={theme}
+          password={password}
+          handleOnChange={this.handleOnChange}
+          errorText={errorText}
         />
       </div>
     );
