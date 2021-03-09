@@ -2,7 +2,9 @@ import { connect } from 'react-redux';
 import ManageAccount from './manage-account.component';
 import { changePage, updateBackupPage } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
-import { addAccount, changeAccount, removeAccount } from './actions';
+import {
+  addAccount, changeAccount, removeAccount, resetSeedWordsBeforeImport
+} from './actions';
 import { updateExportingAccount } from '../export-account/actions';
 
 const mapStateToProps = state => ({
@@ -17,6 +19,7 @@ const mapDispatchToProps = {
   changePage,
   createToast,
   addAccount,
+  resetSeedWordsBeforeImport,
   changeAccount,
   removeAccount,
   updateExportingAccount,

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
-import ButtonCustom from '../../components/common/buttons/button-custom'
+import ButtonCustom from '../../components/common/buttons/button-custom';
 import FontRegular from '../../components/common/fonts/font-regular';
 import LogoBig from '../../images/crust-logo-big.svg';
+import { CREATE_ACCOUNT_PAGE, IMPORT_JSON_PAGE } from '../../constants/navigation';
 import {
-  CREATE_ACCOUNT_PAGE, IMPORT_JSON_PAGE,
-} from '../../constants/navigation';
-import {
-  GENERATE_BUTTON_TEXT, IMPORT_BUTTON_TEXT, FROM_PHRASE_BUTTON_TEXT, FROM_JSON_BUTTON_TEXT
+  GENERATE_BUTTON_TEXT,
+  IMPORT_BUTTON_TEXT,
+  FROM_PHRASE_BUTTON_TEXT,
+  FROM_JSON_BUTTON_TEXT,
 } from '../../constants/account';
 import './styles.css';
 
@@ -27,14 +28,16 @@ class CreateAccountEntry extends Component {
     this.props.updateBackupPage(this.props.page);
   }
 
-  handleClick = (btn) => {
+  handleClick = async btn => {
     if (btn === 'Generate') {
+      await this.props.addAccount();
       this.props.changePage(CREATE_ACCOUNT_PAGE);
     } else if (btn === 'Import') {
       this.setState({
-        showImport: true
+        showImport: true,
       });
     } else if (btn === 'From Phrase') {
+      await this.props.resetSeedWordsBeforeImport();
       this.props.changePage(CREATE_ACCOUNT_PAGE);
     } else if (btn === 'From Json') {
       this.props.changePage(IMPORT_JSON_PAGE);
@@ -42,19 +45,21 @@ class CreateAccountEntry extends Component {
       this.setState({
         showImport: false,
         isHover: false,
-      })
+      });
     }
   };
 
-  handleHover = (hover) => {
+  handleHover = hover => {
     this.setState({
       isHover: hover,
     });
-  }
+  };
 
   render() {
     const { t } = this.props;
-    const { buttons, buttonsImport, showImport, isHover  } = this.state;
+    const {
+      buttons, buttonsImport, showImport, isHover
+    } = this.state;
     return (
       <div>
         <div className="entry-container">
@@ -63,8 +68,7 @@ class CreateAccountEntry extends Component {
           </div>
           <FontRegular className="entry-title" text="Chain to Decentralized Cloud" />
           <div className="entry-container-entries">
-            {
-              !showImport
+            {!showImport
               && buttons.map(btn => (
                 <ButtonCustom
                   onClick={() => this.handleClick(btn)}
@@ -73,20 +77,20 @@ class CreateAccountEntry extends Component {
                 >
                   {t(btn)}
                 </ButtonCustom>
-                )
-              )
-            }
-            {
-              showImport
-              && <div className="entry-square" 
-                    onMouseEnter={() => this.handleHover(true)}
-                    onMouseLeave={() => this.handleHover(false)}
-                    onClick={() => this.handleClick('back')}>
-                  <ArrowBackIosOutlinedIcon style={{ color: isHover ? 'white' : '#FF8D00', fontSize: '14px' }} />
+              ))}
+            {showImport && (
+              <div
+                className="entry-square"
+                onMouseEnter={() => this.handleHover(true)}
+                onMouseLeave={() => this.handleHover(false)}
+                onClick={() => this.handleClick('back')}
+              >
+                <ArrowBackIosOutlinedIcon
+                  style={{ color: isHover ? 'white' : '#FF8D00', fontSize: '14px' }}
+                />
               </div>
-            }
-            {
-              showImport
+            )}
+            {showImport
               && buttonsImport.map(btn => (
                 <ButtonCustom
                   onClick={() => this.handleClick(btn)}
@@ -95,9 +99,7 @@ class CreateAccountEntry extends Component {
                 >
                   {t(btn)}
                 </ButtonCustom>
-                )
-              )
-            }
+              ))}
           </div>
         </div>
       </div>

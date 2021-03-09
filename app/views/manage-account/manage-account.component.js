@@ -6,7 +6,6 @@ import {
   DASHBOARD_PAGE,
   CREATE_ACCOUNT_PAGE,
   EXPORT_ACCOUNT_PAGE,
-  IMPORT_JSON_PAGE,
 } from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AccountList from '../../components/account-list';
@@ -35,7 +34,7 @@ class ManageAccount extends Component {
   componentDidMount() {
     this.props.updateBackupPage(DASHBOARD_PAGE);
   }
-  
+
   handleSubheaderBackBtn = () => {
     this.props.changePage(DASHBOARD_PAGE);
   };
@@ -64,7 +63,8 @@ class ManageAccount extends Component {
       await this.props.addAccount();
       this.props.changePage(CREATE_ACCOUNT_PAGE);
     } else if (option.value === IMPORT_PHRASE.value) {
-      this.props.changePage();
+      await this.props.resetSeedWordsBeforeImport();
+      this.props.changePage(CREATE_ACCOUNT_PAGE);
     } else if (option.value === IMPORT_JSON.value) {
       this.props.changePage(IMPORT_JSON.value);
     }

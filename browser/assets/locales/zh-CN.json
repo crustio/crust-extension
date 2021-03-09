@@ -65,7 +65,7 @@
   "Unlock Password": "解锁密码",
   "Password is incorrect.": "密码输入错误。",
   "Password is required.": "请输入密码",
-  "Duplicate alias.": "账户昵称重复",
+  "Duplicate alias.": "该昵称已被使用",
 
   "Generate Seed Phrase": "生成助记词",
   "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.": "这个助记词用来生成您的首个账户。安全地保存好并且不要分享给别人。",
@@ -104,6 +104,7 @@
   "Duplicate alias": "该昵称已被使用",
   "Account is not exist": "账户不存在",
   "invalid json file or json password": "JSON文件错误或JSON文件密码错误",
+  "Error in Polkadot getAddress": "助记词格式不正确",
 
   "You are exporting your account. Keep it safe and don’t share it with anyone.": "您正在导出账户. 请保证导出文件的安全，不要与任何人分享它。",
   "The password for the wallet.": "钱包密码。",

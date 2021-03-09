@@ -35,7 +35,6 @@ export const styles = () => ({
   },
   inputError: {},
   helperText: {
-    paddingLeft: '16px',
     '&$helperTextError': {
       color: '#FA5050',
       fontFamily: 'Roboto-Regular',

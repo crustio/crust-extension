@@ -42,12 +42,26 @@ class CreateAccount extends Component {
   }
 
   componentDidMount() {
-    const { aliasError, resetImportAccountWithSeedPhraseError } = this.props;
+    const { aliasError, seedWords, resetImportAccountWithSeedPhraseError } = this.props;
     if (aliasError) {
       resetImportAccountWithSeedPhraseError();
       this.setState({
         isAliasError: false,
         aliasErrorMessage: null,
+      });
+    }
+
+    if (seedWords) {
+      this.setState({
+        buttonName: Account.TO_CONFIRM_BUTTON_TEXT,
+        formValue: Account.CREATE_ACCOUNT,
+        disableAccountSettings: false,
+      });
+    } else {
+      this.setState({
+        buttonName: Account.IMPORT_BUTTON_TEXT,
+        formValue: Account.IMPORT_ACCOUNT,
+        disableAccountSettings: false,
       });
     }
   }
@@ -69,10 +83,24 @@ class CreateAccount extends Component {
         errorMessage: '',
       };
     }
+    if (props.seedWords) {
+      return {
+        buttonName: Account.TO_CONFIRM_BUTTON_TEXT,
+        formValue: Account.CREATE_ACCOUNT,
+        disableAccountSettings: false,
+      };
+    }
+    if (!props.seedWords) {
+      return {
+        buttonName: Account.IMPORT_BUTTON_TEXT,
+        formValue: Account.IMPORT_ACCOUNT,
+        disableAccountSettings: false,
+      };
+    }
     return state;
   }
 
-  handleChange = (e, value) => {
+  handleChange = value => {
     let {
       buttonName, formValue, onSubmit, disableAccountSettings
     } = this.state;
@@ -96,22 +124,14 @@ class CreateAccount extends Component {
     });
   };
 
-  handleImportSeedWordsChange = prop => e => {
-    let { value } = e.target;
-    let { isError, errorMessage } = this.state;
+  handleImportSeedWordsChange = () => e => {
+    const { value } = e.target;
     const { error, resetImportAccountWithSeedPhraseError } = this.props;
-    value = value.trim().replace(/\n/g, ' ');
     if (error) {
       resetImportAccountWithSeedPhraseError();
     }
-    if (value === '') {
-      isError = false;
-      errorMessage = null;
-    }
     this.setState({
-      [prop]: value,
-      isError,
-      errorMessage,
+      importedSeedPhrase: value,
     });
   };
 
@@ -153,9 +173,10 @@ class CreateAccount extends Component {
     this.setState({
       isOpen: false,
     });
-    const { alias, password } = this.state;
+    const { alias, password, importedSeedPhrase } = this.state;
     const { seedWords } = this.props;
-    this.props.createFirstAccountWithSeedPhrase(seedWords, alias, password);
+    const word = this.state.formValue === Account.IMPORT_ACCOUNT ? importedSeedPhrase : seedWords;
+    this.props.createFirstAccountWithSeedPhrase(word, alias, password);
   };
 
   handelConfirm = () => {
@@ -165,14 +186,7 @@ class CreateAccount extends Component {
   };
 
   handleNext = () => {
-    const { alias } = this.state;
-    const { isAliasError, aliasErrorMessage } = this.validateAlias(alias);
-    if (isAliasError) {
-      this.aliasInput.focus();
-    } else {
-      this.handelConfirm();
-    }
-    this.setState({ isAliasError, aliasErrorMessage, alias });
+    this.handelConfirm();
   };
 
   handleImportSeedWordClick = () => {
@@ -214,15 +228,17 @@ class CreateAccount extends Component {
 
   handleSeedWordsOnBlur = () => {
     const { isError, errorMessage } = this.validateSeedPhrase(this.state.importedSeedPhrase);
-    if (this.state.importedSeedPhrase === '' || !isError) {
+    if (this.state.importedSeedPhrase === '' || isError) {
       this.setState({ isError, errorMessage });
+      this.seedInput.focus();
     }
   };
 
   handleConfirmSeedWordsOnBlur = () => {
     const { isError, errorMessage } = this.validateSeedPhrase(this.state.confirmSeedPhrase);
-    if (this.state.confirmSeedPhrase === '' || !isError) {
+    if (this.state.confirmSeedPhrase === '' || isError) {
       this.setState({ isError, errorMessage });
+      this.seedInput.focus();
     }
   };
 
@@ -299,8 +315,6 @@ class CreateAccount extends Component {
           importedSeedWords={importedSeedPhrase}
           confirmedSeedWords={confirmSeedPhrase}
           onChange={this.handleImportSeedWordsChange}
-          isError={isError}
-          errorMessage={errorMessage}
           handleSeedWordImportOnMount={this.handleSeedWordImportOnMount}
           importSeedPhraseInputName={importSeedPhraseInputName}
           confirmSeedPhraseInputName={confirmSeedPhraseInputName}
