@@ -21,6 +21,8 @@ class CreateAccount extends Component {
       onSubmit: this.handleNext,
       importedSeedPhrase: '',
       confirmSeedPhrase: '',
+      isPhraseError: false,
+      phraseErrorMsg: '',
       isError: false,
       errorMessage: null,
       alias: '',
@@ -32,7 +34,6 @@ class CreateAccount extends Component {
       aliasInputName: 'alias',
       password: '',
       isOpen: false,
-      disabled: true,
     };
     this.validator = new CrustValidator(validator.importSeedPhraseValidation);
     this.aliasValidator = new CrustValidator(validator.aliasValidation);
@@ -140,7 +141,6 @@ class CreateAccount extends Component {
 
     this.setState({
       [prop]: value,
-      disabled: value.trim().replace(/\n/g, ' ') === '',
     });
   };
 
@@ -148,7 +148,6 @@ class CreateAccount extends Component {
     const { value } = e.target;
     this.setState({
       [prop]: value,
-      disabled: value.trim().replace(/\n/g, ' ') === '',
     });
   };
 
@@ -161,6 +160,7 @@ class CreateAccount extends Component {
   handelBack = () => {
     const { backupPage } = this.props;
     this.props.changePage(backupPage);
+    this.props.resetImportAccountWithSeedPhraseError();
   };
 
   handleCloseDialog = () => {
@@ -186,30 +186,60 @@ class CreateAccount extends Component {
   };
 
   handleNext = () => {
-    this.handelConfirm();
+    this.props.resetImportAccountWithSeedPhraseError();
+    this.handleImportSeedWordClick();
   };
 
   handleImportSeedWordClick = () => {
-    const { alias, importedSeedPhrase } = this.state;
-    const { isAliasError, aliasErrorMessage } = this.validateAlias(alias);
-    const { isError, errorMessage } = this.validateSeedPhrase(importedSeedPhrase);
-    if (!isError && !isAliasError) {
-      this.props.createFirstAccountWithSeedPhrase(
-        this.state.importedSeedPhrase,
-        this.state.alias,
-        this.state.password,
-      );
-    } else if (isError) {
-      this.seedInput.focus();
-    } else if (alias !== '' && isAliasError) {
-      this.aliasInput.focus();
+    const {
+      alias, importedSeedPhrase, password, formValue
+    } = this.state;
+
+    if (formValue === Account.IMPORT_ACCOUNT) {
+      const { isPhraseError, phraseErrorMsg } = this.validateSeedPhrase(importedSeedPhrase);
+
+      if (isPhraseError) {
+        this.setState({
+          isPhraseError,
+          phraseErrorMsg,
+          isAliasError: false,
+          aliasErrorMessage: null,
+          isError: false,
+          errorMessage: null,
+        });
+        this.seedInput.focus();
+        return;
+      }
     }
-    this.setState({
-      isAliasError,
-      aliasErrorMessage,
-      isError,
-      errorMessage,
-    });
+
+    const { isAliasError, aliasErrorMessage } = this.validateAlias(alias);
+
+    if (isAliasError) {
+      this.setState({
+        isPhraseError: false,
+        phraseErrorMsg: null,
+        isAliasError,
+        aliasErrorMessage,
+        isError: false,
+        errorMessage: null,
+      });
+      return;
+    }
+
+    const { isError, errorMessage } = this.validatePassword(password);
+    if (isError) {
+      this.setState({
+        isPhraseError: false,
+        phraseErrorMsg: null,
+        isAliasError: false,
+        aliasErrorMessage: null,
+        isError,
+        errorMessage,
+      });
+      return;
+    }
+
+    this.handelConfirm();
   };
 
   onKeypairTypeChange = e => {
@@ -227,9 +257,11 @@ class CreateAccount extends Component {
   };
 
   handleSeedWordsOnBlur = () => {
-    const { isError, errorMessage } = this.validateSeedPhrase(this.state.importedSeedPhrase);
-    if (this.state.importedSeedPhrase === '' || isError) {
-      this.setState({ isError, errorMessage });
+    const { isPhraseError, phraseErrorMsg } = this.validateSeedPhrase(
+      this.state.importedSeedPhrase,
+    );
+    if (this.state.importedSeedPhrase === '' || isPhraseError) {
+      this.setState({ isPhraseError, phraseErrorMsg });
       this.seedInput.focus();
     }
   };
@@ -256,8 +288,8 @@ class CreateAccount extends Component {
         aliasErrorMessage = null;
       }
     } else {
-      isAliasError = false;
-      aliasErrorMessage = null;
+      isAliasError = true;
+      aliasErrorMessage = 'Alias is required';
     }
     return {
       isAliasError,
@@ -266,21 +298,40 @@ class CreateAccount extends Component {
   }
 
   validateSeedPhrase(importedSeedPhrase) {
-    let { isError, errorMessage } = this.state;
+    let { isPhraseError, phraseErrorMsg } = this.state;
+    if (!importedSeedPhrase || importedSeedPhrase === '') {
+      return {
+        isPhraseError: true,
+        phraseErrorMsg: 'Phrase is required',
+      };
+    }
     const validation = this.validator.validate({
       seedPhrase: importedSeedPhrase,
     });
     if (!validation.isValid) {
-      isError = true;
-      errorMessage = validation.seedPhrase.message;
+      isPhraseError = true;
+      phraseErrorMsg = validation.seedPhrase.message;
     } else {
-      isError = false;
-      errorMessage = null;
+      isPhraseError = false;
+      phraseErrorMsg = null;
     }
 
     return {
-      isError,
-      errorMessage,
+      isPhraseError,
+      phraseErrorMsg,
+    };
+  }
+
+  validatePassword(password) {
+    if (!password || password === '') {
+      return {
+        isError: true,
+        errorMessage: 'Password is required.',
+      };
+    }
+    return {
+      isError: false,
+      errorMessage: null,
     };
   }
 
@@ -305,6 +356,8 @@ class CreateAccount extends Component {
       confirmSeedPhraseInputName,
       aliasInputName,
       backButtonName,
+      isPhraseError,
+      phraseErrorMsg,
     } = this.state;
 
     return (
@@ -319,6 +372,8 @@ class CreateAccount extends Component {
           importSeedPhraseInputName={importSeedPhraseInputName}
           confirmSeedPhraseInputName={confirmSeedPhraseInputName}
           alias={alias}
+          isError={isPhraseError}
+          errorMessage={t(phraseErrorMsg)}
           seedRef={input => {
             this.seedInput = input;
           }}
@@ -363,7 +418,6 @@ class CreateAccount extends Component {
           onBackClick={this.handelBack}
           backButtonName={t(backButtonName)}
           nextButtonName={t(buttonName)}
-          disableYesBtn={this.state.disabled}
         />
         <AlertDailog
           isOpen={this.state.isOpen}

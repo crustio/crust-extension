@@ -65,6 +65,8 @@
   "Unlock Password": "解锁密码",
   "Password is incorrect.": "密码输入错误。",
   "Password is required.": "请输入密码",
+  "Alias is required": "请输入昵称",
+  "Phrase is required": "请输入助记词",
   "Duplicate alias.": "该昵称已被使用",
 
   "Generate Seed Phrase": "生成助记词",
@@ -115,5 +117,7 @@
 
   "Link": "链接",
   "Website": "网址",
-  "Terms of Use": "使用团队"
+  "Terms of Use": "使用团队",
+
+  "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "助记词用来生成账户，请确保其存储安全，并且不要分享。"
 }

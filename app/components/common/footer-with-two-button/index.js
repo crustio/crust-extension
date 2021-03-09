@@ -9,7 +9,6 @@ export default class FooterWithTwoButton extends Component {
       nextButtonName,
       onBackClick,
       onNextClick,
-      disableYesBtn,
       ...otherProps
     } = this.props;
     return (
@@ -39,7 +38,6 @@ export default class FooterWithTwoButton extends Component {
           onClick={onNextClick}
           border="1px solid #FF8D00"
           width="155px"
-          disabled={disableYesBtn}
           background="transparent"
         >
           {nextButtonName}
