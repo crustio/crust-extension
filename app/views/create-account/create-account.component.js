@@ -308,7 +308,7 @@ class CreateAccount extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div className="create-account-container">
         <CreateAccountForm
           value={formValue}
           generatedSeedWords={seedWords}
@@ -351,9 +351,14 @@ class CreateAccount extends Component {
           password={password}
           isPasswordError={isError}
           passwordErrorMessage={t(errorMessage)}
-          className="create-account-settings"
+          className={
+            formValue === Account.IMPORT_ACCOUNT
+              ? 'create-account-settings-import'
+              : 'create-account-settings'
+          }
         />
         <FooterWithTwoButton
+          style={{ bottom: '16px' }}
           onNextClick={onSubmit}
           onBackClick={this.handelBack}
           backButtonName={t(backButtonName)}

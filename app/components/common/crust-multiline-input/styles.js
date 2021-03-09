@@ -24,6 +24,7 @@ export const styles = () => ({
     color: 'rgba(0, 0, 0, 0.87)',
     fontFamily: 'Roboto-Regular',
     fontSize: '16px',
+    width: '297px',
   },
   input: {
     '&::placeholder': {

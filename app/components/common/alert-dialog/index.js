@@ -39,6 +39,7 @@ const DialogTitle = withStyles(styles)(props => {
 const DialogContent = withStyles(() => ({
   root: {
     padding: '0px 10px 25px 10px',
+    'overflow-y': 'hidden',
   },
 }))(MuiDialogContent);
 
@@ -62,6 +63,7 @@ const DialogActions = withStyles(() => ({
     display: 'grid',
     'grid-template-columns': '1fr 1fr',
     'margin-left': '8px',
+    'margin-bottom': '17px',
   },
 }))(MuiDialogActions);
 

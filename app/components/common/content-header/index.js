@@ -9,7 +9,11 @@ export default class ContentHeader extends Component {
     return (
       <div className="content-header-container" {...otherProps}>
         <FontRegular className="content-header-title" text={title} />
-        <FontLight className="content-header-description" text={description} />
+        <FontLight
+          className="content-header-description"
+          text={description}
+          style={{ color: '#858B9C' }}
+        />
       </div>
     );
   }

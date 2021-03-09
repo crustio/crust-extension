@@ -1,3 +1,11 @@
+.create-account-container {
+  height: 469px;
+  background: #fff;
+  margin-left: 16px;
+  border-radius: 10px;
+  margin-right: 16px;
+}
+
 .create-account-form {
   display: flex;
   flex-direction: column;
@@ -7,11 +15,16 @@
   padding-right: 18px;
 }
 
+.create-account-settings-import {
+  width: 297px;
+  margin-top: 20px;
+  margin-left: 16px;
+}
+
 .create-account-settings {
-  position: absolute;
-  top: 287px;
-  left: 18px;
-  width: 321px;
+  width: 297px;
+  margin-top: 20px;
+  margin-left: 16px;
 }
 
 .create-account-button {
