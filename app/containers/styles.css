@@ -118,3 +118,7 @@ p {
 .app {
   height: 600px;
 }
+.app-gray {
+  height: 600px;
+  background: #F7F7FA !important;
+}

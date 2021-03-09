@@ -1,0 +1,56 @@
+.export-account-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #F7F7FA;
+  height: 550px;
+}
+
+.export-account-content-container {
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin: 0 16px;
+  height: 455px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.export-account-password {
+  display: flex;
+  width: 100%;
+  color: #858B9C
+}
+
+.export-account-password fieldset {
+  border: 0;
+  font-size: 14px;
+  background: #F0F1F5;
+}
+
+.export-account-password:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.export-account-tip-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+
+.export-account-info-icon {
+  font-size: 16px;
+  color: #858B9C;
+  margin-right: 6px;
+}
+
+.export-account-info-text {
+  color: #858B9C;
+  font-size: 12px;
+}
+
+.export-account-margin {
+  margin-top: 6px;
+}

@@ -1,13 +1,12 @@
 .create-account-advanced-config {
-  position: absolute;
-  top: 80px;
+  margin-top: 25px;
+  margin-left: 4px;
 }
 
 .account-alias-input {
   width: 100%;
   display: flex;
-  width: 321px;
-  height: 54.82px;
+  height: 44px;
 }
 
 .account-alias-input fieldset {
@@ -36,4 +35,24 @@
 
 .place-holder {
   height: 20px;
+}
+
+.account-password-input {
+  display: flex;
+  width: 297px;
+  color: #858B9C;
+  margin-top: 7px;
+  height: 44px;
+  margin-bottom: 10px;
+}
+
+.account-password-input fieldset {
+  border: 0;
+  font-size: 14px;
+  background: #F0F1F5;
+}
+
+.account-password-input:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
 }

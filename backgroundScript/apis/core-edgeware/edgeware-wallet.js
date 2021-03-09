@@ -25,6 +25,10 @@ export const getAddress = (seedWords, keypairType) => {
   }
 };
 
+export const getAddressByAddr = () => {
+  throw new Error('Not support in edgeware wallet');
+};
+
 export const createSeedWords = () => mnemonicGenerate();
 
 export const valueFormatter = value => {

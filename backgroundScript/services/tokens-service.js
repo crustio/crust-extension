@@ -1,3 +1,4 @@
+import keyring from '@polkadot/ui-keyring';
 import { BAD_REQUEST } from '../../lib/constants/api';
 import { getCurrentAccount } from './store/account-store';
 import { getCurrentNetwork } from './network-service';
@@ -50,19 +51,18 @@ export const getCandyBalance = async () => {
   return token.balance;
 }
 
-export const signCandyTransaction = async (transaction) => {
+export const signCandyTransaction = async (transaction, password) => {
   const {
     to,
     fAmount,
-    account,
   } = transaction.metadata;
 
-  const { seedWords, keypairType } = getCurrentAccount();
-  const kr = new Keyring({ type: keypairType });
-  const accountPair = kr.addFromUri(seedWords);
+  const currentAccount = getCurrentAccount();
+  const accountPair = keyring.getPair(currentAccount.address);
 
-  const nonce = await getApi().rpc.system.accountNextIndex(account.address);
+  accountPair.decodePkcs8(password);
 
+  const nonce = await getApi().rpc.system.accountNextIndex(currentAccount.address);
   const signedT = await getApi().tx.candy
                     .transfer(to, new BN(fAmount))
                     .signAsync(accountPair, { nonce })
@@ -71,9 +71,6 @@ export const signCandyTransaction = async (transaction) => {
 }
 
 export const sendCandyTransaction = async (transactionObj, signedTransaction, txnHash) => {
-  const { seedWords, keypairType } = getCurrentAccount();
-  const kr = new Keyring({ type: keypairType });
-
   signedTransaction.send(async result => {
     if (result.status.isFinalized) {
       await updateTransactionState(transactionObj, txnHash, Transaction.SUCCESS);

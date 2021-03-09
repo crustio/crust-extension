@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
-import { DASHBOARD_PAGE, CREATE_ACCOUNT_PAGE } from '../../constants/navigation';
+import {
+  DASHBOARD_PAGE,
+  CREATE_ACCOUNT_PAGE,
+  EXPORT_ACCOUNT_PAGE,
+} from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AccountList from '../../components/account-list';
 import DraggableDialog from '../../components/common/confirm-dialog';
@@ -10,7 +14,10 @@ import {
   ACCOUNT_MANAGEMENT_MENU_OPTIONS,
   ACCOUNT_MANAGEMENT_OPTIONS,
   ADD_ACCOUNT,
+  EXPORT_ACCOUNT,
   REMOVE,
+  IMPORT_PHRASE,
+  IMPORT_JSON,
 } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
 import './styles.css';
@@ -22,6 +29,10 @@ class ManageAccount extends Component {
     this.state = {
       isOpen: false,
     };
+  }
+
+  componentDidMount() {
+    this.props.updateBackupPage(DASHBOARD_PAGE);
   }
 
   handleSubheaderBackBtn = () => {
@@ -47,15 +58,24 @@ class ManageAccount extends Component {
   };
 
   handleOnSubMenuOptionsChange = async option => {
+    this.props.updateBackupPage(this.props.page);
     if (option.value === ADD_ACCOUNT.value) {
       await this.props.addAccount();
       this.props.changePage(CREATE_ACCOUNT_PAGE);
+    } else if (option.value === IMPORT_PHRASE.value) {
+      await this.props.resetSeedWordsBeforeImport();
+      this.props.changePage(CREATE_ACCOUNT_PAGE);
+    } else if (option.value === IMPORT_JSON.value) {
+      this.props.changePage(IMPORT_JSON.value);
     }
   };
 
   handleAccountMenuOptionsChange = async (option, account) => {
     if (option.value === REMOVE.value) {
       this.setState({ isOpen: true, account });
+    } else if (option.value === EXPORT_ACCOUNT.value) {
+      this.props.updateExportingAccount(account);
+      this.props.changePage(EXPORT_ACCOUNT_PAGE);
     }
   };
 
@@ -78,11 +98,14 @@ class ManageAccount extends Component {
     const { isOpen } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
-    const options = ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
-      // eslint-disable-next-line
-      o.text = t(o.text);
-      return o;
-    });
+    const options = accounts.length > 1
+      ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
+        // eslint-disable-next-line
+            o.text = t(o.text);
+        return o;
+      })
+      : ACCOUNT_MANAGEMENT_OPTIONS.filter(o => o.value !== REMOVE.value);
+
     return (
       <div className="manage-accounts-root-container">
         <SubHeader
@@ -100,7 +123,7 @@ class ManageAccount extends Component {
                 className="accounts-container"
                 accounts={accounts}
                 currentAccount={account}
-                isMoreVertIconVisible={accounts.length > 1}
+                isMoreVertIconVisible
                 moreMenu={options}
                 onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
                 theme={theme}

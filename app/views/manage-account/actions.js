@@ -8,6 +8,10 @@ import {
 } from '../../../lib/services/static-message-factory-service';
 import { getTransactions, getTokens } from '../dashboard/actions';
 
+export const resetSeedWordsBeforeImport = () => async dispatch => {
+  dispatch(AccountActions.resetSeedWords());
+};
+
 export const addAccount = () => async dispatch => {
   dispatch(AppActions.updateAppLoading(true));
   await dispatch(AccountActions.getSeedWords());

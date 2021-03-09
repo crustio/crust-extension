@@ -10,7 +10,7 @@ import ButtonMD from '../../components/common/buttons/button-md';
 import DraggableDialog from '../../components/common/confirm-dialog';
 import {
   ADDRESS_BOOK_MENU_OPTIONS,
-  ACCOUNT_MANAGEMENT_OPTIONS,
+  ADDRESS_BOOK_OPTIONS,
   ADD_ADDRESS,
   REMOVE,
 } from '../../constants/options';
@@ -111,7 +111,7 @@ class AddressBook extends Component {
       return o;
     });
 
-    const options = ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
+    const options = ADDRESS_BOOK_OPTIONS.map(o => {
       // eslint-disable-next-line
       o.text = t(o.text);
       return o;

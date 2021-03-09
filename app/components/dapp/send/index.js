@@ -9,6 +9,7 @@ import TransactionUI from '../transaction-ui';
 import './styles.css';
 import DarkDivider from '../../common/divider/dark-divider';
 import ClickToCopy from '../../common/click-to-copy';
+import CrustPassword from '../../common/password/crust-password';
 
 const Summary = props => (
   <div className={props.className}>
@@ -58,54 +59,62 @@ class Send extends Component {
       txnUi,
       data,
       onCopyData,
+      password,
+      errorText,
+      handleOnChange,
       t,
       ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
-        <WalletExpansionPanel
-          isBelowExpandIcon
-          expanded={isSendExpanded}
-          handleChange={handleSendExpansion}
-          summary={(
-            <Summary
-              className="send-summary-container"
-              onCopyAddress={onCopyAddress}
-              fromAccount={fromAccount}
-              toAccount={toAccount}
-            />
-          )}
-        >
-          {data && (
-            <SignedMessage className="sign-message-body" data={data} onCopyData={onCopyData} />
-          )}
+        <div className="send-panel-container">
+          <WalletExpansionPanel
+            isBelowExpandIcon
+            expanded={isSendExpanded}
+            handleChange={handleSendExpansion}
+            summary={(
+              <Summary
+                className="send-summary-container"
+                onCopyAddress={onCopyAddress}
+                fromAccount={fromAccount}
+                toAccount={toAccount}
+              />
+            )}
+          >
+            {data && (
+              <SignedMessage className="sign-message-body" data={data} onCopyData={onCopyData} />
+            )}
 
-          {txnUi && (
-            <TransactionUI
-              txnUi={txnUi}
-              isInfoExpanded={isInfoExpanded}
-              handleInfoExpansion={handleInfoExpansion}
-              className="send-txn"
-            />
-          )}
+            {txnUi && (
+              <TransactionUI
+                txnUi={txnUi}
+                isInfoExpanded={isInfoExpanded}
+                handleInfoExpansion={handleInfoExpansion}
+                className="send-txn"
+              />
+            )}
 
-          <FooterWithTwoButton
+            {errorMessage && <FontRegular text={errorMessage} className="send-error" />}
+          </WalletExpansionPanel>
+        </div>
+        
+        <CrustPassword
+            className="confirm-form-password"
+            onChange={e => handleOnChange('password', e)}
+            password={password}
+            placeholder={t('Wallet Password')}
+          />
+          {errorText !== '' ? (
+            <div className="error-msg">{t(errorText)}</div>
+          ) : (
+            <div className="place-holder"> </div>
+          )}
+        <FooterWithTwoButton
             onNextClick={onAllow}
             onBackClick={onCancel}
             backButtonName={t('Cancel')}
             nextButtonName={t('Allow')}
           />
-
-          {/* <FooterTwoSMButton
-            className="send-footer-container"
-            namePrimary="Cancel"
-            nameSecondary="Allow"
-            onClickPrimary={onCancel}
-            onClickSecondary={onAllow}
-            isSecondaryDisabled={!!errorMessage}
-          /> */}
-          {errorMessage && <FontRegular text={errorMessage} className="send-error" />}
-        </WalletExpansionPanel>
       </div>
     );
   }

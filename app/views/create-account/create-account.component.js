@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
+import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import CrustValidator from '../../utils/crust-validator';
 import validator from '../../utils/crust-validator/validator';
 import CreateAccountForm from '../../components/account/create-account-form';
-import CrustTabs from '../../components/common/crust-tabs';
-import { MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 import CreateAccountSettings from '../../components/account/create-account-settings';
-import FooterButton from '../../components/common/footer-button';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import * as Account from '../../constants/account';
 import './styles.css';
+import AlertDailog from '../../components/common/alert-dialog';
 
 class CreateAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: Account.CREATE_ACCOUNT,
       formValue: Account.CREATE_ACCOUNT,
       buttonName: Account.TO_CONFIRM_BUTTON_TEXT,
       backButtonName: Account.BACK_BUTTON_TEXT,
@@ -25,7 +23,6 @@ class CreateAccount extends Component {
       confirmSeedPhrase: '',
       isError: false,
       errorMessage: null,
-      labels: ['Generate', 'Import'],
       alias: '',
       disableAccountSettings: false,
       isAliasError: false,
@@ -33,6 +30,9 @@ class CreateAccount extends Component {
       importSeedPhraseInputName: 'importedSeedPhrase',
       confirmSeedPhraseInputName: 'confirmSeedPhrase',
       aliasInputName: 'alias',
+      password: '',
+      isOpen: false,
+      disabled: true,
     };
     this.validator = new CrustValidator(validator.importSeedPhraseValidation);
     this.aliasValidator = new CrustValidator(validator.aliasValidation);
@@ -42,7 +42,7 @@ class CreateAccount extends Component {
   }
 
   componentDidMount() {
-    const { aliasError, resetImportAccountWithSeedPhraseError } = this.props;
+    const { aliasError, seedWords, resetImportAccountWithSeedPhraseError } = this.props;
     if (aliasError) {
       resetImportAccountWithSeedPhraseError();
       this.setState({
@@ -50,19 +50,57 @@ class CreateAccount extends Component {
         aliasErrorMessage: null,
       });
     }
+
+    if (seedWords) {
+      this.setState({
+        buttonName: Account.TO_CONFIRM_BUTTON_TEXT,
+        formValue: Account.CREATE_ACCOUNT,
+        disableAccountSettings: false,
+      });
+    } else {
+      this.setState({
+        buttonName: Account.IMPORT_BUTTON_TEXT,
+        formValue: Account.IMPORT_ACCOUNT,
+        disableAccountSettings: false,
+      });
+    }
   }
 
   static getDerivedStateFromProps(props, state) {
     if (props.error) {
-      return { isError: true, errorMessage: props.error.message };
+      return {
+        isError: true,
+        errorMessage: props.error.message,
+        isAliasError: false,
+        aliasErrorMessage: '',
+      };
     }
     if (props.aliasError) {
-      return { isAliasError: true, aliasErrorMessage: 'Duplicate alias.' };
+      return {
+        isAliasError: true,
+        aliasErrorMessage: 'Duplicate alias.',
+        isError: false,
+        errorMessage: '',
+      };
+    }
+    if (props.seedWords) {
+      return {
+        buttonName: Account.TO_CONFIRM_BUTTON_TEXT,
+        formValue: Account.CREATE_ACCOUNT,
+        disableAccountSettings: false,
+      };
+    }
+    if (!props.seedWords) {
+      return {
+        buttonName: Account.IMPORT_BUTTON_TEXT,
+        formValue: Account.IMPORT_ACCOUNT,
+        disableAccountSettings: false,
+      };
     }
     return state;
   }
 
-  handleChange = (e, value) => {
+  handleChange = value => {
     let {
       buttonName, formValue, onSubmit, disableAccountSettings
     } = this.state;
@@ -79,7 +117,6 @@ class CreateAccount extends Component {
       disableAccountSettings = false;
     }
     this.setState({
-      value,
       buttonName,
       formValue,
       onSubmit,
@@ -87,22 +124,14 @@ class CreateAccount extends Component {
     });
   };
 
-  handleImportSeedWordsChange = prop => e => {
-    let { value } = e.target;
-    let { isError, errorMessage } = this.state;
+  handleImportSeedWordsChange = () => e => {
+    const { value } = e.target;
     const { error, resetImportAccountWithSeedPhraseError } = this.props;
-    value = value.trim().replace(/\n/g, ' ');
     if (error) {
       resetImportAccountWithSeedPhraseError();
     }
-    if (value === '') {
-      isError = false;
-      errorMessage = null;
-    }
     this.setState({
-      [prop]: value,
-      isError,
-      errorMessage,
+      importedSeedPhrase: value,
     });
   };
 
@@ -111,6 +140,15 @@ class CreateAccount extends Component {
 
     this.setState({
       [prop]: value,
+      disabled: value.trim().replace(/\n/g, ' ') === '',
+    });
+  };
+
+  handlePasswordChange = prop => e => {
+    const { value } = e.target;
+    this.setState({
+      [prop]: value,
+      disabled: value.trim().replace(/\n/g, ' ') === '',
     });
   };
 
@@ -121,54 +159,34 @@ class CreateAccount extends Component {
   };
 
   handelBack = () => {
-    if (
-      this.state.formValue === Account.CREATE_ACCOUNT
-      || this.state.formValue === Account.IMPORT_ACCOUNT
-    ) {
-      this.props.changePage(MANAGE_ACCOUNT_PAGE);
-    } else if (this.state.formValue === Account.CONFIRM_ACCOUNT) {
-      this.setState({
-        buttonName: Account.TO_CONFIRM_BUTTON_TEXT,
-        onSubmit: this.handleNext,
-        formValue: Account.CREATE_ACCOUNT,
-        disableAccountSettings: false,
-      });
-    }
+    const { backupPage } = this.props;
+    this.props.changePage(backupPage);
+  };
+
+  handleCloseDialog = () => {
+    this.setState({
+      isOpen: false,
+    });
+  };
+
+  handleYes = () => {
+    this.setState({
+      isOpen: false,
+    });
+    const { alias, password, importedSeedPhrase } = this.state;
+    const { seedWords } = this.props;
+    const word = this.state.formValue === Account.IMPORT_ACCOUNT ? importedSeedPhrase : seedWords;
+    this.props.createFirstAccountWithSeedPhrase(word, alias, password);
   };
 
   handelConfirm = () => {
-    const { confirmSeedPhrase, alias } = this.state;
-    const { seedWords } = this.props;
-    const trimedSeedWords = seedWords.replace(/\s/g, '');
-    const trimedConfirmSeedPhrase = confirmSeedPhrase.replace(/\s/g, '');
-    if (trimedSeedWords === trimedConfirmSeedPhrase) {
-      this.props.createFirstAccountWithSeedPhrase(this.props.seedWords, alias);
-    } else {
-      this.setState({
-        isError: true,
-        errorMessage: "Seed phrase doesn't match.",
-      });
-    }
-  };
-
-  toConfirm = () => {
     this.setState({
-      formValue: Account.CONFIRM_ACCOUNT,
-      buttonName: Account.GENERATE_BUTTON_TEXT,
-      onSubmit: this.handelConfirm,
-      disableAccountSettings: true,
+      isOpen: true,
     });
   };
 
   handleNext = () => {
-    const { alias } = this.state;
-    const { isAliasError, aliasErrorMessage } = this.validateAlias(alias);
-    if (isAliasError) {
-      this.aliasInput.focus();
-    } else {
-      this.toConfirm();
-    }
-    this.setState({ isAliasError, aliasErrorMessage, alias });
+    this.handelConfirm();
   };
 
   handleImportSeedWordClick = () => {
@@ -176,7 +194,11 @@ class CreateAccount extends Component {
     const { isAliasError, aliasErrorMessage } = this.validateAlias(alias);
     const { isError, errorMessage } = this.validateSeedPhrase(importedSeedPhrase);
     if (!isError && !isAliasError) {
-      this.props.createFirstAccountWithSeedPhrase(this.state.importedSeedPhrase, this.state.alias);
+      this.props.createFirstAccountWithSeedPhrase(
+        this.state.importedSeedPhrase,
+        this.state.alias,
+        this.state.password,
+      );
     } else if (isError) {
       this.seedInput.focus();
     } else if (alias !== '' && isAliasError) {
@@ -206,15 +228,17 @@ class CreateAccount extends Component {
 
   handleSeedWordsOnBlur = () => {
     const { isError, errorMessage } = this.validateSeedPhrase(this.state.importedSeedPhrase);
-    if (this.state.importedSeedPhrase === '' || !isError) {
+    if (this.state.importedSeedPhrase === '' || isError) {
       this.setState({ isError, errorMessage });
+      this.seedInput.focus();
     }
   };
 
   handleConfirmSeedWordsOnBlur = () => {
     const { isError, errorMessage } = this.validateSeedPhrase(this.state.confirmSeedPhrase);
-    if (this.state.confirmSeedPhrase === '' || !isError) {
+    if (this.state.confirmSeedPhrase === '' || isError) {
       this.setState({ isError, errorMessage });
+      this.seedInput.focus();
     }
   };
 
@@ -262,10 +286,9 @@ class CreateAccount extends Component {
 
   render() {
     const {
-      seedWords, keypairType, keypairTypes, account, t
+      seedWords, keypairType, keypairTypes, t
     } = this.props;
     const {
-      value,
       formValue,
       buttonName,
       onSubmit,
@@ -275,8 +298,8 @@ class CreateAccount extends Component {
       errorMessage,
       isAliasError,
       aliasErrorMessage,
-      labels,
       alias,
+      password,
       disableAccountSettings,
       importSeedPhraseInputName,
       confirmSeedPhraseInputName,
@@ -284,18 +307,14 @@ class CreateAccount extends Component {
       backButtonName,
     } = this.state;
 
-    const labelsT = labels.map(l => t(l));
     return (
-      <div>
-        <CrustTabs value={value} onChange={this.handleChange} labels={labelsT} />
+      <div className="create-account-container">
         <CreateAccountForm
           value={formValue}
           generatedSeedWords={seedWords}
           importedSeedWords={importedSeedPhrase}
           confirmedSeedWords={confirmSeedPhrase}
           onChange={this.handleImportSeedWordsChange}
-          isError={isError}
-          errorMessage={errorMessage}
           handleSeedWordImportOnMount={this.handleSeedWordImportOnMount}
           importSeedPhraseInputName={importSeedPhraseInputName}
           confirmSeedPhraseInputName={confirmSeedPhraseInputName}
@@ -317,7 +336,7 @@ class CreateAccount extends Component {
           aliasPropName="alias"
           aliasLabel={t('Nickname')}
           isAliasError={isAliasError}
-          aliasErrorMessage={aliasErrorMessage}
+          aliasErrorMessage={t(aliasErrorMessage)}
           keypairType={keypairType}
           keypairTypes={keypairTypes}
           onKeypairTypeChange={this.onKeypairTypeChange}
@@ -326,20 +345,37 @@ class CreateAccount extends Component {
             this.aliasInput = input;
           }}
           handleAliasOnBlur={this.handleAliasOnBlur}
-          className="create-account-settings"
+          handlePasswordChange={this.handlePasswordChange}
+          aliasPassworkPropName="passoword"
+          passwordLabel={t('Password')}
+          password={password}
+          isPasswordError={isError}
+          passwordErrorMessage={t(errorMessage)}
+          className={
+            formValue === Account.IMPORT_ACCOUNT
+              ? 'create-account-settings-import'
+              : 'create-account-settings'
+          }
         />
-        {formValue === Account.CONFIRM_ACCOUNT || account !== undefined ? (
-          <FooterWithTwoButton
-            onNextClick={onSubmit}
-            onBackClick={this.handelBack}
-            backButtonName={t(backButtonName)}
-            nextButtonName={t(buttonName)}
-          />
-        ) : (
-          <div className="create-account-button">
-            <FooterButton onClick={onSubmit} name={buttonName} />
-          </div>
-        )}
+        <FooterWithTwoButton
+          style={{ bottom: '16px' }}
+          onNextClick={onSubmit}
+          onBackClick={this.handelBack}
+          backButtonName={t(backButtonName)}
+          nextButtonName={t(buttonName)}
+          disableYesBtn={this.state.disabled}
+        />
+        <AlertDailog
+          isOpen={this.state.isOpen}
+          handleClose={this.handleCloseDialog}
+          handleYes={this.handleYes}
+          noText={t('Go Back')}
+          yesText={t('Next')}
+          importVaultFileName={
+            <ErrorOutlineOutlinedIcon style={{ color: '#858B9C', fontSize: '60px' }} />
+          }
+          msg={t('make sure you have saved the seed phrase')}
+        />
       </div>
     );
   }

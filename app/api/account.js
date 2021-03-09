@@ -10,13 +10,32 @@ export const getSeedWords = async () => {
   return result;
 };
 
-export const createAccount = async (seedWords, isOnBoarding = false, keypairType, alias) => {
+export const createAccount = async (
+  seedWords,
+  isOnBoarding = false,
+  keypairType,
+  alias,
+  password,
+) => {
   const { message, status, result } = await sendMessage({
     type: MessageTypes.BG_ACCOUNTS_CREATE_ACCOUNT,
     seedWords,
     isOnBoarding,
     keypairType,
     alias,
+    password,
+  });
+  throwIfNoSuccess({ message, status });
+  return result;
+};
+
+export const createAccountWithJson = async (json, oldPwd, isOnBoarding = false, password) => {
+  const { message, status, result } = await sendMessage({
+    type: MessageTypes.BG_ACCOUNTS_CREATE_ACCOUNT_WITH_JSON,
+    json,
+    oldPwd,
+    isOnBoarding,
+    password,
   });
   throwIfNoSuccess({ message, status });
   return result;
@@ -100,3 +119,22 @@ export const removeContact = async contact => {
   throwIfNoSuccess({ message, status });
   return { result };
 };
+
+export const exportAccount = async (address, pwd) => {
+  const { message, status, result } = await sendMessage({
+    type: MessageTypes.BG_ACCOUNTS_EXPORT,
+    address,
+    pwd,
+  });
+  throwIfNoSuccess({ message, status });
+  return { result };
+};
+
+export const verifyPassword = async (password) => {
+  const { message, status, result } = await sendMessage({
+    type: MessageTypes.BG_ACCOUNTS_VERIFY_PASSWORD,
+    password,
+  });
+  throwIfNoSuccess({ message, status });
+  return { result };
+}

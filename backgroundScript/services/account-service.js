@@ -1,4 +1,5 @@
 import { decodeAddress } from '@polkadot/keyring';
+import { keccak512 } from 'js-sha3';
 import { getWallet } from './wallet-service';
 import { getStore } from '../store/store-provider';
 import * as accountActions from '../actions/accounts';
@@ -32,10 +33,23 @@ const constructAlias = n => {
   }
 };
 
+export const getAddressByAddr = addr => {
+  const wallet = getWallet();
+  return wallet.getAddressByAddr(addr);
+};
+
 export const getAddress = (seedWords, keypairType) => {
   const wallet = getWallet();
   const address = wallet.getAddress(seedWords, keypairType);
   return address;
+};
+
+export const getAddressByAccount = account => {
+  if (account.fromJson) {
+    return getAddressByAddr(account.address);
+  }
+
+  return getAddress(account.seedWords, account.keypairType);
 };
 
 export const createSeedWords = () => {
@@ -45,8 +59,8 @@ export const createSeedWords = () => {
   return seedWords;
 };
 
-export const createAccountWithSeed = (seedWords, keypairType, isOnBoarding, alias) => {
-  const address = DotWallet.getAddress(seedWords, keypairType);
+export const createAccountWithSeed = (seedWords, keypairType, isOnBoarding, alias, password) => {
+  const address = DotWallet.getAddressWithPassword(seedWords, keypairType, alias, password);
   const accountAlias = alias === undefined ? constructAlias(1) : validateAlias(alias);
   return {
     seedWords,
@@ -81,24 +95,30 @@ const mergeAccounts = (accounts, newAccount) => {
 };
 
 export const getAccountForUI = account => ({
-  address: getAddress(account.seedWords, account.keypairType),
+  address: getAddressByAccount(account),
   alias: account.alias,
   keypairType: account.keypairType,
 });
 
+export const updateJsonAccountAlias = (account, newAlias) => {
+  const wallet = getWallet();
+  wallet.updateJsonAccountAlias(account, newAlias);
+};
 export const updateAccountAlias = async (address, newAlias) => {
   const { accounts, currentAccount } = getAccountState();
   //validate alias
   const duplicateAlias = accounts.find(x => x.alias === newAlias);
   if (duplicateAlias === undefined) {
     const accountIndex = accounts.findIndex(obj => {
-      const accountAddress = getAddress(obj.seedWords, obj.keypairType);
+      const accountAddress = getAddressByAccount(obj);
       return accountAddress === address;
     });
     // update alias
     if (accountIndex >= 0) {
       accounts[accountIndex].alias = newAlias;
       currentAccount.alias = newAlias;
+      updateJsonAccountAlias(currentAccount, newAlias);
+
       await Promise.all([
         updatesAccountsState(accounts),
         updateCurrentAccountState(currentAccount),
@@ -116,15 +136,33 @@ export const getAccounts = async () => {
   return localAccountObj;
 };
 
-export const createAccount = async (seedWords, keypairType, isOnBoarding, alias) => {
+export const validPassword = async password => {
+  if (password === undefined || password === null) {
+    return false;
+  }
+  const encryptedPwd = keccak512(password);
+  const { appState } = getStore().getState();
+  return appState.hashKey && appState.hashKey === encryptedPwd;
+};
+
+export const createAccount = async (seedWords, keypairType, isOnBoarding, alias, password) => {
   // default keypair type Edwards
   const keypairTypeValue = keypairType === undefined ? KEYPAIR_EDWARDS.value : keypairType.value;
 
+  if (seedWords === undefined) {
+    throw new Error('invalid seed words');
+  }
+
+  const validPwd = await validPassword(password);
+  if (!validPwd) {
+    throw new Error('wallet password is incorrect');
+  }
+
   // grab all the data
-  const account =
-    seedWords === undefined
-      ? createNewAccount(keypairTypeValue)
-      : createAccountWithSeed(seedWords, keypairTypeValue, isOnBoarding, alias);
+  // const account = seedWords === undefined
+  //   ? createNewAccount(keypairTypeValue)
+  //   : createAccountWithSeed(seedWords, keypairTypeValue, isOnBoarding, alias, password);
+  const account = createAccountWithSeed(seedWords, keypairTypeValue, isOnBoarding, alias, password);
   const { accounts } = getAccountState();
   // find duplication
   const newAccount = accountExists(accounts, account);
@@ -136,11 +174,34 @@ export const createAccount = async (seedWords, keypairType, isOnBoarding, alias)
   return account;
 };
 
+export const createAccountWithJson = async (json, oldPwd, isOnBoarding, password) => {
+  const validPwd = await validPassword(password);
+  if (!validPwd) {
+    throw new Error('wallet password is incorrect');
+  }
+
+  const { accounts } = getAccountState();
+  const keypair = DotWallet.restoreAccount(json, oldPwd, password);
+
+  const account = {
+    address: keypair.address,
+    fromJson: true,
+    alias: keypair.meta.name ? keypair.meta.name : 'unknown',
+    // keypairType,
+  };
+  const newAccount = accountExists(accounts, account);
+  const newAccounts = mergeAccounts(accounts, newAccount);
+  // set current selected account by default last created account
+  await Promise.all([updatesAccountsState(newAccounts), updateCurrentAccountState(account)]);
+
+  return account;
+};
+
 export const updateCurrentAccount = async address => {
   // default keypair type Edwards
   const { accounts } = getAccountState();
   const newAccount = accounts.find(obj => {
-    const accountAddress = getAddress(obj.seedWords, obj.keypairType);
+    const accountAddress = getAddressByAccount(obj);
     return accountAddress === address;
   });
   if (newAccount !== undefined) {
@@ -154,17 +215,17 @@ export const removeAccount = async address => {
   // get privious accounts
   const { accounts, currentAccount } = getAccountState();
   const filteredAccounts = accounts.filter(obj => {
-    const accountAddress = getAddress(obj.seedWords, obj.keypairType);
+    const accountAddress = getAddressByAccount(obj);
     if (accountAddress !== address) {
       return obj;
     }
   });
   // update reducer state
   await updatesAccountsState(filteredAccounts);
-  const currentAccountAddress = getAddress(currentAccount.seedWords, currentAccount.keypairType);
+  const currentAccountAddress = getAddressByAccount(currentAccount);
   if (address === currentAccountAddress) {
     const accountIndex = accounts.findIndex(obj => {
-      const accountAddress = getAddress(obj.seedWords, obj.keypairType);
+      const accountAddress = getAddressByAccount(obj);
       return accountAddress === address;
     });
     if (accountIndex === accounts.length - 1) {
@@ -204,7 +265,7 @@ export const accountForDapp = accountState => {
   if (accounts !== undefined) {
     const reformattedAccounts = accounts.map(obj => {
       const accountsWithoutSeedWords = {
-        address: DotWallet.getAddress(obj.seedWords, obj.keypairType),
+        address: getAddressByAccount(obj),
         name: obj.alias,
         meta: {
           name: obj.alias,
@@ -233,7 +294,7 @@ export const getAccount = address => {
   const { accounts } = getAccountState();
   const accountsWithAddress = accounts.map(obj => {
     const account = {
-      address: getAddress(obj.seedWords, obj.keypairType),
+      address: getAddressByAccount(obj),
       alias: obj.alias,
       seedWords: obj.seedWords,
       keypairType: obj.keypairType,
@@ -241,8 +302,7 @@ export const getAccount = address => {
     return account;
   });
   const account = accountsWithAddress.find(
-    account =>
-      JSON.stringify(decodeAddress(account.address)) === JSON.stringify(decodeAddress(address)),
+    account => JSON.stringify(decodeAddress(account.address)) === JSON.stringify(decodeAddress(address)),
   );
   if (account) {
     return account;
@@ -258,4 +318,16 @@ export const existedAccount = acc => {
   }
 
   return false;
+};
+
+export const exportAccount = (address, password) => {
+  const { accounts } = getAccountState();
+  const account = accounts.find(a => a.address === address);
+
+  if (account === undefined) {
+    throw new Error('Account is not exist');
+  }
+
+  const wallet = getWallet();
+  return wallet.exportAccount(address, password);
 };

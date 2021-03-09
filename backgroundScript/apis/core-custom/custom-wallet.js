@@ -5,6 +5,7 @@ import { mnemonicGenerate } from '@polkadot/util-crypto';
 import {
   Keyring, setSS58Format, encodeAddress, decodeAddress
 } from '@polkadot/keyring';
+import keyring from '@polkadot/ui-keyring';
 import {
   formatBalance, isHex, hexToU8a, u8aToHex, u8aToString, stringToU8a
 } from '@polkadot/util';
@@ -30,6 +31,24 @@ export const getAddress = (seedWords, keypairType) => {
     return address;
   } catch (err) {
     throw new Error('Error in Custom getAddress');
+  }
+};
+
+export const getAddressByAddr = addr => {
+  try {
+    const { address } = keyring.getPair(addr);
+    return address;
+  } catch (err) {
+    throw new Error('Error in Custom getAddress by address');
+  }
+};
+
+export const updateJsonAccountAlias = (account, newAlias) => {
+  try {
+    const pair = keyring.getPair(account.address);
+    keyring.saveAccountMeta(pair, { ...pair.meta, name: newAlias });
+  } catch (err) {
+    throw new Error('Error in Custom change alias');
   }
 };
 
@@ -100,3 +119,7 @@ export const getSignMessage = async (account, message) => {
 };
 
 export const getStringMessageFromHex = message => u8aToString(hexToU8a(message));
+
+export const exportAccount = (address, password) => ({
+  exportedJson: JSON.stringify(keyring.backupAccount(keyring.getPair(address), password)),
+});

@@ -37,12 +37,13 @@ export const signMessage = async request => {
   return { result };
 };
 
-export const submitTransaction = async (data, request, dApp = false) => {
+export const submitTransaction = async (data, request, dApp = false, password) => {
   const { message, status, result } = await sendMessage({
     type: MessageTypes.BG_DAPP_TXN_SUBMIT,
     data,
     request,
     dApp,
+    password
   });
   throwIfNoSuccess({ message, status });
   return { result };

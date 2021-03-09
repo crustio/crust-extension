@@ -12,11 +12,11 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 import { faAddressBook } from '@fortawesome/free-solid-svg-icons/faAddressBook';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons/faAngleRight';
-import Visibility from '@material-ui/icons/Visibility';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import MoreVert from '@material-ui/icons/MoreVert';
 import WifiOff from '@material-ui/icons/WifiOff';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import VisibilityOffOutlinedIcon from '@material-ui/icons/VisibilityOffOutlined';
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 
 const IconEdit = props => (
   <FontAwesomeIcon icon={faEdit} style={{ color: '#2f112b', fontSize: props.size }} {...props} />
@@ -63,9 +63,11 @@ const IconTransfer = props => (
 
 const IconSettings = props => <SettingsOutlinedIcon style={{ ...props.style }} {...props} />;
 
-const IconVisibility = props => <Visibility style={{ ...props.style }} {...props} />;
+const IconVisibility = props => <VisibilityOutlinedIcon style={{ ...props.style }} {...props} />;
 
-const IconVisibilityOff = props => <VisibilityOff style={{ ...props.style }} {...props} />;
+const IconVisibilityOff = props => (
+  <VisibilityOffOutlinedIcon style={{ ...props.style }} {...props} />
+);
 
 const WalletDropDownIcon = props => (
   <div {...props}>

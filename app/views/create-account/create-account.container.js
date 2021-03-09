@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
   success: state.createAccountReducer.success,
   keypairType: state.createAccountReducer.keypairType,
   keypairTypes: state.createAccountReducer.keypairTypes,
+  backupPage: state.appStateReducer.backupPage,
 });
 
 const mapDispatchToProps = {

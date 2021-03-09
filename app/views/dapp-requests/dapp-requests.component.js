@@ -16,12 +16,21 @@ export default class DAppRequests extends Component {
     this.state = {
       requestId: '',
       isInfoExpanded: false,
+      password: '',
+      errorText: '',
     };
   }
 
   componentDidMount() {
     this.props.fetchNetwork();
   }
+
+  handleOnChange = prop => e => {
+    const { value } = e.target;
+    this.setState({
+      [prop]: value,
+    });
+  };
 
   onCopyAddress = () => {
     this.props.createToast({
@@ -48,8 +57,14 @@ export default class DAppRequests extends Component {
     this.setState({ isInfoExpanded: !isInfoExpanded });
   };
 
-  handleAllow = request => () => {
-    this.props.allowRequest(request);
+  handleAllow = request => async () => {
+    const ret = await this.props.allowRequest(request, this.state.password);
+    if (ret === 'Password is incorrect.') {
+      this.setState({
+        errorText: ret
+      });
+      return;
+    }
     this.props.updateAppLoading(true);
   };
 
@@ -60,7 +75,7 @@ export default class DAppRequests extends Component {
   renderRequests() {
     const { requests, accounts, balances } = this.props;
     // Use for toggle
-    const { isInfoExpanded } = this.state;
+    const { isInfoExpanded, errorText, password } = this.state;
     return (
       <div className="dapp-requests-container">
         {requests.map(request => {
@@ -93,6 +108,9 @@ export default class DAppRequests extends Component {
                   onAllow={this.handleAllow(request)}
                   className="dapp-requests-card"
                   key={request.id}
+                  password={password}
+                  errorText={errorText}
+                  handleOnChange={this.handleOnChange}
                 />
               );
             case RequestType.SIGN_MESSAGE:

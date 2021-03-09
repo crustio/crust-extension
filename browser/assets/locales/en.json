@@ -37,9 +37,14 @@
   "Yes": "Yes",
   "Remove account": "Remove account",
   "Please make sure you have saved the seed phrase or private key for this account before continuing.": "Please make sure you have saved the seed phrase or private key for this account before continuing.",
+  "make sure you have saved the seed phrase": "make sure you have saved the seed phrase",
 
   "Remove": "Remove",
   "Add Address": "Add Address",
+  "Export Account": "Export Account",
+  "From Phrase": "From Phrase",
+  "From Json": "From Json",
+  "Create Account": "Create Account",
 
   "Select To Address": "Select To Address",
   "Click here to add an address!": "Click here to add an address!",
@@ -52,6 +57,7 @@
   "Address": "Address",
 
   "OK": "OK",
+  "Cancel": "Cancel",
 
   "Token Details": "Token Details",
 
@@ -59,6 +65,7 @@
   "Unlock Password": "Unlock Password",
   "Password is incorrect.": "Password is incorrect.",
   "Password is required.": "Password is required.",
+  "Duplicate alias.": "Duplicate alias.",
 
   "Generate Seed Phrase": "Generate Seed Phrase",
   "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.": "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.",
@@ -80,10 +87,27 @@
   "Allow": "Allow",
   "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.": "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.",
 
-  "Cancel": "Cancel",
-
   "Please input address.": "Please input address.",
   "Please input amount.": "Please input amount.",
+
+  "Choose File": "Choose File",
+  "No file chosen": "No file chosen",
+  "Enter the password previously used to encrypt this account": "Enter the password previously used to encrypt this account",
+  "Enter the password for this wallet": "Enter the password for this wallet",
+  "The JSON file will be re-encripted by this password": "The JSON file will be re-encripted by this password",
+  "Json File is required": "Json File is required",
+
+  "Error while creating new account.": "Error while creating new account.",
+  "wallet password is incorrect": "wallet password is incorrect",
+  "Account already exist.": "Account already exist.",
+  "account is not avalible": "account is not avalible",
+  "Duplicate alias": "Duplicate alias",
+  "Account is not exist": "Account is not exist",
+  "invalid json file or json password": "invalid json file or json password",
+  "Error in Polkadot getAddress": "Error in Polkadot getAddress",
+
+  "You are exporting your account. Keep it safe and don’t share it with anyone.": "You are exporting your account. Keep it safe and don’t share it with anyone.",
+  "The password for the wallet.": "The password for the wallet.",
 
   "Chinese": "Chinese",
   "English": "English",

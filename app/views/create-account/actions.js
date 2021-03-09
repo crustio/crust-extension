@@ -39,7 +39,7 @@ export const setAndStartOnBoarding = () => async dispatch => {
   await dispatch(onBoard());
 };
 
-export const createFirstAccountWithSeedPhrase = (seedPhrase, alias) => async (
+export const createFirstAccountWithSeedPhrase = (seedPhrase, alias, password) => async (
   dispatch,
   getState,
 ) => {
@@ -51,11 +51,14 @@ export const createFirstAccountWithSeedPhrase = (seedPhrase, alias) => async (
       true,
       keypairType,
       alias !== '' ? alias : undefined,
+      password !== '' ? password : undefined,
     );
     const { alias: newAlias } = account;
     dispatch(createToast({ message: onCreateAccount(newAlias), type: 'success' }));
     dispatch(createFirstAccountWithSeedPhraseSuccess());
     dispatch(setAndStartOnBoarding());
+    dispatch(createFirstAccountWithSeedPhraseError(null));
+    dispatch(createDuplicateAliasError(null));
   } catch (e) {
     const error = {
       message: e.message,
@@ -63,8 +66,10 @@ export const createFirstAccountWithSeedPhrase = (seedPhrase, alias) => async (
     };
     if (e.message === APIConstants.DUPLICATE_ALIAS.toString()) {
       dispatch(createDuplicateAliasError(error));
+      dispatch(createFirstAccountWithSeedPhraseError(null));
     } else {
       dispatch(createFirstAccountWithSeedPhraseError(error));
+      dispatch(createDuplicateAliasError(null));
     }
     dispatch(updateAppLoading(false));
   }

@@ -20,7 +20,7 @@ export const signUp = password => async dispatch => {
   await APITypes.OnBoarding.setHashKey(keccak512(password));
   dispatch(setHashKeySuccess());
   await dispatch(AccountActions.getSeedWords());
-  dispatch(AppActions.changePage(NavConstants.CREATE_ACCOUNT_PAGE));
+  dispatch(AppActions.changePage(NavConstants.CREATE_ACCOUNT_ENTRY_PAGE));
   dispatch(AppActions.updateAppLoading(false));
 };
 

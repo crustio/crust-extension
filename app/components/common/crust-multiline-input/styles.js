@@ -24,6 +24,7 @@ export const styles = () => ({
     color: 'rgba(0, 0, 0, 0.87)',
     fontFamily: 'Roboto-Regular',
     fontSize: '16px',
+    width: '297px',
   },
   input: {
     '&::placeholder': {
@@ -35,7 +36,6 @@ export const styles = () => ({
   },
   inputError: {},
   helperText: {
-    paddingLeft: '16px',
     '&$helperTextError': {
       color: '#FA5050',
       fontFamily: 'Roboto-Regular',

@@ -9,6 +9,14 @@ import { findChainByName } from '../../../lib/constants/chain';
 import './styles.css';
 
 class Confirm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: '',
+      errorText: '',
+    };
+  }
+
   componentDidMount() {
     this.props.resetConfirmOnBoarding();
   }
@@ -17,9 +25,24 @@ class Confirm extends Component {
     this.props.changePage(CREATE_ADDRESS_BOOK_PAGE);
   };
 
+  handleOnChange = prop => e => {
+    const { value } = e.target;
+    this.setState({
+      [prop]: value,
+    });
+  };
+
   handleSend = async () => {
     const { confirmDetails, submitTransaction, isNewAddress } = this.props;
-    const tx = await submitTransaction(confirmDetails);
+    const { password } = this.state;
+    const tx = await submitTransaction(confirmDetails, password);
+
+    if (tx === 'Password is incorrect.') {
+      this.setState({
+        errorText: tx
+      });
+      return;
+    }
     const result = await isNewAddress(tx.metadata.to);
     if (result.isNewAddress === true) {
       this.props.updateToAddress(tx.metadata.to);
@@ -44,6 +67,7 @@ class Confirm extends Component {
 
   render() {
     const { confirmDetails, network, t } = this.props;
+    const { errorText, password } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     return (
@@ -53,11 +77,15 @@ class Confirm extends Component {
           title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
         />
+        
         <ConfirmForm
           confirmDetails={confirmDetails}
           handleSend={this.handleSend}
           buttonText={t('Send')}
           theme={theme}
+          password={password}
+          handleOnChange={this.handleOnChange}
+          errorText={errorText}
         />
       </div>
     );

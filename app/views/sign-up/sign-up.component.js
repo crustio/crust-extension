@@ -131,7 +131,6 @@ class SignUp extends Component {
           onChange={e => this.handleOnChange('password', e)}
           password={password}
           placeholder={this.props.t('Password')}
-          handleClickShowPassword={this.handleClickShowPassword}
         />
         {isPasswordError ? (
           <span className="error-msg">{passwordError}</span>

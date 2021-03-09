@@ -37,9 +37,14 @@
   "Yes": "是",
   "Remove account": "移除账户",
   "Please make sure you have saved the seed phrase or private key for this account before continuing.": "再继续删除操作之前，请确认您已经备份了这个账户的助记词或私钥。",
+  "make sure you have saved the seed phrase": "请确认您已经备份了这个账户的助记词",
 
   "Remove": "移除",
   "Add Address": "添加地址",
+  "Export Account": "导出账户",
+  "From Phrase": "助记词导入",
+  "From Json": "Json文件导入",
+  "Create Account": "新建账户",
 
   "Select To Address": "选择地址",
   "Click here to add an address!": "点击这里，添加地址！",
@@ -52,6 +57,7 @@
   "Address": "地址",
 
   "OK": "好的",
+  "Cancel": "取消",
 
   "Token Details": "代币详情",
 
@@ -59,6 +65,7 @@
   "Unlock Password": "解锁密码",
   "Password is incorrect.": "密码输入错误。",
   "Password is required.": "请输入密码",
+  "Duplicate alias.": "该昵称已被使用",
 
   "Generate Seed Phrase": "生成助记词",
   "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.": "这个助记词用来生成您的首个账户。安全地保存好并且不要分享给别人。",
@@ -80,10 +87,28 @@
   "Allow": "同意",
   "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access to any account.": "请求访问账户。点击同意按钮允许账户访问或点击拒绝按钮拒绝账户访问。",
 
-  "Cancel": "取消",
-
   "Please input address.": "请输入账户。",
   "Please input amount.": "请输入数量。",
+
+  "Choose File": "选择文件",
+  "No file chosen": "未选择文件",
+  "Enter the password previously used to encrypt this account": "输入加密此账户的密码",
+  "Enter the password for this wallet": "输入钱包密码",
+  "The JSON file will be re-encripted by this password": "JSON文件将被钱包密码重新加密",
+  "Json File is required": "请选择JSON文件",
+
+  "Error while creating new account.": "创建新账户出错。",
+  "wallet password is incorrect": "钱包密码错误",
+  "Account already exist.": "账户已存在。",
+  "account is not avalible": "账户不可用",
+  "Duplicate alias": "该昵称已被使用",
+  "Account is not exist": "账户不存在",
+  "invalid json file or json password": "JSON文件错误或JSON文件密码错误",
+  "Error in Polkadot getAddress": "助记词格式不正确",
+
+  "You are exporting your account. Keep it safe and don’t share it with anyone.": "您正在导出账户. 请保证导出文件的安全，不要与任何人分享它。",
+  "The password for the wallet.": "钱包密码。",
+  "Wallet Password": "钱包密码",
 
   "Chinese": "中文",
   "English": "英文",

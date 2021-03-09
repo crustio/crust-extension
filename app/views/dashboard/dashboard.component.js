@@ -142,11 +142,14 @@ class Dashboard extends Component {
         </div>
         <CrustTabs value={value} onChange={this.handleChange} labels={tLabels} />
         {value === 0 && (
-          <TokenList
-            tokens={tokens}
-            className="token-list-container"
-            onTokenSelected={this.onTokenSelected}
-          />
+          <div>
+            <TokenList
+              tokens={tokens}
+              className="token-list-container"
+              onTokenSelected={this.onTokenSelected}
+            />
+          </div>
+          
         )}
         {value === 1 && (
           <Transaction

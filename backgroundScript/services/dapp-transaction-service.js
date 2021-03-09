@@ -151,7 +151,7 @@ export const validateDappTransaction = async transaction => {
   };
 };
 
-export const signTransaction = async txnPayload => {
+export const signTransaction = async (txnPayload, password) => {
   // For storing txn in TXN_LIST
   const txnForUI = await createTxnUIObject(txnPayload);
   const { address, value, dest } = txnForUI;
@@ -170,7 +170,7 @@ export const signTransaction = async txnPayload => {
   };
 
   // create signature for Dapp
-  const signature = await TXAPI.getSignature(account, txnPayload);
+  const signature = await TXAPI.getSignature(account, txnPayload, password);
 
   // Fetch Transaction State
   const txnHash = '';
