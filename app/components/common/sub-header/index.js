@@ -20,7 +20,9 @@ export default class SubHeader extends Component {
 
   render() {
     const { anchorEl } = this.state;
-    const { icon, subMenu, onSubMenuOptionsChange } = this.props;
+    const {
+      icon, subMenu, onSubMenuOptionsChange, menuWidth
+    } = this.props;
     return (
       <div className="sub-header-container">
         <div className="sub-header-left">
@@ -42,6 +44,7 @@ export default class SubHeader extends Component {
               }}
               anchorEl={anchorEl}
               onClose={this.handleClose}
+              width={menuWidth}
             />
           </div>
         )}

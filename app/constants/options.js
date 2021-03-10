@@ -7,8 +7,11 @@ import {
 } from './navigation';
 
 import {
-  FROM_PHRASE_BUTTON_TEXT, FROM_JSON_BUTTON_TEXT,  CREATE_ACCOUNT_BUTTON_TEXT, EXPORT_ACCOUNT_BUTTON_TEXT
-} from './account'
+  IMPORT_FROM_PHRASE_BUTTON_TEXT,
+  IMPORT_FROM_JSON_BUTTON_TEXT,
+  CREATE_ACCOUNT_BUTTON_TEXT,
+  EXPORT_ACCOUNT_BUTTON_TEXT,
+} from './account';
 
 export const ADD_TOKEN = {
   text: 'Add Token',
@@ -56,12 +59,12 @@ export const ADD_ACCOUNT = {
 };
 
 export const IMPORT_PHRASE = {
-  text: FROM_PHRASE_BUTTON_TEXT,
+  text: IMPORT_FROM_PHRASE_BUTTON_TEXT,
   value: 'from_phrase',
 };
 
 export const IMPORT_JSON = {
-  text: FROM_JSON_BUTTON_TEXT,
+  text: IMPORT_FROM_JSON_BUTTON_TEXT,
   value: IMPORT_JSON_PAGE,
 };
 

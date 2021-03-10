@@ -35,8 +35,8 @@ class LanguageSetting extends Component {
   render() {
     const { t, i18n, language } = this.props;
     const options = [
-      { value: 'en-US', text: t('English') },
-      { value: 'zh-CN', text: t('Chinese') },
+      { value: ENGLISH, text: t('English') },
+      { value: CHINESE, text: t('Chinese') },
     ];
     return (
       <div className="language-setting-container">

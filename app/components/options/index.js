@@ -26,6 +26,7 @@ export default class Options extends Component {
       onToggleDeveloperMode,
       options,
       onOptionsChange,
+      menuWidth,
       ...otherProps
     } = this.props;
     return (
@@ -38,7 +39,7 @@ export default class Options extends Component {
           onChange={onOptionsChange}
           anchorEl={anchorEl}
           onClose={this.handleClose}
-          width="170px"
+          width={menuWidth}
         />
       </div>
     );

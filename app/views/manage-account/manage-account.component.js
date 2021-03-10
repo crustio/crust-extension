@@ -20,6 +20,7 @@ import {
   IMPORT_JSON,
 } from '../../constants/options';
 import { findChainByName } from '../../../lib/constants/chain';
+import { ENGLISH } from '../../constants/language';
 import './styles.css';
 
 class ManageAccount extends Component {
@@ -93,7 +94,7 @@ class ManageAccount extends Component {
 
   render() {
     const {
-      accounts, account, network, t
+      accounts, account, network, t, language
     } = this.props;
     const { isOpen } = this.state;
     const chain = findChainByName(network.value);
@@ -115,6 +116,7 @@ class ManageAccount extends Component {
           subMenu={ACCOUNT_MANAGEMENT_MENU_OPTIONS}
           showSettings
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
+          menuWidth={language === ENGLISH ? 150 : undefined}
         />
         <div className="manage-accounts">
           <div className="manage-accounts-container">

@@ -45,6 +45,8 @@
   "From Phrase": "助记词导入",
   "From Json": "Json文件导入",
   "Create Account": "新建账户",
+  "Import From Phrase": "助记词导入",
+  "Import From Json": "Json文件导入",
 
   "Select To Address": "选择地址",
   "Click here to add an address!": "点击这里，添加地址！",

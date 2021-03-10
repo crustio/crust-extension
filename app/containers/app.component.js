@@ -140,7 +140,14 @@ class App extends Component {
   render() {
     const {
       props: {
-        page, isLoading, networks, network, isConnected, isDeveloperMode, options
+        page,
+        isLoading,
+        networks,
+        network,
+        isConnected,
+        isDeveloperMode,
+        options,
+        language,
       },
       state: {
         showLogo,
@@ -172,6 +179,7 @@ class App extends Component {
         onOptionsChange={this.handleOptionsChange}
         isDeveloperMode={isDeveloperMode}
         onToggleDeveloperMode={this.onToggleDeveloperMode}
+        language={language}
       />
     );
   }

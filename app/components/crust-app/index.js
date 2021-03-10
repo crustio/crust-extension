@@ -10,6 +10,7 @@ import Options from '../options';
 import { NetworkDisconnectionIcon } from '../common/icon';
 import './styles.css';
 import CrustLogo from '../common/crust-logo';
+import { CHINESE } from '../../constants/language';
 
 export default class CrustApp extends Component {
   render() {
@@ -31,6 +32,7 @@ export default class CrustApp extends Component {
       onOptionsChange,
       isDeveloperMode,
       onToggleDeveloperMode,
+      language,
       ...otherProps
     } = this.props;
 
@@ -85,6 +87,7 @@ export default class CrustApp extends Component {
                 className={CrustSettingsClassNames}
                 isDeveloperMode={isDeveloperMode}
                 page={page}
+                menuWidth={language === CHINESE ? 120 : 170}
               />
             </div>
           </Header>
