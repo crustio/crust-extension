@@ -9,12 +9,10 @@ class Transaction extends Component {
     const {
       transactions, isLinkToFaucet, network, t, ...otherProps
     } = this.props;
-    const ttt = transactions[0];
-    const trans = [ttt, ttt, ttt, ttt, ttt, ttt];
     return (
       <div {...otherProps}>
         {transactions.length > 0 ? (
-          <TransactionItems className="transaction-list-container" transactions={trans} />
+          <TransactionItems className="transaction-list-container" transactions={transactions} />
         ) : (
           <TransactionMessage
             className="transaction-message"

@@ -19,7 +19,7 @@ class Dashboard extends Component {
     super(props);
     this.textInput = React.createRef();
     this.state = {
-      labels: ['Assets', 'Activity'],
+      labels: ['Assets', 'Activities'],
       value: 0,
     };
   }

@@ -10,14 +10,15 @@
   flex-direction: row;
   /* justify-content: space-between; */
   margin-top: 40px;
-  padding: 0px 50px;
+  align-items: center;
+  justify-content: center;
 }
 
 .connect-request-dapp-url-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 100px;
+  margin-right: 40px;
 }
 
 .connect-request-account-item {
@@ -36,9 +37,7 @@
 
 .connect-request-plug-icon {
   transform: rotate(90deg);
-  position: absolute;
-  right: 165px;
-  bottom: 427px;
+  margin-right: 40px;
 }
 
 .connect-request-wallet-icon {
