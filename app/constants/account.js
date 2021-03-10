@@ -15,3 +15,5 @@ export const FROM_PHRASE_BUTTON_TEXT = 'From Phrase';
 export const FROM_JSON_BUTTON_TEXT = 'From Json';
 export const CREATE_ACCOUNT_BUTTON_TEXT = 'Create Account';
 export const EXPORT_ACCOUNT_BUTTON_TEXT = 'Export Account';
+export const IMPORT_FROM_PHRASE_BUTTON_TEXT = 'Import From Phrase';
+export const IMPORT_FROM_JSON_BUTTON_TEXT = 'Import From Json';
