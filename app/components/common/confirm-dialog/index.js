@@ -43,13 +43,18 @@ function DraggableDialog({
         onClose={handleClose}
         PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
+        classes={{ paper: classes.paperRoot }}
       >
-        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+        <DialogTitle
+          classes={{ root: classes.titleRoot }}
+          style={{ cursor: 'move' }}
+          id="draggable-dialog-title"
+        >
           {title}
         </DialogTitle>
-        <DialogContent>
+        <DialogContent classes={{ root: classes.contentRoot }}>
           <DialogContentText align="center">{importVaultFileName}</DialogContentText>
-          <DialogContentText>{msg}</DialogContentText>
+          <DialogContentText classes={{ root: classes.textRoot }}>{msg}</DialogContentText>
           {isShowTextField && (
             <TextField
               autoFocus

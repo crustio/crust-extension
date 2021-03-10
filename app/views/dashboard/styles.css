@@ -72,6 +72,10 @@
   font-weight: bold;
 }
 
+.dashboard-footer:hover {
+  background: #F28600;
+}
+
 .dashboard-icon {
   margin-left: 15px;
   font-size: 14px !important;

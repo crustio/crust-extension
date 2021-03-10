@@ -359,7 +359,6 @@ class CreateAccount extends Component {
       isPhraseError,
       phraseErrorMsg,
     } = this.state;
-
     return (
       <div className="create-account-container">
         <CreateAccountForm
@@ -428,7 +427,7 @@ class CreateAccount extends Component {
           importVaultFileName={
             <ErrorOutlineOutlinedIcon style={{ color: '#858B9C', fontSize: '60px' }} />
           }
-          msg={t('make sure you have saved the seed phrase')}
+          msg={t('Make sure you have saved the seed phrase.')}
         />
       </div>
     );

@@ -149,7 +149,6 @@ class Dashboard extends Component {
               onTokenSelected={this.onTokenSelected}
             />
           </div>
-          
         )}
         {value === 1 && (
           <Transaction
@@ -162,7 +161,7 @@ class Dashboard extends Component {
         <div
           style={{
             position: 'absolute',
-            top: '524px',
+            top: '544px',
             justifyContent: 'space-between',
             display: 'flex',
             width: '100%',
