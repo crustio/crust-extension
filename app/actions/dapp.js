@@ -3,11 +3,16 @@ import * as AppActions from '../containers/actions';
 import * as AccountActions from './account';
 import { getTransactions, getTokens } from '../views/dashboard/actions';
 import {
-  setNetwork, updateNetworkStatus, getUnits, getDeveloperMode, restoreNetwork
+  setNetwork,
+  updateNetworkStatus,
+  getUnits,
+  getDeveloperMode,
+  restoreNetwork,
 } from './network';
 import * as NavConstants from '../constants/navigation';
 import * as dAppActionType from '../constants/dapp';
 import { DApp } from '../api';
+import { promiseTimeout } from '../utils/helper';
 
 export const setEnableRequest = request => ({
   type: dAppActionType.CONNECT_REQUEST_ENABLE_REQUEST,
@@ -24,11 +29,11 @@ const openDashboard = () => async dispatch => {
   await dispatch(setNetwork);
   dispatch(updateNetworkStatus(false));
   dispatch(AccountActions.setInitialBalance);
-  await dispatch(AccountActions.fetchAndSetBalances);
-  await dispatch(restoreNetwork);
+  await promiseTimeout(3000, dispatch(AccountActions.fetchAndSetBalances), {});
+  await promiseTimeout(5000, dispatch(restoreNetwork), {});
   await dispatch(getTransactions);
   dispatch(getUnits());
-  await dispatch(getTokens);
+  await promiseTimeout(3000, dispatch(getTokens), {});
   dispatch(AppActions.updateIsAppOnBoarded(true));
   dispatch(AppActions.updateAppLoading(false));
   dispatch(AppActions.changePage(NavConstants.DASHBOARD_PAGE));

@@ -30,15 +30,15 @@ class Dashboard extends Component {
   };
 
   handleSend = () => {
-    if (!this.props.isConnected) {
-      this.props.connectionError();
-    } else {
-      this.setDefaultToken();
-      this.props.getUnits();
-      this.props.resetToAddress();
-      this.props.updateBackupPage(this.props.page);
-      this.props.changePage(TRANSFER_PAGE);
-    }
+    // if (!this.props.isConnected) {
+    //   this.props.connectionError();
+    // } else {
+    this.setDefaultToken();
+    // this.props.getUnits();
+    this.props.resetToAddress();
+    this.props.updateBackupPage(this.props.page);
+    this.props.changePage(TRANSFER_PAGE);
+    // }
   };
 
   handleDeposit = () => {
@@ -137,6 +137,7 @@ class Dashboard extends Component {
               amount={amount}
               handleSend={this.handleSend}
               handleDeposit={this.handleDeposit}
+              labelText="Transferrable"
             />
           </div>
         </div>

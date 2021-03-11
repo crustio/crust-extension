@@ -107,7 +107,14 @@ class Transfer extends Component {
     const { amount, unit, dropDownSelected } = this.state;
     const { toAddress } = this.props;
     if (toAddress !== '' && amount !== '' && amount !== undefined) {
-      this.props.confirmTransaction(toAddress, this.props.account, amount, unit, dropDownSelected);
+      this.props.confirmTransaction(
+        toAddress,
+        this.props.account,
+        amount,
+        unit,
+        dropDownSelected,
+        this.props.network,
+      );
     } else {
       const error = {};
       if (toAddress === '') {

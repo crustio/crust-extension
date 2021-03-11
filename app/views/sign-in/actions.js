@@ -3,6 +3,7 @@ import * as APITypes from '../../api';
 import * as SignInActionTypes from './action-types';
 import * as APIConstants from '../../../lib/constants/api';
 import { updateAppLoading } from '../../containers/actions';
+import { promiseTimeout } from '../../utils/helper';
 
 const unlockCrustSuccess = () => ({
   type: SignInActionTypes.UNLOCK_CRUST_SUCCESS,
@@ -25,7 +26,14 @@ export const unlockCrustSuccessFalse = () => ({
 export const unlockCrust = password => async dispatch => {
   try {
     dispatch(updateAppLoading(true));
-    await APITypes.OnBoarding.setHashKey(keccak512(password));
+    const ret = await promiseTimeout(
+      60000,
+      APITypes.OnBoarding.setHashKey(keccak512(password)),
+      false,
+    );
+    if (ret.result === false) {
+      throw new Error('Time out.');
+    }
     dispatch(clearUnlockError());
     dispatch(unlockCrustSuccess());
   } catch (e) {

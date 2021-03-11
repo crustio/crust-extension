@@ -92,7 +92,7 @@ class TokenDetailsPage extends Component {
     return (
       <div className="token-details-page-container">
         <SubHeader
-          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', width: '14px' }} />}
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Token Details')}
           backBtnOnClick={this.onClick}
         />
@@ -118,6 +118,7 @@ class TokenDetailsPage extends Component {
             amount={convertBalanceToShow(token.balance, token.decimals)}
             handleSend={this.handleSend}
             handleDeposit={this.handleDeposit}
+            labelText={token.tokenSymbol === 'CRU' ? 'Transferrable' : ''}
           />
         </div>
 

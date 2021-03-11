@@ -6,7 +6,7 @@ import './styles.css';
 export default class TokenBalance extends Component {
   render() {
     const {
-      unit, balance, marketData, amount, ...otherProps
+      unit, balance, marketData, amount, labelText, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -16,6 +16,7 @@ export default class TokenBalance extends Component {
           token={balance}
           marketData={marketData}
           amount={amount}
+          labelText={labelText}
         />
       </div>
     );
