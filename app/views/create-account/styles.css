@@ -36,3 +36,8 @@
   position: absolute;
   top: 487px
 }
+
+.dialog-msg {
+  font-family: PingFangSC-Regular, PingFang SC !important;
+  color: #111A34 !important;
+}
