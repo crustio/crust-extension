@@ -238,8 +238,11 @@ class CreateAccount extends Component {
       });
       return;
     }
-
-    this.handelConfirm();
+    if (formValue === Account.IMPORT_ACCOUNT) {
+      this.handleYes();
+    } else {
+      this.handelConfirm();
+    }
   };
 
   onKeypairTypeChange = e => {
