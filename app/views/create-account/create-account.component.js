@@ -425,7 +425,7 @@ class CreateAccount extends Component {
           noText={t('Go Back')}
           yesText={t('Next')}
           importVaultFileName={
-            <ErrorOutlineOutlinedIcon style={{ color: '#858B9C', fontSize: '60px' }} />
+            <ErrorOutlineOutlinedIcon style={{ color: '#858B9C', fontSize: '70px' }} />
           }
           msg={t('Make sure you have saved the seed phrase.')}
         />

@@ -54,7 +54,7 @@ const DialogContentText = withStyles(() => ({
   root: {
     wordBreak: 'break-all',
     fontSize: '12px',
-    'line-height': 3,
+    'line-height': 2,
   },
 }))(MuiDialogContentText);
 
@@ -85,7 +85,9 @@ export default function AlertDailog({
         </DialogTitle>
         <DialogContent>
           <DialogContentText align="center">{importVaultFileName}</DialogContentText>
-          <DialogContentText align="center">{msg}</DialogContentText>
+          <DialogContentText align="center" className="dialog-msg">
+            {msg}
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <div className="button-primary">
