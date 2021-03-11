@@ -49,7 +49,7 @@ export default class CrustApp extends Component {
       'display-none': !isDeveloperMode,
     });
     const CrustNetworkStatusClassNames = classnames({
-      'display-none': isConnected,
+      'display-none': true,
       'crust-network-status': !isConnected,
     });
     const CrustSettingsClassNames = classnames({

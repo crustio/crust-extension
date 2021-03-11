@@ -6,6 +6,7 @@ import FontRegular from '../../components/common/fonts/font-regular';
 import CrustPassword from '../../components/common/password/crust-password';
 import * as Account from '../../constants/account';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
+import { shortenFilename } from '../../services/wallet-service';
 import './styles.css';
 
 class ImportJson extends Component {
@@ -83,6 +84,7 @@ class ImportJson extends Component {
     const {
       filename, jsonPwd, walletPwd, fileError
     } = this.state;
+    const filenameShow = filename && filename.length > 18 ? shortenFilename(filename) : filename;
     return (
       <div className="import-json-container">
         <div className="import-json-content-container">
@@ -99,9 +101,9 @@ class ImportJson extends Component {
             <div className="import-json-select-container">
               <div className="import-json-file-container">{t('Choose File')}</div>
               <div data-tip={filename || t('No file chosen')} className="import-json-filename">
-                {filename || t('No file chosen')}
+                {filenameShow || t('No file chosen')}
               </div>
-              <ReactTooltip effect="solid" place="bottom" />
+              <ReactTooltip effect="solid" place="bottom" className="import-json-tooltip" />
             </div>
           </label>
           {fileError !== '' ? (

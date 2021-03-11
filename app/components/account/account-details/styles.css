@@ -1,5 +1,5 @@
 .account-alias {
-  font-size: 28px;
+  font-size: 16px;
   line-height: 27px;
   max-width: 150px;
   white-space: nowrap;
@@ -8,7 +8,7 @@
 }
 
 .account-address {
-  font-size: 12px;
+  font-size: 14px;
   width: 90px;
 }
 

@@ -1,12 +1,25 @@
 import * as Types from './action-types';
 import { ACCOUNT_MENU_OPTIONS } from '../../constants/options';
 
+const cruDefault = {
+  balance: '0',
+  decimals: 12,
+  tokenName: 'CRU',
+  tokenSymbol: 'CRU',
+};
+
+const candyDefault = {
+  balance: '0',
+  decimals: 12,
+  tokenName: 'Candy',
+  tokenSymbol: 'Candy',
+};
 const initialState = {
   accountMenu: ACCOUNT_MENU_OPTIONS,
   transactions: [],
   pendingTransfers: [],
-  tokens: [],
-  token: undefined
+  tokens: [cruDefault, candyDefault],
+  token: undefined,
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,15 +42,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ...{
-          tokens: action.tokens
-        }
+          tokens: action.tokens,
+        },
       };
     case Types.UPDATE_SELECTED_TOKEN:
       return {
         ...state,
         ...{
-          token: action.token
-        }
+          token: action.token,
+        },
       };
     default:
       return state;

@@ -12,3 +12,7 @@
 .button-square-icon {
   width: 16px;
 }
+
+.button-square:hover {
+  background: #F28600;
+}

@@ -14,6 +14,7 @@ class TokenDetails extends Component {
       marketData,
       amount,
       t,
+      labelText,
       ...otherProps
     } = this.props;
     return (
@@ -24,6 +25,7 @@ class TokenDetails extends Component {
           balance={`${balance}`}
           amount={amount}
           marketData={marketData}
+          labelText={labelText}
         />
         <TokenDetailFooter
           className="token-detail-footer"

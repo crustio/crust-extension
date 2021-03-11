@@ -19,7 +19,7 @@ class Dashboard extends Component {
     super(props);
     this.textInput = React.createRef();
     this.state = {
-      labels: ['Assets', 'Activity'],
+      labels: ['Assets', 'Activities'],
       value: 0,
     };
   }
@@ -30,15 +30,15 @@ class Dashboard extends Component {
   };
 
   handleSend = () => {
-    if (!this.props.isConnected) {
-      this.props.connectionError();
-    } else {
-      this.setDefaultToken();
-      this.props.getUnits();
-      this.props.resetToAddress();
-      this.props.updateBackupPage(this.props.page);
-      this.props.changePage(TRANSFER_PAGE);
-    }
+    // if (!this.props.isConnected) {
+    //   this.props.connectionError();
+    // } else {
+    this.setDefaultToken();
+    // this.props.getUnits();
+    this.props.resetToAddress();
+    this.props.updateBackupPage(this.props.page);
+    this.props.changePage(TRANSFER_PAGE);
+    // }
   };
 
   handleDeposit = () => {
@@ -137,6 +137,7 @@ class Dashboard extends Component {
               amount={amount}
               handleSend={this.handleSend}
               handleDeposit={this.handleDeposit}
+              labelText="Transferrable"
             />
           </div>
         </div>
@@ -149,7 +150,6 @@ class Dashboard extends Component {
               onTokenSelected={this.onTokenSelected}
             />
           </div>
-          
         )}
         {value === 1 && (
           <Transaction
@@ -162,7 +162,7 @@ class Dashboard extends Component {
         <div
           style={{
             position: 'absolute',
-            top: '524px',
+            top: '544px',
             justifyContent: 'space-between',
             display: 'flex',
             width: '100%',
