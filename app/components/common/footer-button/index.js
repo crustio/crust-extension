@@ -10,7 +10,7 @@ export default class FooterButton extends Component {
       <div
         style={{
           position: 'absolute',
-          top: '524px',
+          top: '544px',
           alignSelf: 'center',
           justifyContent: 'center',
           display: 'flex',
@@ -18,7 +18,9 @@ export default class FooterButton extends Component {
         }}
         {...otherProps}
       >
-        <ButtonXL disabled={disabled} onClick={onClick} custom={custom}>{name}</ButtonXL>
+        <ButtonXL disabled={disabled} onClick={onClick} custom={custom}>
+          {name}
+        </ButtonXL>
       </div>
     );
   }

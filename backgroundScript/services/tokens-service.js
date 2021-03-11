@@ -4,9 +4,6 @@ import { BAD_REQUEST } from '../../lib/constants/api';
 import { getCurrentAccount } from './store/account-store';
 import { getCurrentNetwork } from './network-service';
 import { getApi, getTokenDecimals } from '../apis/chain';
-import { getStore } from '../store/store-provider';
-import { updateTransactionState } from './transaction-service';
-import * as Transaction from '../../lib/constants/transaction';
 
 const candyTemplate = {
   network: null,
@@ -68,20 +65,4 @@ export const signCandyTransaction = async (transaction, password) => {
     .signAsync(accountPair, { nonce });
 
   return signedT;
-};
-
-export const sendCandyTransaction = async (transactionObj, signedTransaction, txnHash) => {
-  signedTransaction.send(async result => {
-    if (result.status.isFinalized) {
-      await updateTransactionState(transactionObj, txnHash, Transaction.SUCCESS);
-    }
-    if (result.status.isDropped || result.status.isInvalid || result.status.isUsurped) {
-      await updateTransactionState(transactionObj, txnHash, Transaction.FAIL);
-    }
-  });
-
-  const {
-    transactionState: { transaction },
-  } = getStore().getState();
-  return transaction;
 };

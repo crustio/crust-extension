@@ -127,6 +127,7 @@ class TokenDetailsPage extends Component {
           network={network}
           isLinkToFaucet={isLinkToFaucet}
           transactions={transDisplay}
+          listHeight="280px"
         />
       </div>
     );
