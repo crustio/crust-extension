@@ -44,6 +44,7 @@ class CreateAddressBook extends Component {
     const {
       address, fname, lname, network
     } = this.state;
+    const { t } = this.props;
     const { isFnameError, fnameErrorMessage } = this.validateFname(fname);
     this.setState({
       isFnameError,
@@ -65,7 +66,7 @@ class CreateAddressBook extends Component {
         fname,
         lname,
         network,
-      });
+      }, t);
     }
   };
 

@@ -58,8 +58,9 @@ class TokenDetailsPage extends Component {
   };
 
   onCopyAddress = () => {
+    const { t } = this.props;
     this.props.createToast({
-      message: copyAccountMessage(),
+      message: t(copyAccountMessage()),
       type: 'info',
     });
   };

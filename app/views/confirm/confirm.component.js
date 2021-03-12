@@ -33,7 +33,7 @@ class Confirm extends Component {
   };
 
   handleSend = async () => {
-    const { confirmDetails, submitTransaction, isNewAddress } = this.props;
+    const { confirmDetails, submitTransaction, isNewAddress, t } = this.props;
     const { password } = this.state;
     const tx = await submitTransaction(confirmDetails, password);
 
@@ -47,7 +47,7 @@ class Confirm extends Component {
     if (result.isNewAddress === true) {
       this.props.updateToAddress(tx.metadata.to);
       this.props.createToast({
-        message: `Transfer submitted with ${shortenAddress(tx.txnHash)}`,
+        message: t("transferSubmitted", { var: shortenAddress(tx.txnHash) }),
         onClick: this.openAddressBook,
         type: 'addAddress',
         toastType: 'info',
@@ -55,7 +55,7 @@ class Confirm extends Component {
       });
     } else {
       this.props.createToast({
-        message: `Transfer submitted with ${shortenAddress(tx.txnHash)}`,
+        message: t("transferSubmitted", { var: shortenAddress(tx.txnHash) }),
         type: 'info',
       });
     }

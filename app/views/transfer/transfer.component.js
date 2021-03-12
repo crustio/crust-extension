@@ -182,9 +182,9 @@ class Transfer extends Component {
           amount={amount}
           buttonText={buttonTextT}
           isToError={isToAddressError}
-          toErrorText={toAddressErrorMessage}
+          toErrorText={t(toAddressErrorMessage)}
           isAmountError={isAmountError}
-          amountErrorText={toAmountErrorMessage}
+          amountErrorText={t(toAmountErrorMessage)}
           handleAmountChange={this.handleAmountChange}
           handleToChange={this.handleToChange}
           handleSendButton={this.handleSendButton}

@@ -37,8 +37,9 @@ class ConnectRequest extends Component {
   };
 
   onCopyAddress = () => {
+    const { t } = this.props;
     this.props.createToast({
-      message: copyAccountMessage(),
+      message: t(copyAccountMessage()),
       type: 'info',
     });
   };
@@ -60,7 +61,7 @@ class ConnectRequest extends Component {
 
   render() {
     const { request, title, t } = this.props;
-    const content = 'is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access to any account.';
+    const content = 'is requesting access to an account. Click Allow to grant access any account or click Deny to prevent access to any account.';
     return (
       <div>
         <SubHeader title={t(title)} />

@@ -9,6 +9,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-size: 14px;
+  margin-top: 12px;
 }
 
 .import-json-content-container {
@@ -22,7 +24,6 @@
 }
 
 .import-json-label {
-  margin-top: 12px;
   color: #111A34;
   font-size: 14px;
 }
@@ -96,4 +97,24 @@
 .import-json-tooltip {
   max-width: 300px;
   overflow-wrap: break-word;
+}
+
+.import-json-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.import-json-text1 {
+  margin-top: 16px;
+  margin-bottom: 5px;
+  color: #FF8D00;
+  font-size: 12px;
+}
+
+.import-json-text2 {
+  margin-top: 16px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  color: #FF8D00;
+  font-size: 12px;
 }

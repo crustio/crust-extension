@@ -41,7 +41,8 @@ class ManageAccount extends Component {
   };
 
   onCopy = () => {
-    this.props.createToast({ message: copyAccountMessage(), type: 'info' });
+    const { t } = this.props;
+    this.props.createToast({ message: t(copyAccountMessage()), type: 'info' });
   };
 
   handleAddAccount = async () => {
@@ -50,10 +51,11 @@ class ManageAccount extends Component {
   };
 
   handleChangeAccount = async (e, account) => {
+    const { t } = this.props;
     if (e.target.tagName === 'DIV') {
-      this.props.createToast({ message: copyAccountMessage(), type: 'info' });
+      this.props.createToast({ message: t(copyAccountMessage()), type: 'info' });
     } else {
-      await this.props.changeAccount(account);
+      await this.props.changeAccount(account, t);
       this.props.changePage(DASHBOARD_PAGE);
     }
   };
@@ -87,8 +89,8 @@ class ManageAccount extends Component {
 
   handleYes = () => {
     const { account } = this.state;
-    const { removeAccount } = this.props;
-    removeAccount(account);
+    const { removeAccount, t } = this.props;
+    removeAccount(account, t);
     this.setState({ isOpen: false });
   };
 
@@ -101,11 +103,9 @@ class ManageAccount extends Component {
     const theme = chain.icon || 'polkadot';
     const options = accounts.length > 1
       ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
-        // eslint-disable-next-line
-            o.text = t(o.text);
-        return o;
+        return {...o, text: t(o.text)};
       })
-      : ACCOUNT_MANAGEMENT_OPTIONS.filter(o => o.value !== REMOVE.value);
+      : ACCOUNT_MANAGEMENT_OPTIONS.filter(o => o.value !== REMOVE.value).map(o => ({...o, text: o.text}));
 
     return (
       <div className="manage-accounts-root-container">

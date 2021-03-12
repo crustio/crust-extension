@@ -13,7 +13,8 @@ class QRCode extends Component {
   };
 
   onCopy = () => {
-    this.props.createToast({ message: copyAccountMessage(), type: 'info' });
+    const { t } = this.props;
+    this.props.createToast({ message: t(copyAccountMessage()), type: 'info' });
   };
 
   render() {

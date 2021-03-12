@@ -122,7 +122,7 @@ const createTransactionObj = transaction => {
     to, account, amount, unit, fAmount, fees, totalAmount, network, tokenSelected
   } = transaction;
 
-  const feeStr = convertBalanceToShow(fees.totalFee, ChainApi.getTokenDecimals(), 9) + ChainApi.getTokenSymbol();
+  const feeStr = convertBalanceToShow(fees.totalFee, ChainApi.getTokenDecimals(), ChainApi.getTokenDecimals()) + ChainApi.getTokenSymbol();
   const amountStr = convertBalanceToShow(fAmount, tokenSelected.decimals, tokenSelected.decimals) + tokenSelected.tokenSymbol;
 
   let total = convertBalanceToShow(totalAmount.toString(), tokenSelected.decimals, tokenSelected.decimals) + tokenSelected.tokenSymbol;
@@ -149,7 +149,7 @@ const createTransactionObj = transaction => {
   return newTransactionObject;
 };
 
-const getTokenBalance = async (senderAddress, token) => {
+export const getTokenBalance = async (senderAddress, token) => {
   if (token.tokenSymbol === ChainApi.getTokenSymbol()) {
     const { balance } = await getBalance(senderAddress);
     return balance;
@@ -159,7 +159,7 @@ const getTokenBalance = async (senderAddress, token) => {
   return balance;
 }
 
-const isValidTokenAmount = async (balanceInBN, totalAmount, network, famountInBN, feeInBN, token, senderAddress) => {
+export const isValidTokenAmount = async (balanceInBN, totalAmount, network, famountInBN, feeInBN, token, senderAddress) => {
   if (token.tokenSymbol === ChainApi.getTokenSymbol()) {
     return isValidTxnAmount(balanceInBN, totalAmount, network);
   } else if (token.tokenSymbol === 'Candy') {
@@ -171,7 +171,7 @@ const isValidTokenAmount = async (balanceInBN, totalAmount, network, famountInBN
   }
 }
 
-const getFeesByPaymentInfo = async (txnType, senderAddress, toAddress, amountInBn, tokenSelected) => {
+export const getFeesByPaymentInfo = async (txnType, senderAddress, toAddress, amountInBn, tokenSelected) => {
   switch (txnType) {
     case Transaction.TRANSFER_COINS: {
       if (tokenSelected.tokenSymbol === ChainApi.getTokenSymbol() || tokenSelected.tokenSymbol === 'Candy') {

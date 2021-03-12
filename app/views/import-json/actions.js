@@ -17,7 +17,7 @@ export const updateWalletPwdError = walletPwdError => ({
   walletPwdError,
 });2
 
-export const createAccountWithJson = (json, oldPwd, password) => async dispatch => {
+export const createAccountWithJson = (json, oldPwd, password, t) => async dispatch => {
   try {
     dispatch(AppActions.updateAppLoading(true));
     const account = await Account.createAccountWithJson(
@@ -27,7 +27,7 @@ export const createAccountWithJson = (json, oldPwd, password) => async dispatch 
       password,
     );
     const { alias: newAlias } = account;
-    dispatch(createToast({ message: onCreateAccount(newAlias), type: 'success' }));
+    dispatch(createToast({ message: t("onCreateAccount", {var: newAlias}), type: 'success' }));
     dispatch(setAndStartOnBoarding());
   } catch (e) {
     if (e.message.indexOf('json') > -1) {

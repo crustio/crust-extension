@@ -3,13 +3,13 @@ import * as NavConstants from '../../constants/navigation';
 import { changePage } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
 
-export const submitContact = contact => async dispatch => {
+export const submitContact = (contact, t) => async dispatch => {
   try {
     await AccountApi.submitContact(contact);
     dispatch(changePage(NavConstants.DASHBOARD_PAGE));
     dispatch(
       createToast({
-        message: 'contact added successfully.',
+        message: t('contact added successfully.'),
         type: 'success',
       }),
     );

@@ -11,12 +11,12 @@ export const getContacts = () => async dispatch => {
   }
 };
 
-export const removeContact = contactToRemove => async dispatch => {
+export const removeContact = (contactToRemove, t) => async dispatch => {
   try {
     const { fname } = contactToRemove;
     await Account.removeContact(contactToRemove);
     AccountActions.fetchAndSetContacts(dispatch);
-    dispatch(createToast({ message: onRemoveAddress(fname), type: 'success' }));
+    dispatch(createToast({ message: t("onRemoveAddress", { var: fname }), type: 'success' }));
   } catch (e) {
     dispatch(createToast({ message: 'Error removing address', type: 'error' }));
   }

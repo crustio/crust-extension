@@ -49,14 +49,16 @@ class AddressBook extends Component {
     this.props.updateBackupPage(NavConstants.DASHBOARD_PAGE);
   };
 
-  onCopy = () => {
-    this.props.createToast({ message: copyAccountMessage(), type: 'info' });
+  onCopyAddress = () => {
+    const { t } = this.props;
+    this.props.createToast({ message: t(copyAccountMessage()), type: 'info' });
   };
 
   handelChangeToAddress = async (e, account) => {
+    const { t } = this.props;
     if (this.props.backupPage === NavConstants.TRANSFER_PAGE) {
       if (e.target.tagName === 'DIV') {
-        this.props.createToast({ message: copyAccountMessage(), type: 'info' });
+        this.props.createToast({ message: t(copyAccountMessage()), type: 'info' });
       } else {
         const { address } = account;
         if (address) {
@@ -93,8 +95,8 @@ class AddressBook extends Component {
 
   handleYes = () => {
     const { contact } = this.state;
-    const { removeContact } = this.props;
-    removeContact(contact);
+    const { removeContact, t } = this.props;
+    removeContact(contact, t);
     this.setState({ isOpen: false });
   };
 
@@ -106,15 +108,11 @@ class AddressBook extends Component {
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     const optionsHeader = ADDRESS_BOOK_MENU_OPTIONS.map(o => {
-      // eslint-disable-next-line
-      o.text = t(o.text);
-      return o;
+      return {...o, text: o.text};
     });
 
     const options = ADDRESS_BOOK_OPTIONS.map(o => {
-      // eslint-disable-next-line
-      o.text = t(o.text);
-      return o;
+      return {...o, text: o.text};
     });
     const headerTextT = t(headerText);
     return (

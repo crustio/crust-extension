@@ -7,6 +7,9 @@ import {
   isValidTxnAmount,
   getTxnError,
   updateTransactionState,
+  getFeesByPaymentInfo,
+  getTokenBalance,
+  isValidTokenAmount
 } from './transaction-service';
 import * as TXAPI from '../apis/tx';
 import { getMetaCalls, getApi } from '../apis/chain';
@@ -79,7 +82,7 @@ const createTxnUIObject = async txnPayload => {
     json,
   } = decodedMethod;
   const note = meta.documentation.join(' ');
-  const { dest, value } = json.args;
+  const { dest, value, target, amount } = json.args;
 
   return {
     address,
@@ -91,8 +94,8 @@ const createTxnUIObject = async txnPayload => {
     tip: formatNumber(tip),
     sectionName,
     method: `${sectionName}.${methodName}`,
-    dest,
-    value: bnToBn(value),
+    dest: sectionName === 'candy' ? target : dest,
+    value: sectionName === 'candy' ? bnToBn(amount) : bnToBn(value),
     note,
   };
 };
@@ -116,15 +119,17 @@ export const validateDappTransaction = async transaction => {
 
   // creating txnForUI object
   const txnForUI = await createTxnUIObject(txnPayload);
-  const { address, value, dest } = txnForUI;
+  const { address, value, dest, sectionName } = txnForUI;
 
   // get Txn Fees.
   const transactionLength = Transaction.SIGNATURE_SIZE;
   const txnType = Transaction.TRANSFER_COINS;
-  const fees = await getTransactionFees(txnType, address, dest, transactionLength); // in femto
+  const tokenSelected = {tokenSymbol: sectionName === 'candy' ? 'Candy' : 'CRU'};
+  const fees = await getFeesByPaymentInfo(txnType, address, dest, new BN(value), tokenSelected); // in femto
+  const balance = await getTokenBalance(address, tokenSelected); // in femto
+  const { totalFee } = fees;
   const totalAmount = new BN(value).add(new BN(fees.totalFee));
   // get current balance
-  const { balance } = await getBalance(address); // in femto
   const balanceInBN = new BN(balance);
 
   const newTransaction = {
@@ -139,7 +144,7 @@ export const validateDappTransaction = async transaction => {
   };
 
   // check for sufficient balance
-  const isValidAmount = isValidTxnAmount(balanceInBN, totalAmount, network);
+  const isValidAmount = await isValidTokenAmount(balanceInBN, totalAmount, network, new BN(value), new BN(totalFee), tokenSelected, address);
   if (!isValidAmount) {
     txnError.isError = true;
     txnError.isAmountError = true;
