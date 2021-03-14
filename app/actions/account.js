@@ -2,6 +2,7 @@ import * as AccountActionTypes from '../constants/account';
 import * as AddressBookActionTypes from '../constants/address-book';
 import { Account } from '../api';
 import { getDummyBalanceObject } from '../utils/helper';
+import { FAILURE } from '../../lib/constants/api'
 
 export const updateAccountList = accounts => ({
   type: AccountActionTypes.ADD_ACCOUNT,
@@ -49,6 +50,11 @@ export const fetchAndSetBalances = async (dispatch, getState) => {
   const { accounts, account } = getState().accountReducer;
   const addrArray = accounts.map(({ address }) => address);
   const { result: balances } = await Account.getCurrentBalance(addrArray);
+  balances.forEach(bal => {
+    if (bal.status === FAILURE) {
+      bal.balance = '-';
+    }
+  });
   const balObj = balances.find(acc => acc.address === account.address);
   // Link Faucets with No Transaction yet.
   dispatch(updateAccountBalance(balances));

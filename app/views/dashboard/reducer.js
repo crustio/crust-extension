@@ -2,14 +2,14 @@ import * as Types from './action-types';
 import { ACCOUNT_MENU_OPTIONS } from '../../constants/options';
 
 const cruDefault = {
-  balance: '0',
+  balance: '-',
   decimals: 12,
   tokenName: 'CRU',
   tokenSymbol: 'CRU',
 };
 
 const candyDefault = {
-  balance: '0',
+  balance: '-',
   decimals: 12,
   tokenName: 'Candy',
   tokenSymbol: 'Candy',

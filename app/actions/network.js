@@ -10,6 +10,7 @@ import { updateAppLoading } from '../containers/actions';
 import { getTransactions, getTokens } from '../views/dashboard/actions';
 import { createFullNetworkURL } from '../../lib/services/network-validator';
 import AppConfig from '../../lib/constants/config';
+import { FAILURE } from '../../lib/constants/api'
 
 export const updateNetworkList = networks => ({
   type: NetworkActionTypes.UPDATE_NETWORK_LIST,
@@ -147,7 +148,7 @@ export const restoreNetwork = async (dispatch, getState) => {
   const { network } = getState().networkReducer;
   const { balance } = getState().accountReducer;
 
-  if (balance.status >= 400) {
+  if (balance.status === FAILURE || balance.balance === '-') {
     await Network.restoreCurrentNetwork(network);
   }
 };

@@ -132,6 +132,7 @@
 
   "Insufficient Balance": "Insufficient Balance",
   "Invalid Address": "Invalid Address",
+  "Network error. Please check network.": "Network error. Please check network.",
 
   "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it."
 }

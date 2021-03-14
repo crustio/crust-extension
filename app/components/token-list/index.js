@@ -29,7 +29,7 @@ export default class TokenList extends Component {
             <div className="token-item-right">
               <FontRegular
                 className="token-item-details-amount"
-                text={convertBalanceToShow(token.balance, token.decimals)}
+                text={token.balance === '-' ? '-' : convertBalanceToShow(token.balance, token.decimals)}
               />
               <div style={{ display: 'flex' }}>
                 <ArrowForwardIosOutlinedIcon className="token-item-icon" />

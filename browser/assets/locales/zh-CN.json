@@ -133,6 +133,7 @@
 
   "Insufficient Balance": "余额不足",
   "Invalid Address": "错误的账户地址",
+  "Network error. Please check network.": "网络错误，请检查网络状态。",
 
   "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "助记词用来生成账户，请确保其存储安全，并且不要分享。"
 }
