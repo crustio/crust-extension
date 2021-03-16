@@ -58,8 +58,9 @@ class TokenDetailsPage extends Component {
   };
 
   onCopyAddress = () => {
+    const { t } = this.props;
     this.props.createToast({
-      message: copyAccountMessage(),
+      message: t(copyAccountMessage()),
       type: 'info',
     });
   };
@@ -113,7 +114,7 @@ class TokenDetailsPage extends Component {
           <TokenDetails
             unit={token.tokenSymbol}
             className="token-container"
-            balance={convertBalanceToShow(token.balance, token.decimals)}
+            balance={token.balance === '-' ? '-' : convertBalanceToShow(token.balance, token.decimals)}
             marketData={undefined}
             amount={convertBalanceToShow(token.balance, token.decimals)}
             handleSend={this.handleSend}

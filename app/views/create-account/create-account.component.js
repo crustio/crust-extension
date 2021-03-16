@@ -174,9 +174,9 @@ class CreateAccount extends Component {
       isOpen: false,
     });
     const { alias, password, importedSeedPhrase } = this.state;
-    const { seedWords } = this.props;
+    const { seedWords, t } = this.props;
     const word = this.state.formValue === Account.IMPORT_ACCOUNT ? importedSeedPhrase : seedWords;
-    this.props.createFirstAccountWithSeedPhrase(word, alias, password);
+    this.props.createFirstAccountWithSeedPhrase(word, alias, password, t);
   };
 
   handelConfirm = () => {

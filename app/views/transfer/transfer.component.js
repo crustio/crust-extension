@@ -106,7 +106,7 @@ class Transfer extends Component {
   handleSendButton = () => {
     const { amount, unit, dropDownSelected } = this.state;
     const { toAddress } = this.props;
-    if (toAddress !== '' && amount !== '' && amount !== undefined) {
+    if (toAddress !== '' && amount !== '' && amount !== undefined && dropDownSelected.balance !== '-') {
       this.props.confirmTransaction(
         toAddress,
         this.props.account,
@@ -125,6 +125,11 @@ class Transfer extends Component {
       if (amount === '' || amount === undefined) {
         error.isAmountError = true;
         error.toAmountErrorMessage = this.props.t('Please input amount.');
+      }
+
+      if (dropDownSelected.balance === '-') {
+        error.isAmountError = true;
+        error.toAmountErrorMessage = this.props.t('Network error. Please check network.');
       }
       this.props.setTransferValidationError(error);
     }
@@ -182,9 +187,9 @@ class Transfer extends Component {
           amount={amount}
           buttonText={buttonTextT}
           isToError={isToAddressError}
-          toErrorText={toAddressErrorMessage}
+          toErrorText={t(toAddressErrorMessage)}
           isAmountError={isAmountError}
-          amountErrorText={toAmountErrorMessage}
+          amountErrorText={t(toAmountErrorMessage)}
           handleAmountChange={this.handleAmountChange}
           handleToChange={this.handleToChange}
           handleSendButton={this.handleSendButton}

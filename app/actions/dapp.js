@@ -30,7 +30,12 @@ const openDashboard = () => async dispatch => {
   dispatch(updateNetworkStatus(false));
   dispatch(AccountActions.setInitialBalance);
   await promiseTimeout(3000, dispatch(AccountActions.fetchAndSetBalances), {});
-  await promiseTimeout(5000, dispatch(restoreNetwork), {});
+  try {
+    await promiseTimeout(5000, dispatch(restoreNetwork), {});
+  } catch (e) {
+    console.log(e);
+  }
+  
   await dispatch(getTransactions);
   dispatch(getUnits());
   await promiseTimeout(3000, dispatch(getTokens), {});

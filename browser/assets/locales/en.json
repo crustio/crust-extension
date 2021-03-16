@@ -89,7 +89,7 @@
   "Connect Request": "Connect Request",
   "Deny": "Deny",
   "Allow": "Allow",
-  "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.": "is requesting access to a/an account. Click allow to grant access any account or click DENY to prevent access toany account.",
+  "is requesting access to an account. Click Allow to grant access any account or click Deny to prevent access to any account.": "is requesting access to an account. Click Allow to grant access any account or click Deny to prevent access to any account.",
 
   "Please input address.": "Please input address.",
   "Please input amount.": "Please input amount.",
@@ -97,7 +97,8 @@
   "Choose File": "Choose File",
   "No file chosen": "No file chosen",
   "Enter the password previously used to encrypt this account": "Enter the password previously used to encrypt this account",
-  "Enter the password for this wallet": "Enter the password for this wallet",
+  "Enter the password for": "Enter the password for",
+  "the wallet": "the wallet",
   "The JSON file will be re-encripted by this password": "The JSON file will be re-encripted by this password",
   "Json File is required": "Json File is required",
 
@@ -119,6 +120,19 @@
   "Link": "Link",
   "Website": "Website",
   "Terms of Use": "Terms of Use",
+
+  "Address copied.": "Address copied.",
+  "Message copied to clipboard": "Message copied to clipboard",
+  "onCreateAccount": "{{ var }} created successfully.",
+  "onRemoveAccount": "{{ var }} removed successfully.",
+  "onUpdateCurrentAccount": "{{ var }} selected as successfully.",
+  "onRemoveAddress": "{{ var }} removed successfully.",
+  "contact added successfully.": "contact added successfully.",
+  "transferSubmitted": "Transfer submitted with {{ var }}",
+
+  "Insufficient Balance": "Insufficient Balance",
+  "Invalid Address": "Invalid Address",
+  "Network error. Please check network.": "Network error. Please check network.",
 
   "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it."
 }

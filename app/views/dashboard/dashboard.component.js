@@ -70,8 +70,9 @@ class Dashboard extends Component {
   };
 
   onCopyAddress = () => {
+    const { t } = this.props;
     this.props.createToast({
-      message: copyAccountMessage(),
+      message: t(copyAccountMessage()),
       type: 'info',
     });
   };
@@ -132,7 +133,7 @@ class Dashboard extends Component {
             <TokenDetails
               unit={network.unit !== undefined ? network.unit : unit !== undefined ? unit.text : ''}
               className="token-container"
-              balance={convertBalanceToShow(defaultToken.balance, defaultToken.decimals)}
+              balance={defaultToken.balance === '-' ? '-' : convertBalanceToShow(defaultToken.balance, defaultToken.decimals)}
               marketData={marketData && marketData}
               amount={amount}
               handleSend={this.handleSend}

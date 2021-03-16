@@ -16,12 +16,12 @@ export const balanceObjOnTimeout = addresses => addresses.map(address => ({ addr
 export const getDummyBalanceObject = ({ accounts, account }) => {
   const balances = accounts.map(account => ({
     address: account.address,
-    balance: '0',
+    balance: '-',
     balanceFormatted: '0',
   }));
   const balance = {
     address: account.address,
-    balance: '0',
+    balance: '-',
     balanceFormatted: '0',
   };
   return { balances, balance };

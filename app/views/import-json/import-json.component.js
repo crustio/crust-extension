@@ -7,6 +7,7 @@ import CrustPassword from '../../components/common/password/crust-password';
 import * as Account from '../../constants/account';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { shortenFilename } from '../../services/wallet-service';
+import { CHINESE } from '../../constants/language';
 import './styles.css';
 
 class ImportJson extends Component {
@@ -68,7 +69,7 @@ class ImportJson extends Component {
       return;
     }
 
-    this.props.createAccountWithJson(file, jsonPwd, walletPwd);
+    this.props.createAccountWithJson(file, jsonPwd, walletPwd, t);
   };
 
   onLoad = (event, file) => {
@@ -80,7 +81,7 @@ class ImportJson extends Component {
   };
 
   render() {
-    const { t, jsonPwdError, walletPwdError } = this.props;
+    const { t, jsonPwdError, walletPwdError, language } = this.props;
     const {
       filename, jsonPwd, walletPwd, fileError
     } = this.state;
@@ -88,24 +89,25 @@ class ImportJson extends Component {
     return (
       <div className="import-json-container">
         <div className="import-json-content-container">
-          <label className="import-json-label" htmlFor="file">
-            <FileInput
-              id="file"
-              readAs="text"
-              onLoad={this.onLoad.bind(this)}
-              style={{
-                display: 'none',
-              }}
-              accept="application/json"
-            />
-            <div className="import-json-select-container">
+          <div className="import-json-select-container">
+            <label className="import-json-label" htmlFor="file">
+              <FileInput
+                id="file"
+                readAs="text"
+                onLoad={this.onLoad.bind(this)}
+                style={{
+                  display: 'none',
+                }}
+                accept="application/json"
+              />
               <div className="import-json-file-container">{t('Choose File')}</div>
-              <div data-tip={filename || t('No file chosen')} className="import-json-filename">
-                {filenameShow || t('No file chosen')}
-              </div>
-              <ReactTooltip effect="solid" place="bottom" className="import-json-tooltip" />
+            </label>
+            <div data-tip={filename || t('No file chosen')} className="import-json-filename">
+              {filenameShow || t('No file chosen')}
             </div>
-          </label>
+          </div>
+          
+          <ReactTooltip effect="solid" place="bottom" className="import-json-tooltip" />
           {fileError !== '' ? (
             <div className="json-file-error-msg">{fileError}</div>
           ) : (
@@ -126,10 +128,40 @@ class ImportJson extends Component {
           ) : (
             <div className="place-holder"> </div>
           )}
-          <FontRegular
-            className="import-json-text import-json-text-margin1"
-            text={`${t('Enter the password for this wallet')}:`}
-          />
+
+          {
+            language === CHINESE ?
+            <div className="import-json-row">
+              <FontRegular
+                className="import-json-text import-json-text-margin1"
+                text="请输入"
+              />
+              <FontRegular
+                className="import-json-text1"
+                text="此钱包"
+              />
+              <FontRegular
+                className="import-json-text import-json-text-margin1"
+                text="的密码:"
+              />
+            </div>
+            : 
+            <div className="import-json-row">
+              <FontRegular
+                className="import-json-text import-json-text-margin1"
+                text="Enter the password for"
+              />
+              <FontRegular
+                className="import-json-text2"
+                text="the wallet"
+              />
+              <FontRegular
+                className="import-json-text import-json-text-margin1"
+                text=":"
+              />
+            </div>
+          }
+          
           <CrustPassword
             className="import-json-password"
             onChange={e => this.handleOnChange('walletPwd', e)}

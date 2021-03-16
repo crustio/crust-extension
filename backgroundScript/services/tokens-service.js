@@ -1,6 +1,6 @@
 import keyring from '@polkadot/ui-keyring';
 import { BN } from 'bn.js';
-import { BAD_REQUEST } from '../../lib/constants/api';
+import { BAD_REQUEST, SUCCESS, FAILURE } from '../../lib/constants/api';
 import { getCurrentAccount } from './store/account-store';
 import { getCurrentNetwork } from './network-service';
 import { getApi, getTokenDecimals } from '../apis/chain';
@@ -33,8 +33,10 @@ export const getCandyToken = async () => {
   try {
     const balance = await getApi().query.candy.balances(currentAccount.address);
     token.balance = balance.toString();
+    token.status = SUCCESS;
   } catch (e) {
     token.balance = '0';
+    token.status = FAILURE;
   }
 
   return token;

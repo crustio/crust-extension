@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import * as RequestType from '../../../lib/constants/request-types';
 import Send from '../../components/dapp/send';
@@ -10,7 +11,7 @@ import {
 import { createAccountObject, createTxnUI } from '../../services/wallet-service';
 import './styles.css';
 
-export default class DAppRequests extends Component {
+class DAppRequests extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,8 +34,9 @@ export default class DAppRequests extends Component {
   };
 
   onCopyAddress = () => {
+    const { t } = this.props;
     this.props.createToast({
-      message: copyAccountMessage(),
+      message: t(copyAccountMessage()),
       type: 'info',
     });
   };
@@ -73,7 +75,7 @@ export default class DAppRequests extends Component {
   };
 
   renderRequests() {
-    const { requests, accounts, balances } = this.props;
+    const { requests, accounts, balances, t } = this.props;
     // Use for toggle
     const { isInfoExpanded, errorText, password } = this.state;
     return (
@@ -98,9 +100,9 @@ export default class DAppRequests extends Component {
                   txnUi={createTxnUI(request.result.txnForUI)}
                   errorMessage={
                     request.result.isError && request.result.isAmountError
-                      ? request.result.toAmountErrorMessage
+                      ? t(request.result.toAmountErrorMessage)
                       : request.result.isToAddressError
-                        ? request.result.toAddressErrorMessage
+                        ? t(request.result.toAddressErrorMessage)
                         : null
                   }
                   onCopyData={this.onCopyData}
@@ -149,3 +151,5 @@ export default class DAppRequests extends Component {
     );
   }
 }
+
+export default withTranslation()(DAppRequests);

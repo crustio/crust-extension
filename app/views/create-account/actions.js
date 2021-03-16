@@ -39,7 +39,7 @@ export const setAndStartOnBoarding = () => async dispatch => {
   await dispatch(onBoard());
 };
 
-export const createFirstAccountWithSeedPhrase = (seedPhrase, alias, password) => async (
+export const createFirstAccountWithSeedPhrase = (seedPhrase, alias, password, t) => async (
   dispatch,
   getState,
 ) => {
@@ -54,7 +54,7 @@ export const createFirstAccountWithSeedPhrase = (seedPhrase, alias, password) =>
       password !== '' ? password : undefined,
     );
     const { alias: newAlias } = account;
-    dispatch(createToast({ message: onCreateAccount(newAlias), type: 'success' }));
+    dispatch(createToast({ message: t("onCreateAccount", { var: newAlias }), type: 'success' }));
     dispatch(createFirstAccountWithSeedPhraseSuccess());
     dispatch(setAndStartOnBoarding());
     dispatch(createFirstAccountWithSeedPhraseError(null));

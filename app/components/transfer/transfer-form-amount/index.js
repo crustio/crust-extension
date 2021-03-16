@@ -35,7 +35,7 @@ class TransferFormAmount extends Component {
           <DropDown className="transfer-form-amount-dropdown" options={options} value={dropDownValue} onChange={onDropDownChange} />
         </div>
 
-        <FontRegular className="transfer-form-amount-balance" text={`${t('Balance')}:  ${convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)}`} />
+        <FontRegular className="transfer-form-amount-balance" text={`${t('Balance')}:  ${dropDownValue.balance === '-' ? '-' : convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)}`} />
 
         <div className="transfer-form-amount-input-container">
           <FontRegular className="transfer-form-amount-input-label" text={`${t('Amount')}:`} />

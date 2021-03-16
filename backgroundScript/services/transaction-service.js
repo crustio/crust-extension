@@ -22,7 +22,8 @@ import { isValidAddress } from './account-service';
 import { validateTxnObject } from '../../lib/services/validation-service';
 import { convertBalanceToShow } from '../../lib/services/numberFormatter';
 import * as ChainApi from '../apis/chain';
-import { getCandyBalance } from './tokens-service';
+import { getCandyToken } from './tokens-service';
+import { FAILURE } from '../../lib/constants/api';
 
 const extension = require('extensionizer');
 
@@ -122,7 +123,7 @@ const createTransactionObj = transaction => {
     to, account, amount, unit, fAmount, fees, totalAmount, network, tokenSelected
   } = transaction;
 
-  const feeStr = convertBalanceToShow(fees.totalFee, ChainApi.getTokenDecimals(), 9) + ChainApi.getTokenSymbol();
+  const feeStr = convertBalanceToShow(fees.totalFee, ChainApi.getTokenDecimals(), ChainApi.getTokenDecimals()) + ChainApi.getTokenSymbol();
   const amountStr = convertBalanceToShow(fAmount, tokenSelected.decimals, tokenSelected.decimals) + tokenSelected.tokenSymbol;
 
   let total = convertBalanceToShow(totalAmount.toString(), tokenSelected.decimals, tokenSelected.decimals) + tokenSelected.tokenSymbol;
@@ -149,21 +150,39 @@ const createTransactionObj = transaction => {
   return newTransactionObject;
 };
 
-const getTokenBalance = async (senderAddress, token) => {
+export const getBalanceWithThrow = async (senderAddress) => {
+  const balance = await getBalance(senderAddress);
+  if (balance.status === FAILURE) {
+    throw new Error('Failed to get balance.');
+  }
+  return balance.balance;
+}
+
+export const getCandyBalanceWithThrow = async (token) => {
+  const candyToken = await getCandyToken(token);
+
+  if (candyToken.status === FAILURE) {
+    throw new Error('Failed to get candy balance.');
+  }
+
+  return candyToken.balance;
+}
+
+export const getTokenBalance = async (senderAddress, token) => {
   if (token.tokenSymbol === ChainApi.getTokenSymbol()) {
-    const { balance } = await getBalance(senderAddress);
+    const balance = await getBalanceWithThrow(senderAddress);
     return balance;
   } 
 
-  const balance = await getCandyBalance(token)
+  const balance = await getCandyBalanceWithThrow(token);
   return balance;
 }
 
-const isValidTokenAmount = async (balanceInBN, totalAmount, network, famountInBN, feeInBN, token, senderAddress) => {
+export const isValidTokenAmount = async (balanceInBN, totalAmount, network, famountInBN, feeInBN, token, senderAddress) => {
   if (token.tokenSymbol === ChainApi.getTokenSymbol()) {
     return isValidTxnAmount(balanceInBN, totalAmount, network);
   } else if (token.tokenSymbol === 'Candy') {
-    const { balance } = await getBalance(senderAddress);
+    const balance = await getBalanceWithThrow(senderAddress);
     const defaultBalance = new BN(balance);
     return balanceInBN.gte(famountInBN) && defaultBalance.gte(feeInBN)
   } else {
@@ -171,7 +190,7 @@ const isValidTokenAmount = async (balanceInBN, totalAmount, network, famountInBN
   }
 }
 
-const getFeesByPaymentInfo = async (txnType, senderAddress, toAddress, amountInBn, tokenSelected) => {
+export const getFeesByPaymentInfo = async (txnType, senderAddress, toAddress, amountInBn, tokenSelected) => {
   switch (txnType) {
     case Transaction.TRANSFER_COINS: {
       if (tokenSelected.tokenSymbol === ChainApi.getTokenSymbol() || tokenSelected.tokenSymbol === 'Candy') {

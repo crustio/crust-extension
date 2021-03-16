@@ -18,7 +18,7 @@ export const addAccount = () => async dispatch => {
   dispatch(AppActions.updateAppLoading(false));
 };
 
-export const changeAccount = account => async dispatch => {
+export const changeAccount = (account, t) => async dispatch => {
   try {
     dispatch(AppActions.updateAppLoading(true));
     const { address, alias } = account;
@@ -28,18 +28,18 @@ export const changeAccount = account => async dispatch => {
     await dispatch(getTransactions);
     await dispatch(getTokens);
     dispatch(AppActions.updateAppLoading(false));
-    dispatch(createToast({ message: onUpdateCurrentAccount(alias), type: 'success' }));
+    dispatch(createToast({ message: t("onUpdateCurrentAccount", { var: alias }), type: 'success' }));
   } catch (e) {
     dispatch(createToast({ message: 'Error selecting current account', type: 'error' }));
   }
 };
 
-export const removeAccount = accountToRemove => async dispatch => {
+export const removeAccount = (accountToRemove, t) => async dispatch => {
   try {
     const { address, alias } = accountToRemove;
     await Account.removeAccount(address);
     AccountActions.fetchAndSetAccounts(dispatch);
-    dispatch(createToast({ message: onRemoveAccount(alias), type: 'success' }));
+    dispatch(createToast({ message: t("onRemoveAccount", {var: alias}), type: 'success' }));
   } catch (e) {
     dispatch(createToast({ message: 'Error removing account', type: 'error' }));
   }

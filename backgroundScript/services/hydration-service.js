@@ -10,7 +10,6 @@ export const hydrateStore = async (latestData, hashKey) => {
       addressBook: { addressBook },
     } = latestData;
     await Promise.all([
-      Store.updateHashKeyState(hashKey),
       Store.updateCurrentAccountState(currentAccount),
       Store.updateWhiteListedDAppsState(whiteListedDApps),
       Store.updatesAccountsState(accounts),

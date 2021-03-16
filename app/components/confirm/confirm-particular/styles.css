@@ -6,4 +6,7 @@
 .confirm-quote-price {
   font-size: 14px;
   color: #858B9C;
+  word-break: break-word;
+  max-width: 200px;
+  text-align: end;
 }

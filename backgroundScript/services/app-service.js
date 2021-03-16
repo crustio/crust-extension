@@ -14,26 +14,32 @@ export const appReady = async hashKey => {
   // load from local Storage
   const data = await StorageService.getLocalStorage();
   const { accounts } = data;
-  // Sign IN
-  if (accounts !== undefined) {
-    // Start Migration Script
-    const latestData = await MigrationService.startMigration(data, hashKey);
-    const {
-      network: { currentNetwork },
-    } = latestData;
-    await hydrateStore(latestData, hashKey);
-    // define Polkadot Api
-    await API.connectToApi(currentNetwork);
-  } else {
-    // Sign UP
-    await Promise.all([
-      Store.updateHashKeyState(hashKey),
-      Store.updateAppState(),
-      Store.updateCurrentNetworkState(DEFAULT_NETWORK),
-    ]);
-    await API.connectToApi(DEFAULT_NETWORK);
+  try {
+    // Sign IN
+    if (accounts !== undefined) {
+      // Start Migration Script
+      const latestData = await MigrationService.startMigration(data, hashKey);
+      const {
+        network: { currentNetwork },
+      } = latestData;
+      await hydrateStore(latestData, hashKey);
+      // define Polkadot Api
+      await API.connectToApi(currentNetwork);
+      await Store.updateHashKeyState(hashKey);
+    } else {
+      // Sign UP
+      await Promise.all([
+        Store.updateHashKeyState(hashKey),
+        Store.updateAppState(),
+        Store.updateCurrentNetworkState(DEFAULT_NETWORK),
+      ]);
+      await API.connectToApi(DEFAULT_NETWORK);
+    }
+    return hashKey;
+  } catch (e) {
+    return undefined;
   }
-  return hashKey;
+  
 };
 
 export const setAppIsOnBoarded = async () => {
