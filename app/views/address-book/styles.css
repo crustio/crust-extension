@@ -1,0 +1,45 @@
+.address-book-root-container {
+  height: 550px;
+  background: #F7F7FA;
+}
+
+.empty-address-book-container {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding-top: 16px;
+}
+
+.manage-address-book {
+  height: 480px;
+  overflow: hidden;
+  position: relative;
+  margin: 0 16px;
+}
+.manage-address-book-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: -5px; /* Increase/Decrease this value for cross-browser compatibility */
+  overflow-y: scroll;
+}
+.address-book-container {
+  display: flex;
+  flex-direction: column;
+  color: #000000;
+  width: 100%;
+  align-self: center;
+}
+
+.empty-list-text {
+  margin: 20px 34.5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.address-book-add-button {
+  width: 100%;
+  padding-bottom: 30px;
+  text-align: center;
+  vertical-align: bottom;
+}

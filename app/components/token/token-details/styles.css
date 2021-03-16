@@ -1,0 +1,13 @@
+.token-balance {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #111A34;
+}
+
+.token-detail-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 16px;
+}

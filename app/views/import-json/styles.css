@@ -1,0 +1,120 @@
+.import-json-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #F7F7FA;
+  height: 550px;
+}
+
+.import-json-select-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.import-json-content-container {
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin: 0 16px;
+  height: 455px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.import-json-label {
+  color: #111A34;
+  font-size: 14px;
+}
+
+.import-json-file-container {
+  padding: 9px 12px;
+  border-radius: 4px;
+  border: 1px solid #C5CAD5;
+  margin-right: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.import-json-filename {
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.import-json-file-container:hover {
+  background: #eee;
+}
+
+.import-json-text {
+  font-size: 12px;
+  color: #858B9C;
+}
+
+.import-json-text-margin1 {
+  margin-top: 16px;
+  margin-bottom: 5px;
+}
+
+.import-json-text-margin2 {
+  margin-top: 5px;
+}
+
+.import-json-password {
+  display: flex;
+  width: 100%;
+  color: #858B9C
+}
+
+.import-json-password fieldset {
+  border: 0;
+  font-size: 14px;
+  background: #F0F1F5;
+}
+
+.import-json-password:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.json-file-text-color {
+  color: #FF8D00;
+}
+
+.json-file-error-msg {
+  color: #FA5050;
+  height: 20px;
+  margin-top: 10px;
+}
+  
+.json-file-place-holder {
+  height: 20px;
+  margin-top: 10px
+}
+
+.import-json-tooltip {
+  max-width: 300px;
+  overflow-wrap: break-word;
+}
+
+.import-json-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.import-json-text1 {
+  margin-top: 16px;
+  margin-bottom: 5px;
+  color: #FF8D00;
+  font-size: 12px;
+}
+
+.import-json-text2 {
+  margin-top: 16px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  color: #FF8D00;
+  font-size: 12px;
+}

@@ -1,0 +1,10 @@
+.transfer-from-to-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.transfer-to-container {
+  margin-top: 10.8px;
+  padding-left: 16px;
+  padding-right: 16px;
+}

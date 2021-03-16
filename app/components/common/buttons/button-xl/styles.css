@@ -1,0 +1,26 @@
+.button-xl button {
+  font-size: 14px;
+  font-family: "Inter-Bold";
+  font-style: normal;
+  height: 38px;
+  width: 320px;
+  color: #FF8D00;
+  border-radius: 4px;
+  border: 1px solid #FF8D00;
+  text-transform: none;
+}
+
+.button-xl button:disabled, .button-xl button[disabled] {
+  color: #858B9C;
+  border-radius: 4px;
+  border: 1px solid #C5CAD5;
+}
+
+.button-xl button:hover, .button-xl button[hover] {
+  background: #FF8D00;
+  color: white;
+}
+
+.button-xl-custom1 button {
+  color: white !important;
+}

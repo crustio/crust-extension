@@ -1,0 +1,66 @@
+.confirm-form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.confirm-form-top-container {
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin: 0 16px;
+  padding-bottom: 10px;
+}
+
+.confirm-form-amount-divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.confirm-form-total-amount-divider {
+  width: 100% !important;
+  margin-bottom: 16px;
+}
+
+.confirm-form-amount-container,
+.confirm-form-fee-container,
+.confirm-form-total-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 38.83px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.confirm-form-amount-container {
+  margin-top: 10;
+}
+
+.confirm-form-fee-container {
+  margin-top: 0;
+}
+
+.confirm-form-total-container {
+  margin-top: 0;
+}
+
+.confirm-form-password-container {
+  width: 100%;
+  padding: 0 16px;
+}
+
+.confirm-form-password {
+  display: flex;
+  width: 100%;
+  color: #858B9C;
+}
+
+.confirm-form-password fieldset {
+  border: 0;
+  font-size: 14px;
+  background: #F0F1F5;
+}
+
+.confirm-form-password:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}

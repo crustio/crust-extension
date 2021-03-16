@@ -1,0 +1,19 @@
+.seed-phrase-title {
+  font-family: "Roboto-Regular";
+  font-size: 14px;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 400;
+}
+
+.seed-phrase-description {
+  font-family: "Roboto-Light";
+  font-size: 12px;
+  margin-top: 6px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.seed-phrase-text-area {
+  margin-top: 17px;
+  border: 1px solid #C5CAD5;
+  border-radius: 4px;
+}

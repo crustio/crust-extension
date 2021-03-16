@@ -1,0 +1,44 @@
+.button-primary button {
+    background: transparent;
+    width: 130px;
+    height: 36px;
+    box-shadow: 0 0 0 transparent;
+    font-size: 14px;
+    font-family: "Roboto-Medium";
+    color: #858B9C;
+    border: 1px solid #858B9C;
+    flex-shrink: 1;
+    text-transform: none;
+  }
+  
+  .button-secondary button {
+    background: transparent;
+    color: #FB822A;
+    width: 130px;
+    height: 36px;
+    box-shadow: 0 0 0 transparent;
+    font-size: 14px;
+    font-family: "Roboto-Medium";
+    border: 1px solid #FB822A;
+    flex-shrink: 1;
+    text-transform: none;
+  }
+  
+  .button-md-dashboard button {
+    background-color: #FB822A;
+    color: rgba(255, 255, 255, 1);
+    width: 147.12px;
+    height: 36px;
+    box-shadow: 0 0 0 transparent;
+    font-size: 14px;
+    font-family: "Roboto-Medium";
+  }
+  
+  .button-primary button:hover {
+    background-color: rgba(245, 245, 246, 1);
+  }
+  
+  .button-secondary button:hover {
+    background-color: #FB822A;
+    color: white;
+  }

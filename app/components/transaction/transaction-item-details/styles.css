@@ -1,0 +1,26 @@
+.transfer-item-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.transaction-item-details-amount {
+  font-size: 14px;
+  color: #41485D;
+}
+
+.transaction-item-status-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.transaction-item-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

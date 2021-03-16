@@ -1,0 +1,15 @@
+ 
+.faucets-message{
+  padding: 10px 0;
+}
+.transaction-message-text{
+  font-size: 16px;
+  color: #858B9C;   
+}
+
+.transaction-message-icon {
+  width: 60px !important;
+  height: 60px !important;
+  color: #C5CAD5;
+}
+ 

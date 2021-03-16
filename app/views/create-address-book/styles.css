@@ -1,0 +1,14 @@
+.create-address-book-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.create-address-book-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #F7F7FA;
+  height: 550px;
+}

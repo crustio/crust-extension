@@ -1,0 +1,20 @@
+.transaction-list-container {
+  height: 230px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.transaction-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 45px;
+}
+
+.transactions-header {
+  font-size: 18px;
+  color: #858B9C;
+  padding: 18px;
+  height:54px;
+  border-bottom: 1px solid rgb(227, 227, 227); 
+}

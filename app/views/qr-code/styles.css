@@ -1,0 +1,11 @@
+.qr-code-container {
+  background: #F7F7FA;
+  height: 550px;
+}
+
+.qr-code-form-container {
+  margin: 0 16px;
+  background: white;
+  border-radius: 8px;
+  padding-bottom: 50px;
+}

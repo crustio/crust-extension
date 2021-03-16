@@ -1,0 +1,37 @@
+.manage-accounts-root-container {
+  height: 550px;
+  background: #F7F7FA;
+}
+.manage-accounts {
+  height: 480px;
+  overflow: hidden;
+  position: relative;
+  margin: 0 16px;
+}
+.manage-accounts-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: -5px; /* Increase/Decrease this value for cross-browser compatibility */
+  overflow-y: scroll;
+}
+.accounts-container {
+  display: flex;
+  flex-direction: column;
+  color: #000000;
+  width: 100%;
+  align-self: center;
+}
+
+.transaction-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-add-account-button {
+  width: 100%;
+  padding-bottom: 30px;
+  text-align: center;
+  vertical-align: bottom;
+}

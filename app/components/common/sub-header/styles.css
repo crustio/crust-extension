@@ -1,0 +1,40 @@
+.sub-header-shadow {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.sub-header-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 21px 16px 21px 0px;
+  height: 55.53px;
+  color: #858B9C;
+}
+
+.sub-header-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.sub-header-title {
+  align-self: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  margin-left: 5px;
+  width: 240px;
+}
+
+.sub-header-icon {
+  align-self: center;
+  justify-content: center;
+}
+
+.more-list-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  margin-left: 5px;
+  cursor: pointer;
+}

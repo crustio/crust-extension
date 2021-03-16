@@ -1,0 +1,18 @@
+.wallet-multiline-input {
+  width: 297px;
+  height: 100px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Roboto-Regular";
+  font-size: 16px;
+  padding: 18px;
+  transition: border-color 200ms ease-in-out;
+}
+
+.wallet-multiline-error {
+  border-color: #ff0000;
+  opacity: 0.6;
+}
+.wallet-multiline-error::placeholder {
+  color: #ff0000;
+  opacity: 0.6;
+}

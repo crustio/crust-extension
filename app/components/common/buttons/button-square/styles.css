@@ -1,0 +1,18 @@
+.button-square {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  background: #FF8D00;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.button-square-icon {
+  width: 16px;
+}
+
+.button-square:hover {
+  background: #F28600;
+}

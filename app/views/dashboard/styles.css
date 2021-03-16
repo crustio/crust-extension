@@ -1,0 +1,89 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #F7F7FA;
+  height: 550px;
+}
+
+.account-container {
+  background-image: url("../../../app/images/crust-home-bg.svg");
+  background-repeat: no-repeat;
+}
+
+.account-content-container {
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin: 0 16px;
+  height: 203px;
+}
+
+.wallet-container {
+  display: flex;
+  flex-direction: row;
+  color: #111A34;
+  height: 75px;
+  width: 100%;
+  padding: 18px 18px 13px 19px;
+}
+
+.token-container {
+  display: flex;
+  flex-direction: column;
+  height: 142px;
+  width: 100%;
+  padding: 4px 18px 16px 18px;
+}
+
+.tab-container {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-item {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  height: 24px;
+}
+
+.transaction-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.token-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-footer {
+  color: white;
+  text-decoration: none;
+  line-height: 38px;
+  text-align: center;
+  font-family: "Roboto-Regular";
+  font-size: 14px;
+  background: #FF8D00;
+  border-radius: 4px;
+  width: 278px;
+  height: 100%;
+  font-weight: bold;
+}
+
+.dashboard-footer:hover {
+  background: #F28600;
+}
+
+.dashboard-icon {
+  margin-left: 15px;
+  font-size: 14px !important;
+}
+
+.dashboard-lock-button {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  background: #FF8D00;
+}

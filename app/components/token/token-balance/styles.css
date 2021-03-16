@@ -1,0 +1,14 @@
+.token-balance-unit {
+  font-size: 40px;
+  text-transform: none;
+  line-height: 56px;
+  align-self: flex-start;
+  justify-self: flex-start;
+}
+
+.token-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}

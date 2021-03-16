@@ -1,0 +1,8 @@
+.token-details-page-container {
+  display: flex;
+  flex-direction: column;
+  background: #F7F7FA;
+  height: 550px;
+}
+
+

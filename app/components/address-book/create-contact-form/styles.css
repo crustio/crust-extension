@@ -1,0 +1,66 @@
+.create-address-book-top {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 16px 16px 100px 16px;
+}
+
+.contact-fname-input-container {
+  margin-top: 22.7px;
+}
+
+.contact-fname-input {
+  width: 100%;
+}
+
+.contact-fname-input fieldset {
+  border: 0;
+  font-size: 14px;
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.contact-fname-input:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.contact-fname-input-meter {
+  margin-top: 50px;
+}
+
+.contact-lname-input-container {
+  margin-top: 22.7px;
+}
+
+.contact-lname-input {
+  width: 100%;
+}
+
+.contact-lname-input fieldset {
+  border: 0;
+  font-size: 14px;
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.contact-lname-input:focus-within fieldset {
+  background-color: transparent;
+  border: 2px solid #ECEDEF !important;
+}
+
+.contact-lname-input-meter {
+  margin-top: 50px;
+}
+
+.contact-network-dropdown {
+  margin: 22.7px 0 0 0 !important;
+}
+
+.error-msg {
+  color: #FA5050;
+  height: 20px;
+}
+
+.place-holder {
+  height: 20px;
+}
