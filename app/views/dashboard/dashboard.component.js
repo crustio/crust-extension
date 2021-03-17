@@ -138,7 +138,7 @@ class Dashboard extends Component {
               amount={amount}
               handleSend={this.handleSend}
               handleDeposit={this.handleDeposit}
-              labelText="Transferrable"
+              labelText={t('Transferrable')}
             />
           </div>
         </div>
