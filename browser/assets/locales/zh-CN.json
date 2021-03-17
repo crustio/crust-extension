@@ -18,6 +18,7 @@
   "Click to copy": "拷贝",
   "Address Book": "地址簿",
   "Language Setting": "语言",
+  "Transferrable": "可转账的",
 
   "Create A Password To Secure Your Account": "创建密码来保护您的账户",
   "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.": "此密码用来保护您的助记词，以防Chrome浏览器扩展获取它们。",
