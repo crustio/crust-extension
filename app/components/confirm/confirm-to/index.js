@@ -8,7 +8,7 @@ export default class ConfirmTo extends Component {
     return (
       <div {...otherProps}>
         <Avatar theme={theme} size={44} value={address} />
-        <Address style={{ marginLeft: '22px' }} hash={address} />
+        <Address style={{ marginLeft: '22px', fontSize: '14px' }} hash={address} />
       </div>
     );
   }
