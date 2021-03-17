@@ -10,6 +10,15 @@ Crust wallet is currently a work in progress, so changes will occur.
 - NodeJS >= v11
 - Yarn latest
 
+### Installation with zip
+
+Download extension zip file from https://github.com/crustio/crust-extension/releases
+- Unzip the zip file downloaded
+- Open chrome browser and Go to chrome://extensions
+- Enable developer mode
+- Click "Load Unpacked Extension"
+- Navigate to the unzipped folder and click Ok to install the extension
+
 ### Installation
 
 Execute the following to clone, install dependencies, and run a development server:
