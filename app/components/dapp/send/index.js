@@ -97,24 +97,23 @@ class Send extends Component {
             {errorMessage && <FontRegular text={errorMessage} className="send-error" />}
           </WalletExpansionPanel>
         </div>
-        
         <CrustPassword
-            className="confirm-form-password"
-            onChange={e => handleOnChange('password', e)}
-            password={password}
-            placeholder={t('Wallet Password')}
-          />
-          {errorText !== '' ? (
-            <div className="error-msg">{t(errorText)}</div>
-          ) : (
-            <div className="place-holder"> </div>
-          )}
+          className="confirm-form-password"
+          onChange={e => handleOnChange('password', e)}
+          password={password}
+          placeholder={t('Wallet Password')}
+        />
+        {errorText !== '' ? (
+          <div className="error-msg">{t(errorText)}</div>
+        ) : (
+          <div className="place-holder"> </div>
+        )}
         <FooterWithTwoButton
-            onNextClick={onAllow}
-            onBackClick={onCancel}
-            backButtonName={t('Cancel')}
-            nextButtonName={t('Allow')}
-          />
+          onNextClick={onAllow}
+          onBackClick={onCancel}
+          backButtonName={t('Cancel')}
+          nextButtonName={t('Allow')}
+        />
       </div>
     );
   }

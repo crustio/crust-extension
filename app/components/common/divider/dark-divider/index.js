@@ -9,6 +9,7 @@ export default class DarkDivider extends Component {
         style={{
           width: '100vw',
           height: '1px',
+          // eslint-disable-next-line
           backgroundColor: background ? background : 'rgba(227, 227, 227, 1)',
           ...style,
         }}

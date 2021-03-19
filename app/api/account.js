@@ -130,11 +130,11 @@ export const exportAccount = async (address, pwd) => {
   return { result };
 };
 
-export const verifyPassword = async (password) => {
+export const verifyPassword = async password => {
   const { message, status, result } = await sendMessage({
     type: MessageTypes.BG_ACCOUNTS_VERIFY_PASSWORD,
     password,
   });
   throwIfNoSuccess({ message, status });
   return { result };
-}
+};

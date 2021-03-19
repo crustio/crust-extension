@@ -102,10 +102,11 @@ class ManageAccount extends Component {
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
     const options = accounts.length > 1
-      ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => {
-        return {...o, text: t(o.text)};
-      })
-      : ACCOUNT_MANAGEMENT_OPTIONS.filter(o => o.value !== REMOVE.value).map(o => ({...o, text: o.text}));
+      ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => ({ ...o, text: t(o.text) }))
+      : ACCOUNT_MANAGEMENT_OPTIONS.filter(o => o.value !== REMOVE.value).map(o => ({
+        ...o,
+        text: o.text,
+      }));
 
     return (
       <div className="manage-accounts-root-container">

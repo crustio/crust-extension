@@ -2,7 +2,6 @@ import * as CreateAccountActionTypes from './action-types';
 import { Account, OnBoarding } from '../../api';
 import { onBoard } from '../../actions/initialize';
 import { createToast } from '../../constants/toast';
-import { onCreateAccount } from '../../../lib/services/static-message-factory-service';
 import { updateAppLoading } from '../../containers/actions';
 import * as APIConstants from '../../../lib/constants/api';
 
@@ -54,7 +53,7 @@ export const createFirstAccountWithSeedPhrase = (seedPhrase, alias, password, t)
       password !== '' ? password : undefined,
     );
     const { alias: newAlias } = account;
-    dispatch(createToast({ message: t("onCreateAccount", { var: newAlias }), type: 'success' }));
+    dispatch(createToast({ message: t('onCreateAccount', { var: newAlias }), type: 'success' }));
     dispatch(createFirstAccountWithSeedPhraseSuccess());
     dispatch(setAndStartOnBoarding());
     dispatch(createFirstAccountWithSeedPhraseError(null));

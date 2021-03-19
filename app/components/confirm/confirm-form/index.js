@@ -4,7 +4,7 @@ import DarkDivider from '../../common/divider/dark-divider';
 import FooterButton from '../../common/footer-button';
 import ConfirmParticular from '../confirm-particular';
 import ConfirmFromTo from '../confirm-from-to';
-import CrustPassword from '../../common/password/crust-password'
+import CrustPassword from '../../common/password/crust-password';
 import './styles.css';
 
 class ConfirmForm extends Component {
@@ -25,13 +25,17 @@ class ConfirmForm extends Component {
       password,
       errorText,
       handleOnChange,
-      t
+      t,
     } = this.props;
     return (
       <div className="confirm-form-container">
         <div className="confirm-form-top-container">
           <ConfirmFromTo to={to} theme={theme} from={address} alias={alias} />
-          <DarkDivider className="confirm-form-amount-divider" background="#E2E4EA" style={{ width: '100%' }}/>
+          <DarkDivider
+            className="confirm-form-amount-divider"
+            background="#E2E4EA"
+            style={{ width: '100%' }}
+          />
           <ConfirmParticular
             className="confirm-form-amount-container"
             description={t('Amount')}
@@ -47,7 +51,11 @@ class ConfirmForm extends Component {
             description={t('Total')}
             price={`${totalTransferAmount}`}
           />
-          <DarkDivider className="confirm-form-total-amount-divider" background="#E2E4EA" style={{ width: '100%' }}/>
+          <DarkDivider
+            className="confirm-form-total-amount-divider"
+            background="#E2E4EA"
+            style={{ width: '100%' }}
+          />
           <div className="confirm-form-password-container">
             <CrustPassword
               className="confirm-form-password"
@@ -62,9 +70,6 @@ class ConfirmForm extends Component {
             )}
           </div>
         </div>
-
-        
-
         <FooterButton onClick={handleSend} name={buttonText} />
       </div>
     );

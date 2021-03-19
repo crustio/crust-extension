@@ -33,9 +33,10 @@ const openDashboard = () => async dispatch => {
   try {
     await promiseTimeout(5000, dispatch(restoreNetwork), {});
   } catch (e) {
+    // eslint-disable-next-line
     console.log(e);
   }
-  
+
   await dispatch(getTransactions);
   dispatch(getUnits());
   await promiseTimeout(3000, dispatch(getTokens), {});
