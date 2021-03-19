@@ -81,7 +81,9 @@ class ImportJson extends Component {
   };
 
   render() {
-    const { t, jsonPwdError, walletPwdError, language } = this.props;
+    const {
+      t, jsonPwdError, walletPwdError, language
+    } = this.props;
     const {
       filename, jsonPwd, walletPwd, fileError
     } = this.state;
@@ -106,7 +108,6 @@ class ImportJson extends Component {
               {filenameShow || t('No file chosen')}
             </div>
           </div>
-          
           <ReactTooltip effect="solid" place="bottom" className="import-json-tooltip" />
           {fileError !== '' ? (
             <div className="json-file-error-msg">{fileError}</div>
@@ -128,40 +129,22 @@ class ImportJson extends Component {
           ) : (
             <div className="place-holder"> </div>
           )}
-
-          {
-            language === CHINESE ?
+          {language === CHINESE ? (
             <div className="import-json-row">
-              <FontRegular
-                className="import-json-text import-json-text-margin1"
-                text="请输入"
-              />
-              <FontRegular
-                className="import-json-text1"
-                text="此钱包"
-              />
-              <FontRegular
-                className="import-json-text import-json-text-margin1"
-                text="的密码:"
-              />
+              <FontRegular className="import-json-text import-json-text-margin1" text="请输入" />
+              <FontRegular className="import-json-text1" text="此钱包" />
+              <FontRegular className="import-json-text import-json-text-margin1" text="的密码:" />
             </div>
-            : 
+          ) : (
             <div className="import-json-row">
               <FontRegular
                 className="import-json-text import-json-text-margin1"
                 text="Enter the password for"
               />
-              <FontRegular
-                className="import-json-text2"
-                text="the wallet"
-              />
-              <FontRegular
-                className="import-json-text import-json-text-margin1"
-                text=":"
-              />
+              <FontRegular className="import-json-text2" text="the wallet" />
+              <FontRegular className="import-json-text import-json-text-margin1" text=":" />
             </div>
-          }
-          
+          )}
           <CrustPassword
             className="import-json-password"
             onChange={e => this.handleOnChange('walletPwd', e)}

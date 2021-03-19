@@ -2,7 +2,7 @@ import * as AccountActionTypes from '../constants/account';
 import * as AddressBookActionTypes from '../constants/address-book';
 import { Account } from '../api';
 import { getDummyBalanceObject } from '../utils/helper';
-import { FAILURE } from '../../lib/constants/api'
+import { FAILURE } from '../../lib/constants/api';
 
 export const updateAccountList = accounts => ({
   type: AccountActionTypes.ADD_ACCOUNT,
@@ -52,6 +52,7 @@ export const fetchAndSetBalances = async (dispatch, getState) => {
   const { result: balances } = await Account.getCurrentBalance(addrArray);
   balances.forEach(bal => {
     if (bal.status === FAILURE) {
+      // eslint-disable-next-line no-param-reassign
       bal.balance = '-';
     }
   });

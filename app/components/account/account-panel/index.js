@@ -53,12 +53,11 @@ export default class AccountPanel extends Component {
             onAliasInputBlur(selectedAccount);
           }}
         />
-        {
-          accountMenu && accountMenu.length > 0 && <WalletDropDownIcon onClick={this.handleClick} className="account-list-icon" />
-        }
-        {
-          accountMenu && accountMenu.length > 0
-          && <CrustMenu
+        {accountMenu && accountMenu.length > 0 && (
+          <WalletDropDownIcon onClick={this.handleClick} className="account-list-icon" />
+        )}
+        {accountMenu && accountMenu.length > 0 && (
+          <CrustMenu
             options={accountMenu}
             onChange={option => {
               onAccountMenuOptionsChange(option, selectedAccount);
@@ -66,8 +65,7 @@ export default class AccountPanel extends Component {
             anchorEl={anchorEl}
             onClose={this.handleClose}
           />
-        }
-        
+        )}
       </div>
     );
   }

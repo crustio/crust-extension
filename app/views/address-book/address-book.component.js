@@ -107,13 +107,9 @@ class AddressBook extends Component {
     } = this.state;
     const chain = findChainByName(network.value);
     const theme = chain.icon || 'polkadot';
-    const optionsHeader = ADDRESS_BOOK_MENU_OPTIONS.map(o => {
-      return {...o, text: o.text};
-    });
+    const optionsHeader = ADDRESS_BOOK_MENU_OPTIONS.map(o => ({ ...o, text: o.text }));
 
-    const options = ADDRESS_BOOK_OPTIONS.map(o => {
-      return {...o, text: o.text};
-    });
+    const options = ADDRESS_BOOK_OPTIONS.map(o => ({ ...o, text: o.text }));
     const headerTextT = t(headerText);
     return (
       <div className="address-book-root-container">
