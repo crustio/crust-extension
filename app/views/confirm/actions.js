@@ -19,14 +19,13 @@ export const submitTransaction = (confirmDetails, password) => async dispatch =>
     if (e.message === 'Password is incorrect.') {
       dispatch(updateAppLoading(false));
       return e.message;
-    } else {
-      dispatch(
-        createToast({
-          message: 'Error submitting transaction',
-          type: 'error',
-        }),
-      );
     }
+    dispatch(
+      createToast({
+        message: 'Error submitting transaction',
+        type: 'error',
+      }),
+    );
   }
   dispatch(changePage(DASHBOARD_PAGE));
   dispatch(clearTransferDetails());

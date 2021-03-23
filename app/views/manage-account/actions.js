@@ -2,10 +2,6 @@ import { Account } from '../../api';
 import * as AccountActions from '../../actions/account';
 import * as AppActions from '../../containers/actions';
 import { createToast } from '../../constants/toast';
-import {
-  onRemoveAccount,
-  onUpdateCurrentAccount,
-} from '../../../lib/services/static-message-factory-service';
 import { getTransactions, getTokens } from '../dashboard/actions';
 
 export const resetSeedWordsBeforeImport = () => async dispatch => {
@@ -28,7 +24,9 @@ export const changeAccount = (account, t) => async dispatch => {
     await dispatch(getTransactions);
     await dispatch(getTokens);
     dispatch(AppActions.updateAppLoading(false));
-    dispatch(createToast({ message: t("onUpdateCurrentAccount", { var: alias }), type: 'success' }));
+    dispatch(
+      createToast({ message: t('onUpdateCurrentAccount', { var: alias }), type: 'success' }),
+    );
   } catch (e) {
     dispatch(createToast({ message: 'Error selecting current account', type: 'error' }));
   }
@@ -39,7 +37,7 @@ export const removeAccount = (accountToRemove, t) => async dispatch => {
     const { address, alias } = accountToRemove;
     await Account.removeAccount(address);
     AccountActions.fetchAndSetAccounts(dispatch);
-    dispatch(createToast({ message: t("onRemoveAccount", {var: alias}), type: 'success' }));
+    dispatch(createToast({ message: t('onRemoveAccount', { var: alias }), type: 'success' }));
   } catch (e) {
     dispatch(createToast({ message: 'Error removing account', type: 'error' }));
   }

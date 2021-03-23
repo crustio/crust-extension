@@ -63,7 +63,7 @@ class DAppRequests extends Component {
     const ret = await this.props.allowRequest(request, this.state.password);
     if (ret === 'Password is incorrect.') {
       this.setState({
-        errorText: ret
+        errorText: ret,
       });
       return;
     }
@@ -75,7 +75,9 @@ class DAppRequests extends Component {
   };
 
   renderRequests() {
-    const { requests, accounts, balances, t } = this.props;
+    const {
+      requests, accounts, balances, t
+    } = this.props;
     // Use for toggle
     const { isInfoExpanded, errorText, password } = this.state;
     return (

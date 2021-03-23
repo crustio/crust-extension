@@ -3,7 +3,7 @@ import * as RequestType from '../../../lib/constants/request-types';
 import * as DAppService from '../../services/dapp-service';
 import { onBoard } from '../../actions/initialize';
 import { setNetwork } from '../../actions/network';
-import { verifyPassword } from '../../api/account'
+import { verifyPassword } from '../../api/account';
 
 export const cancelDAppRequest = request => async dispatch => {
   await cancelRequest(request);
@@ -28,7 +28,7 @@ export const allowRequest = (request, password) => async dispatch => {
       return err.message;
     }
   }
-  
+
   dispatch(onBoard());
 };
 
