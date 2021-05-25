@@ -1,13 +1,10 @@
 import { SI, findSi } from '@polkadot/util/format/si';
-import addressDefaults from '@polkadot/util-crypto/address/defaults';
-import { u32 as U32 } from '@polkadot/types';
-import registry from './type-Registry';
 import keyring from '@polkadot/ui-keyring';
 
 const femtoUnit = findSi('f');
 const units = SI.filter(x => x.power >= femtoUnit.power);
-const DEFAULT_SS58 = new U32(registry, addressDefaults.prefix);
-const DEFAULT_DECIMALS = new U32(registry, 15);
+const DEFAULT_SS58 = 42;
+const DEFAULT_DECIMALS = 15;
 
 let keyringInited = false;
 
@@ -15,39 +12,53 @@ const Chain = {
   units,
   baseUnit: units[0],
   tokenSymbol: '',
-  ss58Format: 42,
-  tokenDecimals: 15,
+  ss58Format: DEFAULT_SS58,
+  tokenDecimals: DEFAULT_DECIMALS,
   metadata: undefined,
   api: undefined,
 };
 
+function parseProps(prop) {
+  try {
+    const mProp = JSON.parse(prop.toHuman());
+    if (mProp && mProp instanceof Array) {
+      return mProp[0];
+    }
+    return mProp;
+  } catch (e) {
+    const p = prop.toString();
+    if (p.startsWith('[') && p.endsWith(']')) return p.substr(1, p.length - 2);
+    return p;
+  }
+}
+
 export const setChain = async api => {
   try {
     const { ss58Format, tokenDecimals, tokenSymbol } = await api.rpc.system.properties();
-    const ss58 = ss58Format.unwrapOr(DEFAULT_SS58).toNumber();
+    const chainSS58 = parseProps(ss58Format);
+    const decimals = parseProps(tokenDecimals);
+    const symbol = parseProps(tokenSymbol);
+    const mSS58 = chainSS58 !== null ? Number(chainSS58) : DEFAULT_SS58;
+    const mDecimals = decimals !== null ? Number(decimals) : DEFAULT_DECIMALS;
+    const mSymbol = symbol !== null ? `${symbol}` : 'CRU';
 
+    Chain.ss58Format = mSS58;
     Chain.api = api;
-    const units = SI.filter(x => x.power >= -tokenDecimals);
+    const units = SI.filter(x => x.power >= -mDecimals);
     Chain.units = units;
     // eslint-disable-next-line prefer-destructuring
     Chain.baseUnit = units[0];
-    Chain.tokenSymbol = 'CRU';
-    Chain.tokenDecimals = tokenDecimals.unwrapOr(DEFAULT_DECIMALS).toNumber();
-    if (ss58) {
-      Chain.ss58Format = ss58;
-    } else {
-      Chain.ss58Format = 42;
-    }
+    Chain.tokenSymbol = mSymbol;
+    Chain.tokenDecimals = mDecimals;
 
     if (!keyringInited) {
       keyring.loadAll({
         ss58Format: Chain.ss58Format,
-        type: 'ed25519',
+        type: 'sr25519',
       });
 
       keyringInited = true;
     }
-
     Chain.metadata = Buffer.from(api.runtimeMetadata.asCallsOnly.toU8a()).toString('base64');
   } catch (err) {
     throw new Error('error in setUnits');

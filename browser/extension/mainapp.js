@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Root from '../../app/containers/Root';
 import { updateApplicationState } from '../../app/services/watcher-service';
 
+require('./bugfix');
+
 const { state } = {};
 const initialState = JSON.parse(state || '{}');
 

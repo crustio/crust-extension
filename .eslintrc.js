@@ -36,6 +36,7 @@ module.exports = {
     'arrow-parens': 0,
     'react/jsx-no-bind': 0,
     'react/no-danger': 0,
+    'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'no-console': 'error',
     'no-catch-shadow': 'error',
