@@ -141,6 +141,8 @@ export const getAddressWithPassword = (seedWords, keypairType, alias, password) 
     const { address } = keyring.getPair(result.pair.address);
     return address;
   } catch (err) {
+    // eslint-disable-next-line
+    console.error('getAddress--', err);
     throw new Error('Error in Polkadot getAddress');
   }
 };

@@ -34,6 +34,8 @@ function parseProps(prop) {
 
 export const setChain = async api => {
   try {
+    // eslint-disable-next-line
+    console.log('seChain--', 'start');
     const { ss58Format, tokenDecimals, tokenSymbol } = await api.rpc.system.properties();
     const chainSS58 = parseProps(ss58Format);
     const decimals = parseProps(tokenDecimals);
@@ -52,6 +54,8 @@ export const setChain = async api => {
     Chain.tokenDecimals = mDecimals;
 
     if (!keyringInited) {
+      // eslint-disable-next-line
+      console.log('loadAll--', 'start');
       keyring.loadAll({
         ss58Format: Chain.ss58Format,
         type: 'sr25519',
@@ -61,6 +65,8 @@ export const setChain = async api => {
     }
     Chain.metadata = Buffer.from(api.runtimeMetadata.asCallsOnly.toU8a()).toString('base64');
   } catch (err) {
+    // eslint-disable-next-line
+    console.info('setChain--', err);
     throw new Error('error in setUnits');
   }
 };

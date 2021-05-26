@@ -28,6 +28,8 @@ const disconnect = () => {
 
 const connect = async network => {
   const { networkFullUrl, name } = network;
+  // eslint-disable-next-line
+  console.log('--connect--', networkFullUrl, name, connection);
   if (name === 'dotcustom') {
     disconnect();
   }
@@ -40,6 +42,8 @@ const connect = async network => {
       });
       await api.isReadyOrError;
       if (api.isConnected) {
+        // eslint-disable-next-line
+        console.log('connected--', networkFullUrl);
         connection.provider = provider;
         connection.isConnected = api.isConnected;
         connection.api = api;
@@ -47,8 +51,12 @@ const connect = async network => {
         await setChain(api);
         return connection;
       }
+      // eslint-disable-next-line
+      console.error('connect error--', api);
       disconnect();
     } catch (e) {
+      // eslint-disable-next-line
+      console.error('connect error--', e);
       disconnect();
       throw e;
     }
