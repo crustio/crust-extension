@@ -5,8 +5,14 @@ import FontRegular from '../common/fonts/font-regular';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import CruTokenIcon from '../../images/crust-logo.png';
 import CandyTokenIcon from '../../images/candy-icon.svg';
+import CSMTokenIcon from '../../images/csm-icon.svg';
 import './styles.css';
 
+const iconMap = {
+  CRU: CruTokenIcon,
+  Candy: CandyTokenIcon,
+  CSM: CSMTokenIcon,
+};
 export default class TokenList extends Component {
   render() {
     const { tokens, onTokenSelected, ...otherProps } = this.props;
@@ -19,17 +25,15 @@ export default class TokenList extends Component {
             onClick={() => onTokenSelected(token)}
           >
             <div className="token-item-left">
-              <img
-                alt="token-symbol"
-                src={token.tokenSymbol === 'CRU' ? CruTokenIcon : CandyTokenIcon}
-                className="token-icon"
-              />
+              <img alt="token-symbol" src={iconMap[token.tokenSymbol]} className="token-icon" />
               <FontMedium text={token.tokenSymbol} className="token-item-details-symbol" />
             </div>
             <div className="token-item-right">
               <FontRegular
                 className="token-item-details-amount"
-                text={token.balance === '-' ? '-' : convertBalanceToShow(token.balance, token.decimals)}
+                text={
+                  token.balance === '-' ? '-' : convertBalanceToShow(token.balance, token.decimals)
+                }
               />
               <div style={{ display: 'flex' }}>
                 <ArrowForwardIosOutlinedIcon className="token-item-icon" />
