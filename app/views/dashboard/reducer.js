@@ -14,11 +14,19 @@ const candyDefault = {
   tokenName: 'Candy',
   tokenSymbol: 'Candy',
 };
+
+const csmDefault = {
+  balance: '-',
+  decimals: 12,
+  tokenName: 'CSM',
+  tokenSymbol: 'CSM',
+};
+
 const initialState = {
   accountMenu: ACCOUNT_MENU_OPTIONS,
   transactions: [],
   pendingTransfers: [],
-  tokens: [cruDefault, candyDefault],
+  tokens: [cruDefault, candyDefault, csmDefault],
   token: undefined,
 };
 

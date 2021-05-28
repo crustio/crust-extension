@@ -5,7 +5,7 @@
 
 import { BN } from 'bn.js';
 import { getApi } from './api';
-import * as ChainApi from './chain'
+import * as ChainApi from './chain';
 
 export const checkCreationFee = async (toAddress, creationFee) => {
   try {
@@ -39,13 +39,17 @@ export const getExtrinsic = async (recipient, amountInBn, tokenSelected) => {
   if (tokenSelected.tokenSymbol === ChainApi.getTokenSymbol()) {
     const extrinsic = await api.tx.balances.transfer(recipient, amountInBn);
     return extrinsic;
-  } else if (tokenSelected.tokenSymbol === 'Candy') {
+  }
+  if (tokenSelected.tokenSymbol === 'Candy') {
     const extrinsic = await api.tx.candy.transfer(recipient, amountInBn);
     return extrinsic;
-  } else {
-    throw new Error('Invalid Token Type');
   }
-}
+  if (tokenSelected.tokenSymbol === 'CSM') {
+    const extrinsic = await api.tx.csm.transfer(recipient, amountInBn);
+    return extrinsic;
+  }
+  throw new Error('Invalid Token Type');
+};
 export const calculateExtrinsicFees = async (sender, recipient, amountInBn, tokenSelected) => {
   try {
     const extrinsic = await getExtrinsic(recipient, amountInBn, tokenSelected);
@@ -57,7 +61,7 @@ export const calculateExtrinsicFees = async (sender, recipient, amountInBn, toke
     console.log('Error in calculateCandyPartialFees', error);
     return new BN(0);
   }
-}
+};
 
 export const getAllFees = async transactionLength => {
   const api = getApi();

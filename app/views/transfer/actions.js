@@ -38,6 +38,8 @@ export const confirmTransaction = (
   network,
 ) => async dispatch => {
   try {
+    // eslint-disable-next-line
+    console.log('confirmTransaction:1', to);
     dispatch(updateAppLoading(true));
     let ret;
     let n = 0;
@@ -54,7 +56,8 @@ export const confirmTransaction = (
         throw new Error('Time out');
       }
     }
-
+    // eslint-disable-next-line
+    console.log('confirmTransaction:2', tokenSelected);
     const { result: transaction } = await Transaction.confirmTransaction({
       txnType: TRANSFER_COINS,
       to,
@@ -63,6 +66,8 @@ export const confirmTransaction = (
       unit,
       tokenSelected,
     });
+    // eslint-disable-next-line
+    console.log('confirmTransaction:3', transaction);
     if (transaction.isError) {
       dispatch(updateAppLoading(false));
       dispatch(setTransferValidationError(transaction));

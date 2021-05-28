@@ -22,7 +22,7 @@ import { isValidAddress } from './account-service';
 import { validateTxnObject } from '../../lib/services/validation-service';
 import { convertBalanceToShow } from '../../lib/services/numberFormatter';
 import * as ChainApi from '../apis/chain';
-import { getCandyToken } from './tokens-service';
+import { getCandyToken, getCSMToken } from './tokens-service';
 import { FAILURE } from '../../lib/constants/api';
 
 const extension = require('extensionizer');
@@ -120,15 +120,26 @@ export const updateTransactionState = async (transaction, txnHash, txnStatus) =>
 
 const createTransactionObj = transaction => {
   const {
-    to, account, amount, unit, fAmount, fees, totalAmount, network, tokenSelected
+    to,
+    account,
+    amount,
+    unit,
+    fAmount,
+    fees,
+    totalAmount,
+    network,
+    tokenSelected,
   } = transaction;
 
-  const feeStr = convertBalanceToShow(fees.totalFee, ChainApi.getTokenDecimals(), ChainApi.getTokenDecimals()) + ChainApi.getTokenSymbol();
-  const amountStr = convertBalanceToShow(fAmount, tokenSelected.decimals, tokenSelected.decimals) + tokenSelected.tokenSymbol;
+  const feeStr = convertBalanceToShow(fees.totalFee, ChainApi.getTokenDecimals(), ChainApi.getTokenDecimals())
+    + ChainApi.getTokenSymbol();
+  const amountStr = convertBalanceToShow(fAmount, tokenSelected.decimals, tokenSelected.decimals)
+    + tokenSelected.tokenSymbol;
 
-  let total = convertBalanceToShow(totalAmount.toString(), tokenSelected.decimals, tokenSelected.decimals) + tokenSelected.tokenSymbol;
+  let total = convertBalanceToShow(totalAmount.toString(), tokenSelected.decimals, tokenSelected.decimals)
+    + tokenSelected.tokenSymbol;
   if (ChainApi.getTokenSymbol() !== tokenSelected.tokenSymbol) {
-    total = amountStr + ' + ' + feeStr;
+    total = `${amountStr} + ${feeStr}`;
   }
 
   const newTransactionObject = {
@@ -150,15 +161,15 @@ const createTransactionObj = transaction => {
   return newTransactionObject;
 };
 
-export const getBalanceWithThrow = async (senderAddress) => {
+export const getBalanceWithThrow = async senderAddress => {
   const balance = await getBalance(senderAddress);
   if (balance.status === FAILURE) {
     throw new Error('Failed to get balance.');
   }
   return balance.balance;
-}
+};
 
-export const getCandyBalanceWithThrow = async (token) => {
+export const getCandyBalanceWithThrow = async token => {
   const candyToken = await getCandyToken(token);
 
   if (candyToken.status === FAILURE) {
@@ -166,60 +177,111 @@ export const getCandyBalanceWithThrow = async (token) => {
   }
 
   return candyToken.balance;
-}
+};
+
+export const getCsmBalanceWithThrow = async token => {
+  const csmToken = await getCSMToken(token);
+
+  if (csmToken.status === FAILURE) {
+    throw new Error('Failed to get candy balance.');
+  }
+
+  return csmToken.balance;
+};
 
 export const getTokenBalance = async (senderAddress, token) => {
   if (token.tokenSymbol === ChainApi.getTokenSymbol()) {
     const balance = await getBalanceWithThrow(senderAddress);
     return balance;
-  } 
+  }
+  if (token.tokenSymbol === 'Candy') {
+    const balance = await getCandyBalanceWithThrow(token);
+    return balance;
+  }
+  if (token.tokenSymbol === 'CSM') {
+    const balance = await getCsmBalanceWithThrow(token);
+    return balance;
+  }
+};
 
-  const balance = await getCandyBalanceWithThrow(token);
-  return balance;
-}
-
-export const isValidTokenAmount = async (balanceInBN, totalAmount, network, famountInBN, feeInBN, token, senderAddress) => {
+export const isValidTokenAmount = async (
+  balanceInBN,
+  totalAmount,
+  network,
+  famountInBN,
+  feeInBN,
+  token,
+  senderAddress,
+) => {
   if (token.tokenSymbol === ChainApi.getTokenSymbol()) {
     return isValidTxnAmount(balanceInBN, totalAmount, network);
-  } else if (token.tokenSymbol === 'Candy') {
+  }
+  if (token.tokenSymbol === 'Candy' || token.tokenSymbol === 'CSM') {
     const balance = await getBalanceWithThrow(senderAddress);
     const defaultBalance = new BN(balance);
-    return balanceInBN.gte(famountInBN) && defaultBalance.gte(feeInBN)
-  } else {
-    throw new Error('Invalid Token Type');
+    return balanceInBN.gte(famountInBN) && defaultBalance.gte(feeInBN);
   }
-}
+  throw new Error('Invalid Token Type');
+};
 
-export const getFeesByPaymentInfo = async (txnType, senderAddress, toAddress, amountInBn, tokenSelected) => {
+export const getFeesByPaymentInfo = async (
+  txnType,
+  senderAddress,
+  toAddress,
+  amountInBn,
+  tokenSelected,
+) => {
   switch (txnType) {
     case Transaction.TRANSFER_COINS: {
-      if (tokenSelected.tokenSymbol === ChainApi.getTokenSymbol() || tokenSelected.tokenSymbol === 'Candy') {
-        const fees = FeeService.getTrasactionFees(senderAddress, toAddress, amountInBn, tokenSelected);
+      if (
+        tokenSelected.tokenSymbol === ChainApi.getTokenSymbol()
+        || tokenSelected.tokenSymbol === 'Candy'
+        || tokenSelected.tokenSymbol === 'CSM'
+      ) {
+        const fees = FeeService.getTrasactionFees(
+          senderAddress,
+          toAddress,
+          amountInBn,
+          tokenSelected,
+        );
         return fees;
-      } else {
-        throw new Error('Invalid Token Type');
       }
+      throw new Error('Invalid Token Type');
     }
     default:
       throw new Error('Invalid Transaction Type');
   }
-}
+};
 
 const validateAmount = async (senderAddress, network, transaction, seedWords, keypairType) => {
   const {
     to, account, amount, unit, txnType, tokenSelected
   } = transaction;
   // const fAmount = convertUnit(amount.toString(), unit.text, getBaseUnit().text); // converting in femto
-  const fAmount = convertShowToBalance(amount.toString(), tokenSelected)
+  const fAmount = convertShowToBalance(amount.toString(), tokenSelected);
   // TODO MM: Take 0 Signature size to show 10 milli fees like polkadot
   // const transactionLength = await getTxnEncodedLength(to, fAmount, seedWords, keypairType);
   const transactionLength = Transaction.SIGNATURE_SIZE;
-  const fees = await getFeesByPaymentInfo(txnType, senderAddress, to, new BN(fAmount), tokenSelected); // in femto
+  const fees = await getFeesByPaymentInfo(
+    txnType,
+    senderAddress,
+    to,
+    new BN(fAmount),
+    tokenSelected,
+  ); // in femto
   const balance = await getTokenBalance(senderAddress, tokenSelected); // in femto
   const { totalFee } = fees;
   const totalAmount = new BN(fAmount).add(new BN(totalFee));
   const balanceInBN = new BN(balance);
-  const isValidAmount = await isValidTokenAmount(balanceInBN, totalAmount, network, new BN(fAmount), new BN(totalFee), tokenSelected, senderAddress);
+  const isValidAmount = await isValidTokenAmount(
+    balanceInBN,
+    totalAmount,
+    network,
+    new BN(fAmount),
+    new BN(totalFee),
+    tokenSelected,
+    senderAddress,
+  );
   if (isValidAmount) {
     return {
       to,

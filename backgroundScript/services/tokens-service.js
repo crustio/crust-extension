@@ -42,14 +42,54 @@ export const getCandyToken = async () => {
   return token;
 };
 
-export const getTokenList = async () => {
-  const token = await getCandyToken();
+const csmTemplate = {
+  network: null,
+  accountAddress: null,
+  tokenName: 'CSM',
+  tokenSymbol: 'CSM',
+  decimals: '12',
+  balance: '0',
+};
 
-  return [token];
+export const getCSMToken = async () => {
+  const currentAccount = getCurrentAccount();
+  const currentNetwork = getCurrentNetwork();
+
+  if (!currentAccount || !currentNetwork) {
+    return {
+      status: BAD_REQUEST,
+      message: 'Invalid account or network.',
+    };
+  }
+
+  const token = { ...csmTemplate };
+  token.network = currentNetwork;
+  token.accountAddress = currentAccount.address;
+
+  try {
+    const account = await getApi().query.csm.account(currentAccount.address);
+    token.balance = account.free.toString();
+    token.status = SUCCESS;
+  } catch (e) {
+    token.balance = '0';
+    token.status = FAILURE;
+  }
+  return token;
+};
+
+export const getTokenList = async () => {
+  const candy = await getCandyToken();
+  const csm = await getCSMToken();
+  return [candy, csm];
 };
 
 export const getCandyBalance = async () => {
   const token = await getCandyToken();
+  return token.balance;
+};
+
+export const getCSMBalance = async () => {
+  const token = await getCSMToken();
   return token.balance;
 };
 
@@ -64,6 +104,22 @@ export const signCandyTransaction = async (transaction, password) => {
   const nonce = await getApi().rpc.system.accountNextIndex(currentAccount.address);
   const signedT = await getApi()
     .tx.candy.transfer(to, new BN(fAmount))
+    .signAsync(accountPair, { nonce });
+
+  return signedT;
+};
+
+export const signCSMTransaction = async (transaction, password) => {
+  const { to, fAmount } = transaction.metadata;
+
+  const currentAccount = getCurrentAccount();
+  const accountPair = keyring.getPair(currentAccount.address);
+
+  accountPair.decodePkcs8(password);
+
+  const nonce = await getApi().rpc.system.accountNextIndex(currentAccount.address);
+  const signedT = await getApi()
+    .tx.csm.transfer(to, new BN(fAmount))
     .signAsync(accountPair, { nonce });
 
   return signedT;

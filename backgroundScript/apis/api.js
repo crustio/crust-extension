@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { setChain } from './chain';
-import crustTypes from './spec'
+
+const { typesBundleForPolkadot } = require('@crustio/type-definitions');
 
 const connection = {
   isConnected: false,
@@ -26,53 +27,39 @@ const disconnect = () => {
 };
 
 const connect = async network => {
-  let api;
   const { networkFullUrl, name } = network;
+  // eslint-disable-next-line
+  console.log('--connect--', networkFullUrl, name, connection);
   if (name === 'dotcustom') {
     disconnect();
   }
-  if (networkFullUrl !== undefined && networkFullUrl !== null && networkFullUrl !== '') {
-    return new Promise((resolve, reject) => {
-      const provider = new WsProvider(networkFullUrl, false);
-      provider
-        .connect()
-        .then(() => {
-          provider.on('error', () => {
-            provider.disconnect();
-            reject(error);
-          });
-          provider.on('connected', () => {
-            const apiPromise = ApiPromise.create({
-              provider,
-              types: crustTypes,
-            });
-            apiPromise
-              .then(api => {
-                disconnect();
-                connection.provider = provider;
-                connection.isConnected = api.isConnected;
-                connection.api = api;
-                connection.currentNetwork = network;
-                setChain(api)
-                  .then(() => {
-                    resolve(connection);
-                  })
-                  .catch(error => {
-                    disconnect();
-                    reject(error);
-                  });
-              })
-              .catch(() => {
-                disconnect();
-                reject(error);
-              });
-          });
-        })
-        .catch(() => {
-          disconnect();
-          reject(error);
-        });
-    });
+  if (networkFullUrl && networkFullUrl !== '') {
+    try {
+      const provider = new WsProvider(networkFullUrl);
+      const api = new ApiPromise({
+        provider,
+        typesBundle: typesBundleForPolkadot,
+      });
+      await api.isReadyOrError;
+      if (api.isConnected) {
+        // eslint-disable-next-line
+        console.log('connected--', networkFullUrl);
+        connection.provider = provider;
+        connection.isConnected = api.isConnected;
+        connection.api = api;
+        connection.currentNetwork = network;
+        await setChain(api);
+        return connection;
+      }
+      // eslint-disable-next-line
+      console.error('connect error--', api);
+      disconnect();
+    } catch (e) {
+      // eslint-disable-next-line
+      console.error('connect error--', e);
+      disconnect();
+      throw e;
+    }
   }
 };
 

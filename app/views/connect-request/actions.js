@@ -1,7 +1,7 @@
 import * as ConnectRequestActionTypes from './action-types';
 import * as RequestType from '../../../lib/constants/request-types';
 import { DApp } from '../../api';
-import { onBoard } from '../../actions/initialize';
+import { onBoard, clearDappRequestForInit } from '../../actions/initialize';
 import { setNetwork } from '../../actions/network';
 
 const dispatchUpdateSelectedAccount = selectedAccount => ({
@@ -32,12 +32,14 @@ export const initializeRequest = () => async (dispatch, getState) => {
 };
 
 export const allowAccountAuthorization = () => async (dispatch, getState) => {
+  clearDappRequestForInit();
   const { request } = getState().dAppReducer;
   await DApp.updateWhiteListedDApps(request);
   dispatch(onBoard());
 };
 
 export const denyAccountAuthorization = () => async (dispatch, getState) => {
+  clearDappRequestForInit();
   const { request } = getState().dAppReducer;
   await DApp.cancelRequest(request);
   dispatch(onBoard());
