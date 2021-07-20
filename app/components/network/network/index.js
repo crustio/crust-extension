@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import CrustMenu from '../../common/crust-menu';
 import FontRegular from '../../common/fonts/font-regular';
 import { DISABLE_NETWORKS_PAGES_GROUP } from '../../../constants/navigation';
-import { shortenName } from '../../../services/wallet-service';
+// import { shortenName } from '../../../services/wallet-service';
 import './styles.css';
 
 class Network extends Component {
@@ -29,11 +29,7 @@ class Network extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <FontRegular
-          className="network-text"
-          text={shortenName(network.text)}
-          onClick={this.handleClick}
-        />
+        <FontRegular className="network-text" text={network.text} onClick={this.handleClick} />
         <CrustMenu
           selected={network}
           options={networks}

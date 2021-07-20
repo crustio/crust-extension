@@ -100,7 +100,7 @@ export const getTokens = async (dispatch, getState) => {
 
   let allTokens = [chainToken];
 
-  const { result } = await Tokens.getTokens();
+  const { result } = await Tokens.getTokens(network);
 
   allTokens = allTokens.concat(result);
   dispatch(updateTokens(allTokens));

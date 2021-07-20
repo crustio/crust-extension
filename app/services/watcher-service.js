@@ -77,7 +77,8 @@ export async function getAndUpdateNetworkStatus(store) {
 
 export async function updateAllTokenBalance(store) {
   try {
-    const { result } = await Tokens.getTokens();
+    const { network } = store.getState().networkReducer;
+    const { result } = await Tokens.getTokens(network);
     const { tokens } = store.getState().dashboardReducer;
 
     if (!result || result.length === 0) {
