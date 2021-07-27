@@ -94,7 +94,10 @@ export const getTokens = async (dispatch, getState) => {
     accountAddress: account.address,
     tokenName: network.unit,
     tokenSymbol: network.unit,
-    balance: balance.balance,
+    balance: balance.balance, // transferable
+    locked: balance.locked, // locked
+    reserved: balance.reserved,
+    total: balance.total,
     decimals: decimals.result,
   };
 

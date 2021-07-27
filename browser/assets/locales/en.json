@@ -18,8 +18,10 @@
   "Click to copy": "Click to copy",
   "Address Book": "Address Book",
   "Language Setting": "Language Setting",
-  "Transferrable": "Transferrable",
-  
+  "Transferable": "Transferable",
+  "Locked": "Locked",
+  "Reserved": "Reserved",
+
   "Create A Password To Secure Your Account": "Create A Password To Secure Your Account",
   "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.": "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.",
   "Password": "Password",

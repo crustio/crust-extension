@@ -42,6 +42,9 @@ export async function updateBalance(store) {
     for (const token of tokens) {
       if (token.tokenSymbol === 'CRU') {
         token.balance = balance.balance;
+        token.locked = balance.locked;
+        token.reserved = balance.reserved;
+        token.total = balance.total;
       }
     }
     /* eslint-enable */

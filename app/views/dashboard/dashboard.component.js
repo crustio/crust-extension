@@ -133,12 +133,16 @@ class Dashboard extends Component {
             <TokenDetails
               unit={network.unit !== undefined ? network.unit : unit !== undefined ? unit.text : ''}
               className="token-container"
-              balance={defaultToken.balance === '-' ? '-' : convertBalanceToShow(defaultToken.balance, defaultToken.decimals)}
+              balance={
+                defaultToken.balance === '-'
+                  ? '-'
+                  : convertBalanceToShow(defaultToken.balance, defaultToken.decimals)
+              }
               marketData={marketData && marketData}
               amount={amount}
               handleSend={this.handleSend}
               handleDeposit={this.handleDeposit}
-              labelText={t('Transferrable')}
+              labelText={t('Transferable')}
             />
           </div>
         </div>

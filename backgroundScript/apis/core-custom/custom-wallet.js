@@ -46,7 +46,10 @@ export const getAddressByAddr = addr => {
 export const updateJsonAccountAlias = (account, newAlias) => {
   try {
     const pair = keyring.getPair(account.address);
-    keyring.saveAccountMeta(pair, { ...pair.meta, name: newAlias });
+    keyring.saveAccountMeta(pair, {
+      ...pair.meta,
+      name: newAlias,
+    });
   } catch (err) {
     throw new Error('Error in Custom change alias');
   }
@@ -66,6 +69,27 @@ export const getBalance = async address => {
       balanceFormatted,
       status: SUCCESS,
     };
+    if (ret.lockedBalance) {
+      balanceObj.locked = ret.lockedBalance.toString();
+      balanceObj.lockedFormatted = formatBalance(
+        ret.lockedBalance,
+        true,
+        ChainApi.getTokenDecimals(),
+      );
+    }
+    if (ret.reservedBalance) {
+      balanceObj.reserved = ret.reservedBalance.toString();
+      balanceObj.reservedFormatted = formatBalance(
+        ret.reservedBalance,
+        true,
+        ChainApi.getTokenDecimals(),
+      );
+    }
+    if (ret.lockedBalance || ret.reservedBalance) {
+      const total = ret.freeBalance.add(ret.reservedBalance);
+      balanceObj.total = total.toString();
+      balanceObj.totalFormatted = formatBalance(total, true, ChainApi.getTokenDecimals());
+    }
     return balanceObj;
   } catch (err) {
     const balanceObj = {
