@@ -184,7 +184,7 @@ export const updateCurrentNetwork = async (request, sendResponse) => {
     const { currentNetwork } = getStore().getState().networkState;
     sendResponse({ ...success, result: currentNetwork });
   } catch (err) {
-    sendResponse({ ...failure, message: 'Error in current network setup' });
+    sendResponse({ ...failure, message: 'Error in current network setup', err });
   }
 };
 

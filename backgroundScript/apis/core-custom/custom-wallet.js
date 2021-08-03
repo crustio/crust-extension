@@ -2,9 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { mnemonicGenerate } from '@polkadot/util-crypto';
-import {
-  Keyring, setSS58Format, encodeAddress, decodeAddress
-} from '@polkadot/keyring';
+import { Keyring, encodeAddress, decodeAddress } from '@polkadot/keyring';
 import keyring from '@polkadot/ui-keyring';
 import {
   formatBalance, isHex, hexToU8a, u8aToHex, u8aToString, stringToU8a
@@ -24,8 +22,8 @@ export const isValidAddress = value => {
 
 export const getAddress = (seedWords, keypairType) => {
   try {
-    setSS58Format(ChainApi.getSs58Format());
     const keyring = new Keyring();
+    keyring.setSS58Format(ChainApi.getSs58Format());
     const pairAlice = keyring.addFromUri(seedWords, {}, keypairType);
     const { address } = keyring.getPair(pairAlice.address);
     return address;

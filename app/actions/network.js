@@ -93,9 +93,13 @@ export const propagateUpdates = async dispatch => {
 };
 
 export const switchNetwork = network => async dispatch => {
-  await Network.updateCurrentNetwork(network);
-  dispatch(changeNetwork(network));
-  dispatch(propagateUpdates);
+  try {
+    await Network.updateCurrentNetwork(network);
+    dispatch(changeNetwork(network));
+    dispatch(propagateUpdates);
+  } catch (e) {
+    dispatch();
+  }
 };
 
 export const validateAndSaveURL = url => async (dispatch, getState) => {

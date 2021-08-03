@@ -3,7 +3,7 @@ import keyring from '@polkadot/ui-keyring';
 
 const femtoUnit = findSi('f');
 const units = SI.filter(x => x.power >= femtoUnit.power);
-const DEFAULT_SS58 = 42;
+let DEFAULT_SS58 = 42;
 const DEFAULT_DECIMALS = 15;
 
 let keyringInited = false;
@@ -69,6 +69,10 @@ export const setChain = async api => {
     console.info('setChain--', err);
     throw new Error('error in setUnits');
   }
+};
+
+export const setDefSs58Format = ss58 => {
+  DEFAULT_SS58 = ss58;
 };
 
 export const getUnits = () => Chain.units;
