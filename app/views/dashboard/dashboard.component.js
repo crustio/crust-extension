@@ -178,7 +178,7 @@ class Dashboard extends Component {
           <a
             className="dashboard-footer"
             target="_blank"
-            href="https://apps.crust.network"
+            href={network.url_apps ? network.url_apps : 'https://apps.crust.network/'}
             rel="noopener noreferrer"
           >
             <div

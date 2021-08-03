@@ -94,7 +94,7 @@ class App extends Component {
           showHeader: true, // no change
           showLogo: true,
           showBanner: false,
-          showNetwork: true,
+          showNetwork: false,
           showSettings: false,
           showGrayHeader: false,
         };

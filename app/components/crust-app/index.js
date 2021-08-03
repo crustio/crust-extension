@@ -58,7 +58,7 @@ export default class CrustApp extends Component {
     });
     const CrustConfigClassNames = classnames({
       'crust-config': showNetwork && showSettings,
-      'display-none': showBanner,
+      'display-none': showBanner || !showNetwork,
     });
     return (
       <CrustContainer blocking={isLoading}>
