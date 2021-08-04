@@ -34,6 +34,7 @@ export const getAddress = (seedWords, keypairType) => {
 
 export const getAddressByAddr = addr => {
   try {
+    keyring.setSS58Format(ChainApi.getSs58Format());
     const { address } = keyring.getPair(addr);
     return address;
   } catch (err) {
@@ -67,7 +68,7 @@ export const getBalance = async address => {
       balanceFormatted,
       status: SUCCESS,
     };
-    if (ret.lockedBalance) {
+    if (ret.lockedBalance && !ret.lockedBalance.isZero()) {
       balanceObj.locked = ret.lockedBalance.toString();
       balanceObj.lockedFormatted = formatBalance(
         ret.lockedBalance,
@@ -75,7 +76,7 @@ export const getBalance = async address => {
         ChainApi.getTokenDecimals(),
       );
     }
-    if (ret.reservedBalance) {
+    if (ret.reservedBalance && !ret.reservedBalance.isZero()) {
       balanceObj.reserved = ret.reservedBalance.toString();
       balanceObj.reservedFormatted = formatBalance(
         ret.reservedBalance,
@@ -83,7 +84,7 @@ export const getBalance = async address => {
         ChainApi.getTokenDecimals(),
       );
     }
-    if (ret.lockedBalance || ret.reservedBalance) {
+    if (balanceObj.reserved || balanceObj.locked) {
       const total = ret.freeBalance.add(ret.reservedBalance);
       balanceObj.total = total.toString();
       balanceObj.totalFormatted = formatBalance(total, true, ChainApi.getTokenDecimals());

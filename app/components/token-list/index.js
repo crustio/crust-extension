@@ -43,6 +43,7 @@ class TokenList extends Component {
     const { t } = this.props;
     const balance = createBalance('balance', token, t);
     const locked = createBalance('locked', token, t);
+    const reserved = createBalance('reserved', token, t);
     const total = createBalance('total', token, t);
     return (
       <div className="token-balances-container">
@@ -51,12 +52,16 @@ class TokenList extends Component {
             {`${balance.title}${balance.title ? ':' : ''}`}
           </div>
           {token.locked && <div className="token-balance-item-title">{`${locked.title}:`}</div>}
+          {token.reserved && <div className="token-balance-item-title">{`${reserved.title}:`}</div>}
           {token.total && <div className="token-balance-item-title">{`${total.title}:`}</div>}
         </div>
         <div className="token-balance-value-container">
           <FontRegular className="token-item-details-amount" text={balance.value} />
           {token.locked && (
             <FontRegular className="token-item-details-amount" text={locked.value} />
+          )}
+          {token.reserved && (
+            <FontRegular className="token-item-details-amount" text={reserved.value} />
           )}
           {token.total && <FontRegular className="token-item-details-amount" text={total.value} />}
         </div>
