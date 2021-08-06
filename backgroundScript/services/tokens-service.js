@@ -70,6 +70,14 @@ export const getCSMToken = async () => {
     const account = await getApi().query.csm.account(currentAccount.address);
     token.balance = account.free.toString();
     token.status = SUCCESS;
+
+    if (account.miscFrozen && !account.miscFrozen.isZero()) {
+      token.balance = account.free.sub(account.miscFrozen).toString();
+      token.locked = account.miscFrozen.toString();
+    }
+    if (account.reserved && !account.reserved.isZero()) {
+      token.total = account.free.add(account.reserved).toString();
+    }
   } catch (e) {
     token.balance = '0';
     token.status = FAILURE;

@@ -42,6 +42,9 @@ export async function updateBalance(store) {
     for (const token of tokens) {
       if (token.tokenSymbol === 'CRU') {
         token.balance = balance.balance;
+        token.locked = balance.locked;
+        token.reserved = balance.reserved;
+        token.total = balance.total;
       }
     }
     /* eslint-enable */
@@ -77,7 +80,8 @@ export async function getAndUpdateNetworkStatus(store) {
 
 export async function updateAllTokenBalance(store) {
   try {
-    const { result } = await Tokens.getTokens();
+    const { network } = store.getState().networkReducer;
+    const { result } = await Tokens.getTokens(network);
     const { tokens } = store.getState().dashboardReducer;
 
     if (!result || result.length === 0) {

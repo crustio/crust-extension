@@ -89,7 +89,13 @@ export const createAccount = async (request, sendResponse) => {
     const {
       seedWords, keypairType, isOnBoarding, alias, password
     } = request;
-    const account = await AccountService.createAccount(seedWords, keypairType, isOnBoarding, alias, password);
+    const account = await AccountService.createAccount(
+      seedWords,
+      keypairType,
+      isOnBoarding,
+      alias,
+      password,
+    );
     sendResponse({ ...success, result: account });
   } catch (err) {
     sendResponse({
@@ -105,7 +111,12 @@ export const createAccountWithJson = async (request, sendResponse) => {
     const {
       json, oldPwd, isOnBoarding, password
     } = request;
-    const account = await AccountService.createAccountWithJson(json, oldPwd, isOnBoarding, password);
+    const account = await AccountService.createAccountWithJson(
+      json,
+      oldPwd,
+      isOnBoarding,
+      password,
+    );
     sendResponse({ ...success, result: account });
   } catch (err) {
     sendResponse({
@@ -113,7 +124,7 @@ export const createAccountWithJson = async (request, sendResponse) => {
       message: err.message === undefined ? 'Error while creating new account.' : err.message,
     });
   }
-}
+};
 
 export const getBalances = async (request, sendResponse) => {
   try {
@@ -155,7 +166,7 @@ export const verifyPassword = async (request, sendResponse) => {
   } catch (err) {
     sendResponse({ ...failure, message: 'Password is incorrect.' });
   }
-}
+};
 
 export const getCurrentNetwork = async (request, sendResponse) => {
   try {
@@ -173,7 +184,7 @@ export const updateCurrentNetwork = async (request, sendResponse) => {
     const { currentNetwork } = getStore().getState().networkState;
     sendResponse({ ...success, result: currentNetwork });
   } catch (err) {
-    sendResponse({ ...failure, message: 'Error in current network setup' });
+    sendResponse({ ...failure, message: 'Error in current network setup', err });
   }
 };
 
@@ -248,9 +259,7 @@ export const confirmTransaction = async (request, sendResponse) => {
   try {
     const { transaction } = request;
     const {
-      accountState: {
-        currentAccount,
-      },
+      accountState: { currentAccount },
       networkState: { currentNetwork },
     } = getStore().getState();
     // const address = AccountService.getAddress(seedWords, keypairType);
@@ -270,7 +279,10 @@ export const confirmTransaction = async (request, sendResponse) => {
 export const submitTransaction = async (request, sendResponse) => {
   try {
     const { transaction, password } = request;
-    const transactionStatus = await TransactionWatcherService.submitTransaction(transaction, password);
+    const transactionStatus = await TransactionWatcherService.submitTransaction(
+      transaction,
+      password,
+    );
     sendResponse({ ...success, result: transactionStatus });
   } catch (err) {
     sendResponse({ ...failure, message: 'Error in submitting  Transaction ' });
@@ -672,8 +684,13 @@ export const forceConnectNetwork = async (request, sendResponse) => {
 
 export const getCrustTokenList = async (request, sender, sendResponse) => {
   try {
-    const result = await TokensService.getTokenList();
-    sendResponse({ ...success, result });
+    const { network } = request;
+    if (network && network.value === 'crust maxwell') {
+      const result = await TokensService.getTokenList();
+      sendResponse({ ...success, result });
+      return;
+    }
+    sendResponse({ ...success, result: [] });
   } catch (err) {
     sendResponse({ ...failure, message: 'Error while get token list.' });
   }

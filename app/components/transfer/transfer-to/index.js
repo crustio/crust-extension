@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Avatar from '../../common/identicon';
+// import Avatar from '../../common/identicon';
 import CrustInput from '../../common/crust-input';
 import './styles.css';
 
@@ -28,7 +28,7 @@ export default class TransferTo extends Component {
         }}
         {...otherProps}
       >
-        <Avatar style={{ marginRight: 22 }} value={addressValue} size={size} theme={theme} />
+        {/*<Avatar style={{ marginRight: 22 }} value={addressValue} size={size} theme={theme} />*/}
         <div className="transfer-to-input-contianer">
           <CrustInput
             className="transfer-to-input"

@@ -13,6 +13,7 @@ class Transaction extends Component {
       <div {...otherProps}>
         {transactions.length > 0 ? (
           <TransactionItems
+            network={network}
             style={{ height: listHeight || '230px' }}
             className="transaction-list-container"
             transactions={transactions}

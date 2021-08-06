@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import { setChain } from './chain';
+import { setChain, setDefSs58Format } from './chain';
 
 const { typesBundleForPolkadot } = require('@crustio/type-definitions');
 
@@ -27,7 +27,8 @@ const disconnect = () => {
 };
 
 const connect = async network => {
-  const { networkFullUrl, name } = network;
+  // eslint-disable-next-line camelcase
+  const { networkFullUrl, name, def_ss58 = 42 } = network;
   // eslint-disable-next-line
   console.log('--connect--', networkFullUrl, name, connection);
   if (name === 'dotcustom') {
@@ -48,6 +49,7 @@ const connect = async network => {
         connection.isConnected = api.isConnected;
         connection.api = api;
         connection.currentNetwork = network;
+        setDefSs58Format(def_ss58);
         await setChain(api);
         return connection;
       }

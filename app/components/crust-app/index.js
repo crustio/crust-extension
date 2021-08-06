@@ -46,10 +46,10 @@ export default class CrustApp extends Component {
 
     const CrustNetworkClassNames = classnames({
       'crust-network': showNetwork,
-      'display-none': !isDeveloperMode,
+      // 'display-none': false,
     });
     const CrustNetworkStatusClassNames = classnames({
-      'display-none': true,
+      'display-none': isConnected,
       'crust-network-status': !isConnected,
     });
     const CrustSettingsClassNames = classnames({
@@ -58,7 +58,7 @@ export default class CrustApp extends Component {
     });
     const CrustConfigClassNames = classnames({
       'crust-config': showNetwork && showSettings,
-      'display-none': showBanner,
+      'display-none': showBanner || !showNetwork,
     });
     return (
       <CrustContainer blocking={isLoading}>

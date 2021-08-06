@@ -57,12 +57,12 @@ module.exports = {
       statsOptions: { source: false },
     }),
   ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      maxSize: 1024 * 1024 * 4,
-    },
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all',
+  //     maxSize: 1024 * 1024 * 4,
+  //   },
+  // },
 
   resolve: {
     extensions: ['*', '.js'],

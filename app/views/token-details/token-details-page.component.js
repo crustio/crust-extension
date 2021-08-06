@@ -114,12 +114,14 @@ class TokenDetailsPage extends Component {
           <TokenDetails
             unit={token.tokenSymbol}
             className="token-container"
-            balance={token.balance === '-' ? '-' : convertBalanceToShow(token.balance, token.decimals)}
+            balance={
+              token.balance === '-' ? '-' : convertBalanceToShow(token.balance, token.decimals)
+            }
             marketData={undefined}
             amount={convertBalanceToShow(token.balance, token.decimals)}
             handleSend={this.handleSend}
             handleDeposit={this.handleDeposit}
-            labelText={token.tokenSymbol === 'CRU' ? 'Transferrable' : ''}
+            labelText={token.tokenSymbol === 'CRU' ? 'Transferable' : ''}
           />
         </div>
 

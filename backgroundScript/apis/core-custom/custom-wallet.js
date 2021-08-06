@@ -2,9 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { mnemonicGenerate } from '@polkadot/util-crypto';
-import {
-  Keyring, setSS58Format, encodeAddress, decodeAddress
-} from '@polkadot/keyring';
+import { Keyring, encodeAddress, decodeAddress } from '@polkadot/keyring';
 import keyring from '@polkadot/ui-keyring';
 import {
   formatBalance, isHex, hexToU8a, u8aToHex, u8aToString, stringToU8a
@@ -24,8 +22,8 @@ export const isValidAddress = value => {
 
 export const getAddress = (seedWords, keypairType) => {
   try {
-    setSS58Format(ChainApi.getSs58Format());
     const keyring = new Keyring();
+    keyring.setSS58Format(ChainApi.getSs58Format());
     const pairAlice = keyring.addFromUri(seedWords, {}, keypairType);
     const { address } = keyring.getPair(pairAlice.address);
     return address;
@@ -36,6 +34,7 @@ export const getAddress = (seedWords, keypairType) => {
 
 export const getAddressByAddr = addr => {
   try {
+    keyring.setSS58Format(ChainApi.getSs58Format());
     const { address } = keyring.getPair(addr);
     return address;
   } catch (err) {
@@ -46,7 +45,10 @@ export const getAddressByAddr = addr => {
 export const updateJsonAccountAlias = (account, newAlias) => {
   try {
     const pair = keyring.getPair(account.address);
-    keyring.saveAccountMeta(pair, { ...pair.meta, name: newAlias });
+    keyring.saveAccountMeta(pair, {
+      ...pair.meta,
+      name: newAlias,
+    });
   } catch (err) {
     throw new Error('Error in Custom change alias');
   }
@@ -66,6 +68,27 @@ export const getBalance = async address => {
       balanceFormatted,
       status: SUCCESS,
     };
+    if (ret.lockedBalance && !ret.lockedBalance.isZero()) {
+      balanceObj.locked = ret.lockedBalance.toString();
+      balanceObj.lockedFormatted = formatBalance(
+        ret.lockedBalance,
+        true,
+        ChainApi.getTokenDecimals(),
+      );
+    }
+    if (ret.reservedBalance && !ret.reservedBalance.isZero()) {
+      balanceObj.reserved = ret.reservedBalance.toString();
+      balanceObj.reservedFormatted = formatBalance(
+        ret.reservedBalance,
+        true,
+        ChainApi.getTokenDecimals(),
+      );
+    }
+    if (balanceObj.reserved || balanceObj.locked) {
+      const total = ret.freeBalance.add(ret.reservedBalance);
+      balanceObj.total = total.toString();
+      balanceObj.totalFormatted = formatBalance(total, true, ChainApi.getTokenDecimals());
+    }
     return balanceObj;
   } catch (err) {
     const balanceObj = {
