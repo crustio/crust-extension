@@ -22,7 +22,7 @@ export const appReady = async hashKey => {
       const {
         network: { currentNetwork },
       } = latestData;
-      await hydrateStore(latestData, hashKey);
+      await hydrateStore(latestData);
       // define Polkadot Api
       await API.connectToApi(currentNetwork);
       await Store.updateHashKeyState(hashKey);
@@ -39,7 +39,6 @@ export const appReady = async hashKey => {
   } catch (e) {
     return undefined;
   }
-  
 };
 
 export const setAppIsOnBoarded = async () => {
@@ -69,4 +68,4 @@ export const getLanguage = async () => {
 export const clearHashKeyState = async () => {
   await Store.updateClearHashKeyState();
   return true;
-}
+};

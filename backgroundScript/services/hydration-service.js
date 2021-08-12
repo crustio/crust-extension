@@ -1,6 +1,7 @@
 import * as Store from './store-service';
+import * as Chain from '../../lib/constants/chain';
 
-export const hydrateStore = async (latestData, hashKey) => {
+export const hydrateStore = async latestData => {
   try {
     const {
       accounts: { accounts, currentAccount },
@@ -8,6 +9,7 @@ export const hydrateStore = async (latestData, hashKey) => {
       permissions: { whiteListedDApps },
       network: { currentNetwork, isDeveloperMode },
       addressBook: { addressBook },
+      metadata_list = Chain.CHAIN,
     } = latestData;
     await Promise.all([
       Store.updateCurrentAccountState(currentAccount),
@@ -18,6 +20,7 @@ export const hydrateStore = async (latestData, hashKey) => {
       Store.updateDeveloperMode(isDeveloperMode || false),
       Store.updateAppState(),
       Store.updateAddressBook(addressBook),
+      Store.updateMetadataList(metadata_list),
     ]);
   } catch (err) {
     // eslint-disable-next-line no-console

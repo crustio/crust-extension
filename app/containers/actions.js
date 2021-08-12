@@ -59,3 +59,16 @@ export const updateAppLanguage = (language, i18n) => async dispatch => {
     dispatch(createToast({ message: 'Error set language', type: 'error' }));
   }
 };
+
+export const setAppShowValidatePass = onSuccess => ({
+  type: Types.APPSTATE_SHOW_VALIDATE_PASSWORD,
+  showValidatePass: {
+    onSuccess,
+    show: true,
+  },
+});
+
+export const closeAppValidatePass = () => ({
+  type: Types.APPSTATE_SHOW_VALIDATE_PASSWORD,
+  showValidatePass: {},
+});

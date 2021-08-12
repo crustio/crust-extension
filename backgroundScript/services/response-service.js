@@ -14,6 +14,8 @@ import * as AddressBookService from './address-book-service';
 import * as ResponseType from '../../lib/constants/response-types';
 import { sendErrorMessage } from '../../lib/services/static-message-factory-service';
 import { getTokenDecimals } from '../apis/chain';
+import * as StoreService from './store-service';
+
 // use below messages if no return message is needed
 export const success = {
   status: status.SUCCESS,
@@ -57,8 +59,9 @@ export const setHashKey = async (request, sendResponse) => {
   try {
     const { data } = request;
     const hashKey = await AppService.appReady(data);
-    if (hashKey !== undefined);
-    sendResponse({ ...success, message: 'Password created' });
+    if (hashKey !== undefined) {
+      sendResponse({ ...success, message: 'Password created' });
+    }
   } catch (err) {
     sendResponse({ ...failure, message: 'Error setting password' });
   }
@@ -239,6 +242,8 @@ export const getAccounts = async (request, sendResponse) => {
       sendResponse({ ...success, result });
     }
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getAccountStateForUi::', err);
     sendResponse({ ...failure, message: 'Error in getting accounts' });
   }
 };
@@ -424,6 +429,7 @@ export const updateWhiteListedDApps = async (request, sender, sendResponse) => {
         ...failure,
         message: 'Error while whitelisting.',
         origin: request.request.sender.origin,
+        msgId: request.request.request.messageId,
         type: ResponseType.BG_DAPP_RESPONSE,
       },
     };
@@ -448,6 +454,7 @@ export const cancelDAppRequest = async (request, sender, sendResponse) => {
         ...failure,
         message: 'Error while cancelling request.',
         origin: request.request.sender.origin,
+        msgId: request.request.request.messageId,
         type: ResponseType.BG_DAPP_RESPONSE,
       },
     };
@@ -479,6 +486,7 @@ export const submitDappTransaction = async (request, sender, sendResponse) => {
           ...success,
           result: { id, signature },
           origin: dAppRequest.metadata.origin,
+          msgId: dAppRequest.messageId,
           type: ResponseType.BG_DAPP_RESPONSE,
         },
       };
@@ -499,6 +507,7 @@ export const submitDappTransaction = async (request, sender, sendResponse) => {
         ...failure,
         message: 'Error while signing Transaction.',
         origin: request.request.sender.origin,
+        msgId: request.request.messageId,
         type: ResponseType.BG_DAPP_RESPONSE,
       },
     };
@@ -529,7 +538,7 @@ export const signMessage = async (request, sender, sendResponse) => {
     const result = await DAppService.signMessage(request, sender);
     sendResponse({ ...success, result });
   } catch (e) {
-    sendResponse({ ...failure, message: 'Error in signing message.' });
+    sendResponse({ ...failure, message: 'Unable to sign Dapp Transaction.' });
   }
 };
 
@@ -585,6 +594,7 @@ export const getSignMessage = async (request, sender, sendResponse) => {
         ...failure,
         message: 'Error while signing message.',
         origin: request.request.sender.origin,
+        msgId: request.request.request.messageId,
         type: ResponseType.BG_DAPP_RESPONSE,
       },
     };
@@ -682,6 +692,15 @@ export const forceConnectNetwork = async (request, sendResponse) => {
   }
 };
 
+export const disConnectNetwork = (request, sendResponse) => {
+  try {
+    NetworkService.disconnect();
+    sendResponse({ ...success });
+  } catch (e) {
+    sendResponse({ ...failure, message: 'Error in disconnect' });
+  }
+};
+
 export const getCrustTokenList = async (request, sender, sendResponse) => {
   try {
     const { network } = request;
@@ -702,5 +721,53 @@ export const updateCandyBalance = async (request, sender, sendResponse) => {
     sendResponse({ ...success, result });
   } catch (err) {
     sendResponse({ ...failure, message: 'Error while update candy balance.' });
+  }
+};
+
+export const getMetadataList = async (request, sender, sendResponse) => {
+  try {
+    const result = StoreService.getLiteMetadataList();
+    sendResponse({ ...success, result });
+  } catch (err) {
+    sendResponse({ ...failure, message: 'Error while update candy balance.' });
+  }
+};
+
+export const reqMetadataProvide = async (request, sender, sendResponse) => {
+  try {
+    // eslint-disable-next-line
+    // console.info('reqMetadata::', request, sender);
+    await DAppService.reqMetadataProvide(request, sender);
+    sendResponse({ ...success, result: undefined });
+  } catch (err) {
+    sendResponse({ ...failure, message: 'Error while update candy balance.' });
+  }
+};
+
+export const allowMetadataProvide = async (request, sender, sendResponse) => {
+  try {
+    const { result, requestID, replyData } = await DAppService.allowMetadataProvide(request);
+    DAppService.sendPopupResponse({ ...success, result }, sender, sendResponse);
+    await DAppService.closeRequestAndReplyDApp(requestID, replyData);
+  } catch (err) {
+    DAppService.sendPopupResponse(
+      {
+        ...failure,
+        message: 'Error with allow update metadata.',
+      },
+      sender,
+      sendResponse,
+    );
+    const pdata = {
+      id: sender.tab.id,
+      message: {
+        ...failure,
+        message: 'Error with allow update metadata.',
+        origin: request.request.sender.origin,
+        msgId: request.request.request.messageId,
+        type: ResponseType.BG_DAPP_RESPONSE,
+      },
+    };
+    await DAppService.closeRequestAndReplyDApp(request.request.id, pdata);
   }
 };

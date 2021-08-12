@@ -21,7 +21,11 @@
   "Transferable": "可转账的",
   "Locked": "锁定的",
   "Reserved": "保留的",
+  "Pending Requests": "待处理",
+  "Update": "更新",
 
+  "Sign the following data": "签名下面的数据",
+  "Update Metadata": "更新元数据",
   "Create A Password To Secure Your Account": "创建密码来保护您的账户",
   "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.": "此密码用来保护您的助记词，以防Chrome浏览器扩展获取它们。",
   "Password": "密码",
@@ -140,6 +144,17 @@
   "Invalid Address": "错误的账户地址",
   "Network error. Please check network.": "网络错误，请检查网络状态。",
 
+
   "Signing can provide access to the value of your account. Only sign this if you know and trust the requesting source.": "签署可以提供对你账户价值的访问。只有在你知道并信任请求来源的情况下才可以签署。",
-  "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "助记词用来生成账户，请确保其存储安全，并且不要分享。"
+  "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "助记词用来生成账户，请确保其存储安全，并且不要分享。",
+
+  "Offline": "未连接",
+  "Set To Online Mode": "设为在线模式",
+  "Set To Offline Mode": "设为离线模式",
+  "OfflineDescription": "钱包处于离线状态。\n当钱包处于离线状态时，您仍然可以使用钱包签名交易。\n了解钱包离线的原因？",
+  "Why my wallet is offline?": "为什么我的钱包离线了？",
+  "Possible reasons": "可能的原因",
+  "reasons_1": "1.您手动将钱包切换为\"离线模式\"。在该模式下，钱包总是主动保持离线。您可以在设定菜单中切换离线/在线模式。",
+  "reasons_2": "2.钱包未升级到最新版本。您可能需要更新版本，或等待新版本发布。",
+  "reasons_3": "3.网络或服务器连接出现错误。"
 }

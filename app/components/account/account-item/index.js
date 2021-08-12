@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { withTranslation } from 'react-i18next';
 import BalanceDetails from '../balance-details';
 import './styles.css';
 import AccountDetails from '../account-details';
 import Avatar from '../../common/identicon';
 
-export default class AccountItem extends Component {
+class AccountItem extends Component {
   render() {
     const {
       account,
@@ -15,6 +16,7 @@ export default class AccountItem extends Component {
       onAliasInputBlur,
       onAliasInputKeyPress,
       inputRef,
+      t,
       ...otherProps
     } = this.props;
     const accountItemClassNames = classNames({
@@ -52,3 +54,5 @@ export default class AccountItem extends Component {
     );
   }
 }
+
+export default withTranslation()(AccountItem);

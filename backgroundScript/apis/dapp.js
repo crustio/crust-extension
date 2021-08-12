@@ -18,7 +18,7 @@ export const reply = async data => {
   return result;
 };
 
-export const showPopup = async window => {
+export const showPopup = async (window, tabId) => {
   // Check for the window object
   if (window) {
     //Gets information about all open windows
@@ -26,6 +26,7 @@ export const showPopup = async window => {
     const isPopupOpen = windows
       ? windows.some(win => win.id === window.id && win.type === window.type)
       : false;
+    // eslint-disable-next-line
     if (isPopupOpen) {
       //Returns the fully-qualified URL to the resource.
       const windowURL = await ExtensionApi.getURL('window.html');
@@ -35,12 +36,10 @@ export const showPopup = async window => {
       return window;
     }
     //Creates a new window.
-    const result = await WindowApi.create();
-    return result;
+    return await WindowApi.create(tabId);
   }
   //Creates a new window.
-  const result = await WindowApi.create();
-  return result;
+  return await WindowApi.create(tabId);
 };
 
 export const closePopup = async window => {

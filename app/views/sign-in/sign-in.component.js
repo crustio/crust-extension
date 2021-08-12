@@ -18,7 +18,10 @@ class SignIn extends Component {
 
   static getDerivedStateFromProps(props, state) {
     if (props.error) {
-      return { isError: true, errorText: props.error.message };
+      return {
+        isError: true,
+        errorText: props.error.message,
+      };
     }
     return state;
   }
@@ -47,7 +50,14 @@ class SignIn extends Component {
     const { t } = this.props;
     return (
       <div>
-        <div className="sign-in-container">
+        <div
+          className="sign-in-container"
+          onKeyPress={e => {
+            if (e.key === 'Enter') {
+              this.handleClick();
+            }
+          }}
+        >
           <div className="sign-in-img-contianer">
             <img src={LogoBig} alt="logo2" />
           </div>

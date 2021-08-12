@@ -49,3 +49,12 @@ export const submitTransaction = async (data, request, dApp = false, password) =
   throwIfNoSuccess({ message, status });
   return { result };
 };
+
+export const allowMetadataProvide = async request => {
+  const { message, status, result } = await sendMessage({
+    type: MessageTypes.BG_DAPP_ALLOW_METADATA_PROVIDE,
+    request,
+  });
+  throwIfNoSuccess({ message, status });
+  return { result };
+};

@@ -6,7 +6,6 @@ import SubHeader from '../../components/common/sub-header';
 import TransferForm from '../../components/transfer/transfer-form';
 import * as NavConstants from '../../constants/navigation';
 import { INPUT_NUMBER_REGEX } from '../../../lib/constants/regex';
-import { findChainByName } from '../../../lib/constants/chain';
 import './styles.css';
 
 class Transfer extends Component {
@@ -106,7 +105,12 @@ class Transfer extends Component {
   handleSendButton = () => {
     const { amount, unit, dropDownSelected } = this.state;
     const { toAddress } = this.props;
-    if (toAddress !== '' && amount !== '' && amount !== undefined && dropDownSelected.balance !== '-') {
+    if (
+      toAddress !== ''
+      && amount !== ''
+      && amount !== undefined
+      && dropDownSelected.balance !== '-'
+    ) {
       this.props.confirmTransaction(
         toAddress,
         this.props.account,
@@ -153,14 +157,12 @@ class Transfer extends Component {
       isAmountError,
       toAmountErrorMessage,
       toAddress,
-      network,
       t,
     } = this.props;
     const {
       to, amount, alias, from, buttonText, dropDownList, dropDownSelected
     } = this.state;
-    const chain = findChainByName(network.value);
-    const theme = chain.icon || 'polkadot';
+    const theme = 'substrate';
     const buttonTextT = t(buttonText);
     return (
       <div className="tranfer-page-container">

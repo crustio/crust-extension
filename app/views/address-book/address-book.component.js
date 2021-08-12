@@ -14,7 +14,6 @@ import {
   ADD_ADDRESS,
   REMOVE,
 } from '../../constants/options';
-import { findChainByName } from '../../../lib/constants/chain';
 import './styles.css';
 
 class AddressBook extends Component {
@@ -101,12 +100,11 @@ class AddressBook extends Component {
   };
 
   render() {
-    const { addressBook, network, t } = this.props;
+    const { addressBook, t } = this.props;
     const {
       isOpen, showSettings, headerText, isMoreVertIconVisible
     } = this.state;
-    const chain = findChainByName(network.value);
-    const theme = chain.icon || 'polkadot';
+    const theme = 'substrate';
     const optionsHeader = ADDRESS_BOOK_MENU_OPTIONS.map(o => ({ ...o, text: o.text }));
 
     const options = ADDRESS_BOOK_OPTIONS.map(o => ({ ...o, text: o.text }));

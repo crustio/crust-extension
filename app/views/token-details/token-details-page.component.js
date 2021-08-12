@@ -3,12 +3,11 @@ import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import TokenDetails from '../../components/token/token-details';
 import Wallet from '../../components/wallet';
-import { TRANSFER_PAGE, QR_CODE_PAGE, DASHBOARD_PAGE } from '../../constants/navigation';
+import { DASHBOARD_PAGE, QR_CODE_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import './styles.css';
 import { RENAME } from '../../constants/options';
-import { findChainByName } from '../../../lib/constants/chain';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import SubHeader from '../../components/common/sub-header';
 
@@ -84,8 +83,7 @@ class TokenDetailsPage extends Component {
       token,
       t,
     } = this.props;
-    const chain = findChainByName(network.value);
-    const theme = chain.icon || 'polkadot';
+    const theme = 'substrate';
     const transDisplay = transactions.filter(
       trans => trans.metadata.tokenSelected !== undefined
         && trans.metadata.tokenSelected.tokenSymbol === token.tokenSymbol,

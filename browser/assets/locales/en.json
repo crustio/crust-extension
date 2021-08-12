@@ -137,5 +137,12 @@
   "Invalid Address": "Invalid Address",
   "Network error. Please check network.": "Network error. Please check network.",
 
-  "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it."
+  "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.",
+
+  "Offline": "Offline",
+  "OfflineDescription": "The wallet is now offline. \nWhen offline, you can still sign transactions with the wallet. \nWhy my wallet is offline?",
+  "Possible reasons": "Possible reasons",
+  "reasons_1": "1. You have manually set the wallet to ‘Offline Mode’. In this mode, your wallet will always keep offline regardless of network connection. You can shift wallet mode (Online/Offline) in settings menu.",
+  "reasons_2": "2. The wallet has not been updated to the latest version. You may need to update the wallet or wait for a new version release. ",
+  "reasons_3": "3. Something wrong with the network connection or the server."
 }

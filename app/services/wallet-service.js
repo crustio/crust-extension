@@ -75,6 +75,7 @@ export function createTxnUI(result) {
     { label: 'Version', value: result.sVersion },
     { label: 'Nonce', value: result.nonce },
     { label: 'Method', value: result.method },
+    { label: 'Amount', value: result.fValue },
     // this is not showing correct
     // { label: 'Fees', value: result.transferFee },
     { label: 'Info', value: result.note },

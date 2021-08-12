@@ -1,3 +1,5 @@
+import AppConfig from '../lib/constants/config';
+
 const extension = require('extensionizer');
 
 require('./messaging/content');
@@ -9,7 +11,7 @@ function injectScript(filePath) {
   document.documentElement.appendChild(script);
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (AppConfig.isProd) {
   const url = extension.extension.getURL('js/inPageScript.bundle.js');
   injectScript(url);
 } else {

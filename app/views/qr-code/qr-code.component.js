@@ -4,7 +4,6 @@ import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import QRCodeForm from '../../components/qr-code/qr-code-form';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
-import { findChainByName } from '../../../lib/constants/chain';
 import './styles.css';
 
 class QRCode extends Component {
@@ -18,9 +17,8 @@ class QRCode extends Component {
   };
 
   render() {
-    const { account, network, t } = this.props;
-    const chain = findChainByName(network.value);
-    const theme = chain.icon || 'polkadot';
+    const { account, t } = this.props;
+    const theme = 'substrate';
     return (
       <div className="qr-code-container">
         <SubHeader

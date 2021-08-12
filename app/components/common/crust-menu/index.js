@@ -25,7 +25,7 @@ class CrustMenu extends Component {
       anchorEl,
       selected,
       width,
-      t
+      t,
     } = this.props;
 
     return (
@@ -36,7 +36,7 @@ class CrustMenu extends Component {
         PaperProps={{
           style: {
             marginTop: 33,
-            maxHeight: 144,
+            maxHeight: 176,
             width: width !== undefined ? width : 128,
             fontFamily: 'Roboto-Regular',
             fontSize: 14,

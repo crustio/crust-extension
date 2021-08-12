@@ -4,6 +4,7 @@ import SubHeader from '../../components/common/sub-header';
 import * as RequestType from '../../../lib/constants/request-types';
 import Send from '../../components/dapp/send';
 import SignMessage from '../../components/dapp/sign-message';
+import UpMetadata from '../../components/dapp/up-metadata';
 import {
   copyAccountMessage,
   copyDataMessage,
@@ -140,6 +141,22 @@ class DAppRequests extends Component {
                   t={t}
                 />
               );
+            case RequestType.GET_METADATA_PROVIDE:
+              return (
+                <UpMetadata
+                  isSignMessageExpanded
+                  handleSignMessageExpansion={this.handleExpansion(request.id)}
+                  onCancel={this.handleCancel(request)}
+                  onAllow={this.handleAllow(request)}
+                  errorMessage={null}
+                  data={request.result}
+                  key={request.id}
+                  onCopyData={this.onCopyData}
+                  className="dapp-requests-card"
+                  errorText={errorText}
+                  t={t}
+                />
+              );
             default:
               return <div key={request.id} />;
           }
@@ -149,9 +166,10 @@ class DAppRequests extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div>
-        <SubHeader title="Pending Requests" />
+        <SubHeader title={t('Pending Requests')} />
         {this.props.requests && this.renderRequests()}
       </div>
     );

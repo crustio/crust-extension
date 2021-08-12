@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import ClickToCopy from '../click-to-copy';
 import Address from '../address';
 
-export default class ClickToCopyAddress extends Component {
+class ClickToCopyAddress extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,9 +24,11 @@ export default class ClickToCopyAddress extends Component {
   };
 
   render() {
-    const { onCopyAddress, address, ...otherProps } = this.props;
+    const {
+      onCopyAddress, address, t, ...otherProps
+    } = this.props;
     const visibleAddress = this.state.isTextOn ? (
-      'Click to copy'
+      t('Click to copy')
     ) : (
       <Address className={this.props.className} hash={this.props.address} />
     );
@@ -41,3 +44,5 @@ export default class ClickToCopyAddress extends Component {
     );
   }
 }
+
+export default withTranslation()(ClickToCopyAddress);

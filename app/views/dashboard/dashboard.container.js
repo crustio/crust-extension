@@ -6,7 +6,7 @@ import {
   connectionError,
   renameAlias,
   onTokenSelected,
-  lockApp
+  lockApp,
 } from './actions';
 import { changePage, updateBackupPage } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
@@ -23,6 +23,9 @@ const mapStateToProps = state => ({
   network: state.networkReducer.network,
   unit: state.networkReducer.unit,
   isConnected: state.networkReducer.isConnected,
+  isOfflineMode: state.networkReducer.isOfflineMode,
+  isError: state.networkReducer.isError,
+  isErrorByType: state.networkReducer.isErrorByType,
   accountMenu: state.dashboardReducer.accountMenu,
   tokens: state.dashboardReducer.tokens,
 });
