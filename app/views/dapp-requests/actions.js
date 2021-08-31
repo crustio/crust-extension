@@ -18,8 +18,8 @@ export const allowRequest = (request, password) => async dispatch => {
         await DAppService.submitTransaction(request, password);
         break;
       case RequestType.SIGN_MESSAGE:
-        // await verifyPassword(password);
-        await DAppService.signMessage(request);
+        await verifyPassword(password);
+        await DAppService.signMessage(request, password);
         break;
       default:
     }

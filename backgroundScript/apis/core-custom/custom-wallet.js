@@ -114,11 +114,7 @@ export const valueFormatter = value => {
   }
 };
 
-export const getAccountPair = async (keypairType, seedWords) => {
-  const keyring = new Keyring({ type: keypairType });
-  const accountPair = keyring.addFromUri(seedWords);
-  return accountPair;
-};
+export const getAccountPair = async account => keyring.getPair(account.address);
 
 export const getAccountForUI = account => ({
   address: account.address,
@@ -126,9 +122,11 @@ export const getAccountForUI = account => ({
   keypairType: account.keypairType,
 });
 
-export const getSignMessage = async (account, message) => {
-  const { seedWords, keypairType } = account;
-  const accountPair = await getAccountPair(keypairType, seedWords);
+export const getSignMessage = async (account, password, message) => {
+  const accountPair = await getAccountPair(account);
+  if (accountPair.isLocked) {
+    accountPair.unlock(password);
+  }
   const signedMessage = u8aToHex(accountPair.sign(stringToU8a(message.message)));
   const result = {
     account: getAccountForUI(account),

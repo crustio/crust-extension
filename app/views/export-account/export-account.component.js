@@ -46,6 +46,8 @@ class ExportAccout extends Component {
     this.props.updateAppLoading(true);
     const { password } = this.state;
     if (!password || password.trim() === '') {
+      // eslint-disable-next-line no-console
+      console.info('password::', password);
       this.setState({
         errorText: 'Password is required.',
       });
@@ -62,6 +64,8 @@ class ExportAccout extends Component {
           saveAs(blob, `${this.props.account.address}.json`);
         })
         .catch(() => {
+          // eslint-disable-next-line no-console
+          console.info('password:2:', password);
           this.props.updateAppLoading(false);
           this.setState({
             errorText: 'Password is incorrect.',

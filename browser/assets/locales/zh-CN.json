@@ -64,6 +64,8 @@
   "OK": "好的",
   "Cancel": "取消",
 
+  "Sign": "签名",
+
   "Token Details": "代币详情",
 
   "Enter Password": "输入密码",
@@ -138,5 +140,6 @@
   "Invalid Address": "错误的账户地址",
   "Network error. Please check network.": "网络错误，请检查网络状态。",
 
+  "Signing can provide access to the value of your account. Only sign this if you know and trust the requesting source.": "签署可以提供对你账户价值的访问。只有在你知道并信任请求来源的情况下才可以签署。",
   "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "助记词用来生成账户，请确保其存储安全，并且不要分享。"
 }

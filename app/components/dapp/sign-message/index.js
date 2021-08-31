@@ -8,6 +8,7 @@ import AccountItem from '../../account/account-item';
 import DarkDivider from '../../common/divider/dark-divider';
 import './styles.css';
 import ClickToCopy from '../../common/click-to-copy';
+import CrustPassword from '../../common/password/crust-password';
 
 const Summary = props => (
   <div className={props.className}>
@@ -51,6 +52,10 @@ export default class SignMessage extends Component {
       errorMessage,
       data,
       onCopyData,
+      password,
+      handleOnChange,
+      errorText,
+      t,
       ...otherProps
     } = this.props;
     return (
@@ -70,14 +75,27 @@ export default class SignMessage extends Component {
         >
           <Disclaimer
             className="sign-message-disclaimer"
-            notice="Signing can provide access to the value of your account. Only sign this if you know and trust the requesting source."
+            notice={t(
+              'Signing can provide access to the value of your account. Only sign this if you know and trust the requesting source.',
+            )}
           />
           <FontRegular className="sign-message-title" text="Message" />
           <SignedMessage className="sign-message-body" data={data} onCopyData={onCopyData} />
+          <CrustPassword
+            className="confirm-form-password"
+            onChange={e => handleOnChange('password', e)}
+            password={password}
+            placeholder={t('Wallet Password')}
+          />
+          {errorText !== '' ? (
+            <div className="error-msg">{t(errorText)}</div>
+          ) : (
+            <div className="place-holder"> </div>
+          )}
           <FooterTwoSMButton
             className="sign-message-footer-container"
-            namePrimary="cancel"
-            nameSecondary="sign"
+            namePrimary={t('Cancel')}
+            nameSecondary={t('Sign')}
             onClickPrimary={onCancel}
             onClickSecondary={onAllow}
             isSecondaryDisabled={!!errorMessage}

@@ -1,6 +1,9 @@
 // receives all messages from Content Script
 import * as MessageTypes from '../../lib/constants/message-types';
 import * as ResponseService from '../services/response-service';
+import * as dapp from '../apis/dapp';
+import * as DAppService from '../services/dapp-service';
+import * as ResponseType from '../../lib/constants/response-types';
 
 const extension = require('extensionizer');
 
@@ -229,4 +232,24 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // This logic require to be open message port between popup.js and background.js till not get responses by sendMessage.
   // Don't remove return true.
   return true;
+});
+
+extension.windows.onRemoved.addListener(async windowId => {
+  const metadata = await dapp.getMetaData();
+  if (
+    metadata
+    && metadata.window
+    && metadata.window.id === windowId
+    && metadata.requests
+    && metadata.requests.length
+  ) {
+    const request = metadata.requests[0];
+    await DAppService.closeRequestAndReplyDApp(request.id, {
+      id: request.sender.tab.id,
+      status: 500,
+      message: 'The request was cancelled.',
+      origin: request.request.metadata.url,
+      type: ResponseType.BG_DAPP_RESPONSE,
+    });
+  }
 });
