@@ -58,4 +58,5 @@
   max-height: 50px;
   overflow-x: hidden;
   overflow-y: scroll;
+  padding: 1rem 0;
 }

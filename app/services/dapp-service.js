@@ -9,6 +9,6 @@ export const submitTransaction = async (transactionObj, password) => {
   await ApiType.DApp.submitTransaction(opts, transactionObj, dApp, password);
 };
 
-export const signMessage = async data => {
-  await ApiType.DApp.signMessage(data);
+export const signMessage = async (data, password) => {
+  await ApiType.DApp.signMessage(data, password);
 };

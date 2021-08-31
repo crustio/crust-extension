@@ -28,10 +28,11 @@ export const cancelRequest = async request => {
   return { result };
 };
 
-export const signMessage = async request => {
+export const signMessage = async (request, password) => {
   const { message, status, result } = await sendMessage({
     type: MessageTypes.BG_DAPP_GET_SIGN_MESSAGE,
     request,
+    password,
   });
   throwIfNoSuccess({ message, status });
   return { result };
@@ -43,7 +44,7 @@ export const submitTransaction = async (data, request, dApp = false, password) =
     data,
     request,
     dApp,
-    password
+    password,
   });
   throwIfNoSuccess({ message, status });
   return { result };

@@ -134,6 +134,10 @@ class DAppRequests extends Component {
                   key={request.id}
                   onCopyData={this.onCopyData}
                   className="dapp-requests-card"
+                  password={password}
+                  errorText={errorText}
+                  handleOnChange={this.handleOnChange}
+                  t={t}
                 />
               );
             default:

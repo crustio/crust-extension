@@ -253,13 +253,14 @@ export const getSignMessage = async data => {
       },
       result: signMessageObj,
     },
+    password,
   } = data;
   const { account, message } = signMessageObj;
   const wallet = getWallet();
   const accountWithSeed = AccountService.getAccount(account.address);
   const {
     message: { signedMessage },
-  } = await wallet.getSignMessage(accountWithSeed, message);
+  } = await wallet.getSignMessage(accountWithSeed, password, message);
   const replyData = {
     id,
     message: {

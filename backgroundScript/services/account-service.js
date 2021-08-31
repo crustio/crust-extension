@@ -294,10 +294,8 @@ export const getAccount = address => {
   const { accounts } = getAccountState();
   const accountsWithAddress = accounts.map(obj => {
     const account = {
+      ...obj,
       address: getAddressByAccount(obj),
-      alias: obj.alias,
-      seedWords: obj.seedWords,
-      keypairType: obj.keypairType,
     };
     return account;
   });
@@ -321,13 +319,6 @@ export const existedAccount = acc => {
 };
 
 export const exportAccount = (address, password) => {
-  const { accounts } = getAccountState();
-  const account = accounts.find(a => a.address === address);
-
-  if (account === undefined) {
-    throw new Error('Account is not exist');
-  }
-
   const wallet = getWallet();
   return wallet.exportAccount(address, password);
 };
