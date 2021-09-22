@@ -9,6 +9,8 @@ import * as ResponseType from '../../lib/constants/response-types';
 import * as DappTransactionService from './dapp-transaction-service';
 import { validateData } from '../../lib/services/validation-service';
 import { getAccountState } from './store/account-store';
+import { isConnected } from '../apis/api';
+import { findChain, updateChainMetadata } from './store-service';
 
 // use below messages if no return message is needed
 export const success = {
@@ -37,7 +39,10 @@ export const sendPopupResponse = (data, sender, sendResponse) => {
 };
 const showDAppPopup = async data => {
   let prevDAppMetadata = data;
-  const window = await dapp.showPopup(prevDAppMetadata ? prevDAppMetadata.window : undefined);
+  const window = await dapp.showPopup(
+    prevDAppMetadata ? prevDAppMetadata.window : undefined,
+    prevDAppMetadata ? prevDAppMetadata.tabId : undefined,
+  );
   prevDAppMetadata = await dapp.getMetaData();
   prevDAppMetadata.window = window;
   await dapp.setMetadata(prevDAppMetadata);
@@ -82,8 +87,9 @@ const queueDAppRequests = async (data, sender, result) => {
   }
   const requests = [];
   requests.push(request);
-  await dapp.setMetadata({ requests });
-  await showDAppPopup({ requests });
+  const tabId = sender.tab.id;
+  await dapp.setMetadata({ requests, tabId });
+  await showDAppPopup({ requests, tabId });
 };
 
 export const getDAppRequests = async () => {
@@ -121,6 +127,7 @@ export const whitelistDApp = async data => {
       id: requestID,
       request: {
         metadata: { url, origin },
+        messageId: msgId,
       },
       sender: {
         tab: { id },
@@ -138,6 +145,7 @@ export const whitelistDApp = async data => {
       ...success,
       result: enableResponse,
       origin,
+      msgId,
       type: ResponseType.BG_DAPP_RESPONSE,
     },
   };
@@ -150,6 +158,7 @@ export const cancelRequest = async data => {
       id: requestID,
       request: {
         metadata: { origin },
+        messageId: msgId,
       },
       sender: {
         tab: { id },
@@ -162,6 +171,7 @@ export const cancelRequest = async data => {
       ...failure,
       message: 'The request was cancelled.',
       origin,
+      msgId,
       type: ResponseType.BG_DAPP_RESPONSE,
     },
   };
@@ -190,8 +200,9 @@ export const validateTransaction = async (transactionObj, sender) => {
   if (!isDAppAuthorized) {
     throw new Error('Unauthorized access.');
   }
+  const isUnConnected = !isConnected();
   // update network connection
-  const network = await DappTransactionService.setNetwork(opts);
+  const network = await DappTransactionService.checkSetNetwork(opts, isUnConnected);
 
   const { address } = opts;
   const account = AccountService.getAccount(address);
@@ -204,7 +215,12 @@ export const validateTransaction = async (transactionObj, sender) => {
     txnPayload: opts,
     network,
   };
-  const result = await DappTransactionService.validateDappTransaction(validationObj);
+  let result;
+  if (isUnConnected) {
+    result = await DappTransactionService.offlineValidateDappTransaction(validationObj);
+  } else {
+    result = await DappTransactionService.validateDappTransaction(validationObj);
+  }
   await queueDAppRequests(transactionObj, sender, {
     account,
     transaction,
@@ -233,6 +249,8 @@ export const signMessage = async (signdata, sender) => {
     account: accountForUi,
     message: { message },
   };
+  // eslint-disable-next-line
+  // console.info('signMessage->:', signdata);
   await queueDAppRequests(signdata, sender, result);
   return undefined;
 };
@@ -247,6 +265,7 @@ export const getSignMessage = async data => {
       id: requestID,
       request: {
         metadata: { origin },
+        messageId: msgId,
       },
       sender: {
         tab: { id },
@@ -265,8 +284,59 @@ export const getSignMessage = async data => {
     id,
     message: {
       ...success,
+      msgId,
       result: { signature: signedMessage },
       origin,
+      type: ResponseType.BG_DAPP_RESPONSE,
+    },
+  };
+  return { result: true, requestID, replyData };
+};
+
+export const reqMetadataProvide = async (request, sender) => {
+  const {
+    metadata: { url },
+    opts,
+  } = request;
+  const isDAppAuthorized = await PermissionService.getDAppIsAuthorized({ url });
+  if (!isDAppAuthorized) {
+    throw new Error('Unauthorized access.');
+  }
+  const old = findChain(opts.genesisHash);
+  if (!old) {
+    throw new Error('Not support network.');
+  }
+  const result = {
+    network: opts.chain,
+    specVersion: opts.specVersion,
+    oldSpecVersion: old.specVersion,
+  };
+  await queueDAppRequests(request, sender, result);
+  return undefined;
+};
+
+export const allowMetadataProvide = async request => {
+  const {
+    request: {
+      id: requestID,
+      request: {
+        metadata: { origin },
+        opts,
+        messageId: msgId,
+      },
+      sender: {
+        tab: { id },
+      },
+    },
+  } = request;
+  await updateChainMetadata(opts);
+  const replyData = {
+    id,
+    message: {
+      ...success,
+      result: true,
+      origin,
+      msgId,
       type: ResponseType.BG_DAPP_RESPONSE,
     },
   };

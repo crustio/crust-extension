@@ -38,10 +38,13 @@
 }
 
 .crust-network {
+  border: 1px solid #666666;
+  border-radius: 4px;
+  padding: 2px 4px;
 }
 
 .crust-network-status {
-  margin-right: 13.37px;
+  margin-right: 5px;
 }
 
 .crust-config {
@@ -51,7 +54,7 @@
 }
 
 .crust-settings {
-  margin-left: 16px;
+  margin-left: 8px;
   align-self: center;
   display: flex;
   flex-direction: row;

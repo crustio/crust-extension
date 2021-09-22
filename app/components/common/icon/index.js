@@ -17,6 +17,7 @@ import MoreVert from '@material-ui/icons/MoreVert';
 import WifiOff from '@material-ui/icons/WifiOff';
 import VisibilityOffOutlinedIcon from '@material-ui/icons/VisibilityOffOutlined';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
+import { HelpCircle, WifiOff as FiWifiOff } from 'react-feather';
 
 const IconEdit = props => (
   <FontAwesomeIcon icon={faEdit} style={{ color: '#2f112b', fontSize: props.size }} {...props} />
@@ -111,6 +112,8 @@ const NetworkDisconnectionIcon = props => (
   </div>
 );
 
+const NetworkOfflineIcon = props => <FiWifiOff size={60} color="#C5CAD5" {...props} />;
+
 const SolidWallet = props => (
   <div {...props}>
     <FontAwesomeIcon
@@ -193,6 +196,7 @@ const AddressBook = props => (
     />
   </div>
 );
+
 export {
   IconEdit,
   IconTransferFromTo,
@@ -202,6 +206,7 @@ export {
   IconSettings,
   IconCheckCircle,
   NetworkDisconnectionIcon,
+  NetworkOfflineIcon,
   SolidWallet,
   SolidPlug,
   CaretRight,
@@ -212,4 +217,5 @@ export {
   File,
   IconVisibilityOff,
   IconAngleRight,
+  HelpCircle,
 };

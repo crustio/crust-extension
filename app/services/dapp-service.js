@@ -12,3 +12,7 @@ export const submitTransaction = async (transactionObj, password) => {
 export const signMessage = async (data, password) => {
   await ApiType.DApp.signMessage(data, password);
 };
+
+export const allowMetadataProvide = async data => {
+  await ApiType.DApp.allowMetadataProvide(data);
+};

@@ -13,6 +13,7 @@ const initialState = {
   links: LINKS,
   backupPage: DASHBOARD_PAGE,
   language: ENGLISH,
+  showValidatePass: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -58,6 +59,11 @@ const reducer = (state = initialState, action) => {
         ...{
           language: action.language,
         },
+      };
+    case Types.APPSTATE_SHOW_VALIDATE_PASSWORD:
+      return {
+        ...state,
+        showValidatePass: action.showValidatePass,
       };
     default:
       return state;

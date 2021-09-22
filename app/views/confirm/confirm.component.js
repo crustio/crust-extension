@@ -3,9 +3,8 @@ import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import ConfirmForm from '../../components/confirm/confirm-form';
 import SubHeader from '../../components/common/sub-header';
-import { TRANSFER_PAGE, CREATE_ADDRESS_BOOK_PAGE } from '../../constants/navigation';
+import { CREATE_ADDRESS_BOOK_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import { shortenAddress } from '../../services/wallet-service';
-import { findChainByName } from '../../../lib/constants/chain';
 import './styles.css';
 
 class Confirm extends Component {
@@ -68,10 +67,9 @@ class Confirm extends Component {
   };
 
   render() {
-    const { confirmDetails, network, t } = this.props;
+    const { confirmDetails, t } = this.props;
     const { errorText, password } = this.state;
-    const chain = findChainByName(network.value);
-    const theme = chain.icon || 'polkadot';
+    const theme = 'substrate';
     return (
       <div className="confirm-container">
         <SubHeader

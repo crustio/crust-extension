@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
+import { ChevronDown } from 'react-feather';
 import CrustMenu from '../../common/crust-menu';
 import FontRegular from '../../common/fonts/font-regular';
 import { DISABLE_NETWORKS_PAGES_GROUP } from '../../../constants/navigation';
@@ -29,7 +30,10 @@ class Network extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <FontRegular className="network-text" text={network.text} onClick={this.handleClick} />
+        <div className="network-text-container" onClick={this.handleClick}>
+          <FontRegular className="network-text" text={network.text} />
+          <ChevronDown size={14} color="#333333" />
+        </div>
         <CrustMenu
           selected={network}
           options={networks}

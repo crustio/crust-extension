@@ -7,7 +7,6 @@ import CrustValidator from '../../utils/crust-validator';
 import { DASHBOARD_PAGE } from '../../constants/navigation';
 import validator from '../../utils/crust-validator/validator';
 import './styles.css';
-import { findChainByName } from '../../../lib/constants/chain';
 
 const FnameRequiredErrorMessage = 'Firstname required';
 const AddressRequiredErrorMessage = 'Address required';
@@ -61,12 +60,15 @@ class CreateAddressBook extends Component {
       addressErrorMessage,
     });
     if (!isFnameError && !isAddressError && !isLnameError) {
-      this.props.submitContact({
-        address,
-        fname,
-        lname,
-        network,
-      }, t);
+      this.props.submitContact(
+        {
+          address,
+          fname,
+          lname,
+          network,
+        },
+        t,
+      );
     }
   };
 
@@ -193,8 +195,7 @@ class CreateAddressBook extends Component {
       network,
     } = this.state;
     const { networks, t } = this.props;
-    const chain = findChainByName(this.props.network.value);
-    const theme = chain.icon || 'polkadot';
+    const theme = 'substrate';
     const fnameLabelT = t('Firstname');
     const lnameLabelT = t('Lastname');
     const buttonTextT = t('Submit');

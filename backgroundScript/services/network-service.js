@@ -66,3 +66,7 @@ export const forceConnectToApi = async network => {
   getStore().dispatch(networkStateActions.updateCurrentNetwork(newNetwork));
   return newNetwork;
 };
+
+export const disconnect = () => {
+  Api.disconnect();
+};

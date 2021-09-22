@@ -13,6 +13,7 @@ const decryptDataset = (data, hashKey) => {
     permissions,
     addressBook,
     contractTokens,
+    metadata_list,
   } = data;
   return {
     accounts: StorageService.decrypt(accounts, hashKey),
@@ -28,8 +29,8 @@ const decryptDataset = (data, hashKey) => {
     permissions:
       permissions === undefined
         ? {
-            whiteListedDApps: {},
-          }
+          whiteListedDApps: {},
+        }
         : StorageService.decrypt(permissions, hashKey),
     addressBook:
       addressBook === undefined
@@ -39,6 +40,7 @@ const decryptDataset = (data, hashKey) => {
       contractTokens === undefined
         ? { tokens: [] }
         : StorageService.decrypt(contractTokens, hashKey),
+    metadata_list,
   };
 };
 

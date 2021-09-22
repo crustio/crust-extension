@@ -3,8 +3,8 @@ import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import {
-  DASHBOARD_PAGE,
   CREATE_ACCOUNT_PAGE,
+  DASHBOARD_PAGE,
   EXPORT_ACCOUNT_PAGE,
 } from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
@@ -15,11 +15,10 @@ import {
   ACCOUNT_MANAGEMENT_OPTIONS,
   ADD_ACCOUNT,
   EXPORT_ACCOUNT,
-  REMOVE,
-  IMPORT_PHRASE,
   IMPORT_JSON,
+  IMPORT_PHRASE,
+  REMOVE,
 } from '../../constants/options';
-import { findChainByName } from '../../../lib/constants/chain';
 import { ENGLISH } from '../../constants/language';
 import './styles.css';
 
@@ -96,11 +95,10 @@ class ManageAccount extends Component {
 
   render() {
     const {
-      accounts, account, network, t, language
+      accounts, account, t, language
     } = this.props;
     const { isOpen } = this.state;
-    const chain = findChainByName(network.value);
-    const theme = chain.icon || 'polkadot';
+    const theme = 'substrate';
     const options = accounts.length > 1
       ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => ({ ...o, text: t(o.text) }))
       : ACCOUNT_MANAGEMENT_OPTIONS.filter(o => o.value !== REMOVE.value).map(o => ({

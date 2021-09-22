@@ -5,7 +5,11 @@ const initialState = {
   networks: [],
   network: DEFAULT_NETWORK,
   customNetwork: {},
-  isConnected: true,
+  isConnected: false,
+  isLoadingNetwork: false,
+  isOfflineMode: false,
+  isError: false,
+  isErrorByType: false,
   isDeveloperMode: false,
   customNetworkSuccess: false,
   customNetworkError: {
@@ -60,6 +64,17 @@ const reducer = (state = initialState, action) => {
           isConnected: action.isConnected,
         },
       };
+    case Types.UPDATE_NETWORK_ERROR:
+      return {
+        ...state,
+        isError: action.isError,
+        isErrorByType: action.isErrorByType,
+      };
+    case Types.UPDATE_NETWORK_IS_LOADING:
+      return {
+        ...state,
+        isLoadingNetwork: action.isLoading,
+      };
     case Types.CUSTOM_NETWORK_VALIDATION_ERROR:
       if (action.customNetworkError) {
         return {
@@ -91,6 +106,11 @@ const reducer = (state = initialState, action) => {
         ...{
           isDeveloperMode: action.isDeveloperMode,
         },
+      };
+    case Types.UPDATE_OFFLINE_MODE:
+      return {
+        ...state,
+        isOfflineMode: action.isOfflineMode,
       };
     default:
       return state;

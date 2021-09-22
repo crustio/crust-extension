@@ -1,18 +1,45 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import TokenDetails from '../../components/token/token-details';
 import Wallet from '../../components/wallet';
-import { TRANSFER_PAGE, QR_CODE_PAGE, TOKEN_DETAILS_PAGE } from '../../constants/navigation';
+import { QR_CODE_PAGE, TOKEN_DETAILS_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import './styles.css';
 import { RENAME } from '../../constants/options';
-import { findChainByName } from '../../../lib/constants/chain';
 import TokenList from '../../components/token-list';
 import CrustTabs from '../../components/common/crust-tabs';
 import ButtonSquare from '../../components/common/buttons/button-square';
+import { HelpCircle, NetworkOfflineIcon } from '../../components/common/icon';
+
+const MP = withStyles({
+  root: {
+    color: '#111A34',
+    fontSize: 14,
+    fontWeight: 400,
+    padding: '4px 0',
+  },
+})(DialogContentText);
+
+const MDialogTitle = withStyles({
+  root: {
+    fontSize: 16,
+    fontWeight: 500,
+    color: '#111A34',
+    textAlign: 'center',
+    padding: '16px',
+  },
+})(DialogTitle);
 
 class Dashboard extends Component {
   constructor(props) {
@@ -21,6 +48,7 @@ class Dashboard extends Component {
     this.state = {
       labels: ['Assets', 'Activities'],
       value: 0,
+      showOfflineDescription: false,
     };
   }
 
@@ -101,6 +129,10 @@ class Dashboard extends Component {
       balance: { balanceFormatted, marketData, amount },
       isLinkToFaucet,
       network,
+      isConnected,
+      isOfflineMode,
+      // isError,
+      // isErrorByType,
       unit,
       accountMenu,
       tokens,
@@ -108,9 +140,9 @@ class Dashboard extends Component {
     } = this.props;
     const { labels, value } = this.state;
     const tLabels = labels.map(l => t(l));
-    const chain = findChainByName(network.value);
-    const theme = chain.icon || 'polkadot';
+    const theme = 'substrate';
     const defaultToken = tokens.find(token => token.address === undefined);
+    const showOffline = !isConnected || isOfflineMode;
     return (
       <div className="dashboard-container">
         <div>
@@ -130,39 +162,96 @@ class Dashboard extends Component {
               accountMenu={accountMenu}
               onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
             />
-            <TokenDetails
-              unit={network.unit !== undefined ? network.unit : unit !== undefined ? unit.text : ''}
-              className="token-container"
-              balance={
-                defaultToken.balance === '-'
-                  ? '-'
-                  : convertBalanceToShow(defaultToken.balance, defaultToken.decimals)
-              }
-              marketData={marketData && marketData}
-              amount={amount}
-              handleSend={this.handleSend}
-              handleDeposit={this.handleDeposit}
-              labelText={t('Transferable')}
-            />
+            {!showOffline && (
+              <TokenDetails
+                unit={
+                  network.unit !== undefined ? network.unit : unit !== undefined ? unit.text : ''
+                }
+                className="token-container"
+                balance={
+                  defaultToken.balance === '-'
+                    ? '-'
+                    : convertBalanceToShow(defaultToken.balance, defaultToken.decimals)
+                }
+                marketData={marketData && marketData}
+                amount={amount}
+                handleSend={this.handleSend}
+                handleDeposit={this.handleDeposit}
+                labelText={t('Transferable')}
+              />
+            )}
           </div>
         </div>
-        <CrustTabs value={value} onChange={this.handleChange} labels={tLabels} />
-        {value === 0 && (
-          <div>
-            <TokenList
-              tokens={tokens}
-              className="token-list-container"
-              onTokenSelected={this.onTokenSelected}
-            />
+        {showOffline && (
+          <div className="crust-offline-container">
+            <NetworkOfflineIcon />
+            <span className="offline-hint">
+              {t('OfflineDescription')}
+              <HelpCircle
+                size={16}
+                color="#111A34"
+                style={{
+                  marginLeft: 10,
+                  marginBottom: -3,
+                  cursor: 'pointer',
+                }}
+                onClick={() => this.setState({ showOfflineDescription: true })}
+              />
+            </span>
+            <Dialog
+              PaperProps={{
+                style: {
+                  margin: 30,
+                  borderRadius: 8,
+                },
+              }}
+              open={this.state.showOfflineDescription}
+              onClose={() => this.setState({ showOfflineDescription: false })}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              <MDialogTitle disableTypography id="alert-dialog-title">
+                {t('Why my wallet is offline?')}
+              </MDialogTitle>
+              <DialogContent color="#111A34" style={{ padding: '0 16px 16px' }}>
+                <MP>{`${t('Possible reasons')}:`}</MP>
+                <MP>{t('reasons_1')}</MP>
+                <MP style={{ marginTop: 12 }}>{t('reasons_2')}</MP>
+                <MP style={{ marginTop: 12 }}>{t('reasons_3')}</MP>
+              </DialogContent>
+              <DialogActions style={{ margin: '16px' }}>
+                <div
+                  className="btn-ok"
+                  onClick={() => this.setState({ showOfflineDescription: false })}
+                >
+                  {t('OK')}
+                </div>
+              </DialogActions>
+            </Dialog>
           </div>
         )}
-        {value === 1 && (
-          <Transaction
-            className="transaction-container"
-            network={network}
-            isLinkToFaucet={isLinkToFaucet}
-            transactions={transactions}
-          />
+        {!showOffline && (
+          <>
+            <CrustTabs value={value} onChange={this.handleChange} labels={tLabels} />
+            {value === 0 && (
+              <div>
+                <TokenList
+                  tokens={tokens}
+                  className="token-list-container"
+                  onTokenSelected={this.onTokenSelected}
+                />
+              </div>
+            )}
+            {value === 1 && (
+              <Transaction
+                className="transaction-container"
+                network={network}
+                isLinkToFaucet={isLinkToFaucet}
+                transactions={transactions}
+              />
+            )}
+          </>
         )}
         <div
           style={{

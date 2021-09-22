@@ -6,11 +6,15 @@ import {
   DEV_DOT_NETWORK_LIST,
   DEFAULT_NETWORK,
 } from '../../lib/constants/networks';
-import { updateAppLoading } from '../containers/actions';
+import {
+  // setAppShowValidatePass,
+  updateAppLoading,
+} from '../containers/actions';
 import { getTransactions, getTokens } from '../views/dashboard/actions';
 import { createFullNetworkURL } from '../../lib/services/network-validator';
 import AppConfig from '../../lib/constants/config';
 import { FAILURE } from '../../lib/constants/api';
+import { setOfflineMode } from '../../lib/services/extension/local';
 
 export const updateNetworkList = networks => ({
   type: NetworkActionTypes.UPDATE_NETWORK_LIST,
@@ -30,6 +34,17 @@ export const updateCustomNetwork = customNetwork => ({
 export const updateNetworkStatus = isConnected => ({
   type: NetworkActionTypes.UPDATE_NETWORK_STATUS,
   isConnected,
+});
+
+export const updateNetworkError = (isError, isErrorByType) => ({
+  type: NetworkActionTypes.UPDATE_NETWORK_ERROR,
+  isError,
+  isErrorByType,
+});
+
+export const updateNetworkIsLoading = isLoading => ({
+  type: NetworkActionTypes.UPDATE_NETWORK_IS_LOADING,
+  isLoading,
 });
 
 export const customNetworkValidationError = customNetworkError => ({
@@ -65,7 +80,15 @@ export const getUnits = () => async dispatch => {
 export const setNetwork = async (dispatch, getState) => {
   const { isDeveloperMode } = getState().networkReducer;
   if (isDeveloperMode) {
-    dispatch(updateNetworkList([...DEV_DOT_NETWORK_LIST, { text: 'Custom...', value: 'custom' }]));
+    dispatch(
+      updateNetworkList([
+        ...DEV_DOT_NETWORK_LIST,
+        {
+          text: 'Custom...',
+          value: 'custom',
+        },
+      ]),
+    );
   } else {
     dispatch(updateNetworkList([...DOT_NETWORK_LIST]));
   }
@@ -80,6 +103,7 @@ export const setNetwork = async (dispatch, getState) => {
 export function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
+
 export const propagateUpdates = async dispatch => {
   dispatch(updateAppLoading(true));
   dispatch(updateNetworkStatus(false));
@@ -155,4 +179,25 @@ export const restoreNetwork = async (dispatch, getState) => {
   if (balance.status === FAILURE || balance.balance === '-') {
     await Network.restoreCurrentNetwork(network);
   }
+};
+
+export const doSetNetworkMode = isOfflineMode => async dispatch => {
+  await setOfflineMode(isOfflineMode);
+  dispatch({
+    type: NetworkActionTypes.UPDATE_OFFLINE_MODE,
+    isOfflineMode,
+  });
+  if (isOfflineMode) {
+    await Network.disConnectNetwork();
+  } else {
+    await dispatch(restoreNetwork);
+  }
+};
+
+export const setNetworkMode = isOfflineMode => async dispatch => {
+  // const onSuccess = isOfflineMode
+  //   ? () => doSetNetworkMode(true)(dispatch)
+  //   : () => doSetNetworkMode(false)(dispatch);
+  // await dispatch(setAppShowValidatePass(onSuccess));
+  await doSetNetworkMode(isOfflineMode)(dispatch);
 };

@@ -13,7 +13,7 @@ import CrustPassword from '../../common/password/crust-password';
 const Summary = props => (
   <div className={props.className}>
     <RequestType
-      type="Sign"
+      type={props.t('Sign')}
       blockchain={props.blockchain}
       className="sign-message-summary-request-type"
     />
@@ -66,6 +66,7 @@ export default class SignMessage extends Component {
           handleChange={handleSignMessageExpansion}
           summary={(
             <Summary
+              t={t}
               className="sign-message-summary-container"
               account={account}
               balance={balance}
@@ -79,7 +80,7 @@ export default class SignMessage extends Component {
               'Signing can provide access to the value of your account. Only sign this if you know and trust the requesting source.',
             )}
           />
-          <FontRegular className="sign-message-title" text="Message" />
+          <FontRegular className="sign-message-title" text={t('Sign the following data')} />
           <SignedMessage className="sign-message-body" data={data} onCopyData={onCopyData} />
           <CrustPassword
             className="confirm-form-password"

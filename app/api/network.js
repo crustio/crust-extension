@@ -69,3 +69,9 @@ export const getChainDecimals = async () => {
   throwIfNoSuccess({ message, status });
   return { result };
 };
+
+export const disConnectNetwork = async () => {
+  await sendMessage({
+    type: MessageTypes.BG_NETWORK_DIS_CONNECT,
+  });
+};

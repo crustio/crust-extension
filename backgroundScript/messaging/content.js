@@ -15,6 +15,8 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (senderId === extensionId) {
     if (senderURL !== popupURL && senderURL !== windowURL) {
       try {
+        // eslint-disable-next-line no-console
+        // console.info('ContentMsg:', request.type, request);
         switch (request.type) {
           case MessageTypes.BG_DAPP_TXN_VALIDATE:
             ResponseService.handleDAppValidateTransaction(request, sender, sendResponse);
@@ -27,6 +29,12 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
             break;
           case MessageTypes.BG_DAPP_SIGN_MESSAGE:
             ResponseService.signMessage(request, sender, sendResponse);
+            break;
+          case MessageTypes.BG_DAPP_GET_METADATA_LIST:
+            ResponseService.getMetadataList(request, sender, sendResponse);
+            break;
+          case MessageTypes.BG_DAPP_METADATA_PROVIDE:
+            ResponseService.reqMetadataProvide(request, sender, sendResponse);
             break;
           default:
             ResponseService.handledAppDefault(request, sendResponse);

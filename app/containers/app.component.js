@@ -122,8 +122,12 @@ class App extends Component {
   };
 
   handleOptionsChange = option => {
-    this.props.updateBackupPage(this.props.page);
-    this.props.changePage(option.value);
+    if (option.value === 'network_mode') {
+      this.props.setNetworkMode(!this.props.isOfflineMode);
+    } else {
+      this.props.updateBackupPage(this.props.page);
+      this.props.changePage(option.value);
+    }
   };
 
   onToggleDeveloperMode = event => {
@@ -145,9 +149,11 @@ class App extends Component {
         networks,
         network,
         isConnected,
+        isOfflineMode,
         isDeveloperMode,
         options,
         language,
+        t,
       },
       state: {
         showLogo,
@@ -159,6 +165,12 @@ class App extends Component {
         showGrayBg,
       },
     } = this;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const option of options) {
+      if (option.value === 'network_mode') {
+        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set To Offline Mode';
+      }
+    }
     return (
       <CrustApp
         className={showGrayBg ? 'app-gray' : 'app'}
@@ -167,6 +179,7 @@ class App extends Component {
         networks={networks}
         network={network}
         isConnected={isConnected}
+        isOfflineMode={isOfflineMode}
         onNetworkChange={this.handleNetworkChange}
         showLogo={showLogo}
         showBanner={showBanner}
@@ -180,6 +193,7 @@ class App extends Component {
         isDeveloperMode={isDeveloperMode}
         onToggleDeveloperMode={this.onToggleDeveloperMode}
         language={language}
+        t={t}
       />
     );
   }

@@ -12,6 +12,7 @@ module.exports = {
     jest: true,
   },
   rules: {
+    'react/jsx-tag-spacing': 0,
     'react/forbid-prop-types': 0,
     'react/prefer-stateless-function': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
@@ -43,6 +44,8 @@ module.exports = {
     'no-useless-catch': 'error',
     'no-param-reassign': 'error',
     'filenames/match-regex': [2, '^[a-z0-9-(.)]+$', true],
+    camelcase: 0,
+    'no-return-await': 0,
   },
   plugins: ['react', 'filenames'],
 };

@@ -3,11 +3,7 @@ import * as AppActions from '../containers/actions';
 import * as AccountActions from './account';
 import { getTransactions, getTokens } from '../views/dashboard/actions';
 import {
-  setNetwork,
-  updateNetworkStatus,
-  getUnits,
-  getDeveloperMode,
-  restoreNetwork,
+  setNetwork, getUnits, getDeveloperMode, restoreNetwork
 } from './network';
 import * as NavConstants from '../constants/navigation';
 import * as dAppActionType from '../constants/dapp';
@@ -27,7 +23,6 @@ export const setDAppRequests = requests => ({
 const openDashboard = () => async dispatch => {
   await dispatch(getDeveloperMode());
   await dispatch(setNetwork);
-  dispatch(updateNetworkStatus(false));
   dispatch(AccountActions.setInitialBalance);
   await promiseTimeout(3000, dispatch(AccountActions.fetchAndSetBalances), {});
   try {

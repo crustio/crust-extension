@@ -10,7 +10,7 @@ const candyTemplate = {
   accountAddress: null,
   tokenName: 'Candy',
   tokenSymbol: 'Candy',
-  decimals: '15',
+  decimals: 12,
   balance: '0',
 };
 
@@ -28,7 +28,7 @@ export const getCandyToken = async () => {
   const token = { ...candyTemplate };
   token.network = currentNetwork;
   token.accountAddress = currentAccount.address;
-  token.decimals = getTokenDecimals().toString();
+  token.decimals = getTokenDecimals();
 
   try {
     const balance = await getApi().query.candy.balances(currentAccount.address);
@@ -47,7 +47,7 @@ const csmTemplate = {
   accountAddress: null,
   tokenName: 'CSM',
   tokenSymbol: 'CSM',
-  decimals: '12',
+  decimals: 12,
   balance: '0',
 };
 

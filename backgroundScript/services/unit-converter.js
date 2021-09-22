@@ -1,5 +1,5 @@
 import { BigNumber } from 'bignumber.js';
-import { getUnits } from '../apis/chain';
+// import { getUnits } from '../apis/chain';
 
 const validate = (value, name) => {
   if (value !== undefined) {
@@ -11,32 +11,32 @@ const validate = (value, name) => {
   }
 };
 
-export const convertUnit = (value, fromUnit, toUnit) => {
-  validate(value, 'value');
-  validate(fromUnit, 'fromUnit');
-  validate(toUnit, 'toUnit');
-  const bnValue = new BigNumber(value);
-  const units = getUnits();
-  const foundFromUnit = units.find(x => x.text === fromUnit);
-  if (foundFromUnit === undefined) {
-    throw new Error('From Unit is not supported');
-  }
-  const foundToUnit = units.find(x => x.text === toUnit);
-  if (foundToUnit === undefined) {
-    throw new Error('To Unit is not supported');
-  }
-  const power = foundFromUnit.power - foundToUnit.power;
-  const exponential = new BigNumber(10).pow(new BigNumber(power));
-  const newValue = bnValue.multipliedBy(exponential);
-  return newValue.toFixed();
-};
+// export const convertUnit = (value, fromUnit, toUnit) => {
+//   validate(value, 'value');
+//   validate(fromUnit, 'fromUnit');
+//   validate(toUnit, 'toUnit');
+//   const bnValue = new BigNumber(value);
+//   const units = getUnits();
+//   const foundFromUnit = units.find(x => x.text === fromUnit);
+//   if (foundFromUnit === undefined) {
+//     throw new Error('From Unit is not supported');
+//   }
+//   const foundToUnit = units.find(x => x.text === toUnit);
+//   if (foundToUnit === undefined) {
+//     throw new Error('To Unit is not supported');
+//   }
+//   const power = foundFromUnit.power - foundToUnit.power;
+//   const exponential = new BigNumber(10).pow(new BigNumber(power));
+//   const newValue = bnValue.multipliedBy(exponential);
+//   return newValue.toFixed();
+// };
 
 export const convertShowToBalance = (value, token) => {
-  validate(value, 'value')
-  validate(token.tokenSymbol, 'tokenSymbol')
+  validate(value, 'value');
+  validate(token.tokenSymbol, 'tokenSymbol');
 
   const bnValue = new BigNumber(value);
   const exponential = new BigNumber(10).pow(new BigNumber(token.decimals));
   const newValue = bnValue.multipliedBy(exponential);
   return newValue.toFixed();
-}
+};

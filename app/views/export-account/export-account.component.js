@@ -6,10 +6,9 @@ import CrustPassword from '../../components/common/password/crust-password';
 import AccountInfo from '../../components/account/account-info';
 import * as Account from '../../api/account';
 import './styles.css';
-import { findChainByName } from '../../../lib/constants/chain';
 import FontRegular from '../../components/common/fonts/font-regular';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
-import { MANAGE_ACCOUNT_PAGE, DASHBOARD_PAGE } from '../../constants/navigation';
+import { DASHBOARD_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 import { BACK_BUTTON_TEXT, TO_CONFIRM_BUTTON_TEXT } from '../../constants/account';
 
 class ExportAccout extends Component {
@@ -46,8 +45,6 @@ class ExportAccout extends Component {
     this.props.updateAppLoading(true);
     const { password } = this.state;
     if (!password || password.trim() === '') {
-      // eslint-disable-next-line no-console
-      console.info('password::', password);
       this.setState({
         errorText: 'Password is required.',
       });
@@ -64,8 +61,6 @@ class ExportAccout extends Component {
           saveAs(blob, `${this.props.account.address}.json`);
         })
         .catch(() => {
-          // eslint-disable-next-line no-console
-          console.info('password:2:', password);
           this.props.updateAppLoading(false);
           this.setState({
             errorText: 'Password is incorrect.',
@@ -76,9 +71,8 @@ class ExportAccout extends Component {
 
   render() {
     const { password, errorText } = this.state;
-    const { t, account, network } = this.props;
-    const chain = findChainByName(network.value);
-    const theme = chain.icon || 'polkadot';
+    const { t, account } = this.props;
+    const theme = 'substrate';
     return (
       <div className="export-account-container">
         <div className="export-account-content-container">
