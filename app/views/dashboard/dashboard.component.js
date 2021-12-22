@@ -278,7 +278,7 @@ class Dashboard extends Component {
                 alignItems: 'center',
               }}
             >
-              <div>Crust Apps</div>
+              <div>{network.url_name ? network.url_name : 'Crust Apps'}</div>
               <div style={{ display: 'flex' }}>
                 <ArrowForwardIosOutlinedIcon className="dashboard-icon" />
               </div>
