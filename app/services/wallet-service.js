@@ -12,8 +12,10 @@ export function addZeroX(data) {
 
 export const getWalletAlias = (walletArr, addressToLookup) => {
   const walletFound = walletArr.find(wallet => wallet.address === addressToLookup);
-
-  return walletFound === undefined ? 'Unknown Contact' : walletFound.alias;
+  if (walletFound) {
+    return walletFound.alias;
+  }
+  return addressToLookup.substr(0, 5);
 };
 
 export function renameWallet(value, currentWallet, currenIndex, walletArr) {

@@ -109,9 +109,16 @@ const createOfflineTxnUIObject = async txnPayload => {
     chain: chain.name,
     sVersion,
     method,
-    dest: '-',
+    dest: '',
     value: new BN('0'),
-    fValue: '-',
+    fValue: '',
+    items: [
+      {
+        method: 'unknown',
+        section: 'unknown',
+        args: [method],
+      },
+    ],
   };
 };
 
@@ -125,36 +132,81 @@ const createTxnUIObject = async txnPayload => {
     const { era, nonce, tip } = payload;
 
     const sVersion = bnToBn(specVersion).toNumber();
-    const mortality = await mortalityAsString(era, blockNumber);
+    // const mortality = await mortalityAsString(era, blockNumber);
     const decodedMethod = await decodeMethod(method, sVersion, chain);
     const {
-      method: { section: sectionName, method: methodName },
+      method: { args, section: sectionName, method: methodName },
       json,
     } = decodedMethod;
+    //
+    // const mArgs = args[0].toHuman()
+    // console.info('decodeMethod:', mArgs, decodedMethod);
     // const note = meta.documentation.map(doc => doc.toString()).join(' ');
-    const {
-      dest, value, target, amount
-    } = json.args;
-    const toAddress = sectionName === 'candy' ? target : dest;
-    const fToAddress = keyring.encodeAddress(toAddress, chain.ss58Format);
-    const inputValue = sectionName === 'candy' ? bnToBn(amount) : bnToBn(value);
-    const symbol = sectionName === 'candy' ? 'Candy' : sectionName === 'csm' ? 'CSM' : 'CRU';
+    const isMulti = Array.isArray(args[0]);
+    const mArgs = isMulti ? args[0] : decodedMethod.method;
+    const items = [];
+    let fToAddress = '';
+    let inputValue = '0';
+    let fValue = '';
+    if (isMulti) {
+      for (let index = 0; index < mArgs.length; index++) {
+        const item = mArgs[index];
+        let itemArgs = [];
+        if (item.method === 'transfer' || item.method === 'transferKeepAlive') {
+          const tempArgs = item.args.map(i => i.toString());
+          inputValue = tempArgs[0];
+          itemArgs = [tempArgs[0], `${convertBalanceToShow(tempArgs[1], 12, 4)} CRU`];
+          fValue = itemArgs[1];
+        } else {
+          itemArgs = item.toHuman().args;
+        }
+        items.push({
+          section: item.section,
+          method: item.method,
+          args: itemArgs,
+        });
+      }
+    } else {
+      let itemArgs = [];
+      if (mArgs.method === 'transfer' || mArgs.method === 'transferKeepAlive') {
+        const {
+          dest, value, target, amount
+        } = json.args;
+        const toAddress = sectionName === 'candy' ? target : dest;
+        fToAddress = keyring.encodeAddress(toAddress, chain.ss58Format);
+        inputValue = sectionName === 'candy' ? bnToBn(amount) : bnToBn(value);
+        const symbol = sectionName === 'candy' ? 'Candy' : sectionName === 'csm' ? 'CSM' : 'CRU';
+        itemArgs = [fToAddress, `${convertBalanceToShow(inputValue, 12, 4)} ${symbol}`];
+        fValue = itemArgs[1];
+      } else {
+        itemArgs = mArgs.toHuman().args;
+      }
+      items.push({
+        section: mArgs.section,
+        method: mArgs.method,
+        args: itemArgs,
+      });
+    }
+    console.info('items->', mArgs.toHuman(), items);
+
     return {
       address,
       blockHash,
       chain: chain.name,
       sVersion,
-      mortality,
-      nonce: formatNumber(nonce),
-      tip: formatNumber(tip),
+      // mortality,
       sectionName,
       method: `${sectionName}.${methodName}`,
+      nonce: formatNumber(nonce),
+      tip: formatNumber(tip),
+      fValue,
       dest: fToAddress,
       value: inputValue,
-      fValue: `${convertBalanceToShow(inputValue, 12, 4)} ${symbol}`,
+      items,
       // note,
     };
   } catch (e) {
+    console.error(e);
     return await createOfflineTxnUIObject(txnPayload);
   }
 };

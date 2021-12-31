@@ -1,52 +1,38 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import RequestType from '../request-type';
-import SendToFrom from '../send-to-from';
-import WalletExpansionPanel from '../../common/wallet-expansion-panel';
-import FontRegular from '../../common/fonts/font-regular';
+import { createAccountObject } from '../../../services/wallet-service';
 import FooterWithTwoButton from '../../common/footer-with-two-button';
-import TransactionUI from '../transaction-ui';
-import './styles.css';
-import DarkDivider from '../../common/divider/dark-divider';
-import ClickToCopy from '../../common/click-to-copy';
 import CrustPassword from '../../common/password/crust-password';
+import SendToFrom from '../send-to-from';
+import './styles.css';
 
 const Summary = props => (
   <div className={props.className}>
-    <RequestType type="Send" className="send-summary-request-type" />
-    <SendToFrom
-      toAccount={props.toAccount}
-      fromAccount={props.fromAccount}
-      onCopyAddress={props.onCopyAddress}
-      className="send-summary-send-to-from"
-    />
+    <div className="send_item_title">Request</div>
+    <div className="send_summary_item">
+      <div className="ssi_left">From:</div>
+      <div className="ssi_right">{props.from}</div>
+    </div>
+    <div className="send_summary_item">
+      <div className="ssi_left">Chain:</div>
+      <div className="ssi_right">{props.chain}</div>
+    </div>
+    <div className="send_summary_item">
+      <div className="ssi_left">Version:</div>
+      <div className="ssi_right">{props.version}</div>
+    </div>
   </div>
 );
 
-const SignedMessage = props => (
-  <div className={props.className}>
-    <DarkDivider style={{ width: '100%' }} />
-    <div className="send-data-container">
-      <div>
-        <FontRegular text="Data" className="send-data-label" />
-      </div>
-      <div>
-        <ClickToCopy
-          className="send-data clickable-icon"
-          text={props.data}
-          value={props.data}
-          onCopy={props.onCopyData}
-        />
-      </div>
-    </div>
-    <DarkDivider style={{ width: '100%' }} />
-  </div>
-);
+const isTx = item => (item.method === 'transfer' || item.method === 'transferKeepAlive')
+  && item.section === 'balances';
+
 class Send extends Component {
   render() {
     const {
+      accounts,
       fromAccount,
-      toAccount,
+      // toAccount,
       onCopyAddress,
       isSendExpanded,
       handleSendExpansion,
@@ -56,6 +42,7 @@ class Send extends Component {
       onCancel,
       onAllow,
       errorMessage,
+      txnForUI,
       txnUi,
       data,
       onCopyData,
@@ -65,37 +52,40 @@ class Send extends Component {
       t,
       ...otherProps
     } = this.props;
+    const { items = [] } = txnForUI || {};
     return (
       <div {...otherProps}>
         <div className="send-panel-container">
-          <WalletExpansionPanel
-            isBelowExpandIcon
-            expanded={isSendExpanded}
-            handleChange={handleSendExpansion}
-            summary={(
-              <Summary
-                className="send-summary-container"
-                onCopyAddress={onCopyAddress}
-                fromAccount={fromAccount}
-                toAccount={toAccount}
-              />
-            )}
-          >
-            {data && (
-              <SignedMessage className="sign-message-body" data={data} onCopyData={onCopyData} />
-            )}
-
-            {txnUi && (
-              <TransactionUI
-                txnUi={txnUi}
-                isInfoExpanded={isInfoExpanded}
-                handleInfoExpansion={handleInfoExpansion}
-                className="send-txn"
-              />
-            )}
-
-            {errorMessage && <FontRegular text={errorMessage} className="send-error" />}
-          </WalletExpansionPanel>
+          <Summary
+            className="send-summary-container"
+            onCopyAddress={onCopyAddress}
+            fromAccount={fromAccount}
+            from={txnForUI.url}
+            chain={txnForUI.chain}
+            version={txnForUI.sVersion}
+          />
+          {items.map((item, index) => (
+            <div key={`items_${index}`} className="send_item">
+              <div className="send_item_title">{item.method}</div>
+              {isTx(item) ? (
+                <>
+                  <SendToFrom
+                    toAccount={createAccountObject(accounts, item.args[0])}
+                    fromAccount={fromAccount}
+                    onCopyAddress={onCopyAddress}
+                    className="send_tx_from_to"
+                  />
+                  <div>Amount: {item.args[1]}</div>
+                </>
+              ) : (
+                <div>
+                  {item.args.map((arg, argIndex) => (
+                    <div key={`args_${argIndex}`}>{arg}</div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
         <CrustPassword
           className="confirm-form-password"

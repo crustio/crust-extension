@@ -61,7 +61,7 @@ class SignIn extends Component {
           <div className="sign-in-img-contianer">
             <img src={LogoBig} alt="logo2" />
           </div>
-          <FontRegular className="sign-in-title" text="Chain to Decentralized Cloud" />
+          <FontRegular className="sign-in-title" text="Web 3.0 Storage for Metaverse" />
           <div className="sign-in-container-password">
             <CrustUnlockPassword
               isError={isError}

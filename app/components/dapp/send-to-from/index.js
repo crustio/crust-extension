@@ -11,12 +11,12 @@ export default class SendToFrom extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <Avatar
             className="account-avatar"
             onCopyAddress={onCopyAddress}
             value={fromAccount.address}
-            size="32"
+            size="34"
           />
           <AccountDetails
             className="account-item-identity-container"
@@ -30,7 +30,7 @@ export default class SendToFrom extends Component {
         <ArrowForwardOutlinedIcon style={{ color: 'black', width: '16px' }} />
 
         {toAccount && (
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <Avatar
               className="account-avatar"
               onCopyAddress={onCopyAddress}
