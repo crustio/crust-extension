@@ -80,7 +80,7 @@ class Send extends Component {
               ) : (
                 <div>
                   {item.args.map((arg, argIndex) => (
-                    <div key={`args_${argIndex}`}>{arg}</div>
+                    <div key={`args_${argIndex}`}>{JSON.stringify(arg)}</div>
                   ))}
                 </div>
               )}
