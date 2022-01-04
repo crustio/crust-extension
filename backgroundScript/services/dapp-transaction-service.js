@@ -142,7 +142,8 @@ const createTxnUIObject = async txnPayload => {
     // const mArgs = args[0].toHuman()
     // console.info('decodeMethod:', mArgs, decodedMethod);
     // const note = meta.documentation.map(doc => doc.toString()).join(' ');
-    const isMulti = Array.isArray(args[0]);
+
+    const isMulti = Array.isArray(args[0]) && (methodName === 'batch' || methodName === 'batchAll');
     const mArgs = isMulti ? args[0] : decodedMethod.method;
     const items = [];
     let fToAddress = '';
@@ -161,9 +162,9 @@ const createTxnUIObject = async txnPayload => {
           itemArgs = item.toHuman().args;
         }
         items.push({
-          section: item.section,
-          method: item.method,
-          args: itemArgs,
+          section: item.section || 'unknown',
+          method: item.method || 'unknown',
+          args: itemArgs || [],
         });
       }
     } else {
@@ -182,9 +183,9 @@ const createTxnUIObject = async txnPayload => {
         itemArgs = mArgs.toHuman().args;
       }
       items.push({
-        section: mArgs.section,
-        method: mArgs.method,
-        args: itemArgs,
+        section: mArgs.section || 'unknown',
+        method: mArgs.method || 'unknown',
+        args: itemArgs || [],
       });
     }
     console.info('items->', mArgs.toHuman(), items);
