@@ -1,6 +1,6 @@
 {
   "name": "crust-wallet",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Crust Wallet - polkadot web extension wallet",
   "scripts": {
     "dev": "node scripts/dev",
@@ -146,6 +146,7 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.6",
     "react-draggable": "^3.3.1",
+    "react-feather": "^2.0.9",
     "react-i18next": "^11.8.7",
     "react-loaders": "^3.0.1",
     "react-redux": "^4.3.0",

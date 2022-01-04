@@ -1,21 +1,25 @@
-import { SI, findSi } from '@polkadot/util/format/si';
+import { findSi, SI } from '@polkadot/util/format/si';
 import keyring from '@polkadot/ui-keyring';
+import { getSpecTypes } from '@polkadot/types-known';
+import { updateChainMetadata } from '../services/store-service';
 
 const femtoUnit = findSi('f');
 const units = SI.filter(x => x.power >= femtoUnit.power);
-let DEFAULT_SS58 = 42;
-const DEFAULT_DECIMALS = 15;
+const DEFAULT_SS58 = 42;
+const DEFAULT_DECIMALS = 12;
+const DEFAULT_SYMBOL = 'CRU';
 
 let keyringInited = false;
 
 const Chain = {
   units,
   baseUnit: units[0],
-  tokenSymbol: '',
+  tokenSymbol: DEFAULT_SYMBOL,
   ss58Format: DEFAULT_SS58,
   tokenDecimals: DEFAULT_DECIMALS,
   metadata: undefined,
   api: undefined,
+  networkValue: '',
 };
 
 function parseProps(prop) {
@@ -26,24 +30,50 @@ function parseProps(prop) {
     }
     return mProp;
   } catch (e) {
+    if (prop === null || prop === undefined) {
+      return null;
+    }
     const p = prop.toString();
     if (p.startsWith('[') && p.endsWith(']')) return p.substr(1, p.length - 2);
     return p;
   }
 }
 
-export const setChain = async api => {
+const DEF_PROPS = {
+  ss58Format: null,
+  tokenDecimals: null,
+  tokenSymbol: null,
+};
+const getProperties = async api => {
   try {
-    // eslint-disable-next-line
-    console.log('seChain--', 'start');
-    const { ss58Format, tokenDecimals, tokenSymbol } = await api.rpc.system.properties();
+    const props = await api.rpc.system.properties();
+    return props || DEF_PROPS;
+  } catch (e) {
+    return DEF_PROPS;
+  }
+};
+
+export const setChain = async (api, network) => {
+  try {
+    const {
+      // eslint-disable-next-line camelcase
+      def_ss58 = DEFAULT_SS58,
+      // eslint-disable-next-line camelcase
+      def_decimals = DEFAULT_DECIMALS,
+      unit = DEFAULT_SYMBOL,
+    } = network;
+    const { ss58Format, tokenDecimals, tokenSymbol } = await getProperties(api);
     const chainSS58 = parseProps(ss58Format);
     const decimals = parseProps(tokenDecimals);
     const symbol = parseProps(tokenSymbol);
-    const mSS58 = chainSS58 !== null ? Number(chainSS58) : DEFAULT_SS58;
-    const mDecimals = decimals !== null ? Number(decimals) : DEFAULT_DECIMALS;
-    const mSymbol = symbol !== null ? `${symbol}` : 'CRU';
-
+    // eslint-disable-next-line
+    console.info('ss58-->', chainSS58, def_ss58, network);
+    // eslint-disable-next-line camelcase
+    const mSS58 = chainSS58 !== null ? Number(chainSS58) : def_ss58;
+    // eslint-disable-next-line camelcase
+    const mDecimals = decimals !== null ? Number(decimals) : def_decimals;
+    const mSymbol = symbol !== null ? `${symbol}` : unit;
+    Chain.networkValue = network.value;
     Chain.ss58Format = mSS58;
     Chain.api = api;
     const units = SI.filter(x => x.power >= -mDecimals);
@@ -60,19 +90,25 @@ export const setChain = async api => {
         ss58Format: Chain.ss58Format,
         type: 'sr25519',
       });
-
       keyringInited = true;
     }
     Chain.metadata = Buffer.from(api.runtimeMetadata.asCallsOnly.toU8a()).toString('base64');
+
+    await updateChainMetadata({
+      genesisHash: api.genesisHash.toHex(),
+      metaCalls: Chain.metadata,
+      specVersion: api.runtimeVersion.specVersion.toNumber(),
+      types: getSpecTypes(
+        api.registry,
+        network.value,
+        api.runtimeVersion.specName,
+        api.runtimeVersion.specVersion,
+      ),
+    });
   } catch (err) {
     // eslint-disable-next-line
     console.info('setChain--', err);
-    throw new Error('error in setUnits');
   }
-};
-
-export const setDefSs58Format = ss58 => {
-  DEFAULT_SS58 = ss58;
 };
 
 export const getUnits = () => Chain.units;
@@ -85,6 +121,21 @@ export const getTokenDecimals = () => Chain.tokenDecimals;
 
 export const getSs58Format = () => Chain.ss58Format;
 
-export const getMetaCalls = () => Chain.metadata;
-
 export const getApi = () => Chain.api;
+
+/**
+ *  if (!Chain.api || (await getOfflineMode())) {
+     registry.setChainProperties(
+       registry.createType('ChainProperties', {
+         ss58Format: getSs58Format(),
+        tokenDecimals: getTokenDecimals(),
+         tokenSymbol: getTokenSymbol(),
+       }),
+     );
+     Chain.api = { registry };
+     return registry;
+   }
+ * */
+export const getRegistry = () => Chain.api.registry;
+
+export const getNetworkValue = () => Chain.networkValue;

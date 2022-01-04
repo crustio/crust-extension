@@ -78,7 +78,11 @@ export const LANGUAGE_SETTING = {
   value: LANGUAGE_SETTING_PAGE,
 };
 
-export const OPTIONS = [MANAGE_ACCOUNT, ADDRESS_BOOK, LANGUAGE_SETTING, ABOUT];
+export const NetworkMode = {
+  value: 'network_mode',
+};
+
+export const OPTIONS = [MANAGE_ACCOUNT, ADDRESS_BOOK, LANGUAGE_SETTING, NetworkMode, ABOUT];
 
 export const ACCOUNT_MENU_OPTIONS = [RENAME];
 

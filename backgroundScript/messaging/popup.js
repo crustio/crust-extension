@@ -127,6 +127,10 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
             break;
           }
 
+          case MessageTypes.BG_NETWORK_DIS_CONNECT: {
+            ResponseService.disConnectNetwork(request, sendResponse);
+            break;
+          }
           // Transactions
 
           case MessageTypes.BG_TXN_FEE: {
@@ -194,7 +198,9 @@ extension.runtime.onMessage.addListener((request, sender, sendResponse) => {
             ResponseService.submitDappTransaction(request, sender, sendResponse);
             break;
           }
-
+          case MessageTypes.BG_DAPP_ALLOW_METADATA_PROVIDE:
+            ResponseService.allowMetadataProvide(request, sender, sendResponse);
+            break;
           // tokens
           case MessageTypes.BG_CRUST_GET_TOKEN_LIST: {
             ResponseService.getCrustTokenList(request, sender, sendResponse);

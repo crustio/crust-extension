@@ -7,6 +7,8 @@ import * as ResponseType from '../../lib/constants/response-types';
 window.addEventListener('message', async event => {
   // We only accept messages from ourselves
   if (event.source !== window) return;
+  // eslint-disable-next-line no-console
+  // console.info('onMessageEvent::', event.data.requestType, event);
   if (event.data && event.data.requestType) {
     const { data } = event;
     try {
@@ -23,6 +25,12 @@ window.addEventListener('message', async event => {
         case RequestTypes.SIGN_MESSAGE:
           TransceiverService.signMessage(data);
           break;
+        case RequestTypes.GET_METADATA:
+          TransceiverService.getMetadataList(data);
+          break;
+        case RequestTypes.GET_METADATA_PROVIDE:
+          TransceiverService.reqMetadataProvide(data);
+          break;
         default:
           TransceiverService.handleDefault(data);
       }
@@ -35,6 +43,8 @@ window.addEventListener('message', async event => {
 
 extension.runtime.onMessage.addListener(response => {
   const { type } = response;
+  // eslint-disable-next-line no-console
+  // console.info('replyMessage::', type, response);
   switch (type) {
     case ResponseType.BG_DAPP_RESPONSE:
       TransceiverService.dAppResponse(response);

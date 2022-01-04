@@ -1,3 +1,5 @@
+import AppConfig from '../../lib/constants/config';
+
 const extension = require('extensionizer');
 
 const injectCode = {
@@ -20,7 +22,7 @@ function isInjected(tabId) {
 }
 
 function loadScript(name, tabId, cb) {
-  if (process.env.NODE_ENV === 'production') {
+  if (AppConfig.isProd) {
     extension.tabs.executeScript(
       tabId,
       { file: `/js/${name}.bundle.js`, runAt: 'document_start' },

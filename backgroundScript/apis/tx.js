@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
-import { Keyring } from '@polkadot/keyring';
 import { BN } from 'bn.js';
 import { TypeRegistry } from '@polkadot/types';
 import keyring from '@polkadot/ui-keyring';
@@ -30,10 +29,7 @@ export const getTxnEncodedLength = async (to, fAmount, seedWords, keypairType) =
 };
 
 export const signTransaction = async (transaction, currentAccount, password) => {
-  const {
-    to,
-    fAmount,
-  } = transaction.metadata;
+  const { to, fAmount } = transaction.metadata;
   const api = getApi();
   //replace this with commented line once edgeware upgrade mainnet
   //const { nonce } = await api.query.system.account(address);

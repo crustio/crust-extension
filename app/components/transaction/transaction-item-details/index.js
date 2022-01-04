@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FontMedium from '../../common/fonts/font-medium';
 import TransactionItemStatus from '../transaction-item-status';
 import './styles.css';
+import { DAPP } from '../../../../lib/constants/transaction';
 
 export default class TransactionItemDetails extends Component {
   render() {
@@ -12,7 +13,16 @@ export default class TransactionItemDetails extends Component {
       <div className="transfer-item-details" {...otherProps}>
         <div className="transaction-item-status-container">
           <FontMedium className="transaction-item-details-amount" text={amount} />
-          <FontMedium className="" text={status} style={{ color, fontSize: '14px' }} />
+          {status !== DAPP && (
+            <FontMedium
+              className=""
+              text={status}
+              style={{
+                color,
+                fontSize: '14px',
+              }}
+            />
+          )}
         </div>
 
         <TransactionItemStatus

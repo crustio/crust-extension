@@ -38,6 +38,8 @@ export const getAddressByAddr = addr => {
     const { address } = keyring.getPair(addr);
     return address;
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.info('getAddressByAddr', err);
     throw new Error('Error in Custom getAddress by address');
   }
 };

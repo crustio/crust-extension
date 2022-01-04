@@ -66,7 +66,7 @@ class CreateAccountEntry extends Component {
           <div className="entry-img-contianer">
             <img src={LogoBig} alt="logo2" />
           </div>
-          <FontRegular className="entry-title" text="Chain to Decentralized Cloud" />
+          <FontRegular className="entry-title" text="Web 3.0 Storage for Metaverse" />
           <div className="entry-container-entries">
             {!showImport
               && buttons.map(btn => (

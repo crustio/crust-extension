@@ -19,6 +19,7 @@ export const handleDefault = data => {
   const out = {
     ...failure,
     message: 'Wrong request type.',
+    msgId: data.messageId,
     type: ResponseTypes.BG_DAPP_RESPONSE,
   };
   window.postMessage(out, data.metadata.origin);
@@ -41,6 +42,7 @@ export const authorizeDApp = async data => {
   if (response.result !== undefined || response.status === status.FAILURE) {
     const out = {
       ...response,
+      msgId: data.messageId,
       type: ResponseTypes.BG_DAPP_RESPONSE,
     };
     window.postMessage(out, '*');
@@ -62,6 +64,7 @@ export const submitTransaction = async data => {
   if (response.result !== undefined || response.status === status.FAILURE) {
     const out = {
       ...response,
+      msgId: data.messageId,
       type: ResponseTypes.BG_DAPP_RESPONSE,
     };
     window.postMessage(out, data.metadata.origin);
@@ -76,6 +79,7 @@ export const signMessage = async data => {
   if (response.result !== undefined || response.status === status.FAILURE) {
     const out = {
       ...response,
+      msgId: data.messageId,
       type: ResponseTypes.BG_DAPP_RESPONSE,
     };
     window.postMessage(out, data.metadata.origin);
@@ -90,6 +94,37 @@ export const getAccounts = async data => {
   if (response.result !== undefined || response.status === status.FAILURE) {
     const out = {
       ...response,
+      msgId: data.messageId,
+      type: ResponseTypes.BG_DAPP_RESPONSE,
+    };
+    window.postMessage(out, data.metadata.origin);
+  }
+};
+
+export const getMetadataList = async data => {
+  const response = await sendMessage({
+    ...data,
+    type: MessageTypes.BG_DAPP_GET_METADATA_LIST,
+  });
+  if (response.result !== undefined || response.status === status.FAILURE) {
+    const out = {
+      ...response,
+      msgId: data.messageId,
+      type: ResponseTypes.BG_DAPP_RESPONSE,
+    };
+    window.postMessage(out, data.metadata.origin);
+  }
+};
+
+export const reqMetadataProvide = async data => {
+  const response = await sendMessage({
+    ...data,
+    type: MessageTypes.BG_DAPP_METADATA_PROVIDE,
+  });
+  if (response.result !== undefined || response.status === status.FAILURE) {
+    const out = {
+      ...response,
+      msgId: data.messageId,
       type: ResponseTypes.BG_DAPP_RESPONSE,
     };
     window.postMessage(out, data.metadata.origin);

@@ -8,7 +8,7 @@ import * as transactionActions from '../actions/transactions';
 import { updateTransactionsState } from './store-service';
 import * as Notification from '../../lib/services/extension/notifications';
 import { createTransactionToastMessage } from '../../lib/services/static-message-factory-service';
-import { convertUnit, convertShowToBalance } from './unit-converter';
+import { convertShowToBalance } from './unit-converter';
 import { getBaseUnit } from '../apis/chain';
 import {
   KUSAMA_NETWORK,
@@ -64,7 +64,7 @@ export const mergeTransactions = async newTransaction => {
   const { transactionArr } = getStore().getState().transactionState;
   // remove Pending duplicate TXN and overide with new Status
   const pendingTransactionIndex = transactionArr.findIndex(
-    x => x.txnHash === newTransaction.txnHash,
+    x => x.txnHash && x.txnHash === newTransaction.txnHash,
   );
   if (pendingTransactionIndex > -1) {
     transactionArr.splice(pendingTransactionIndex, 1, newTransaction);

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import SubHeader from '../../components/common/sub-header';
 import * as RequestType from '../../../lib/constants/request-types';
-import Send from '../../components/dapp/send';
-import SignMessage from '../../components/dapp/sign-message';
 import {
   copyAccountMessage,
   copyDataMessage,
 } from '../../../lib/services/static-message-factory-service';
-import { createAccountObject, createTxnUI } from '../../services/wallet-service';
+import SubHeader from '../../components/common/sub-header';
+import Send from '../../components/dapp/send';
+import SignMessage from '../../components/dapp/sign-message';
+import UpMetadata from '../../components/dapp/up-metadata';
+import { createTxnUI } from '../../services/wallet-service';
 import './styles.css';
 
 class DAppRequests extends Component {
@@ -87,26 +88,22 @@ class DAppRequests extends Component {
             case RequestType.SEND:
               return (
                 <Send
+                  accounts={accounts}
                   isSendExpanded
                   fromAccount={request.result.account}
-                  toAccount={
-                    request.result.txnForUI.dest
-                      ? request.result.txnForUI
-                        && createAccountObject(accounts, request.result.txnForUI.dest)
-                      : null
-                  }
                   onCopyAddress={this.onCopyAddress}
                   handleSendExpansion={this.handleExpansion(request.id)}
                   handleInfoExpansion={this.handleInfoExpansion}
                   isInfoExpanded={isInfoExpanded}
+                  txnForUI={request.result.txnForUI}
                   txnUi={createTxnUI(request.result.txnForUI)}
-                  errorMessage={
-                    request.result.isError && request.result.isAmountError
-                      ? t(request.result.toAmountErrorMessage)
-                      : request.result.isToAddressError
-                        ? t(request.result.toAddressErrorMessage)
-                        : null
-                  }
+                  // errorMessage={
+                  //   request.result.isError && request.result.isAmountError
+                  //     ? t(request.result.toAmountErrorMessage)
+                  //     : request.result.isToAddressError
+                  //       ? t(request.result.toAddressErrorMessage)
+                  //       : null
+                  // }
                   onCopyData={this.onCopyData}
                   onCancel={this.handleCancel(request)}
                   onAllow={this.handleAllow(request)}
@@ -140,6 +137,22 @@ class DAppRequests extends Component {
                   t={t}
                 />
               );
+            case RequestType.GET_METADATA_PROVIDE:
+              return (
+                <UpMetadata
+                  isSignMessageExpanded
+                  handleSignMessageExpansion={this.handleExpansion(request.id)}
+                  onCancel={this.handleCancel(request)}
+                  onAllow={this.handleAllow(request)}
+                  errorMessage={null}
+                  data={request.result}
+                  key={request.id}
+                  onCopyData={this.onCopyData}
+                  className="dapp-requests-card"
+                  errorText={errorText}
+                  t={t}
+                />
+              );
             default:
               return <div key={request.id} />;
           }
@@ -149,9 +162,10 @@ class DAppRequests extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div>
-        <SubHeader title="Pending Requests" />
+        <SubHeader title={t('Pending Requests')} />
         {this.props.requests && this.renderRequests()}
       </div>
     );

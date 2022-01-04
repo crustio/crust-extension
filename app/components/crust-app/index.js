@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import classnames from 'classnames';
+import { Circle } from 'react-feather';
 import CrustContainer from '../crust-container';
 import Header from '../common/header/header.component';
 import ViewSelector from '../view-selector';
@@ -11,6 +12,7 @@ import { NetworkDisconnectionIcon } from '../common/icon';
 import './styles.css';
 import CrustLogo from '../common/crust-logo';
 import { CHINESE } from '../../constants/language';
+import ValidatePasswordModal from '../validate-password/modal';
 
 export default class CrustApp extends Component {
   render() {
@@ -24,6 +26,7 @@ export default class CrustApp extends Component {
       showBanner,
       showNetwork,
       isConnected,
+      isOfflineMode,
       showSettings,
       showHeader,
       showGrayHeader,
@@ -33,6 +36,7 @@ export default class CrustApp extends Component {
       isDeveloperMode,
       onToggleDeveloperMode,
       language,
+      t,
       ...otherProps
     } = this.props;
 
@@ -48,7 +52,7 @@ export default class CrustApp extends Component {
       'crust-network': showNetwork,
       // 'display-none': false,
     });
-    const CrustNetworkStatusClassNames = classnames({
+    const CrustNetworkDisClassNames = classnames({
       'display-none': isConnected,
       'crust-network-status': !isConnected,
     });
@@ -69,17 +73,35 @@ export default class CrustApp extends Component {
               <div className="crust-header-text">Crust Wallet</div>
             </div>
             <div className={CrustConfigClassNames}>
-              <NetworkDisconnectionIcon
-                title="Network unavailable"
-                className={CrustNetworkStatusClassNames}
-              />
-              <Network
-                networks={networks}
-                network={network}
-                onNetworkChange={onNetworkChange}
-                className={CrustNetworkClassNames}
-                page={page}
-              />
+              {!isOfflineMode && (
+                <>
+                  <NetworkDisconnectionIcon
+                    title="Network unavailable"
+                    className={CrustNetworkDisClassNames}
+                  />
+                  <Network
+                    networks={networks}
+                    network={network}
+                    onNetworkChange={onNetworkChange}
+                    className={CrustNetworkClassNames}
+                    page={page}
+                  />
+                </>
+              )}
+              {isOfflineMode && (
+                <>
+                  <Circle size={8} color="#999999" />
+                  <span
+                    style={{
+                      fontSize: 14,
+                      color: '#999999',
+                      padding: '0 8px',
+                    }}
+                  >
+                    {t('Offline')}
+                  </span>
+                </>
+              )}
               <Options
                 onToggleDeveloperMode={onToggleDeveloperMode}
                 options={options}
@@ -93,6 +115,7 @@ export default class CrustApp extends Component {
           </Header>
           <ViewSelector page={page} />
           <ToastContainer />
+          <ValidatePasswordModal />
         </div>
       </CrustContainer>
     );

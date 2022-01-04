@@ -1,10 +1,10 @@
 import { CRUST_UPDATE_TIME } from '../../lib/constants/update';
-import { Transaction, Network, Tokens } from '../api';
+import { Transaction, Tokens } from '../api';
 import { SUCCESS, FAIL } from '../../lib/constants/transaction';
 import { getTransactions, updateTransactions, updateTokenList } from '../views/dashboard/actions';
 import * as AccountActions from '../actions/account';
 import { getTransfersWithMoment } from '../../lib/services/static-message-factory-service';
-import { updateNetworkStatus } from '../actions/network';
+import watchBg from './watch-bg';
 
 export async function pollPendingTransactions(store) {
   try {
@@ -67,17 +67,6 @@ export async function updateTransactionItemTime(store) {
   }
 }
 
-export async function getAndUpdateNetworkStatus(store) {
-  try {
-    const { network } = store.getState().networkReducer;
-    const { result } = await Network.isConnected(network);
-    store.dispatch(updateNetworkStatus(result.isConnected));
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log('Error in updating  network status');
-  }
-}
-
 export async function updateAllTokenBalance(store) {
   try {
     const { network } = store.getState().networkReducer;
@@ -114,15 +103,17 @@ export async function updateAllTokenBalance(store) {
 async function updateApplicationStateHelper(store) {
   const { isOnBoarded } = store.getState().appStateReducer;
   if (isOnBoarded) {
-    pollPendingTransactions(store);
-    updateBalance(store);
-    updateTransactionItemTime(store);
-    getAndUpdateNetworkStatus(store);
-    updateAllTokenBalance(store);
+    await pollPendingTransactions(store);
+    await updateBalance(store);
+    await updateTransactionItemTime(store);
+    await updateAllTokenBalance(store);
   }
 }
 
 export async function updateApplicationState(store) {
+  watchBg(store, {
+    updateApplicationStateHelper,
+  });
   await updateApplicationStateHelper(store);
   setInterval(async () => {
     await updateApplicationStateHelper(store);

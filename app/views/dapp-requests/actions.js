@@ -21,6 +21,9 @@ export const allowRequest = (request, password) => async dispatch => {
         await verifyPassword(password);
         await DAppService.signMessage(request, password);
         break;
+      case RequestType.GET_METADATA_PROVIDE:
+        await DAppService.allowMetadataProvide(request);
+        break;
       default:
     }
   } catch (err) {

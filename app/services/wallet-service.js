@@ -12,8 +12,10 @@ export function addZeroX(data) {
 
 export const getWalletAlias = (walletArr, addressToLookup) => {
   const walletFound = walletArr.find(wallet => wallet.address === addressToLookup);
-
-  return walletFound === undefined ? 'Unknown Contact' : walletFound.alias;
+  if (walletFound) {
+    return walletFound.alias;
+  }
+  return addressToLookup.substr(0, 5);
 };
 
 export function renameWallet(value, currentWallet, currenIndex, walletArr) {
@@ -75,6 +77,7 @@ export function createTxnUI(result) {
     { label: 'Version', value: result.sVersion },
     { label: 'Nonce', value: result.nonce },
     { label: 'Method', value: result.method },
+    { label: 'Amount', value: result.fValue },
     // this is not showing correct
     // { label: 'Fees', value: result.transferFee },
     { label: 'Info', value: result.note },
