@@ -23,4 +23,10 @@
 
 .button-xl-custom1 button {
   color: white !important;
+  background: #FF8D00;
+}
+
+.button-xl-custom1 button:hover, .button-xl-custom1 button[hover] {
+  background: white;
+  color: #FF8D00 !important;
 }

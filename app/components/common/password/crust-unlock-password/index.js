@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import PasswordAdornment from '../password-adornment';
 import CrustInput from '../../crust-input';
-import ButtonSquare from '../../buttons/button-square';
 import './styles.css';
 
+const showColor = {
+  color: '#666F83',
+};
+
+const hideColor = {
+  color: '#666F83',
+};
+
 class CrustUnlockPassword extends Component {
+  state = {
+    showPassword: false,
+  };
+
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
   render() {
     const {
       classes,
@@ -19,20 +34,26 @@ class CrustUnlockPassword extends Component {
       t,
       ...otherProps
     } = this.props;
+    const { showPassword } = this.state;
+
     return (
       <div className={className} style={{ display: 'flex', flexDirection: 'column' }}>
         <CrustInput
           {...otherProps}
           className={className}
           error={isError}
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={onChange('password')}
-          endAdornment={(
-            <InputAdornment>
-              <ButtonSquare iconName="forward" onClick={handleUnlock} />
-            </InputAdornment>
-          )}
+          endAdornment={
+            <PasswordAdornment
+              position="end"
+              onClick={this.handleClickShowPassword}
+              showPassword={showPassword}
+              showColor={showColor}
+              hideColor={hideColor}
+            />
+          }
         />
         {isError ? (
           <div className="unlock-error-msg">{t(errorText)}</div>

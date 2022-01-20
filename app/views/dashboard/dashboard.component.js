@@ -9,17 +9,15 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import TokenDetails from '../../components/token/token-details';
+import TokenDetailFooter from '../../components/token/token-detail-footer';
 import Wallet from '../../components/wallet';
 import { QR_CODE_PAGE, TOKEN_DETAILS_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
-import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import './styles.css';
 import { RENAME } from '../../constants/options';
 import TokenList from '../../components/token-list';
 import CrustTabs from '../../components/common/crust-tabs';
-import ButtonSquare from '../../components/common/buttons/button-square';
 import { HelpCircle, NetworkOfflineIcon } from '../../components/common/icon';
 
 const MP = withStyles({
@@ -52,16 +50,10 @@ class Dashboard extends Component {
     };
   }
 
-  setDefaultToken = () => {
-    const defaultToken = this.props.tokens.find(token => token.address === undefined);
-    this.props.onTokenSelected(defaultToken);
-  };
-
   handleSend = () => {
     // if (!this.props.isConnected) {
     //   this.props.connectionError();
     // } else {
-    this.setDefaultToken();
     // this.props.getUnits();
     this.props.resetToAddress();
     this.props.updateBackupPage(this.props.page);
@@ -162,24 +154,6 @@ class Dashboard extends Component {
               accountMenu={accountMenu}
               onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
             />
-            {!showOffline && (
-              <TokenDetails
-                unit={
-                  network.unit !== undefined ? network.unit : unit !== undefined ? unit.text : ''
-                }
-                className="token-container"
-                balance={
-                  defaultToken.balance === '-'
-                    ? '-'
-                    : convertBalanceToShow(defaultToken.balance, defaultToken.decimals)
-                }
-                marketData={marketData && marketData}
-                amount={amount}
-                handleSend={this.handleSend}
-                handleDeposit={this.handleDeposit}
-                labelText={t('Transferable')}
-              />
-            )}
           </div>
         </div>
         {showOffline && (
@@ -256,7 +230,7 @@ class Dashboard extends Component {
         <div
           style={{
             position: 'absolute',
-            top: '544px',
+            top: '524px',
             justifyContent: 'space-between',
             display: 'flex',
             width: '100%',
@@ -264,27 +238,15 @@ class Dashboard extends Component {
             height: '38px',
           }}
         >
-          <a
-            className="dashboard-footer"
-            target="_blank"
-            href={network.url_apps ? network.url_apps : 'https://apps.crust.network/'}
-            rel="noopener noreferrer"
-          >
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <div>{network.url_name ? network.url_name : 'Crust Apps'}</div>
-              <div style={{ display: 'flex' }}>
-                <ArrowForwardIosOutlinedIcon className="dashboard-icon" />
-              </div>
-            </div>
-          </a>
-          <ButtonSquare iconName="lock" onClick={this.handleLock} />
+          {!showOffline && (
+            <TokenDetailFooter
+              className="token-detail-footer"
+              handleDeposit={this.handleDeposit}
+              handleSend={this.handleSend}
+              receiveButtonName={t('Receive')}
+              sendButtonName={t('Send')}
+            />
+          )}
         </div>
       </div>
     );

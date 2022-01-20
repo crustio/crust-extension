@@ -14,6 +14,7 @@ import { faAddressBook } from '@fortawesome/free-solid-svg-icons/faAddressBook';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons/faAngleRight';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import MoreVert from '@material-ui/icons/MoreVert';
+import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import WifiOff from '@material-ui/icons/WifiOff';
 import VisibilityOffOutlinedIcon from '@material-ui/icons/VisibilityOffOutlined';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
@@ -72,7 +73,7 @@ const IconVisibilityOff = props => (
 
 const WalletDropDownIcon = props => (
   <div {...props}>
-    <MoreVert
+    <MoreHoriz
       style={{
         fontSize: '1.5em',
         color: '#111A34',
