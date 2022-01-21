@@ -3,6 +3,8 @@ import { CRUST_COLOR1 } from '../../../constants/colors';
 export const styles = () => ({
   tabsRoot: {
     backgroundColor: 'transparent',
+    paddingLeft: '18px',
+    paddingRight: '18px',
   },
   tabsIndicator: {
     backgroundColor: CRUST_COLOR1,
@@ -10,7 +12,7 @@ export const styles = () => ({
   },
   tabRoot: {
     color: '#858B9C',
-    width: '180px',
+    width: '162px',
     height: '48px',
     textTransform: 'none',
     fontSize: '14px',
@@ -23,7 +25,7 @@ export const styles = () => ({
     '&$tabSelected': {
       color: CRUST_COLOR1,
       fontSize: '14px',
-      borderBottom: '1px solid #FF8D00'
+      borderBottom: '1px solid #FF8D00',
     },
     '&:focus': {
       color: CRUST_COLOR1,

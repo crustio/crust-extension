@@ -68,10 +68,10 @@ export default class CrustApp extends Component {
       <CrustContainer blocking={isLoading}>
         <div {...otherProps}>
           <Header page={page} className={CrustHeaderClassNames}>
-            <div className="crust-row">
+            {/* <div className="crust-row">
               <CrustLogo className="crust-logo" />
               <div className="crust-header-text">Crust Wallet</div>
-            </div>
+            </div> */}
             <div className={CrustConfigClassNames}>
               {!isOfflineMode && (
                 <>

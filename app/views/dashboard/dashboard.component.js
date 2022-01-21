@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import {
   Dialog,
   DialogActions,
@@ -19,6 +18,7 @@ import { RENAME } from '../../constants/options';
 import TokenList from '../../components/token-list';
 import CrustTabs from '../../components/common/crust-tabs';
 import { HelpCircle, NetworkOfflineIcon } from '../../components/common/icon';
+import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 
 const MP = withStyles({
   root: {
@@ -227,27 +227,15 @@ class Dashboard extends Component {
             )}
           </>
         )}
-        <div
-          style={{
-            position: 'absolute',
-            top: '524px',
-            justifyContent: 'space-between',
-            display: 'flex',
-            width: '100%',
-            padding: '0 16px',
-            height: '38px',
-          }}
-        >
-          {!showOffline && (
-            <TokenDetailFooter
-              className="token-detail-footer"
-              handleDeposit={this.handleDeposit}
-              handleSend={this.handleSend}
-              receiveButtonName={t('Receive')}
-              sendButtonName={t('Send')}
-            />
-          )}
-        </div>
+
+        {!showOffline && (
+          <FooterWithTwoButton
+            onNextClick={this.handleSend}
+            onBackClick={this.handleDeposit}
+            backButtonName={t('Receive')}
+            nextButtonName={t('Send')}
+          />
+        )}
       </div>
     );
   }

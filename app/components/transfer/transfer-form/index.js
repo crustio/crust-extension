@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import TransferFromTo from '../transfer-from-to';
 import FooterButton from '../../common/footer-button';
+import FooterWithTwoButton from '../../common/footer-with-two-button';
 import TransferFormAmount from '../transfer-form-amount';
 import './styles.css';
 
@@ -22,15 +23,17 @@ class TransferForm extends Component {
       isAmountError,
       amountErrorText,
       unit,
-      buttonText,
+      nextButtonText,
+      backButtonText,
       amountPropName,
       toPropName,
       handleAmountChange,
       handleToChange,
       handleSendButton,
+      handleBackButton,
       handleUnitOnChange,
       onAddressBookClick,
-      t
+      t,
     } = this.props;
     return (
       <div className="transfer-form-container">
@@ -62,7 +65,12 @@ class TransferForm extends Component {
           dropDownValue={unit}
           onDropDownChange={handleUnitOnChange}
         />
-        <FooterButton onClick={handleSendButton} name={buttonText} />
+        <FooterWithTwoButton
+          onNextClick={handleSendButton}
+          onBackClick={handleBackButton}
+          backButtonName={backButtonText}
+          nextButtonName={nextButtonText}
+        />
       </div>
     );
   }
