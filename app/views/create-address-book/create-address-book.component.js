@@ -205,6 +205,7 @@ class CreateAddressBook extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Address Book')}
           backBtnOnClick={this.handleSubheaderBackBtn}
+          isBackIcon
         />
         <CreateContactForm
           className="create-address-book-form"

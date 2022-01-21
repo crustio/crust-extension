@@ -44,6 +44,7 @@ class LanguageSetting extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Language Setting')}
           backBtnOnClick={this.onClick}
+          isBackIcon
         />
         <div className="language-setting-option-container">
           <CrustRadioButtonGroup

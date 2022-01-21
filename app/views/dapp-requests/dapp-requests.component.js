@@ -165,7 +165,7 @@ class DAppRequests extends Component {
     const { t } = this.props;
     return (
       <div>
-        <SubHeader title={t('Pending Requests')} />
+        <SubHeader title={t('Pending Requests')} isBackIcon />
         {this.props.requests && this.renderRequests()}
       </div>
     );

@@ -76,6 +76,7 @@ class Confirm extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '18px' }} />}
           title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
+          isBackIcon
         />
         <ConfirmForm
           confirmDetails={confirmDetails}

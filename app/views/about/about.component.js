@@ -43,6 +43,7 @@ class About extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('About')}
           backBtnOnClick={this.onClick}
+          isBackIcon
         />
         <div className="about-container">
           <FontRegular className="about-title" text={manifest.name} />

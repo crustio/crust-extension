@@ -13,6 +13,7 @@ import {
   CREATE_ACCOUNT_ENTRY_PAGE,
   IMPORT_JSON_PAGE,
   CREATE_ACCOUNT_PAGE,
+  TRANSFER_PAGE,
 } from '../constants/navigation';
 import CrustApp from '../components/crust-app';
 import './styles.css';
@@ -28,6 +29,7 @@ class App extends Component {
       showSettings: false,
       showGrayHeader: false,
       showGrayBg: false,
+      showUserId: false,
     };
   }
 
@@ -56,6 +58,7 @@ class App extends Component {
             showNetwork: false,
             showSettings: false,
             showGrayHeader: false,
+            showUserId: false,
           };
         }
 
@@ -67,6 +70,7 @@ class App extends Component {
             showNetwork: false,
             showSettings: false,
             showGrayHeader: true,
+            showUserId: false,
           };
         }
         if (prevProps.page === CREATE_ACCOUNT_PAGE) {
@@ -78,6 +82,7 @@ class App extends Component {
             showSettings: false,
             showGrayHeader: true,
             showGrayBg: true,
+            showUserId: false,
           };
         }
         return {
@@ -87,6 +92,7 @@ class App extends Component {
           showNetwork: false,
           showSettings: false,
           showGrayHeader: false,
+          showUserId: false,
         };
       }
       if (prevProps.page === CONNECT_REQUEST_PAGE || prevProps.page === DAPP_REQUESTS_PAGE) {
@@ -97,6 +103,18 @@ class App extends Component {
           showNetwork: false,
           showSettings: false,
           showGrayHeader: false,
+          showUserId: false,
+        };
+      }
+      if (prevProps.page === TRANSFER_PAGE) {
+        return {
+          showHeader: true, // no change
+          showLogo: true,
+          showBanner: false,
+          showNetwork: true,
+          showSettings: false,
+          showGrayHeader: true,
+          showUserId: true,
         };
       }
       return {
@@ -106,6 +124,7 @@ class App extends Component {
         showNetwork: true,
         showSettings: true,
         showGrayHeader: true,
+        showUserId: false,
       };
     }
 
@@ -144,6 +163,7 @@ class App extends Component {
   render() {
     const {
       props: {
+        account,
         page,
         isLoading,
         networks,
@@ -163,6 +183,7 @@ class App extends Component {
         showHeader,
         showGrayHeader,
         showGrayBg,
+        showUserId,
       },
     } = this;
     // eslint-disable-next-line no-restricted-syntax
@@ -175,6 +196,7 @@ class App extends Component {
       <CrustApp
         className={showGrayBg ? 'app-gray' : 'app'}
         isLoading={isLoading}
+        account={account}
         page={page}
         networks={networks}
         network={network}
@@ -187,6 +209,7 @@ class App extends Component {
         showSettings={showSettings}
         showHeader={showHeader}
         showGrayHeader={showGrayHeader}
+        showUserId={showUserId}
         onLogoClick={this.onClick}
         options={options}
         onOptionsChange={this.handleOptionsChange}

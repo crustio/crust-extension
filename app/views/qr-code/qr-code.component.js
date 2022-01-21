@@ -25,6 +25,7 @@ class QRCode extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Receive')}
           backBtnOnClick={this.handleSubheaderBackBtn}
+          isBackIcon
         />
         <QRCodeForm
           className="qr-code-form-container"

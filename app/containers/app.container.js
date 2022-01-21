@@ -12,6 +12,7 @@ import {
 import { clearTransferDetails, resetConfirmOnBoarding } from '../views/transfer/actions';
 
 const mapStateToProps = state => ({
+  account: state.accountReducer.account,
   page: state.appStateReducer.page,
   isLoading: state.appStateReducer.isLoading || state.networkReducer.isLoadingNetwork,
   networks: state.networkReducer.networks,

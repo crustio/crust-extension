@@ -116,6 +116,7 @@ class ManageAccount extends Component {
           showSettings
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
           menuWidth={language === ENGLISH ? 150 : undefined}
+          isBackIcon
         />
         <div className="manage-accounts">
           <div className="manage-accounts-container">

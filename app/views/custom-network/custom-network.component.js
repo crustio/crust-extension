@@ -51,6 +51,7 @@ export default class CustomNetwork extends Component {
           icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
           title="Custom Network"
           backBtnOnClick={this.handleSubheaderBackBtn}
+          isBackIcon
         />
         <CustomNetworkForm
           className="custom-network-form"

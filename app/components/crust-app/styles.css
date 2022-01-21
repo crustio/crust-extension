@@ -65,6 +65,15 @@
   justify-content: flex-end;
 }
 
+.crust-user-id {
+  margin-left: auto;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  justify-content: flex-end;
+}
+
 .crust-header-text {
   font-size: 18px;
   color: #111A34;

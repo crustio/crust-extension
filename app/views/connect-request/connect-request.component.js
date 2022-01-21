@@ -64,14 +64,10 @@ class ConnectRequest extends Component {
     const content = 'is requesting access to an account. Click Allow to grant access any account or click Deny to prevent access to any account.';
     return (
       <div>
-        <SubHeader title={t(title)} />
+        <SubHeader title={t(title)} isBackIcon />
         {this.renderHeader()}
         <FontRegular
-          text={(
-            <div>
-              {`${request.request.metadata.url} ${t(content)}`}
-            </div>
-          )}
+          text={<div>{`${request.request.metadata.url} ${t(content)}`}</div>}
           className="connect-request-center connect-request-account-selection-header"
         />
         <FooterWithTwoButton

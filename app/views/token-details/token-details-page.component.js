@@ -94,6 +94,7 @@ class TokenDetailsPage extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Token Details')}
           backBtnOnClick={this.onClick}
+          isBackIcon
         />
         <div className="account-content-container">
           <Wallet

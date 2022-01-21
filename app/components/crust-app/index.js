@@ -13,10 +13,12 @@ import './styles.css';
 import CrustLogo from '../common/crust-logo';
 import { CHINESE } from '../../constants/language';
 import ValidatePasswordModal from '../validate-password/modal';
+import FontMedium from '../common/fonts/font-medium';
 
 export default class CrustApp extends Component {
   render() {
     const {
+      account,
       page,
       isLoading,
       networks,
@@ -30,6 +32,7 @@ export default class CrustApp extends Component {
       showSettings,
       showHeader,
       showGrayHeader,
+      showUserId,
       onLogoClick,
       options,
       onOptionsChange,
@@ -42,8 +45,8 @@ export default class CrustApp extends Component {
 
     const CrustHeaderClassNames = classnames({
       'crust-header': showHeader,
-      'crust-header-banner': showHeader && showBanner && !showLogo && !showNetwork && !showSettings,
-      'crust-header-boarded': showHeader && !showBanner && showLogo && showNetwork && showSettings,
+      'crust-header-banner': showHeader && showBanner && !showLogo && !showNetwork && !showUserId,
+      'crust-header-boarded': showHeader && !showBanner && showLogo && showNetwork && showUserId,
       'crust-header-gray': showHeader && showGrayHeader,
       'display-none': !showHeader,
     });
@@ -60,8 +63,12 @@ export default class CrustApp extends Component {
       'crust-settings': showSettings,
       'display-none': !showSettings,
     });
+    const CrustUserIdClassNames = classnames({
+      'crust-settings': showUserId,
+      'display-none': !showUserId,
+    });
     const CrustConfigClassNames = classnames({
-      'crust-config': showNetwork && showSettings,
+      'crust-config': (showNetwork && showSettings) || (showNetwork && showUserId),
       'display-none': showBanner || !showNetwork,
     });
     return (
@@ -110,6 +117,11 @@ export default class CrustApp extends Component {
                 isDeveloperMode={isDeveloperMode}
                 page={page}
                 menuWidth={language === CHINESE ? 120 : 170}
+              />
+              <FontMedium
+                className={CrustUserIdClassNames}
+                text={account ? account.alias : ''}
+                page={page}
               />
             </div>
           </Header>

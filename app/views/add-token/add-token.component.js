@@ -73,6 +73,7 @@ export default class AddToken extends Component {
           icon={<Clear style={{ color: 'rgba(255, 255, 255, 1)' }} />}
           title="Add Token"
           backBtnOnClick={this.onClick}
+          isBackIcon
         />
         <div className="token-add-container">
           <CrustInput

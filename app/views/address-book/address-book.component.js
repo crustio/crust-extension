@@ -118,6 +118,7 @@ class AddressBook extends Component {
           subMenu={showSettings ? optionsHeader : null}
           showSettings={showSettings}
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
+          isBackIcon
         />
         <div className="manage-address-book">
           <div className="manage-address-book-container">

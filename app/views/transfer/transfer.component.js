@@ -179,6 +179,7 @@ class Transfer extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Send')}
           backBtnOnClick={this.handleBackButton}
+          isBackIcon={false}
         />
         <TransferForm
           theme={theme}

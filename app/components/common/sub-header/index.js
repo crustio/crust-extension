@@ -21,17 +21,19 @@ export default class SubHeader extends Component {
   render() {
     const { anchorEl } = this.state;
     const {
-      icon, subMenu, onSubMenuOptionsChange, menuWidth
+      icon, subMenu, onSubMenuOptionsChange, menuWidth, isBackIcon
     } = this.props;
     return (
       <div className="sub-header-container">
         <div className="sub-header-left">
-          <IconContainer
-            className="sub-header-icon clickable-icon"
-            onClick={this.props.backBtnOnClick}
-          >
-            {icon}
-          </IconContainer>
+          {isBackIcon && (
+            <IconContainer
+              className="sub-header-icon clickable-icon"
+              onClick={this.props.backBtnOnClick}
+            >
+              {icon}
+            </IconContainer>
+          )}
           <FontMedium className="sub-header-title" text={this.props.title} />
         </div>
         {subMenu && subMenu.length > 0 && (

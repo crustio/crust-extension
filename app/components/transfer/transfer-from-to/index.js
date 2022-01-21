@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { IconTransferFromTo } from '../../common/icon';
-import TransferFrom from '../transfer-from';
 import TransferToIcon from '../transfer-to-icon';
 import './styles.css';
 
