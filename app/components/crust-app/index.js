@@ -10,7 +10,6 @@ import Network from '../network/network';
 import Options from '../options';
 import { NetworkDisconnectionIcon } from '../common/icon';
 import './styles.css';
-import CrustLogo from '../common/crust-logo';
 import { CHINESE } from '../../constants/language';
 import ValidatePasswordModal from '../validate-password/modal';
 import FontMedium from '../common/fonts/font-medium';
