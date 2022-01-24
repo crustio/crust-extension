@@ -31,30 +31,19 @@ export default class TransferToIcon extends Component {
         }}
         {...otherProps}
       >
-        <div>
-          <Avatar value={addressValue} size={size} theme={theme} />
+        <CrustInput
+          className="transfer-to-icon-input"
+          value={toValue}
+          onChange={onChange(propName)}
+          placeholder={label}
+          spellCheck={false}
+          endAdornment={<AddressBookAdorment position="end" onClick={onAddressBookClick} />}
+        />
+        {isError ? (
+          <span className="tranfer-to-icon-error-msg">{errorMessage}</span>
+        ) : (
           <span className="place-holder"> </span>
-        </div>
-
-
-        <div>
-          <CrustInput
-            className="transfer-to-icon-input"
-            value={toValue}
-            onChange={onChange(propName)}
-            placeholder={label}
-            spellCheck={false}
-            endAdornment={(
-              <AddressBookAdorment position="end" onClick={onAddressBookClick} />
-            )}
-          />
-          {isError ? (
-            <span className="tranfer-to-icon-error-msg">{errorMessage}</span>
-          ) : (
-            <span className="place-holder"> </span>
-          )}
-        </div>
-
+        )}
       </div>
     );
   }

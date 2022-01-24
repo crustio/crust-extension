@@ -1,7 +1,7 @@
 
 .transfer-to-icon-input {
   justify-self: flex-start;
-  margin-left: 22px;
+  width: 100%;
 }
 
 .transfer-to-icon-input fieldset {

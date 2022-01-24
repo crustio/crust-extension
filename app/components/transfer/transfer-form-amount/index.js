@@ -31,20 +31,32 @@ class TransferFormAmount extends Component {
         {...otherProps}
       >
         <div className="transfer-form-amount-dropdown-container">
-          <FontRegular className="transfer-form-amount-dropdown-label" text={`${t('Assets')}:`} />
-          <DropDown className="transfer-form-amount-dropdown" options={options} value={dropDownValue} onChange={onDropDownChange} />
+          <DropDown
+            className="transfer-form-amount-dropdown"
+            options={options}
+            value={dropDownValue}
+            onChange={onDropDownChange}
+          />
         </div>
 
-        <FontRegular className="transfer-form-amount-balance" text={`${t('Balance')}:  ${dropDownValue.balance === '-' ? '-' : convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)}`} />
-
         <div className="transfer-form-amount-input-container">
-          <FontRegular className="transfer-form-amount-input-label" text={`${t('Amount')}:`} />
           <CrustInput
             className="transfer-from-amount-input"
             onChange={onChange(propName)}
             value={value}
+            placeholder={t('Amount')}
+            endAdornment={<FontRegular text={t('Max')} style={{ marginRight: 8 }} />}
           />
         </div>
+
+        <FontRegular
+          className="transfer-form-amount-balance"
+          text={`${t('Balance')}:  ${
+            dropDownValue.balance === '-'
+              ? '-'
+              : convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)
+          }`}
+        />
         {error ? (
           <span className="transfer-from-amount-input-error-msg">{helperText}</span>
         ) : (

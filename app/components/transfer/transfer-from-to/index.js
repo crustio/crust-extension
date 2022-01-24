@@ -26,7 +26,7 @@ export default class TransferFromTo extends Component {
           addressValue={to}
           theme={theme}
           isError={isToError}
-          label="To"
+          label="To Address"
           propName={toPropName}
           toValue={to}
           errorMessage={toErrorText}
