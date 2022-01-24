@@ -20,6 +20,10 @@ export default class SubHeader extends Component {
 
   render() {
     const { anchorEl } = this.state;
+    const style = {
+      textAlign: `${this.props.align ? this.props.align : 'center'}`,
+      marginLeft: `${this.props.margin ? this.props.margin : 'none'}`,
+    };
     const {
       icon, subMenu, onSubMenuOptionsChange, menuWidth, isBackIcon
     } = this.props;
@@ -34,7 +38,7 @@ export default class SubHeader extends Component {
               {icon}
             </IconContainer>
           )}
-          <FontMedium className="sub-header-title" text={this.props.title} />
+          <FontMedium className="sub-header-title" text={this.props.title} style={style} />
         </div>
         {subMenu && subMenu.length > 0 && (
           <div>

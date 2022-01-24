@@ -4,7 +4,7 @@ import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutli
 import FontMedium from '../common/fonts/font-medium';
 import FontRegular from '../common/fonts/font-regular';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
-import CruTokenIcon from '../../images/crust-logo.png';
+import CruTokenIcon from '../../images/crust-logo-light.svg';
 import CandyTokenIcon from '../../images/candy-icon.svg';
 import CSMTokenIcon from '../../images/csm-icon.svg';
 import './styles.css';
@@ -85,9 +85,9 @@ class TokenList extends Component {
             </div>
             <div className="token-item-right">
               {this.renderBalances(token)}
-              <div style={{ display: 'flex' }}>
+              {/* <div style={{ display: 'flex' }}>
                 <ArrowForwardIosOutlinedIcon className="token-item-icon" />
-              </div>
+              </div> */}
             </div>
           </div>
         ))}

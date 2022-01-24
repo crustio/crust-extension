@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import TransferFrom from '../../transfer/transfer-from';
 import FooterButton from '../../common/footer-button';
 import QR from '../../common/qr';
 import './styles.css';
+import ClickToCopyAddress from '../../common/click-to-copy-address';
 
 class QRCodeForm extends Component {
   render() {
@@ -12,13 +12,6 @@ class QRCodeForm extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        <TransferFrom
-          theme={theme}
-          address={account.address}
-          canCopy
-          onCopyAddress={onCopyAddress}
-          alias={account.alias}
-        />
         <QR
           theme={theme}
           className="qr-address"
@@ -26,8 +19,13 @@ class QRCodeForm extends Component {
           size={200}
           value={account.address}
         />
+        <ClickToCopyAddress
+          className="qr-copy-address clickable-icon"
+          onCopyAddress={onCopyAddress}
+          address={account.address}
+        />
         <div className="qr-button-container">
-          <FooterButton name={t('Done')} onClick={onClick} />
+          <FooterButton name={t('Copy Address')} onClick={onCopyAddress} />
         </div>
       </div>
     );

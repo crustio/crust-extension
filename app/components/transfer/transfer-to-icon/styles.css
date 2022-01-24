@@ -7,8 +7,8 @@
 .transfer-to-icon-input fieldset {
   border: 0;
   font-size: 14px;
-  background-color: transparent;
-  border: 2px solid #ECEDEF !important;
+  background-color: white;
+  border-radius: 12px;
 }
 
 .transfer-to-icon-input:focus-within fieldset {
@@ -27,7 +27,7 @@
 .tranfer-to-icon-error-msg {
   color: #FA5050;
   height: 20px;
-  margin-left: 22px;
+  margin-left: 80px;
 }
 
 .place-holder {

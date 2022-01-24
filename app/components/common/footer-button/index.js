@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ButtonXL from '../buttons/button-xl';
+import ButtonCustom from '../buttons/button-custom';
 
 export default class FooterButton extends Component {
   render() {
@@ -18,9 +18,15 @@ export default class FooterButton extends Component {
         }}
         {...otherProps}
       >
-        <ButtonXL disabled={disabled} onClick={onClick} custom={custom}>
+        <ButtonCustom
+          disabled={disabled}
+          onClick={onClick}
+          custom={custom}
+          color="white"
+          background="#FF8D00"
+        >
           {name}
-        </ButtonXL>
+        </ButtonCustom>
       </div>
     );
   }

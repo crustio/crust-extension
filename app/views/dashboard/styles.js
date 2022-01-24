@@ -21,7 +21,7 @@ export const styles = () => ({
       opacity: 1,
     },
     '&$tabSelected': {
-      color: 'rgba(215, 95, 160, 1)',
+      color: 'rgba(25, 25, 25, 1)',
       fontSize: '14px',
     },
     '&:focus': {

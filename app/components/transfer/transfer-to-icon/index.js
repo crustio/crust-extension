@@ -25,8 +25,7 @@ export default class TransferToIcon extends Component {
       <div
         style={{
           display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
+          flexDirection: 'column',
           justifyContent: 'space-between',
         }}
         {...otherProps}
@@ -39,11 +38,7 @@ export default class TransferToIcon extends Component {
           spellCheck={false}
           endAdornment={<AddressBookAdorment position="end" onClick={onAddressBookClick} />}
         />
-        {isError ? (
-          <span className="tranfer-to-icon-error-msg">{errorMessage}</span>
-        ) : (
-          <span className="place-holder"> </span>
-        )}
+        {isError ? <span className="tranfer-to-icon-error-msg">{errorMessage}</span> : null}
       </div>
     );
   }

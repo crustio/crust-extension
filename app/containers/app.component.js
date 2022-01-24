@@ -15,6 +15,7 @@ import {
   CREATE_ACCOUNT_PAGE,
   TRANSFER_PAGE,
   QR_CODE_PAGE,
+  MANAGE_ACCOUNT_PAGE,
 } from '../constants/navigation';
 import CrustApp from '../components/crust-app';
 import './styles.css';
@@ -119,6 +120,17 @@ class App extends Component {
         };
       }
       if (prevProps.page === QR_CODE_PAGE) {
+        return {
+          showHeader: false, // no change
+          showLogo: false,
+          showBanner: false,
+          showNetwork: false,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: false,
+        };
+      }
+      if (prevProps.page === MANAGE_ACCOUNT_PAGE) {
         return {
           showHeader: false, // no change
           showLogo: false,

@@ -234,6 +234,10 @@ class Dashboard extends Component {
             onBackClick={this.handleDeposit}
             backButtonName={t('Receive')}
             nextButtonName={t('Send')}
+            nextColor="white"
+            nextBackground="#FF8D00"
+            backColor="white"
+            backBackground="#2C2B32"
           />
         )}
       </div>

@@ -70,6 +70,10 @@ class TransferForm extends Component {
           onBackClick={handleBackButton}
           backButtonName={backButtonText}
           nextButtonName={nextButtonText}
+          nextColor="white"
+          nextBackground="#FF8D00"
+          backColor="black"
+          backBackground="transparent"
         />
       </div>
     );

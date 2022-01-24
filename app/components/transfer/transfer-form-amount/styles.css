@@ -1,13 +1,14 @@
 
 .transfer-from-amount-input {
   flex: 1;
-  color: #858B9C !important;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .transfer-from-amount-input fieldset {
   border: 0;
   font-size: 14px;
-  border: 1px solid #C5CAD5;
+  border-radius: 12px;
+  background-color: white;
 }
 
 .transfer-from-amount-input:focus-within fieldset {
@@ -49,8 +50,8 @@
 
 .transfer-form-amount-dropdown {
   flex: 1;
-  border-radius: 8px;
-  border: 1px solid #C5CAD5;
+  border-radius: 12px;
+  background-color: white;
 }
 
 .transfer-form-amount-input-container {

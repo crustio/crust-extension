@@ -13,6 +13,11 @@ class CrustTabs extends Component {
       <Tabs
         value={value}
         onChange={onChange}
+        TabIndicatorProps={{
+          style: {
+            display: 'none',
+          },
+        }}
         classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
         {...otherProps}
       >

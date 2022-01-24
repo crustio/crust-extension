@@ -19,6 +19,7 @@ import {
   IMPORT_PHRASE,
   REMOVE,
 } from '../../constants/options';
+import CrustTabs from '../../components/common/crust-tabs';
 import { ENGLISH } from '../../constants/language';
 import './styles.css';
 
@@ -28,6 +29,8 @@ class ManageAccount extends Component {
     this.textInput = React.createRef();
     this.state = {
       isOpen: false,
+      labels: ['My Account', 'Settings'],
+      value: 0,
     };
   }
 
@@ -93,11 +96,17 @@ class ManageAccount extends Component {
     this.setState({ isOpen: false });
   };
 
+  handleTabChange = (e, value) => {
+    this.setState({
+      value,
+    });
+  };
+
   render() {
     const {
       accounts, account, t, language
     } = this.props;
-    const { isOpen } = this.state;
+    const { isOpen, labels, value } = this.state;
     const theme = 'substrate';
     const options = accounts.length > 1
       ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => ({ ...o, text: t(o.text) }))
@@ -105,6 +114,7 @@ class ManageAccount extends Component {
         ...o,
         text: o.text,
       }));
+    const tLabels = labels.map(l => t(l));
 
     return (
       <div className="manage-accounts-root-container">
@@ -118,6 +128,9 @@ class ManageAccount extends Component {
           menuWidth={language === ENGLISH ? 150 : undefined}
           isBackIcon
         />
+        <>
+          <CrustTabs value={value} onChange={this.handleTabChange} labels={tLabels} />
+        </>
         <div className="manage-accounts">
           <div className="manage-accounts-container">
             {accounts.length > 0 ? (

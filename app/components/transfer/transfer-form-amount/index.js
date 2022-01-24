@@ -45,9 +45,16 @@ class TransferFormAmount extends Component {
             onChange={onChange(propName)}
             value={value}
             placeholder={t('Amount')}
-            endAdornment={<FontRegular text={t('Max')} style={{ marginRight: 8 }} />}
+            endAdornment={
+              <FontRegular text={t('Max')} style={{ marginRight: 8, position: 'relative' }} />
+            }
           />
         </div>
+        {error ? (
+          <span className="transfer-from-amount-input-error-msg">{helperText}</span>
+        ) : (
+          <span className="transfer-from-amount-input-place-holder "> </span>
+        )}
 
         <FontRegular
           className="transfer-form-amount-balance"
@@ -57,11 +64,6 @@ class TransferFormAmount extends Component {
               : convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)
           }`}
         />
-        {error ? (
-          <span className="transfer-from-amount-input-error-msg">{helperText}</span>
-        ) : (
-          <span className="transfer-from-amount-input-place-holder "> </span>
-        )}
       </div>
     );
   }
