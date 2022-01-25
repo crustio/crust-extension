@@ -7,7 +7,7 @@ import { styles } from './styles';
 class CrustTabs extends Component {
   render() {
     const {
-      value, onChange, classes, labels, ...otherProps
+      value, onChange, classes, labels, parent, ...otherProps
     } = this.props;
     return (
       <Tabs
@@ -18,14 +18,20 @@ class CrustTabs extends Component {
             display: 'none',
           },
         }}
-        classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+        classes={{
+          root: parent === 'home' ? classes.tabsRootHome : classes.tabsRootAccount,
+          indicator: classes.tabsIndicator,
+        }}
         {...otherProps}
       >
         {labels.map(label => (
           <Tab
             key={label}
             disableRipple
-            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+            classes={{
+              root: parent === 'home' ? classes.tabRootHome : classes.tabRootAccount,
+              selected: parent === 'home' ? classes.tabSelected : classes.tabSelected,
+            }}
             label={label}
           />
         ))}

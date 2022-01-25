@@ -207,7 +207,12 @@ class Dashboard extends Component {
         )}
         {!showOffline && (
           <>
-            <CrustTabs value={value} onChange={this.handleChange} labels={tLabels} />
+            <CrustTabs
+              value={value}
+              onChange={this.handleChange}
+              labels={tLabels}
+              parent="home"
+            />
             {value === 0 && (
               <div>
                 <TokenList

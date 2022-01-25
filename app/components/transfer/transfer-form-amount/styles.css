@@ -9,6 +9,7 @@
   font-size: 14px;
   border-radius: 12px;
   background-color: white;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.05);
 }
 
 .transfer-from-amount-input:focus-within fieldset {
@@ -52,6 +53,7 @@
   flex: 1;
   border-radius: 12px;
   background-color: white;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.05);
 }
 
 .transfer-form-amount-input-container {
@@ -68,7 +70,7 @@
 }
 
 .transfer-form-amount-balance {
-  font-size: 12px;
+  font-size: 14px;
   color: #858B9C;
   width: 100%;
   margin-left: 10px;

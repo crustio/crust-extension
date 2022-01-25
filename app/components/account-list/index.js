@@ -53,9 +53,8 @@ class AccountList extends Component {
               moreMenu={moreMenu}
               isMoreVertIconVisible={isMoreVertIconVisible}
               onMoreMenuOptionsChange={onAccountMenuOptionsChange}
-              className={`account-card-container ${
-                currentAccount.address === account.address ? 'account-card-container-bg' : ''
-              }`}
+              isActive={currentAccount.address === account.address}
+              className="account-card-container"
             />
           ))}
         </List>

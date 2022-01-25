@@ -19,9 +19,9 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 15px 16px;
-  margin-bottom: 5px;
-  box-shadow: 0px 5px 5px #EEEEEE;
-  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
   cursor: pointer;
 }
 

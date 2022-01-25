@@ -9,6 +9,7 @@ import {
 } from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AccountList from '../../components/account-list';
+import SettingsList from '../../components/settings-list';
 import DraggableDialog from '../../components/common/confirm-dialog';
 import {
   ACCOUNT_MANAGEMENT_MENU_OPTIONS,
@@ -18,8 +19,10 @@ import {
   IMPORT_JSON,
   IMPORT_PHRASE,
   REMOVE,
+  OPTIONS as AccountOptions,
 } from '../../constants/options';
 import CrustTabs from '../../components/common/crust-tabs';
+import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { ENGLISH } from '../../constants/language';
 import './styles.css';
 
@@ -65,8 +68,7 @@ class ManageAccount extends Component {
   handleOnSubMenuOptionsChange = async option => {
     this.props.updateBackupPage(this.props.page);
     if (option.value === ADD_ACCOUNT.value) {
-      await this.props.addAccount();
-      this.props.changePage(CREATE_ACCOUNT_PAGE);
+      this.handleAddAccount();
     } else if (option.value === IMPORT_PHRASE.value) {
       await this.props.resetSeedWordsBeforeImport();
       this.props.changePage(CREATE_ACCOUNT_PAGE);
@@ -102,9 +104,25 @@ class ManageAccount extends Component {
     });
   };
 
+  handleAddAccount = async () => {
+    await this.props.addAccount();
+    this.props.changePage(CREATE_ACCOUNT_PAGE);
+  };
+
+  handleOptionsChange = (e, option) => {
+    if (option.value === 'network_mode') {
+      this.props.setNetworkMode(!this.props.isOfflineMode);
+    } else if (option.value === 'lock') {
+      this.props.lockApp();
+    } else {
+      this.props.updateBackupPage(this.props.page);
+      this.props.changePage(option.value);
+    }
+  };
+
   render() {
     const {
-      accounts, account, t, language
+      accounts, account, t, language, isOfflineMode
     } = this.props;
     const { isOpen, labels, value } = this.state;
     const theme = 'substrate';
@@ -115,12 +133,18 @@ class ManageAccount extends Component {
         text: o.text,
       }));
     const tLabels = labels.map(l => t(l));
+    // eslint-disable-next-line no-restricted-syntax
+    for (const option of AccountOptions) {
+      if (option.value === 'network_mode') {
+        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set To Offline Mode';
+      }
+    }
 
     return (
       <div className="manage-accounts-root-container">
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
-          title={t('Account Management')}
+          title={t('Account')}
           backBtnOnClick={this.handleSubheaderBackBtn}
           subMenu={ACCOUNT_MANAGEMENT_MENU_OPTIONS}
           showSettings
@@ -129,38 +153,70 @@ class ManageAccount extends Component {
           isBackIcon
         />
         <>
-          <CrustTabs value={value} onChange={this.handleTabChange} labels={tLabels} />
-        </>
-        <div className="manage-accounts">
-          <div className="manage-accounts-container">
-            {accounts.length > 0 ? (
-              <AccountList
-                className="accounts-container"
-                accounts={accounts}
-                currentAccount={account}
-                isMoreVertIconVisible
-                moreMenu={options}
-                onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
-                theme={theme}
-                onCopyAddress={this.onCopyAddress}
-                handleChangeAccount={this.handleChangeAccount}
-              />
-            ) : null}
-            <div>
-              <DraggableDialog
-                isOpen={isOpen}
-                handleClose={this.handleCloseDialog}
-                handleYes={this.handleYes}
-                noText={t('No')}
-                yesText={t('Yes')}
-                title={t('Remove account')}
-                msg={t(
-                  'Please make sure you have saved the seed phrase or private key for this account before continuing.',
-                )}
-              />
+          <CrustTabs
+            value={value}
+            onChange={this.handleTabChange}
+            labels={tLabels}
+            parent="account"
+          />
+          {value === 0 && (
+            <div className="manage-accounts">
+              <div className="manage-accounts-container">
+                {accounts.length > 0 ? (
+                  <AccountList
+                    className="accounts-container"
+                    accounts={accounts}
+                    currentAccount={account}
+                    isMoreVertIconVisible
+                    moreMenu={options}
+                    onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
+                    theme={theme}
+                    onCopyAddress={this.onCopyAddress}
+                    handleChangeAccount={this.handleChangeAccount}
+                  />
+                ) : null}
+                <div>
+                  <DraggableDialog
+                    isOpen={isOpen}
+                    handleClose={this.handleCloseDialog}
+                    handleYes={this.handleYes}
+                    noText={t('No')}
+                    yesText={t('Yes')}
+                    title={t('Remove account')}
+                    msg={t(
+                      'Please make sure you have saved the seed phrase or private key for this account before continuing.',
+                    )}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          )}
+          {value === 1 && (
+            <div className="manage-accounts">
+              <div className="manage-accounts-container">
+                {accounts.length > 0 ? (
+                  <SettingsList
+                    className="accounts-container"
+                    options={AccountOptions}
+                    onOptionsChange={this.handleOptionsChange}
+                  />
+                ) : null}
+              </div>
+            </div>
+          )}
+        </>
+        {value === 0 && (
+          <FooterWithTwoButton
+            onNextClick={this.handleAddAccount}
+            onBackClick={null} //Currently we need to clear import method.
+            backButtonName={t('Import Account')}
+            nextButtonName={t('Create Account')}
+            nextColor="white"
+            nextBackground="#FF8D00"
+            backColor="white"
+            backBackground="#2C2B32"
+          />
+        )}
       </div>
     );
   }

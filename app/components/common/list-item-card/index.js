@@ -4,8 +4,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ReactTooltip from 'react-tooltip';
-import Avatar from '../identicon';
-import { MoreVertIcon } from '../icon';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import { MoreHorizIcon } from '../icon';
 import CrustMenu from '../crust-menu';
 import ClickToCopyAddress from '../click-to-copy-address';
 import './styles.css';
@@ -45,6 +46,7 @@ class ListItemCard extends Component {
       handleListItemAvatarClick,
       handleListItemClick,
       isMoreVertIconVisible,
+      isActive,
       theme,
       ...otherProps
     } = this.props;
@@ -53,35 +55,33 @@ class ListItemCard extends Component {
       <div {...otherProps}>
         <ListItem>
           <ListItemAvatar onClick={event => handleListItemAvatarClick(event, listItem)}>
-            <Avatar
-              className="account-avatar"
-              onCopyAddress={onCopyAddress}
-              value={address}
-              theme={theme}
-              style={{ cursor: 'pointer !important' }}
-            />
+            {isActive ? (
+              <CheckCircleIcon className="accout-card-icon" />
+            ) : (
+              <RadioButtonUncheckedIcon className="accout-card-icon" />
+            )}
           </ListItemAvatar>
           <ListItemText
             onClick={event => handleListItemClick(event, listItem)}
-            primary={(
+            primary={
               <span style={{ display: 'flex' }}>
                 <span className="account-card-text" data-tip={primaryText}>
                   {primaryText}
                 </span>
                 <ReactTooltip effect="solid" place="bottom" />
               </span>
-            )}
+            }
             className={classes.primaryWidth}
-            secondary={(
+            secondary={
               <ClickToCopyAddress
                 className="account-address clickable-icon"
                 onCopyAddress={onCopyAddress}
                 address={address}
               />
-            )}
+            }
           />
           {isMoreVertIconVisible && (
-            <MoreVertIcon
+            <MoreHorizIcon
               color="rgba(0, 0, 0, 1)"
               onClick={this.handleClick}
               className="more-list-icon"

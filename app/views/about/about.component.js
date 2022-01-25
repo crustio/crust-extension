@@ -55,7 +55,7 @@ class About extends Component {
                 background: '#FF8D00',
                 color: 'white',
                 height: '38px',
-                borderRadius: '4px',
+                borderRadius: '12px',
                 top: '547px',
               }}
               onClick={this.onClick}

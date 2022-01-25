@@ -19,6 +19,7 @@ export default class CrustApp extends Component {
     const {
       account,
       page,
+      changePage,
       isLoading,
       networks,
       network,
@@ -110,11 +111,10 @@ export default class CrustApp extends Component {
               )}
               <Options
                 onToggleDeveloperMode={onToggleDeveloperMode}
-                options={options}
-                onOptionsChange={onOptionsChange}
                 className={CrustSettingsClassNames}
                 isDeveloperMode={isDeveloperMode}
                 page={page}
+                changePage={changePage}
                 menuWidth={language === CHINESE ? 120 : 170}
               />
               <FontMedium

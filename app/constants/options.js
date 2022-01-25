@@ -82,7 +82,17 @@ export const NetworkMode = {
   value: 'network_mode',
 };
 
-export const OPTIONS = [MANAGE_ACCOUNT, ADDRESS_BOOK, LANGUAGE_SETTING, NetworkMode, ABOUT];
+export const Lock = {
+  text: 'Lock',
+  value: 'lock',
+};
+
+export const GET_CRU = {
+  text: 'Get CRU',
+  value: 'get_cru',
+};
+
+export const OPTIONS = [ADDRESS_BOOK, LANGUAGE_SETTING, NetworkMode, Lock, GET_CRU, ABOUT];
 
 export const ACCOUNT_MENU_OPTIONS = [RENAME];
 

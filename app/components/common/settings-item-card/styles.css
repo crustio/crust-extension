@@ -1,0 +1,19 @@
+  .settings-card-text {
+    font-size: 14px;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Roboto-Regular';
+    display: block;
+  }
+  
+  .arrow-list-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 16px !important;
+  }

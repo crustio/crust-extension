@@ -37,11 +37,16 @@ wallet-card-item-container {
 }
 
 .account-card-text {
-  font-size: 16px;
+  font-size: 14px;
   max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: 'Roboto-Regular';
   display: block;
+}
+
+.accout-card-icon {
+  color: #4F4D59;
+  font-size: 16px;
 }

@@ -6,6 +6,8 @@ import {
   addAccount, changeAccount, removeAccount, resetSeedWordsBeforeImport
 } from './actions';
 import { updateExportingAccount } from '../export-account/actions';
+import { setNetworkMode } from '../../actions/network';
+import { lockApp } from '../dashboard/actions';
 
 const mapStateToProps = state => ({
   page: state.appStateReducer.page,
@@ -14,6 +16,7 @@ const mapStateToProps = state => ({
   accounts: state.accountReducer.accounts,
   network: state.networkReducer.network,
   language: state.appStateReducer.language,
+  isOfflineMode: state.networkReducer.isOfflineMode,
 });
 
 const mapDispatchToProps = {
@@ -25,6 +28,8 @@ const mapDispatchToProps = {
   removeAccount,
   updateExportingAccount,
   updateBackupPage,
+  setNetworkMode,
+  lockApp,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAccount);

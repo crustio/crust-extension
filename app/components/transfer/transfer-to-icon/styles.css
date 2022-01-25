@@ -9,6 +9,7 @@
   font-size: 14px;
   background-color: white;
   border-radius: 12px;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.05);
 }
 
 .transfer-to-icon-input:focus-within fieldset {

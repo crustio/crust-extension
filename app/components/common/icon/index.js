@@ -93,6 +93,17 @@ const MoreVertIcon = props => (
   </div>
 );
 
+const MoreHorizIcon = props => (
+  <div {...props}>
+    <MoreHoriz
+      style={{
+        fontSize: '1.5em',
+        color: props.color ? props.color : 'rgba(255, 255, 255, 1)',
+      }}
+    />
+  </div>
+);
+
 const IconCheckCircle = props => (
   <div {...props}>
     <FontAwesomeIcon
@@ -214,6 +225,7 @@ export {
   CaretDown,
   ExclamationTriangle,
   MoreVertIcon,
+  MoreHorizIcon,
   AddressBook,
   File,
   IconVisibilityOff,

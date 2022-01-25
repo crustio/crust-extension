@@ -17,7 +17,7 @@ class ButtonCustom extends Component {
   render() {
     const { custom, ...otherProps } = this.props;
     const styles = {
-      fontSize: '14px',
+      fontSize: '18px',
       fontFamily: 'Roboto-Medium',
       fontStyle: 'normal',
       borderRadius: '12px',
