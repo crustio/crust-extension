@@ -3,7 +3,11 @@ import ManageAccount from './manage-account.component';
 import { changePage, updateBackupPage } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
 import {
-  addAccount, changeAccount, removeAccount, resetSeedWordsBeforeImport
+  addAccount,
+  changeAccount,
+  removeAccount,
+  resetSeedWordsBeforeImport,
+  updateCurrentTab,
 } from './actions';
 import { updateExportingAccount } from '../export-account/actions';
 import { setNetworkMode } from '../../actions/network';
@@ -17,6 +21,7 @@ const mapStateToProps = state => ({
   network: state.networkReducer.network,
   language: state.appStateReducer.language,
   isOfflineMode: state.networkReducer.isOfflineMode,
+  currentTab: state.manageAccountReducer.currentTab,
 });
 
 const mapDispatchToProps = {
@@ -30,6 +35,7 @@ const mapDispatchToProps = {
   updateBackupPage,
   setNetworkMode,
   lockApp,
+  updateCurrentTab,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAccount);

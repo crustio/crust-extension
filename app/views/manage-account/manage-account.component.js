@@ -33,7 +33,6 @@ class ManageAccount extends Component {
     this.state = {
       isOpen: false,
       labels: ['My Account', 'Settings'],
-      value: 0,
     };
   }
 
@@ -99,9 +98,7 @@ class ManageAccount extends Component {
   };
 
   handleTabChange = (e, value) => {
-    this.setState({
-      value,
-    });
+    this.props.updateCurrentTab(value);
   };
 
   handleAddAccount = async () => {
@@ -122,9 +119,9 @@ class ManageAccount extends Component {
 
   render() {
     const {
-      accounts, account, t, language, isOfflineMode
+      accounts, account, t, language, isOfflineMode, currentTab
     } = this.props;
-    const { isOpen, labels, value } = this.state;
+    const { isOpen, labels } = this.state;
     const theme = 'substrate';
     const options = accounts.length > 1
       ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => ({ ...o, text: t(o.text) }))
@@ -154,12 +151,12 @@ class ManageAccount extends Component {
         />
         <>
           <CrustTabs
-            value={value}
+            value={currentTab}
             onChange={this.handleTabChange}
             labels={tLabels}
             parent="account"
           />
-          {value === 0 && (
+          {currentTab === 0 && (
             <div className="manage-accounts">
               <div className="manage-accounts-container">
                 {accounts.length > 0 ? (
@@ -191,7 +188,7 @@ class ManageAccount extends Component {
               </div>
             </div>
           )}
-          {value === 1 && (
+          {currentTab === 1 && (
             <div className="manage-accounts">
               <div className="manage-accounts-container">
                 {accounts.length > 0 ? (
@@ -205,7 +202,7 @@ class ManageAccount extends Component {
             </div>
           )}
         </>
-        {value === 0 && (
+        {currentTab === 0 && (
           <FooterWithTwoButton
             onNextClick={this.handleAddAccount}
             onBackClick={null} //Currently we need to clear import method.

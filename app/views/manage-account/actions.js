@@ -1,4 +1,5 @@
 import { Account } from '../../api';
+import * as ManageAccountActionTypes from './action-types';
 import * as AccountActions from '../../actions/account';
 import * as AppActions from '../../containers/actions';
 import { createToast } from '../../constants/toast';
@@ -41,4 +42,11 @@ export const removeAccount = (accountToRemove, t) => async dispatch => {
   } catch (e) {
     dispatch(createToast({ message: 'Error removing account', type: 'error' }));
   }
+};
+
+export const updateCurrentTab = currentTab => async dispatch => {
+  dispatch({
+    type: ManageAccountActionTypes.UPDATE_CURRENT_TAB,
+    currentTab,
+  });
 };
