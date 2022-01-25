@@ -14,6 +14,7 @@ class TransferForm extends Component {
       alias,
       to,
       amount,
+      setAmount,
       units,
       toRef,
       amountRef,
@@ -57,6 +58,7 @@ class TransferForm extends Component {
           error={isAmountError}
           label={t('Amount')}
           value={amount}
+          setValue={setAmount}
           helperText={amountErrorText}
           onChange={handleAmountChange}
           propName={amountPropName}
@@ -73,7 +75,7 @@ class TransferForm extends Component {
           nextColor="white"
           nextBackground="#FF8D00"
           backColor="black"
-          backBackground="transparent"
+          backBackground="#FFFFFF"
         />
       </div>
     );

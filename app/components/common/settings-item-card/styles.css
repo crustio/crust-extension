@@ -6,6 +6,7 @@
     text-overflow: ellipsis;
     font-family: 'Roboto-Regular';
     display: block;
+    font-weight: bold;
   }
   
   .arrow-list-icon {

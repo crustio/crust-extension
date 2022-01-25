@@ -98,6 +98,12 @@ class Transfer extends Component {
     }
   };
 
+  setAmount = value => {
+    this.setState({
+      amount: value,
+    });
+  };
+
   onAddressBookClick = () => {
     this.props.updateBackupPage(this.props.page);
     this.props.changePage(NavConstants.ADDRESS_BOOK_PAGE);
@@ -199,6 +205,7 @@ class Transfer extends Component {
             this.amountInput = input;
           }}
           amount={amount}
+          setAmount={this.setAmount}
           nextButtonText={nextButtonTextT}
           backButtonText={backButtonTextT}
           isToError={isToAddressError}

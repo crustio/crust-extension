@@ -10,6 +10,7 @@ import {
   fetchAndUpdateLanguage,
 } from './actions';
 import { clearTransferDetails, resetConfirmOnBoarding } from '../views/transfer/actions';
+import { createToast } from '../constants/toast';
 
 const mapStateToProps = state => ({
   account: state.accountReducer.account,
@@ -36,6 +37,7 @@ const mapDispatchToProps = {
   onToggleDeveloperMode,
   fetchAndUpdateLanguage,
   setNetworkMode,
+  createToast,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

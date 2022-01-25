@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import classnames from 'classnames';
 import { Circle } from 'react-feather';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import CrustContainer from '../crust-container';
 import Header from '../common/header/header.component';
 import ViewSelector from '../view-selector';
@@ -34,6 +35,7 @@ export default class CrustApp extends Component {
       showGrayHeader,
       showUserId,
       onLogoClick,
+      onCopyAddress,
       options,
       onOptionsChange,
       isDeveloperMode,
@@ -117,11 +119,14 @@ export default class CrustApp extends Component {
                 changePage={changePage}
                 menuWidth={language === CHINESE ? 120 : 170}
               />
-              <FontMedium
-                className={CrustUserIdClassNames}
-                text={account ? account.alias : ''}
-                page={page}
-              />
+              <CopyToClipboard text={account ? account.address : ''}>
+                <FontMedium
+                  className={CrustUserIdClassNames}
+                  text={account ? account.alias : ''}
+                  page={page}
+                  onClick={onCopyAddress}
+                />
+              </CopyToClipboard>
             </div>
           </Header>
           <ViewSelector page={page} />

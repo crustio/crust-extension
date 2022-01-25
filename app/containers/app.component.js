@@ -17,6 +17,7 @@ import {
   QR_CODE_PAGE,
   MANAGE_ACCOUNT_PAGE,
 } from '../constants/navigation';
+import { copyAccountMessage } from '../../lib/services/static-message-factory-service';
 import CrustApp from '../components/crust-app';
 import './styles.css';
 
@@ -175,6 +176,14 @@ class App extends Component {
     this.props.changePage(DASHBOARD_PAGE);
   };
 
+  onCopyAddress = () => {
+    const { t } = this.props;
+    this.props.createToast({
+      message: t(copyAccountMessage()),
+      type: 'info',
+    });
+  };
+
   render() {
     const {
       props: {
@@ -225,6 +234,7 @@ class App extends Component {
         onToggleDeveloperMode={this.onToggleDeveloperMode}
         language={language}
         changePage={changePage}
+        onCopyAddress={this.onCopyAddress}
         t={t}
       />
     );

@@ -7,6 +7,14 @@ import { convertBalanceToShow } from '../../../../lib/services/numberFormatter';
 import './styles.css';
 
 class TransferFormAmount extends Component {
+  onClickMax = () => {
+    this.props.setValue(
+      this.props.dropDownValue.balance === '-'
+        ? 0
+        : convertBalanceToShow(this.props.dropDownValue.balance, this.props.dropDownValue.decimals),
+    );
+  };
+
   render() {
     const {
       error,
@@ -46,7 +54,11 @@ class TransferFormAmount extends Component {
             value={value}
             placeholder={t('Amount')}
             endAdornment={
-              <FontRegular text={t('Max')} style={{ marginRight: 8, position: 'relative' }} />
+              <FontRegular
+                text={t('Max')}
+                style={{ marginRight: 8, position: 'relative', cursor: 'pointer' }}
+                onClick={this.onClickMax}
+              />
             }
           />
         </div>

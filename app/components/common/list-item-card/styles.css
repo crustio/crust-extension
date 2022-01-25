@@ -44,9 +44,10 @@ wallet-card-item-container {
   text-overflow: ellipsis;
   font-family: 'Roboto-Regular';
   display: block;
+  font-weight: bold;
 }
 
 .accout-card-icon {
   color: #4F4D59;
-  font-size: 16px;
+  font-size: 16px !important;
 }

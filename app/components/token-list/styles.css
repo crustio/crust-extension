@@ -25,10 +25,6 @@
   cursor: pointer;
 }
 
-.token-item-container:hover {
-  background: #ECECEC;
-}
-
 .token-item-details-amount {
   flex: 1;
   text-align: end;
@@ -38,7 +34,7 @@
 
 .token-item-details-symbol {
   font-size: 16px;
-  color: #858B9C;
+  color: #1A1B24;
 }
 
 .token-item-icon {
