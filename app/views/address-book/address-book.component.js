@@ -100,7 +100,7 @@ class AddressBook extends Component {
   };
 
   render() {
-    const { addressBook, t } = this.props;
+    const { addressBook, network, t } = this.props;
     const {
       isOpen, showSettings, headerText, isMoreVertIconVisible
     } = this.state;
@@ -132,6 +132,7 @@ class AddressBook extends Component {
                 isMoreVertIconVisible={isMoreVertIconVisible}
                 onCopyAddress={this.onCopyAddress}
                 handelChangeToAddress={this.handelChangeToAddress}
+                network={network}
               />
             ) : (
               <div className="empty-address-book-container">

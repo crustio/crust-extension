@@ -161,6 +161,7 @@ class ManageAccount extends Component {
             labels={tLabels}
             parent="account"
             style={{ background: colorTheme[network.value].card }}
+            network={network}
           />
           {currentTab === 0 && (
             <div className="manage-accounts">
@@ -177,6 +178,7 @@ class ManageAccount extends Component {
                     onCopyAddress={this.onCopyAddress}
                     handleChangeAccount={this.handleChangeAccount}
                     colorTheme={colorTheme[network.value]}
+                    network={network}
                   />
                 ) : null}
                 <div>

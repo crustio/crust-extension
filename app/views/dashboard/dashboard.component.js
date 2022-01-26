@@ -149,6 +149,7 @@ class Dashboard extends Component {
               accounts={accounts}
               balances={balances}
               balance={balanceFormatted}
+              network={network}
               selectedAccount={account}
               theme={theme}
               colorTheme={colorTheme[network.value]}
@@ -222,6 +223,7 @@ class Dashboard extends Component {
               labels={tLabels}
               parent="home"
               colorTheme={colorTheme[network.value]}
+              network={network}
             />
             {value === 0 && (
               <div>

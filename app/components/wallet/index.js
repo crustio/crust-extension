@@ -16,6 +16,7 @@ export default class Wallet extends Component {
       inputRef,
       theme,
       colorTheme,
+      network,
       ...otherProps
     } = this.props;
 
@@ -38,6 +39,7 @@ export default class Wallet extends Component {
           accountMenu={accountMenu}
           onAccountMenuOptionsChange={onAccountMenuOptionsChange}
           colorTheme={colorTheme}
+          network={network}
         />
       </div>
     );

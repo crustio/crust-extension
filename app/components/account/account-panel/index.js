@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import AccountDetails from '../account-details';
 import { WalletDropDownIcon } from '../../common/icon';
-import CrustMenu from '../../common/crust-menu';
+import ModalWithThreeButton from '../../common/modal-with-three-button';
 
 export default class AccountPanel extends Component {
   state = {
-    anchorEl: null,
+    showModal: false,
   };
 
   handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+    this.setState({ showModal: true });
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleCancel = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
-    const { anchorEl } = this.state;
+    const { showModal } = this.state;
     const {
       selectedAccount,
       onCopyAddress,
@@ -28,8 +28,10 @@ export default class AccountPanel extends Component {
       onAliasInputKeyPress,
       inputRef,
       colorTheme,
+      network,
       ...otherProps
     } = this.props;
+
     return (
       <div {...otherProps}>
         <AccountDetails
@@ -62,16 +64,14 @@ export default class AccountPanel extends Component {
             colorTheme={colorTheme}
           />
         )}
-        {accountMenu && accountMenu.length > 0 && (
-          <CrustMenu
-            options={accountMenu}
-            onChange={option => {
-              onAccountMenuOptionsChange(option, selectedAccount);
-            }}
-            anchorEl={anchorEl}
-            onClose={this.handleClose}
-          />
-        )}
+        <ModalWithThreeButton
+          show={showModal}
+          colorTheme={colorTheme}
+          handleCancel={this.handleCancel}
+          topButton="Create Account"
+          bottomButton="Import Account"
+          network={network}
+        />
       </div>
     );
   }

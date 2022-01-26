@@ -9,19 +9,20 @@ import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { MoreHorizIcon } from '../icon';
 import CrustMenu from '../crust-menu';
 import ClickToCopyAddress from '../click-to-copy-address';
+import ModalWithThreeButton from '../modal-with-three-button';
 import './styles.css';
 
 class ListItemCard extends Component {
   state = {
-    anchorEl: null,
+    showModal: false,
   };
 
   handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+    this.setState({ showModal: true });
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleCancel = () => {
+    this.setState({ showModal: false });
   };
 
   handleNullBalanceObject = (balObj, account) => {
@@ -49,9 +50,10 @@ class ListItemCard extends Component {
       isActive,
       theme,
       colorTheme,
+      network,
       ...otherProps
     } = this.props;
-    const { anchorEl } = this.state;
+    const { showModal } = this.state;
     return (
       <div {...otherProps}>
         <ListItem>
@@ -99,13 +101,13 @@ class ListItemCard extends Component {
               className="more-list-icon"
             />
           )}
-          <CrustMenu
-            options={moreMenu}
-            onChange={option => {
-              onMoreMenuOptionsChange(option, listItem);
-            }}
-            anchorEl={anchorEl}
-            onClose={this.handleClose}
+          <ModalWithThreeButton
+            show={showModal}
+            colorTheme={colorTheme}
+            handleCancel={this.handleCancel}
+            topButton="Remove"
+            bottomButton="Export Account"
+            network={network}
           />
         </ListItem>
       </div>

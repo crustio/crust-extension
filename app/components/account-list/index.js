@@ -33,6 +33,7 @@ class AccountList extends Component {
       isMoreVertIconVisible,
       colorTheme,
       theme,
+      network,
       ...otherProps
     } = this.props;
     return (
@@ -58,6 +59,7 @@ class AccountList extends Component {
               className="account-card-container"
               style={{ background: colorTheme.card }}
               colorTheme={colorTheme}
+              network={network}
             />
           ))}
         </List>

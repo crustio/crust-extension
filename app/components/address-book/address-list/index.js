@@ -16,6 +16,7 @@ class AddressList extends Component {
       isMoreVertIconVisible,
       handelChangeToAddress,
       theme,
+      network,
       ...otherProps
     } = this.props;
     return (
@@ -38,6 +39,7 @@ class AddressList extends Component {
               onMoreMenuOptionsChange={onMoreMenuOptionsChange}
               handleListItemAvatarClick={handelChangeToAddress}
               handleListItemClick={handelChangeToAddress}
+              network={network}
             />
           ))}
         </List>
