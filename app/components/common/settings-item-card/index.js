@@ -20,6 +20,7 @@ class SettingsItemCard extends Component {
       handleListItemClick,
       isMoreVertIconVisible,
       isActive,
+      colorTheme,
       ...otherProps
     } = this.props;
     return (
@@ -28,7 +29,11 @@ class SettingsItemCard extends Component {
           <ListItemText
             primary={
               <span style={{ display: 'flex' }}>
-                <span className="settings-card-text" data-tip={listItem.text}>
+                <span
+                  className="settings-card-text"
+                  data-tip={listItem.text}
+                  style={{ color: colorTheme.text.primary }}
+                >
                   {listItem.text}
                 </span>
                 <ReactTooltip effect="solid" place="bottom" />

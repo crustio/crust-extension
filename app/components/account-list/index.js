@@ -31,6 +31,7 @@ class AccountList extends Component {
       handleChangeAccount,
       onAccountMenuOptionsChange,
       isMoreVertIconVisible,
+      colorTheme,
       theme,
       ...otherProps
     } = this.props;
@@ -55,6 +56,8 @@ class AccountList extends Component {
               onMoreMenuOptionsChange={onAccountMenuOptionsChange}
               isActive={currentAccount.address === account.address}
               className="account-card-container"
+              style={{ background: colorTheme.card }}
+              colorTheme={colorTheme}
             />
           ))}
         </List>

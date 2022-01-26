@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import TransferFromTo from '../transfer-from-to';
-import FooterButton from '../../common/footer-button';
 import FooterWithTwoButton from '../../common/footer-with-two-button';
 import TransferFormAmount from '../transfer-form-amount';
 import './styles.css';
@@ -34,6 +33,7 @@ class TransferForm extends Component {
       handleBackButton,
       handleUnitOnChange,
       onAddressBookClick,
+      colorTheme,
       t,
     } = this.props;
     return (
@@ -51,6 +51,7 @@ class TransferForm extends Component {
             toErrorText={toErrorText}
             handleToChange={handleToChange}
             onAddressBookClick={onAddressBookClick}
+            colorTheme={colorTheme}
           />
         </div>
         <TransferFormAmount
@@ -66,6 +67,7 @@ class TransferForm extends Component {
           options={units}
           dropDownValue={unit}
           onDropDownChange={handleUnitOnChange}
+          colorTheme={colorTheme}
         />
         <FooterWithTwoButton
           onNextClick={handleSendButton}

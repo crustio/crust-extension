@@ -24,6 +24,7 @@ import {
 import CrustTabs from '../../components/common/crust-tabs';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { ENGLISH } from '../../constants/language';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class ManageAccount extends Component {
@@ -119,7 +120,7 @@ class ManageAccount extends Component {
 
   render() {
     const {
-      accounts, account, t, language, isOfflineMode, currentTab
+      accounts, account, t, language, isOfflineMode, currentTab, network
     } = this.props;
     const { isOpen, labels } = this.state;
     const theme = 'substrate';
@@ -138,7 +139,10 @@ class ManageAccount extends Component {
     }
 
     return (
-      <div className="manage-accounts-root-container">
+      <div
+        className="manage-accounts-root-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Account')}
@@ -148,6 +152,7 @@ class ManageAccount extends Component {
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
           menuWidth={language === ENGLISH ? 150 : undefined}
           isBackIcon
+          colorTheme={colorTheme[network.value]}
         />
         <>
           <CrustTabs
@@ -155,6 +160,7 @@ class ManageAccount extends Component {
             onChange={this.handleTabChange}
             labels={tLabels}
             parent="account"
+            style={{ background: colorTheme[network.value].card }}
           />
           {currentTab === 0 && (
             <div className="manage-accounts">
@@ -170,6 +176,7 @@ class ManageAccount extends Component {
                     theme={theme}
                     onCopyAddress={this.onCopyAddress}
                     handleChangeAccount={this.handleChangeAccount}
+                    colorTheme={colorTheme[network.value]}
                   />
                 ) : null}
                 <div>
@@ -196,6 +203,7 @@ class ManageAccount extends Component {
                     className="accounts-container"
                     options={AccountOptions}
                     onOptionsChange={this.handleOptionsChange}
+                    colorTheme={colorTheme[network.value]}
                   />
                 ) : null}
               </div>
@@ -208,10 +216,10 @@ class ManageAccount extends Component {
             onBackClick={null} //Currently we need to clear import method.
             backButtonName={t('Import Account')}
             nextButtonName={t('Create Account')}
-            nextColor="white"
-            nextBackground="#FF8D00"
-            backColor="white"
-            backBackground="#2C2B32"
+            nextColor={colorTheme[network.value].button.primary.text}
+            nextBackground={colorTheme[network.value].button.primary.main}
+            backColor={colorTheme[network.value].button.secondary.text}
+            backBackground={colorTheme[network.value].button.secondary.main}
           />
         )}
       </div>

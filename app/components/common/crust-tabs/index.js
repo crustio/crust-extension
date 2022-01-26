@@ -7,7 +7,7 @@ import { styles } from './styles';
 class CrustTabs extends Component {
   render() {
     const {
-      value, onChange, classes, labels, parent, ...otherProps
+      value, onChange, classes, labels, parent, colorTheme, ...otherProps
     } = this.props;
     return (
       <Tabs

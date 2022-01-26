@@ -5,12 +5,12 @@ import IconContainer from '../../common/icon-container';
 
 export default class AddressBookAdornment extends Component {
   render() {
-    const { onClick, ...otherProps } = this.props;
+    const { onClick, colorTheme, ...otherProps } = this.props;
     return (
       <CrustInputAdornment {...otherProps}>
         <IconContainer aria-label="Toggle password visibility" onClick={onClick}>
           {/* <AddressBook /> */}
-          <ListAltIcon />
+          <ListAltIcon style={{ color: colorTheme.text.secondary }} />
         </IconContainer>
       </CrustInputAdornment>
     );

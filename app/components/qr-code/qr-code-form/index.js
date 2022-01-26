@@ -8,7 +8,7 @@ import ClickToCopyAddress from '../../common/click-to-copy-address';
 class QRCodeForm extends Component {
   render() {
     const {
-      account, theme, onClick, onCopyAddress, t, ...otherProps
+      account, theme, onClick, onCopyAddress, colorTheme, t, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -23,6 +23,7 @@ class QRCodeForm extends Component {
           className="qr-copy-address clickable-icon"
           onCopyAddress={onCopyAddress}
           address={account.address}
+          style={{ color: colorTheme.text.primary }}
         />
         <div className="qr-button-container">
           <FooterButton name={t('Copy Address')} onClick={onCopyAddress} />

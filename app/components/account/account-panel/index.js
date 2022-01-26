@@ -27,6 +27,7 @@ export default class AccountPanel extends Component {
       onAliasInputBlur,
       onAliasInputKeyPress,
       inputRef,
+      colorTheme,
       ...otherProps
     } = this.props;
     return (
@@ -38,6 +39,7 @@ export default class AccountPanel extends Component {
           onCopyAddress={onCopyAddress}
           inputRef={inputRef}
           editMode={selectedAccount.editMode ? selectedAccount.editMode : false}
+          colorTheme={colorTheme}
           onAliasChange={event => {
             onAliasChange(event.target.value, selectedAccount);
           }}
@@ -54,7 +56,11 @@ export default class AccountPanel extends Component {
           }}
         />
         {accountMenu && accountMenu.length > 0 && (
-          <WalletDropDownIcon onClick={this.handleClick} className="account-list-icon" />
+          <WalletDropDownIcon
+            onClick={this.handleClick}
+            className="account-list-icon"
+            colorTheme={colorTheme}
+          />
         )}
         {accountMenu && accountMenu.length > 0 && (
           <CrustMenu

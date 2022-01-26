@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Avatar from '../../common/identicon';
 import CrustInput from '../../common/crust-input';
 import AddressBookAdorment from '../address-book-adornment';
 import './styles.css';
@@ -19,6 +18,7 @@ export default class TransferToIcon extends Component {
       onBlur,
       inputRef,
       onAddressBookClick,
+      colorTheme,
       ...otherProps
     } = this.props;
     return (
@@ -36,7 +36,14 @@ export default class TransferToIcon extends Component {
           onChange={onChange(propName)}
           placeholder={label}
           spellCheck={false}
-          endAdornment={<AddressBookAdorment position="end" onClick={onAddressBookClick} />}
+          style={{ background: colorTheme.card }}
+          endAdornment={
+            <AddressBookAdorment
+              position="end"
+              onClick={onAddressBookClick}
+              colorTheme={colorTheme}
+            />
+          }
         />
         {isError ? <span className="tranfer-to-icon-error-msg">{errorMessage}</span> : null}
       </div>

@@ -76,7 +76,7 @@ const WalletDropDownIcon = props => (
     <MoreHoriz
       style={{
         fontSize: '1.5em',
-        color: '#111A34',
+        color: props.colorTheme.text.secondary,
       }}
     />
   </div>
@@ -118,7 +118,7 @@ const NetworkDisconnectionIcon = props => (
     <WifiOff
       style={{
         fontSize: '1.5em',
-        color: '#111A34',
+        color: props.colorTheme.text.secondary,
       }}
     />
   </div>

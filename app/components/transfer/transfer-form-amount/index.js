@@ -27,6 +27,7 @@ class TransferFormAmount extends Component {
       dropDownValue,
       propName,
       onDropDownChange,
+      colorTheme,
       t,
       ...otherProps
     } = this.props;
@@ -41,9 +42,11 @@ class TransferFormAmount extends Component {
         <div className="transfer-form-amount-dropdown-container">
           <DropDown
             className="transfer-form-amount-dropdown"
+            style={{ background: colorTheme.card }}
             options={options}
             value={dropDownValue}
             onChange={onDropDownChange}
+            colorTheme={colorTheme}
           />
         </div>
 
@@ -53,10 +56,16 @@ class TransferFormAmount extends Component {
             onChange={onChange(propName)}
             value={value}
             placeholder={t('Amount')}
+            style={{ background: colorTheme.card }}
             endAdornment={
               <FontRegular
                 text={t('Max')}
-                style={{ marginRight: 8, position: 'relative', cursor: 'pointer' }}
+                style={{
+                  marginRight: 8,
+                  position: 'relative',
+                  cursor: 'pointer',
+                  color: colorTheme.text.secondary,
+                }}
                 onClick={this.onClickMax}
               />
             }
@@ -75,6 +84,7 @@ class TransferFormAmount extends Component {
               ? '-'
               : convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)
           }`}
+          style={{ color: colorTheme.text.quaternary }}
         />
       </div>
     );

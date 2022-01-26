@@ -48,6 +48,7 @@ class ListItemCard extends Component {
       isMoreVertIconVisible,
       isActive,
       theme,
+      colorTheme,
       ...otherProps
     } = this.props;
     const { anchorEl } = this.state;
@@ -56,16 +57,26 @@ class ListItemCard extends Component {
         <ListItem>
           <ListItemAvatar onClick={event => handleListItemAvatarClick(event, listItem)}>
             {isActive ? (
-              <CheckCircleIcon className="accout-card-icon" />
+              <CheckCircleIcon
+                className="accout-card-icon"
+                style={{ color: colorTheme.icon.primary }}
+              />
             ) : (
-              <RadioButtonUncheckedIcon className="accout-card-icon" />
+              <RadioButtonUncheckedIcon
+                className="accout-card-icon"
+                style={{ color: colorTheme.icon.secondary }}
+              />
             )}
           </ListItemAvatar>
           <ListItemText
             onClick={event => handleListItemClick(event, listItem)}
             primary={
               <span style={{ display: 'flex' }}>
-                <span className="account-card-text" data-tip={primaryText}>
+                <span
+                  className="account-card-text"
+                  data-tip={primaryText}
+                  style={{ color: colorTheme.text.primary }}
+                >
                   {primaryText}
                 </span>
                 <ReactTooltip effect="solid" place="bottom" />
@@ -77,12 +88,13 @@ class ListItemCard extends Component {
                 className="account-address clickable-icon"
                 onCopyAddress={onCopyAddress}
                 address={address}
+                style={{ color: colorTheme.text.tertiary }}
               />
             }
           />
           {isMoreVertIconVisible && (
             <MoreHorizIcon
-              color="rgba(0, 0, 0, 1)"
+              color={colorTheme.text.secondary}
               onClick={this.handleClick}
               className="more-list-icon"
             />

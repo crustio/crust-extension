@@ -23,6 +23,7 @@ export default class SubHeader extends Component {
     const style = {
       textAlign: `${this.props.align ? this.props.align : 'center'}`,
       marginLeft: `${this.props.margin ? this.props.margin : 'none'}`,
+      color: this.props.colorTheme.text.primary,
     };
     const {
       icon, subMenu, onSubMenuOptionsChange, menuWidth, isBackIcon

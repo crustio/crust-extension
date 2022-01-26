@@ -72,7 +72,7 @@ class App extends Component {
             showBanner: true,
             showNetwork: false,
             showSettings: false,
-            showGrayHeader: true,
+            showGrayHeader: false,
             showUserId: false,
           };
         }
@@ -83,7 +83,7 @@ class App extends Component {
             showBanner: true,
             showNetwork: false,
             showSettings: false,
-            showGrayHeader: true,
+            showGrayHeader: false,
             showGrayBg: true,
             showUserId: false,
           };
@@ -116,7 +116,7 @@ class App extends Component {
           showBanner: false,
           showNetwork: true,
           showSettings: false,
-          showGrayHeader: true,
+          showGrayHeader: false,
           showUserId: true,
         };
       }
@@ -148,7 +148,7 @@ class App extends Component {
         showBanner: false,
         showNetwork: true,
         showSettings: true,
-        showGrayHeader: true,
+        showGrayHeader: false,
         showUserId: false,
       };
     }

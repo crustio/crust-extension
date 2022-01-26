@@ -8,7 +8,6 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import TokenDetailFooter from '../../components/token/token-detail-footer';
 import Wallet from '../../components/wallet';
 import { QR_CODE_PAGE, TOKEN_DETAILS_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
@@ -19,6 +18,7 @@ import TokenList from '../../components/token-list';
 import CrustTabs from '../../components/common/crust-tabs';
 import { HelpCircle, NetworkOfflineIcon } from '../../components/common/icon';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
+import { colorTheme } from '../../../lib/constants/colors';
 
 const MP = withStyles({
   root: {
@@ -118,14 +118,13 @@ class Dashboard extends Component {
       account,
       balances,
       transactions,
-      balance: { balanceFormatted, marketData, amount },
+      balance: { balanceFormatted },
       isLinkToFaucet,
       network,
       isConnected,
       isOfflineMode,
       // isError,
       // isErrorByType,
-      unit,
       accountMenu,
       tokens,
       t,
@@ -133,12 +132,17 @@ class Dashboard extends Component {
     const { labels, value } = this.state;
     const tLabels = labels.map(l => t(l));
     const theme = 'substrate';
-    const defaultToken = tokens.find(token => token.address === undefined);
     const showOffline = !isConnected || isOfflineMode;
     return (
-      <div className="dashboard-container">
+      <div
+        className="dashboard-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         <div>
-          <div className="account-content-container">
+          <div
+            className="account-content-container"
+            style={{ background: colorTheme[network.value].card }}
+          >
             <Wallet
               className="wallet-container"
               inputRef={this.textInput}
@@ -147,18 +151,23 @@ class Dashboard extends Component {
               balance={balanceFormatted}
               selectedAccount={account}
               theme={theme}
+              colorTheme={colorTheme[network.value]}
               onAliasChange={this.handleAliasChange}
               onAliasInputBlur={this.handleAliasInputBlur}
               onAliasInputKeyPress={this.handleOnKeyPress}
               onCopyAddress={this.onCopyAddress}
               accountMenu={accountMenu}
               onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
+              style={{
+                color: colorTheme[network.value].text.secondary,
+                boxShadow: network.value === 'crust maxwell' ? 'none' : '',
+              }}
             />
           </div>
         </div>
         {showOffline && (
           <div className="crust-offline-container">
-            <NetworkOfflineIcon />
+            <NetworkOfflineIcon colorTheme={colorTheme[network.value]} />
             <span className="offline-hint">
               {t('OfflineDescription')}
               <HelpCircle
@@ -212,6 +221,7 @@ class Dashboard extends Component {
               onChange={this.handleChange}
               labels={tLabels}
               parent="home"
+              colorTheme={colorTheme[network.value]}
             />
             {value === 0 && (
               <div>
@@ -219,6 +229,7 @@ class Dashboard extends Component {
                   tokens={tokens}
                   className="token-list-container"
                   onTokenSelected={this.onTokenSelected}
+                  colorTheme={colorTheme[network.value]}
                 />
               </div>
             )}
@@ -239,10 +250,10 @@ class Dashboard extends Component {
             onBackClick={this.handleDeposit}
             backButtonName={t('Receive')}
             nextButtonName={t('Send')}
-            nextColor="white"
-            nextBackground="#FF8D00"
-            backColor="white"
-            backBackground="#2C2B32"
+            nextColor={colorTheme[network.value].button.primary.text}
+            nextBackground={colorTheme[network.value].button.primary.main}
+            backColor={colorTheme[network.value].button.secondary.text}
+            backBackground={colorTheme[network.value].button.secondary.main}
           />
         )}
       </div>

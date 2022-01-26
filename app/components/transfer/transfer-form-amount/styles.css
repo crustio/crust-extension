@@ -1,20 +1,13 @@
 
 .transfer-from-amount-input {
   flex: 1;
-  color: rgba(0, 0, 0, 0.87);
+  border-radius: 12px;
 }
 
 .transfer-from-amount-input fieldset {
   border: 0;
   font-size: 14px;
-  border-radius: 12px;
-  background-color: white;
   box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.05);
-}
-
-.transfer-from-amount-input:focus-within fieldset {
-  background-color: transparent;
-  border: 1px solid #C5CAD5 !important;
 }
 
 .input-margin {

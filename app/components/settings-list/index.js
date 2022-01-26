@@ -8,7 +8,7 @@ import './styles.css';
 class SettingsList extends Component {
   render() {
     const {
-      classes, options, onOptionsChange, ...otherProps
+      classes, options, onOptionsChange, colorTheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -23,6 +23,8 @@ class SettingsList extends Component {
               listItem={option}
               handleListItemClick={onOptionsChange}
               className="settings-card-container"
+              colorTheme={colorTheme}
+              style={{ background: colorTheme.card }}
             />
           ))}
         </List>
