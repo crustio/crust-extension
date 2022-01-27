@@ -25,7 +25,11 @@ class AccountItem extends Component {
       'clickable-icon': true,
     });
     return (
-      <div className={accountItemClassNames} {...otherProps}>
+      <div
+        className={accountItemClassNames}
+        {...otherProps}
+        style={{ background: colorTheme.card }}
+      >
         <Avatar className="account-avatar" onCopyAddress={onCopyAddress} value={account.address} />
         <AccountDetails
           className="account-item-identity-container"

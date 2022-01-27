@@ -11,6 +11,7 @@ const Summary = props => (
       type={props.t('Update Metadata')}
       blockchain={props.blockchain}
       className="sign-message-summary-request-type"
+      colorTheme={props.colorTheme}
     />
   </div>
 );

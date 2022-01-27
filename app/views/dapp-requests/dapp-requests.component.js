@@ -84,7 +84,10 @@ class DAppRequests extends Component {
     // Use for toggle
     const { isInfoExpanded, errorText, password } = this.state;
     return (
-      <div className="dapp-requests-container">
+      <div
+        className="dapp-requests-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         {requests.map(request => {
           switch (request.request.requestType) {
             case RequestType.SEND:
@@ -115,6 +118,7 @@ class DAppRequests extends Component {
                   errorText={errorText}
                   handleOnChange={this.handleOnChange}
                   colorTheme={colorTheme[network.value]}
+                  style={{ background: colorTheme[network.value].background }}
                 />
               );
             case RequestType.SIGN_MESSAGE:
@@ -139,6 +143,7 @@ class DAppRequests extends Component {
                   handleOnChange={this.handleOnChange}
                   colorTheme={colorTheme[network.value]}
                   t={t}
+                  style={{ background: colorTheme[network.value].background }}
                 />
               );
             case RequestType.GET_METADATA_PROVIDE:
@@ -156,6 +161,7 @@ class DAppRequests extends Component {
                   errorText={errorText}
                   colorTheme={colorTheme[network.value]}
                   t={t}
+                  style={{ background: colorTheme[network.value].background }}
                 />
               );
             default:
@@ -169,11 +175,13 @@ class DAppRequests extends Component {
   render() {
     const { t, network } = this.props;
     return (
-      <div>
+      <div className="dapp-request" style={{ background: colorTheme[network.value].background }}>
         <SubHeader
           title={t('Pending Requests')}
-          isBackIcon
           colorTheme={colorTheme[network.value]}
+          align="left"
+          margin="15px"
+          isBackIcon={false}
         />
         {this.props.requests && this.renderRequests()}
       </div>

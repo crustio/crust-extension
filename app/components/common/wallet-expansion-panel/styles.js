@@ -5,7 +5,7 @@ export const styles = () => ({
     position: 'inherit',
     paddingLeft: 0,
     minHeight: 15,
-    width: 321,
+    width: 'auto',
   },
   content: {
     margin: 0,

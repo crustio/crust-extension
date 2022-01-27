@@ -98,7 +98,7 @@ class App extends Component {
           showUserId: false,
         };
       }
-      if (prevProps.page === CONNECT_REQUEST_PAGE || prevProps.page === DAPP_REQUESTS_PAGE) {
+      if (prevProps.page === CONNECT_REQUEST_PAGE) {
         return {
           showHeader: true, // no change
           showLogo: true,
@@ -132,6 +132,17 @@ class App extends Component {
         };
       }
       if (prevProps.page === MANAGE_ACCOUNT_PAGE) {
+        return {
+          showHeader: false, // no change
+          showLogo: false,
+          showBanner: false,
+          showNetwork: false,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: false,
+        };
+      }
+      if (prevProps.page === DAPP_REQUESTS_PAGE) {
         return {
           showHeader: false, // no change
           showLogo: false,

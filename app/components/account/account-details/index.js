@@ -48,6 +48,7 @@ export default class AccountDetails extends Component {
             className="account-address clickable-icon"
             onCopyAddress={onCopyAddress}
             address={address}
+            style={{ color: colorTheme.text.secondary }}
           />
         )}
       </div>
