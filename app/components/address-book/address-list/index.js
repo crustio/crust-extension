@@ -17,6 +17,7 @@ class AddressList extends Component {
       handelChangeToAddress,
       theme,
       network,
+      colorTheme,
       ...otherProps
     } = this.props;
     return (
@@ -40,6 +41,7 @@ class AddressList extends Component {
               handleListItemAvatarClick={handelChangeToAddress}
               handleListItemClick={handelChangeToAddress}
               network={network}
+              colorTheme={colorTheme}
             />
           ))}
         </List>

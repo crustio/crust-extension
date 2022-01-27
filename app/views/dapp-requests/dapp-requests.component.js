@@ -10,6 +10,8 @@ import Send from '../../components/dapp/send';
 import SignMessage from '../../components/dapp/sign-message';
 import UpMetadata from '../../components/dapp/up-metadata';
 import { createTxnUI } from '../../services/wallet-service';
+import { colorTheme } from '../../../lib/constants/colors';
+
 import './styles.css';
 
 class DAppRequests extends Component {
@@ -77,7 +79,7 @@ class DAppRequests extends Component {
 
   renderRequests() {
     const {
-      requests, accounts, balances, t
+      requests, accounts, balances, network, t
     } = this.props;
     // Use for toggle
     const { isInfoExpanded, errorText, password } = this.state;
@@ -112,6 +114,7 @@ class DAppRequests extends Component {
                   password={password}
                   errorText={errorText}
                   handleOnChange={this.handleOnChange}
+                  colorTheme={colorTheme[network.value]}
                 />
               );
             case RequestType.SIGN_MESSAGE:
@@ -134,6 +137,7 @@ class DAppRequests extends Component {
                   password={password}
                   errorText={errorText}
                   handleOnChange={this.handleOnChange}
+                  colorTheme={colorTheme[network.value]}
                   t={t}
                 />
               );
@@ -150,6 +154,7 @@ class DAppRequests extends Component {
                   onCopyData={this.onCopyData}
                   className="dapp-requests-card"
                   errorText={errorText}
+                  colorTheme={colorTheme[network.value]}
                   t={t}
                 />
               );
@@ -162,10 +167,14 @@ class DAppRequests extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, network } = this.props;
     return (
       <div>
-        <SubHeader title={t('Pending Requests')} isBackIcon />
+        <SubHeader
+          title={t('Pending Requests')}
+          isBackIcon
+          colorTheme={colorTheme[network.value]}
+        />
         {this.props.requests && this.renderRequests()}
       </div>
     );

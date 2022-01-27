@@ -29,6 +29,7 @@ export default class AccountPanel extends Component {
       inputRef,
       colorTheme,
       network,
+      onCreateAccountClick,
       ...otherProps
     } = this.props;
 
@@ -68,6 +69,8 @@ export default class AccountPanel extends Component {
           show={showModal}
           colorTheme={colorTheme}
           handleCancel={this.handleCancel}
+          handleTopClick={onCreateAccountClick}
+          handleBottomClick={null}
           topButton="Create Account"
           bottomButton="Import Account"
           network={network}

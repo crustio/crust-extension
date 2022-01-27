@@ -14,6 +14,7 @@ import {
   ADD_ADDRESS,
   REMOVE,
 } from '../../constants/options';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class AddressBook extends Component {
@@ -119,6 +120,7 @@ class AddressBook extends Component {
           showSettings={showSettings}
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
           isBackIcon
+          colorTheme={colorTheme[network.value]}
         />
         <div className="manage-address-book">
           <div className="manage-address-book-container">
@@ -133,6 +135,7 @@ class AddressBook extends Component {
                 onCopyAddress={this.onCopyAddress}
                 handelChangeToAddress={this.handelChangeToAddress}
                 network={network}
+                colorTheme={colorTheme[network.value]}
               />
             ) : (
               <div className="empty-address-book-container">

@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
   requests: state.dAppReducer.requests,
   accounts: state.accountReducer.accounts,
   balances: state.accountReducer.balances,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {

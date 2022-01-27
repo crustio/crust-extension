@@ -12,6 +12,7 @@ import { changePage, updateBackupPage } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
 import { resetToAddress } from '../../actions/address-book';
 import { getUnits } from '../../actions/network';
+import { addAccount } from '../manage-account/actions';
 
 const mapStateToProps = state => ({
   accounts: state.accountReducer.accounts,
@@ -42,6 +43,7 @@ const mapDispatchToProps = {
   connectionError,
   onTokenSelected,
   lockApp,
+  addAccount,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

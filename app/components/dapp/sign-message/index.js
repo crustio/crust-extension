@@ -22,6 +22,7 @@ const Summary = props => (
       account={props.account}
       balance={props.balance}
       onCopyAddress={props.onCopyAddress}
+      colorTheme={props.colorTheme}
     />
   </div>
 );
@@ -55,6 +56,7 @@ export default class SignMessage extends Component {
       password,
       handleOnChange,
       errorText,
+      colorTheme,
       t,
       ...otherProps
     } = this.props;
@@ -64,15 +66,16 @@ export default class SignMessage extends Component {
           isBelowExpandIcon
           expanded={isSignMessageExpanded}
           handleChange={handleSignMessageExpansion}
-          summary={(
+          summary={
             <Summary
               t={t}
               className="sign-message-summary-container"
               account={account}
               balance={balance}
               onCopyAddress={onCopyAddress}
+              colorTheme={colorTheme}
             />
-          )}
+          }
         >
           <Disclaimer
             className="sign-message-disclaimer"

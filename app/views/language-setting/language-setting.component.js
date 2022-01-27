@@ -6,6 +6,7 @@ import './styles.css';
 import * as NavConstants from '../../constants/navigation';
 import { CHINESE, ENGLISH } from '../../constants/language';
 import CrustRadioButtonGroup from '../../components/common/crust-radio-button-group';
+import { colorTheme } from '../../../lib/constants/colors';
 
 class LanguageSetting extends Component {
   constructor(props) {
@@ -33,7 +34,9 @@ class LanguageSetting extends Component {
   };
 
   render() {
-    const { t, i18n, language } = this.props;
+    const {
+      t, i18n, language, network
+    } = this.props;
     const options = [
       { value: ENGLISH, text: t('English') },
       { value: CHINESE, text: t('Chinese') },
@@ -44,6 +47,7 @@ class LanguageSetting extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Language Setting')}
           backBtnOnClick={this.onClick}
+          colorTheme={colorTheme[network.value]}
           isBackIcon
         />
         <div className="language-setting-option-container">

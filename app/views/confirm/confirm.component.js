@@ -5,6 +5,7 @@ import ConfirmForm from '../../components/confirm/confirm-form';
 import SubHeader from '../../components/common/sub-header';
 import { CREATE_ADDRESS_BOOK_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import { shortenAddress } from '../../services/wallet-service';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class Confirm extends Component {
@@ -67,7 +68,7 @@ class Confirm extends Component {
   };
 
   render() {
-    const { confirmDetails, t } = this.props;
+    const { confirmDetails, network, t } = this.props;
     const { errorText, password } = this.state;
     const theme = 'substrate';
     return (
@@ -76,6 +77,7 @@ class Confirm extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '18px' }} />}
           title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
+          colorTheme={colorTheme[network.value]}
           isBackIcon
         />
         <ConfirmForm

@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
   account: state.accountReducer.account,
   tokens: state.dashboardReducer.tokens,
   language: state.appStateReducer.language,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {

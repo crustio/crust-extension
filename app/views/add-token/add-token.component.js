@@ -4,6 +4,7 @@ import SubHeader from '../../components/common/sub-header';
 import FooterButton from '../../components/common/footer-button-old';
 import CrustInput from '../../components/common/crust-input';
 import { DASHBOARD_PAGE } from '../../constants/navigation';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 export default class AddToken extends Component {
@@ -66,6 +67,7 @@ export default class AddToken extends Component {
     const {
       tname, propName, tokenLabel, tokenError, tokenErrorMessage
     } = this.state;
+    const { network } = this.props;
 
     return (
       <div>
@@ -74,6 +76,7 @@ export default class AddToken extends Component {
           title="Add Token"
           backBtnOnClick={this.onClick}
           isBackIcon
+          colorTheme={colorTheme[network.value]}
         />
         <div className="token-add-container">
           <CrustInput

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Clear from '@material-ui/icons/Clear';
 import SubHeader from '../../components/common/sub-header';
 import CustomNetworkForm from '../../components/network/custom-network-form';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 export default class CustomNetwork extends Component {
@@ -43,6 +44,7 @@ export default class CustomNetwork extends Component {
   render() {
     const {
       customNetworkError: { customNetworkIsValid, customNetworkErrorMessage },
+      network,
     } = this.props;
     const { url } = this.state;
     return (
@@ -52,6 +54,7 @@ export default class CustomNetwork extends Component {
           title="Custom Network"
           backBtnOnClick={this.handleSubheaderBackBtn}
           isBackIcon
+          colorTheme={colorTheme[network.value]}
         />
         <CustomNetworkForm
           className="custom-network-form"

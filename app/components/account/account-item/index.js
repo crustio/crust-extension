@@ -16,6 +16,7 @@ class AccountItem extends Component {
       onAliasInputBlur,
       onAliasInputKeyPress,
       inputRef,
+      colorTheme,
       t,
       ...otherProps
     } = this.props;
@@ -44,6 +45,7 @@ class AccountItem extends Component {
           }}
           blockchain={account.blockchain}
           onCopyAddress={onCopyAddress}
+          colorTheme={colorTheme}
         />
         <BalanceDetails
           className="account-item-balance-section"

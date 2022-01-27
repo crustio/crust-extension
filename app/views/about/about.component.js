@@ -6,6 +6,7 @@ import FontRegular from '../../components/common/fonts/font-regular';
 import FooterButton from '../../components/common/footer-button';
 import './styles.css';
 import Link from '../../components/common/link';
+import { colorTheme } from '../../../lib/constants/colors';
 import * as NavConstants from '../../constants/navigation';
 
 class About extends Component {
@@ -36,7 +37,7 @@ class About extends Component {
   }
 
   render() {
-    const { manifest, t } = this.props;
+    const { manifest, network, t } = this.props;
     return (
       <div>
         <SubHeader
@@ -44,6 +45,7 @@ class About extends Component {
           title={t('About')}
           backBtnOnClick={this.onClick}
           isBackIcon
+          colorTheme={colorTheme[network.value]}
         />
         <div className="about-container">
           <FontRegular className="about-title" text={manifest.name} />

@@ -9,7 +9,12 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Wallet from '../../components/wallet';
-import { QR_CODE_PAGE, TOKEN_DETAILS_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
+import {
+  CREATE_ACCOUNT_PAGE,
+  QR_CODE_PAGE,
+  TOKEN_DETAILS_PAGE,
+  TRANSFER_PAGE,
+} from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import './styles.css';
@@ -112,6 +117,11 @@ class Dashboard extends Component {
     this.props.lockApp();
   };
 
+  onCreateAccountClick = async () => {
+    await this.props.addAccount();
+    this.props.changePage(CREATE_ACCOUNT_PAGE);
+  };
+
   render() {
     const {
       accounts,
@@ -159,6 +169,7 @@ class Dashboard extends Component {
               onCopyAddress={this.onCopyAddress}
               accountMenu={accountMenu}
               onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
+              onCreateAccountClick={this.onCreateAccountClick}
               style={{
                 color: colorTheme[network.value].text.secondary,
                 boxShadow: network.value === 'crust maxwell' ? 'none' : '',

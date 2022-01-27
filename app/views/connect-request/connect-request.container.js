@@ -15,6 +15,7 @@ const mapStateToProps = state => ({
   selectedAccount: state.connectRequestReducer.selectedAccount,
   title: state.connectRequestReducer.title,
   request: state.dAppReducer.request,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {

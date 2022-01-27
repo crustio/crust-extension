@@ -8,7 +8,15 @@ import { CRUST_MAXWELL_NETWORK, CRUST_NETWORK } from '../../../../lib/constants/
 
 function ModalWithThreeButton(props) {
   const {
-    show, colorTheme, handleCancel, topButton, bottomButton, network, classes
+    show,
+    colorTheme,
+    handleCancel,
+    topButton,
+    bottomButton,
+    handleTopClick,
+    handleBottomClick,
+    network,
+    classes,
   } = props;
 
   const { t } = useTranslation();
@@ -30,6 +38,7 @@ function ModalWithThreeButton(props) {
           <ButtonCustom
             color={colorTheme.button.primary.text}
             background={colorTheme.button.primary.main}
+            onClick={handleTopClick}
           >
             {t(topButton)}
           </ButtonCustom>
@@ -38,6 +47,7 @@ function ModalWithThreeButton(props) {
           <ButtonCustom
             color={colorTheme.button.secondary.text}
             background={colorTheme.button.secondary.main}
+            onClick={handleBottomClick}
           >
             {t(bottomButton)}
           </ButtonCustom>

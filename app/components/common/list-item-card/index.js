@@ -7,7 +7,6 @@ import ReactTooltip from 'react-tooltip';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { MoreHorizIcon } from '../icon';
-import CrustMenu from '../crust-menu';
 import ClickToCopyAddress from '../click-to-copy-address';
 import ModalWithThreeButton from '../modal-with-three-button';
 import './styles.css';
