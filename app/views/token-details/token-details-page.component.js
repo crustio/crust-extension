@@ -110,7 +110,9 @@ class TokenDetailsPage extends Component {
             onAliasInputKeyPress={this.handleOnKeyPress}
             onCopyAddress={this.onCopyAddress}
             accountMenu={accountMenu}
+            colorTheme={colorTheme[network.value]}
             onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
+            network={network}
           />
           <TokenDetails
             unit={token.tokenSymbol}
@@ -132,6 +134,7 @@ class TokenDetailsPage extends Component {
           isLinkToFaucet={isLinkToFaucet}
           transactions={transDisplay}
           listHeight="280px"
+          colorTheme={colorTheme[network.value]}
         />
       </div>
     );

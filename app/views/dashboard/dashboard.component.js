@@ -252,6 +252,7 @@ class Dashboard extends Component {
                 network={network}
                 isLinkToFaucet={isLinkToFaucet}
                 transactions={transactions}
+                colorTheme={colorTheme[network.value]}
               />
             )}
           </>

@@ -7,7 +7,13 @@ import './styles.css';
 class Transaction extends Component {
   render() {
     const {
-      transactions, isLinkToFaucet, network, t, listHeight, ...otherProps
+      transactions,
+      isLinkToFaucet,
+      network,
+      t,
+      listHeight,
+      colorTheme,
+      ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -17,6 +23,7 @@ class Transaction extends Component {
             style={{ height: listHeight || '230px' }}
             className="transaction-list-container"
             transactions={transactions}
+            colorTheme={colorTheme}
           />
         ) : (
           <TransactionMessage
