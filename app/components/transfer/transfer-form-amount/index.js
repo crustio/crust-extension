@@ -65,6 +65,8 @@ class TransferFormAmount extends Component {
                   position: 'relative',
                   cursor: 'pointer',
                   color: colorTheme.text.secondary,
+                  fontSize: 14,
+                  width: 32,
                 }}
                 onClick={this.onClickMax}
               />
