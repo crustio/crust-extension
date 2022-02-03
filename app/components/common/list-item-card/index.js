@@ -10,6 +10,7 @@ import { MoreHorizIcon } from '../icon';
 import ClickToCopyAddress from '../click-to-copy-address';
 import ModalWithThreeButton from '../modal-with-three-button';
 import './styles.css';
+import { EXPORT_ACCOUNT, REMOVE } from '../../../constants/options';
 
 class ListItemCard extends Component {
   state = {
@@ -32,6 +33,14 @@ class ListItemCard extends Component {
       };
     }
     return balObj;
+  };
+
+  handleTopClick = async () => {
+    await this.props.onMoreMenuOptionsChange(REMOVE, this.props.listItem);
+  };
+
+  handleBottomClick = async () => {
+    await this.props.onMoreMenuOptionsChange(EXPORT_ACCOUNT, this.props.listItem);
   };
 
   render() {
@@ -103,6 +112,10 @@ class ListItemCard extends Component {
           <ModalWithThreeButton
             show={showModal}
             colorTheme={colorTheme}
+            firstOption={EXPORT_ACCOUNT}
+            secondOption={REMOVE}
+            handleTopClick={this.handleTopClick}
+            handleBottomClick={this.handleBottomClick}
             handleCancel={this.handleCancel}
             topButton="Remove"
             bottomButton="Export Account"

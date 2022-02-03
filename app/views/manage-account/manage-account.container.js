@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ManageAccount from './manage-account.component';
-import { changePage, updateBackupPage } from '../../containers/actions';
+import { changePage, updateBackupPage, updateAppLoading } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
 import {
   addAccount,
@@ -36,6 +36,7 @@ const mapDispatchToProps = {
   setNetworkMode,
   lockApp,
   updateCurrentTab,
+  updateAppLoading,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAccount);

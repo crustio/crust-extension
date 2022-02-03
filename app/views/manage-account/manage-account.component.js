@@ -34,6 +34,7 @@ class ManageAccount extends Component {
     this.state = {
       isOpen: false,
       labels: ['My Account', 'Settings'],
+      allowUpdate: true,
     };
   }
 
@@ -109,7 +110,13 @@ class ManageAccount extends Component {
 
   handleOptionsChange = (e, option) => {
     if (option.value === 'network_mode') {
+      this.props.updateAppLoading(true);
+      this.setState({ allowUpdate: false });
       this.props.setNetworkMode(!this.props.isOfflineMode);
+      setTimeout(() => {
+        this.props.updateAppLoading(false);
+        this.setState({ allowUpdate: true });
+      }, 1000);
     } else if (option.value === 'lock') {
       this.props.lockApp();
     } else {
@@ -122,7 +129,7 @@ class ManageAccount extends Component {
     const {
       accounts, account, t, language, isOfflineMode, currentTab, network
     } = this.props;
-    const { isOpen, labels } = this.state;
+    const { isOpen, labels, allowUpdate } = this.state;
     const theme = 'substrate';
     const options = accounts.length > 1
       ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => ({ ...o, text: t(o.text) }))
@@ -204,7 +211,7 @@ class ManageAccount extends Component {
                   <SettingsList
                     className="accounts-container"
                     options={AccountOptions}
-                    onOptionsChange={this.handleOptionsChange}
+                    onOptionsChange={allowUpdate ? this.handleOptionsChange : null}
                     colorTheme={colorTheme[network.value]}
                   />
                 ) : null}
