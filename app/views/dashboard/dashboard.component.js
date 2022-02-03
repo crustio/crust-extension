@@ -16,7 +16,10 @@ import {
   TRANSFER_PAGE,
 } from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
-import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
+import {
+  copyAccountMessage,
+  getTransfersWithMoment,
+} from '../../../lib/services/static-message-factory-service';
 import './styles.css';
 import { RENAME } from '../../constants/options';
 import TokenList from '../../components/token-list';
@@ -47,12 +50,21 @@ const MDialogTitle = withStyles({
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+    this.timer = setInterval(() => this.props.fetchTransactionHistory(this.props.network), 30000);
     this.textInput = React.createRef();
     this.state = {
       labels: ['Assets', 'Activities'],
       value: 0,
       showOfflineDescription: false,
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchTransactionHistory(this.props.network);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   handleSend = () => {
@@ -127,7 +139,7 @@ class Dashboard extends Component {
       accounts,
       account,
       balances,
-      transactions,
+      transactionHistory,
       balance: { balanceFormatted },
       isLinkToFaucet,
       network,
@@ -250,8 +262,9 @@ class Dashboard extends Component {
               <Transaction
                 className="transaction-container"
                 network={network}
+                account={account}
                 isLinkToFaucet={isLinkToFaucet}
-                transactions={transactions}
+                transactions={getTransfersWithMoment(transactionHistory)}
                 colorTheme={colorTheme[network.value]}
               />
             )}

@@ -6,7 +6,7 @@ import './styles.css';
 export default class TransactionItemDetails extends Component {
   render() {
     const {
-      amount, address, moment, status, color, colorTheme, ...otherProps
+      amount, address, moment, colorTheme, ...otherProps
     } = this.props;
     return (
       <div className="transfer-item-details" {...otherProps}>
@@ -21,8 +21,6 @@ export default class TransactionItemDetails extends Component {
         <TransactionItemStatus
           address={address}
           moment={moment}
-          status={status}
-          color={color}
           className="transaction-item-info-container"
           style={{ color: colorTheme.text.quaternary }}
         />

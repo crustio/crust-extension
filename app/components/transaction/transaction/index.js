@@ -8,6 +8,7 @@ class Transaction extends Component {
   render() {
     const {
       transactions,
+      account,
       isLinkToFaucet,
       network,
       t,
@@ -20,7 +21,8 @@ class Transaction extends Component {
         {transactions.length > 0 ? (
           <TransactionItems
             network={network}
-            style={{ height: listHeight || '230px' }}
+            account={account}
+            style={{ height: listHeight || '350px' }}
             className="transaction-list-container"
             transactions={transactions}
             colorTheme={colorTheme}

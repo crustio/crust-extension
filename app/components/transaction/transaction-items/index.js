@@ -6,16 +6,17 @@ import './styles.css';
 export default class TransactionItems extends Component {
   render() {
     const {
-      transactions, network, colorTheme, ...otherProps
+      transactions, network, account, colorTheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
         {transactions.map(transaction => (
-          <div key={transaction.date}>
+          <div key={transaction.block_timestamp}>
             <TransactionItem
               className="transaction-item"
               transaction={transaction}
               network={network}
+              account={account}
               colorTheme={colorTheme}
               style={{
                 background: colorTheme.card,
