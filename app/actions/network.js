@@ -111,6 +111,7 @@ export const propagateUpdates = async dispatch => {
   dispatch(AccountActions.setInitialBalance);
   await dispatch(AccountActions.fetchAndSetBalances);
   dispatch(getTransactions);
+  dispatch(fetchTransactionHistory);
   dispatch(getUnits());
   dispatch(getTokens);
   dispatch(updateAppLoading(false));

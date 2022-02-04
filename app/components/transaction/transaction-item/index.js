@@ -27,7 +27,15 @@ export default class TransactionItem extends Component {
                   style={{ color: colorTheme.text.primary }}
                 />
                 <TransactionItemDetails
-                  amount={`Send ${transaction.amount}`}
+                  amount={`Send ${transaction.amount}${
+                    transaction.module === 'balances'
+                      ? 'CRU'
+                      : transaction.module === 'csm'
+                        ? 'CSM'
+                        : transaction.module === 'candy'
+                          ? 'candy'
+                          : ''
+                  }`}
                   address={transaction.to}
                   moment={transaction.modifiedDate}
                   colorTheme={colorTheme}
@@ -40,7 +48,15 @@ export default class TransactionItem extends Component {
                   style={{ color: colorTheme.text.primary }}
                 />
                 <TransactionItemDetails
-                  amount={`Received ${transaction.amount}`}
+                  amount={`Received ${transaction.amount}${
+                    transaction.module === 'balances'
+                      ? 'CRU'
+                      : transaction.module === 'csm'
+                        ? 'CSM'
+                        : transaction.module === 'candy'
+                          ? 'candy'
+                          : ''
+                  }`}
                   address={transaction.from}
                   moment={transaction.modifiedDate}
                   colorTheme={colorTheme}

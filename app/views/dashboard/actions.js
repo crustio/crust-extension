@@ -137,15 +137,15 @@ export const lockApp = () => async dispatch => {
   }
 };
 
-const fetchTransactionHistoryByPage = async (page, network) => {
+const fetchTransactionHistoryByPage = async (page, network, address) => {
   const body = {
     row: 10,
     page,
-    address: 'cTMp3aCiDSjxQWUAKzvnifonKbNTfG6QQC8dmE5xVwgyPzJEg',
+    address,
   };
   const headers = {
     'Content-Type': 'application/json',
-    'x-api-key': '5962d7416ae2a5eaf4de837972c11606',
+    'x-api-key': process.env.REACT_APP_SUBSCAN_KEY,
   };
 
   const result = await Axios.post(`https://${network}.api.subscan.io/api/scan/transfers`, body, {
@@ -155,7 +155,12 @@ const fetchTransactionHistoryByPage = async (page, network) => {
   return result;
 };
 
-export const fetchTransactionHistory = network => async dispatch => {
+export const fetchTransactionHistory = () => async (dispatch, getState) => {
+  const {
+    account: { address },
+  } = getState().accountReducer;
+  const { network } = getState().networkReducer;
+
   let startPage = 0;
   const response = [];
   const networkUrl = network.value === CRUST_MAXWELL_NETWORK.value
@@ -165,7 +170,7 @@ export const fetchTransactionHistory = network => async dispatch => {
       : '';
   while (true) {
     // eslint-disable-next-line
-    const result = await fetchTransactionHistoryByPage(startPage, networkUrl);
+    const result = await fetchTransactionHistoryByPage(startPage, networkUrl, address);
     if (result.data.data) {
       if (!result.data.data.transfers) {
         break;

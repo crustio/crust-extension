@@ -1,7 +1,7 @@
 import * as RequestType from '../../lib/constants/request-types';
 import * as AppActions from '../containers/actions';
 import * as AccountActions from './account';
-import { getTransactions, getTokens } from '../views/dashboard/actions';
+import { getTransactions, getTokens, fetchTransactionHistory } from '../views/dashboard/actions';
 import {
   setNetwork, getUnits, getDeveloperMode, restoreNetwork
 } from './network';
@@ -33,6 +33,7 @@ const openDashboard = () => async dispatch => {
   }
 
   await dispatch(getTransactions);
+  await dispatch(fetchTransactionHistory);
   dispatch(getUnits());
   await promiseTimeout(3000, dispatch(getTokens), {});
   dispatch(AppActions.updateIsAppOnBoarded(true));

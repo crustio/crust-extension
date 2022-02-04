@@ -60,7 +60,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchTransactionHistory(this.props.network);
+    this.props.fetchTransactionHistory();
   }
 
   componentWillUnmount() {

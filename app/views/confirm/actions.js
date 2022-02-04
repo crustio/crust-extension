@@ -3,7 +3,7 @@ import { clearTransferDetails } from '../transfer/actions';
 import { DASHBOARD_PAGE } from '../../constants/navigation';
 import { createToast } from '../../constants/toast';
 import { Transaction, Account } from '../../api';
-import { getTransactions } from '../dashboard/actions';
+import { getTransactions, fetchTransactionHistory } from '../dashboard/actions';
 
 export const submitTransaction = (confirmDetails, password) => async dispatch => {
   try {
@@ -11,6 +11,7 @@ export const submitTransaction = (confirmDetails, password) => async dispatch =>
     await Account.verifyPassword(password);
     const { result } = await Transaction.submitTransaction(confirmDetails, password);
     dispatch(getTransactions);
+    dispatch(fetchTransactionHistory);
     dispatch(changePage(DASHBOARD_PAGE));
     dispatch(clearTransferDetails());
     dispatch(updateAppLoading(false));
