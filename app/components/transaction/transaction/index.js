@@ -7,16 +7,25 @@ import './styles.css';
 class Transaction extends Component {
   render() {
     const {
-      transactions, isLinkToFaucet, network, t, listHeight, ...otherProps
+      transactions,
+      account,
+      isLinkToFaucet,
+      network,
+      t,
+      listHeight,
+      colorTheme,
+      ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
         {transactions.length > 0 ? (
           <TransactionItems
             network={network}
-            style={{ height: listHeight || '230px' }}
+            account={account}
+            style={{ height: listHeight || '350px' }}
             className="transaction-list-container"
             transactions={transactions}
+            colorTheme={colorTheme}
           />
         ) : (
           <TransactionMessage

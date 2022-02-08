@@ -9,6 +9,7 @@ import {
 } from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AccountList from '../../components/account-list';
+import SettingsList from '../../components/settings-list';
 import DraggableDialog from '../../components/common/confirm-dialog';
 import {
   ACCOUNT_MANAGEMENT_MENU_OPTIONS,
@@ -18,8 +19,12 @@ import {
   IMPORT_JSON,
   IMPORT_PHRASE,
   REMOVE,
+  OPTIONS as AccountOptions,
 } from '../../constants/options';
+import CrustTabs from '../../components/common/crust-tabs';
+import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { ENGLISH } from '../../constants/language';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class ManageAccount extends Component {
@@ -28,6 +33,8 @@ class ManageAccount extends Component {
     this.textInput = React.createRef();
     this.state = {
       isOpen: false,
+      labels: ['My Account', 'Settings'],
+      allowUpdate: true,
     };
   }
 
@@ -62,8 +69,7 @@ class ManageAccount extends Component {
   handleOnSubMenuOptionsChange = async option => {
     this.props.updateBackupPage(this.props.page);
     if (option.value === ADD_ACCOUNT.value) {
-      await this.props.addAccount();
-      this.props.changePage(CREATE_ACCOUNT_PAGE);
+      this.handleAddAccount();
     } else if (option.value === IMPORT_PHRASE.value) {
       await this.props.resetSeedWordsBeforeImport();
       this.props.changePage(CREATE_ACCOUNT_PAGE);
@@ -93,11 +99,37 @@ class ManageAccount extends Component {
     this.setState({ isOpen: false });
   };
 
+  handleTabChange = (e, value) => {
+    this.props.updateCurrentTab(value);
+  };
+
+  handleAddAccount = async () => {
+    await this.props.addAccount();
+    this.props.changePage(CREATE_ACCOUNT_PAGE);
+  };
+
+  handleOptionsChange = (e, option) => {
+    if (option.value === 'network_mode') {
+      this.props.updateAppLoading(true);
+      this.setState({ allowUpdate: false });
+      this.props.setNetworkMode(!this.props.isOfflineMode);
+      setTimeout(() => {
+        this.props.updateAppLoading(false);
+        this.setState({ allowUpdate: true });
+      }, 1000);
+    } else if (option.value === 'lock') {
+      this.props.lockApp();
+    } else {
+      this.props.updateBackupPage(this.props.page);
+      this.props.changePage(option.value);
+    }
+  };
+
   render() {
     const {
-      accounts, account, t, language
+      accounts, account, t, language, isOfflineMode, currentTab, network
     } = this.props;
-    const { isOpen } = this.state;
+    const { isOpen, labels, allowUpdate } = this.state;
     const theme = 'substrate';
     const options = accounts.length > 1
       ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => ({ ...o, text: t(o.text) }))
@@ -105,48 +137,100 @@ class ManageAccount extends Component {
         ...o,
         text: o.text,
       }));
+    const tLabels = labels.map(l => t(l));
+    // eslint-disable-next-line no-restricted-syntax
+    for (const option of AccountOptions) {
+      if (option.value === 'network_mode') {
+        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set To Offline Mode';
+      }
+    }
 
     return (
-      <div className="manage-accounts-root-container">
+      <div
+        className="manage-accounts-root-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
-          title={t('Account Management')}
+          title={t('Account')}
           backBtnOnClick={this.handleSubheaderBackBtn}
           subMenu={ACCOUNT_MANAGEMENT_MENU_OPTIONS}
           showSettings
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
           menuWidth={language === ENGLISH ? 150 : undefined}
+          isBackIcon
+          colorTheme={colorTheme[network.value]}
         />
-        <div className="manage-accounts">
-          <div className="manage-accounts-container">
-            {accounts.length > 0 ? (
-              <AccountList
-                className="accounts-container"
-                accounts={accounts}
-                currentAccount={account}
-                isMoreVertIconVisible
-                moreMenu={options}
-                onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
-                theme={theme}
-                onCopyAddress={this.onCopyAddress}
-                handleChangeAccount={this.handleChangeAccount}
-              />
-            ) : null}
-            <div>
-              <DraggableDialog
-                isOpen={isOpen}
-                handleClose={this.handleCloseDialog}
-                handleYes={this.handleYes}
-                noText={t('No')}
-                yesText={t('Yes')}
-                title={t('Remove account')}
-                msg={t(
-                  'Please make sure you have saved the seed phrase or private key for this account before continuing.',
-                )}
-              />
+        <>
+          <CrustTabs
+            value={currentTab}
+            onChange={this.handleTabChange}
+            labels={tLabels}
+            parent="account"
+            style={{ background: colorTheme[network.value].card }}
+            network={network}
+          />
+          {currentTab === 0 && (
+            <div className="manage-accounts">
+              <div className="manage-accounts-container">
+                {accounts.length > 0 ? (
+                  <AccountList
+                    className="accounts-container"
+                    accounts={accounts}
+                    currentAccount={account}
+                    isMoreVertIconVisible
+                    moreMenu={options}
+                    onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
+                    theme={theme}
+                    onCopyAddress={this.onCopyAddress}
+                    handleChangeAccount={this.handleChangeAccount}
+                    colorTheme={colorTheme[network.value]}
+                    network={network}
+                  />
+                ) : null}
+                <div>
+                  <DraggableDialog
+                    isOpen={isOpen}
+                    handleClose={this.handleCloseDialog}
+                    handleYes={this.handleYes}
+                    noText={t('No')}
+                    yesText={t('Yes')}
+                    title={t('Remove account')}
+                    msg={t(
+                      'Please make sure you have saved the seed phrase or private key for this account before continuing.',
+                    )}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          )}
+          {currentTab === 1 && (
+            <div className="manage-accounts">
+              <div className="manage-accounts-container">
+                {accounts.length > 0 ? (
+                  <SettingsList
+                    className="accounts-container"
+                    options={AccountOptions}
+                    onOptionsChange={allowUpdate ? this.handleOptionsChange : null}
+                    colorTheme={colorTheme[network.value]}
+                  />
+                ) : null}
+              </div>
+            </div>
+          )}
+        </>
+        {currentTab === 0 && (
+          <FooterWithTwoButton
+            onNextClick={this.handleAddAccount}
+            onBackClick={null} //Currently we need to clear import method.
+            backButtonName={t('Import Account')}
+            nextButtonName={t('Create Account')}
+            nextColor={colorTheme[network.value].button.primary.text}
+            nextBackground={colorTheme[network.value].button.primary.main}
+            backColor={colorTheme[network.value].button.secondary.text}
+            backBackground={colorTheme[network.value].button.secondary.main}
+          />
+        )}
       </div>
     );
   }

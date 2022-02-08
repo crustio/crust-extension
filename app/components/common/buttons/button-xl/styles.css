@@ -1,5 +1,5 @@
 .button-xl button {
-  font-size: 14px;
+  font-size: 18px;
   font-family: "Roboto-Regular";
   font-style: normal;
   height: 38px;
@@ -23,4 +23,10 @@
 
 .button-xl-custom1 button {
   color: white !important;
+  background: #FF8D00;
+}
+
+.button-xl-custom1 button:hover, .button-xl-custom1 button[hover] {
+  background: white;
+  color: #FF8D00 !important;
 }

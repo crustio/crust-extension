@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import CrustUnlockPassword from '../../components/common/password/crust-unlock-password';
 import FontRegular from '../../components/common/fonts/font-regular';
+import FooterButton from '../../components/common/footer-button';
 import LogoBig from '../../images/crust-logo-big.svg';
 import './styles.css';
 
@@ -69,7 +70,7 @@ class SignIn extends Component {
               className="sign-in-password-container"
               onChange={this.handleOnChange}
               password={password}
-              placeholder={t('Unlock Password')}
+              placeholder={t('Password')}
               handleUnlock={this.handleClick}
             />
           </div>
@@ -78,8 +79,8 @@ class SignIn extends Component {
             <span className="error-msg">{t(errorText)}</span>
           ) : (
             <span className="place-holder"> </span>
-          )}
-          <FooterButton onClick={this.handleClick} name={t('Unlock')} /> */}
+          )} */}
+          <FooterButton onClick={this.handleClick} name={t('Unlock')} custom />
         </div>
       </div>
     );

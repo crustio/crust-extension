@@ -26,13 +26,17 @@ class Network extends Component {
   render() {
     const { anchorEl } = this.state;
     const {
-      networks, network, onNetworkChange, ...otherProps
+      networks, network, onNetworkChange, colorTheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
         <div className="network-text-container" onClick={this.handleClick}>
-          <FontRegular className="network-text" text={network.text} />
-          <ChevronDown size={14} color="#333333" />
+          <FontRegular
+            className="network-text"
+            text={network.text}
+            style={{ color: colorTheme.text.secondary }}
+          />
+          <ChevronDown size={14} color={colorTheme.text.secondary} />
         </div>
         <CrustMenu
           selected={network}

@@ -6,6 +6,7 @@ import CreateContactForm from '../../components/address-book/create-contact-form
 import CrustValidator from '../../utils/crust-validator';
 import { DASHBOARD_PAGE } from '../../constants/navigation';
 import validator from '../../utils/crust-validator/validator';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 const FnameRequiredErrorMessage = 'Firstname required';
@@ -205,6 +206,8 @@ class CreateAddressBook extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Address Book')}
           backBtnOnClick={this.handleSubheaderBackBtn}
+          isBackIcon
+          colorTheme={colorTheme[network.value]}
         />
         <CreateContactForm
           className="create-address-book-form"

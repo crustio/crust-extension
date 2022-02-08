@@ -7,6 +7,7 @@ import { trimUrl } from '../../services/wallet-service';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { SolidWallet, SolidPlug, File } from '../../components/common/icon';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 const DAppURL = ({ favIconUrl, url, ...otherProps }) => (
@@ -60,18 +61,16 @@ class ConnectRequest extends Component {
   }
 
   render() {
-    const { request, title, t } = this.props;
+    const {
+      request, title, network, t
+    } = this.props;
     const content = 'is requesting access to an account. Click Allow to grant access any account or click Deny to prevent access to any account.';
     return (
       <div>
-        <SubHeader title={t(title)} />
+        <SubHeader title={t(title)} isBackIcon colorTheme={colorTheme[network.value]} />
         {this.renderHeader()}
         <FontRegular
-          text={(
-            <div>
-              {`${request.request.metadata.url} ${t(content)}`}
-            </div>
-          )}
+          text={<div>{`${request.request.metadata.url} ${t(content)}`}</div>}
           className="connect-request-center connect-request-account-selection-header"
         />
         <FooterWithTwoButton

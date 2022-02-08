@@ -1,18 +1,13 @@
 
 .transfer-from-amount-input {
   flex: 1;
-  color: #858B9C !important;
+  border-radius: 12px;
 }
 
 .transfer-from-amount-input fieldset {
   border: 0;
   font-size: 14px;
-  border: 1px solid #C5CAD5;
-}
-
-.transfer-from-amount-input:focus-within fieldset {
-  background-color: transparent;
-  border: 1px solid #C5CAD5 !important;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.05);
 }
 
 .input-margin {
@@ -49,8 +44,9 @@
 
 .transfer-form-amount-dropdown {
   flex: 1;
-  border-radius: 8px;
-  border: 1px solid #C5CAD5;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.05);
 }
 
 .transfer-form-amount-input-container {
@@ -67,9 +63,9 @@
 }
 
 .transfer-form-amount-balance {
-  font-size: 12px;
+  font-size: 14px;
   color: #858B9C;
   width: 100%;
-  margin-left: 100px;
-  margin-top: 6px;
+  margin-left: 10px;
+  margin-top: 10px;
 }

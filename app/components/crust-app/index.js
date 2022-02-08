@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import classnames from 'classnames';
 import { Circle } from 'react-feather';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import CrustContainer from '../crust-container';
 import Header from '../common/header/header.component';
 import ViewSelector from '../view-selector';
@@ -10,14 +11,17 @@ import Network from '../network/network';
 import Options from '../options';
 import { NetworkDisconnectionIcon } from '../common/icon';
 import './styles.css';
-import CrustLogo from '../common/crust-logo';
 import { CHINESE } from '../../constants/language';
 import ValidatePasswordModal from '../validate-password/modal';
+import FontMedium from '../common/fonts/font-medium';
+import { colorTheme } from '../../../lib/constants/colors';
 
 export default class CrustApp extends Component {
   render() {
     const {
+      account,
       page,
+      changePage,
       isLoading,
       networks,
       network,
@@ -30,7 +34,9 @@ export default class CrustApp extends Component {
       showSettings,
       showHeader,
       showGrayHeader,
+      showUserId,
       onLogoClick,
+      onCopyAddress,
       options,
       onOptionsChange,
       isDeveloperMode,
@@ -42,8 +48,8 @@ export default class CrustApp extends Component {
 
     const CrustHeaderClassNames = classnames({
       'crust-header': showHeader,
-      'crust-header-banner': showHeader && showBanner && !showLogo && !showNetwork && !showSettings,
-      'crust-header-boarded': showHeader && !showBanner && showLogo && showNetwork && showSettings,
+      'crust-header-banner': showHeader && showBanner && !showLogo && !showNetwork && !showUserId,
+      'crust-header-boarded': showHeader && !showBanner && showLogo && showNetwork && showUserId,
       'crust-header-gray': showHeader && showGrayHeader,
       'display-none': !showHeader,
     });
@@ -60,24 +66,33 @@ export default class CrustApp extends Component {
       'crust-settings': showSettings,
       'display-none': !showSettings,
     });
+    const CrustUserIdClassNames = classnames({
+      'crust-settings': showUserId,
+      'display-none': !showUserId,
+    });
     const CrustConfigClassNames = classnames({
-      'crust-config': showNetwork && showSettings,
+      'crust-config': (showNetwork && showSettings) || (showNetwork && showUserId),
       'display-none': showBanner || !showNetwork,
     });
     return (
       <CrustContainer blocking={isLoading}>
         <div {...otherProps}>
-          <Header page={page} className={CrustHeaderClassNames}>
-            <div className="crust-row">
+          <Header
+            page={page}
+            className={CrustHeaderClassNames}
+            style={{ background: colorTheme[network.value].background }}
+          >
+            {/* <div className="crust-row">
               <CrustLogo className="crust-logo" />
               <div className="crust-header-text">Crust Wallet</div>
-            </div>
+            </div> */}
             <div className={CrustConfigClassNames}>
               {!isOfflineMode && (
                 <>
                   <NetworkDisconnectionIcon
                     title="Network unavailable"
                     className={CrustNetworkDisClassNames}
+                    colorTheme={colorTheme[network.value]}
                   />
                   <Network
                     networks={networks}
@@ -85,6 +100,8 @@ export default class CrustApp extends Component {
                     onNetworkChange={onNetworkChange}
                     className={CrustNetworkClassNames}
                     page={page}
+                    style={{ border: `1px solid ${colorTheme[network.value].border}` }}
+                    colorTheme={colorTheme[network.value]}
                   />
                 </>
               )}
@@ -104,13 +121,22 @@ export default class CrustApp extends Component {
               )}
               <Options
                 onToggleDeveloperMode={onToggleDeveloperMode}
-                options={options}
-                onOptionsChange={onOptionsChange}
                 className={CrustSettingsClassNames}
                 isDeveloperMode={isDeveloperMode}
                 page={page}
+                changePage={changePage}
                 menuWidth={language === CHINESE ? 120 : 170}
+                colorTheme={colorTheme[network.value]}
               />
+              <CopyToClipboard text={account ? account.address : ''}>
+                <FontMedium
+                  className={CrustUserIdClassNames}
+                  text={account ? account.alias : ''}
+                  page={page}
+                  onClick={onCopyAddress}
+                  colorTheme={colorTheme[network.value]}
+                />
+              </CopyToClipboard>
             </div>
           </Header>
           <ViewSelector page={page} />

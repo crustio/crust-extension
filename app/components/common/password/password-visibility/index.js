@@ -7,8 +7,12 @@ export default class PasswordVisibility extends Component {
       showPassword, showColor, hideColor, ...otherProps
     } = this.props;
     return (
-      <div {...otherProps}>
-        {showPassword ? <IconVisibility style={showColor} /> : <IconVisibilityOff style={hideColor} />}
+      <div {...otherProps} style={{ maxHeight: 24 }}>
+        {showPassword ? (
+          <IconVisibility style={showColor} />
+        ) : (
+          <IconVisibilityOff style={hideColor} />
+        )}
       </div>
     );
   }

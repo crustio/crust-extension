@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import QRCodeForm from '../../components/qr-code/qr-code-form';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class QRCode extends Component {
@@ -17,14 +18,23 @@ class QRCode extends Component {
   };
 
   render() {
-    const { account, t } = this.props;
+    const { account, network, t } = this.props;
     const theme = 'substrate';
     return (
-      <div className="qr-code-container">
+      <div
+        className="qr-code-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         <SubHeader
-          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
+          icon={
+            <ArrowBackIosOutlinedIcon
+              style={{ color: colorTheme[network.value].text.secondary, fontSize: '14px' }}
+            />
+          }
           title={t('Receive')}
           backBtnOnClick={this.handleSubheaderBackBtn}
+          isBackIcon
+          colorTheme={colorTheme[network.value]}
         />
         <QRCodeForm
           className="qr-code-form-container"
@@ -32,6 +42,8 @@ class QRCode extends Component {
           account={account}
           onCopyAddress={this.onCopy}
           onClick={this.handleSubheaderBackBtn}
+          colorTheme={colorTheme[network.value]}
+          style={{ background: colorTheme[network.value].background }}
         />
       </div>
     );

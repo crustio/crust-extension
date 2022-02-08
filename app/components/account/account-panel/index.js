@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import AccountDetails from '../account-details';
 import { WalletDropDownIcon } from '../../common/icon';
-import CrustMenu from '../../common/crust-menu';
+import ModalWithThreeButton from '../../common/modal-with-three-button';
 
 export default class AccountPanel extends Component {
   state = {
-    anchorEl: null,
+    showModal: false,
   };
 
   handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+    this.setState({ showModal: true });
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleCancel = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
-    const { anchorEl } = this.state;
+    const { showModal } = this.state;
     const {
       selectedAccount,
       onCopyAddress,
@@ -27,8 +27,12 @@ export default class AccountPanel extends Component {
       onAliasInputBlur,
       onAliasInputKeyPress,
       inputRef,
+      colorTheme,
+      network,
+      onCreateAccountClick,
       ...otherProps
     } = this.props;
+
     return (
       <div {...otherProps}>
         <AccountDetails
@@ -38,6 +42,7 @@ export default class AccountPanel extends Component {
           onCopyAddress={onCopyAddress}
           inputRef={inputRef}
           editMode={selectedAccount.editMode ? selectedAccount.editMode : false}
+          colorTheme={colorTheme}
           onAliasChange={event => {
             onAliasChange(event.target.value, selectedAccount);
           }}
@@ -54,18 +59,22 @@ export default class AccountPanel extends Component {
           }}
         />
         {accountMenu && accountMenu.length > 0 && (
-          <WalletDropDownIcon onClick={this.handleClick} className="account-list-icon" />
-        )}
-        {accountMenu && accountMenu.length > 0 && (
-          <CrustMenu
-            options={accountMenu}
-            onChange={option => {
-              onAccountMenuOptionsChange(option, selectedAccount);
-            }}
-            anchorEl={anchorEl}
-            onClose={this.handleClose}
+          <WalletDropDownIcon
+            onClick={this.handleClick}
+            className="account-list-icon"
+            colorTheme={colorTheme}
           />
         )}
+        <ModalWithThreeButton
+          show={showModal}
+          colorTheme={colorTheme}
+          handleCancel={this.handleCancel}
+          handleTopClick={onCreateAccountClick}
+          handleBottomClick={null}
+          topButton="Create Account"
+          bottomButton="Import Account"
+          network={network}
+        />
       </div>
     );
   }

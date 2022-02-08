@@ -2,13 +2,13 @@
   font-family: "Roboto-Medium";
   text-transform: none;
 }
-
+/* 
 .button-custom button:hover {
   background-color: #FF8D00 !important;
   color: white !important;
 }
 
 .button-custom1 button:hover {
-  background-color: #eee !important;
-  color: #858B9C !important;
-}
+  background-color: transparent !important;
+  color: black !important;
+} */

@@ -4,23 +4,25 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ReactTooltip from 'react-tooltip';
-import Avatar from '../identicon';
-import { MoreVertIcon } from '../icon';
-import CrustMenu from '../crust-menu';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import { MoreHorizIcon } from '../icon';
 import ClickToCopyAddress from '../click-to-copy-address';
+import ModalWithThreeButton from '../modal-with-three-button';
 import './styles.css';
+import { EXPORT_ACCOUNT, REMOVE } from '../../../constants/options';
 
 class ListItemCard extends Component {
   state = {
-    anchorEl: null,
+    showModal: false,
   };
 
   handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+    this.setState({ showModal: true });
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleCancel = () => {
+    this.setState({ showModal: false });
   };
 
   handleNullBalanceObject = (balObj, account) => {
@@ -31,6 +33,14 @@ class ListItemCard extends Component {
       };
     }
     return balObj;
+  };
+
+  handleTopClick = async () => {
+    await this.props.onMoreMenuOptionsChange(REMOVE, this.props.listItem);
+  };
+
+  handleBottomClick = async () => {
+    await this.props.onMoreMenuOptionsChange(EXPORT_ACCOUNT, this.props.listItem);
   };
 
   render() {
@@ -45,55 +55,71 @@ class ListItemCard extends Component {
       handleListItemAvatarClick,
       handleListItemClick,
       isMoreVertIconVisible,
+      isActive,
       theme,
+      colorTheme,
+      network,
       ...otherProps
     } = this.props;
-    const { anchorEl } = this.state;
+    const { showModal } = this.state;
     return (
       <div {...otherProps}>
         <ListItem>
           <ListItemAvatar onClick={event => handleListItemAvatarClick(event, listItem)}>
-            <Avatar
-              className="account-avatar"
-              onCopyAddress={onCopyAddress}
-              value={address}
-              theme={theme}
-              style={{ cursor: 'pointer !important' }}
-            />
+            {isActive ? (
+              <CheckCircleIcon
+                className="accout-card-icon"
+                style={{ color: colorTheme.icon.primary }}
+              />
+            ) : (
+              <RadioButtonUncheckedIcon
+                className="accout-card-icon"
+                style={{ color: colorTheme.icon.secondary }}
+              />
+            )}
           </ListItemAvatar>
           <ListItemText
             onClick={event => handleListItemClick(event, listItem)}
-            primary={(
+            primary={
               <span style={{ display: 'flex' }}>
-                <span className="account-card-text" data-tip={primaryText}>
+                <span
+                  className="account-card-text"
+                  data-tip={primaryText}
+                  style={{ color: colorTheme.text.primary }}
+                >
                   {primaryText}
                 </span>
                 <ReactTooltip effect="solid" place="bottom" />
               </span>
-            )}
+            }
             className={classes.primaryWidth}
-            secondary={(
+            secondary={
               <ClickToCopyAddress
                 className="account-address clickable-icon"
                 onCopyAddress={onCopyAddress}
                 address={address}
+                style={{ color: colorTheme.text.tertiary }}
               />
-            )}
+            }
           />
           {isMoreVertIconVisible && (
-            <MoreVertIcon
-              color="rgba(0, 0, 0, 1)"
+            <MoreHorizIcon
+              color={colorTheme.text.secondary}
               onClick={this.handleClick}
               className="more-list-icon"
             />
           )}
-          <CrustMenu
-            options={moreMenu}
-            onChange={option => {
-              onMoreMenuOptionsChange(option, listItem);
-            }}
-            anchorEl={anchorEl}
-            onClose={this.handleClose}
+          <ModalWithThreeButton
+            show={showModal}
+            colorTheme={colorTheme}
+            firstOption={EXPORT_ACCOUNT}
+            secondOption={REMOVE}
+            handleTopClick={this.handleTopClick}
+            handleBottomClick={this.handleBottomClick}
+            handleCancel={this.handleCancel}
+            topButton="Remove"
+            bottomButton="Export Account"
+            network={network}
           />
         </ListItem>
       </div>

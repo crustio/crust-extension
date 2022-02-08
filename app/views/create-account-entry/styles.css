@@ -16,7 +16,7 @@
 
 .entry-password-container {
   display: flex;
-  width: 321px;
+  width: auto;
   height: 45.82px;
   color: #858B9C
 }

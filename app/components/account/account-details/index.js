@@ -18,13 +18,19 @@ export default class AccountDetails extends Component {
       onAliasInputKeyPress,
       fontSize,
       inputRef,
+      colorTheme,
       ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
         {!editMode && (
           <div>
-            <FontRegular className="account-alias" text={alias} data-tip={alias} style={fontSize && { fontSize }} />
+            <FontRegular
+              className="account-alias"
+              text={alias}
+              data-tip={alias}
+              style={(fontSize && { fontSize }, { color: colorTheme.text.primary })}
+            />
             <ReactTooltip effect="solid" place="bottom" />
           </div>
         )}
@@ -42,6 +48,7 @@ export default class AccountDetails extends Component {
             className="account-address clickable-icon"
             onCopyAddress={onCopyAddress}
             address={address}
+            style={{ color: colorTheme.text.secondary }}
           />
         )}
       </div>

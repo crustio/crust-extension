@@ -20,19 +20,26 @@ export default class SubHeader extends Component {
 
   render() {
     const { anchorEl } = this.state;
+    const style = {
+      textAlign: `${this.props.align ? this.props.align : 'center'}`,
+      marginLeft: `${this.props.margin ? this.props.margin : 'none'}`,
+      color: this.props.colorTheme.text.primary,
+    };
     const {
-      icon, subMenu, onSubMenuOptionsChange, menuWidth
+      icon, subMenu, onSubMenuOptionsChange, menuWidth, isBackIcon
     } = this.props;
     return (
       <div className="sub-header-container">
         <div className="sub-header-left">
-          <IconContainer
-            className="sub-header-icon clickable-icon"
-            onClick={this.props.backBtnOnClick}
-          >
-            {icon}
-          </IconContainer>
-          <FontMedium className="sub-header-title" text={this.props.title} />
+          {isBackIcon && (
+            <IconContainer
+              className="sub-header-icon clickable-icon"
+              onClick={this.props.backBtnOnClick}
+            >
+              {icon}
+            </IconContainer>
+          )}
+          <FontMedium className="sub-header-title" text={this.props.title} style={style} />
         </div>
         {subMenu && subMenu.length > 0 && (
           <div>

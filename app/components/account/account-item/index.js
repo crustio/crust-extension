@@ -16,6 +16,7 @@ class AccountItem extends Component {
       onAliasInputBlur,
       onAliasInputKeyPress,
       inputRef,
+      colorTheme,
       t,
       ...otherProps
     } = this.props;
@@ -24,7 +25,11 @@ class AccountItem extends Component {
       'clickable-icon': true,
     });
     return (
-      <div className={accountItemClassNames} {...otherProps}>
+      <div
+        className={accountItemClassNames}
+        {...otherProps}
+        style={{ background: colorTheme.card }}
+      >
         <Avatar className="account-avatar" onCopyAddress={onCopyAddress} value={account.address} />
         <AccountDetails
           className="account-item-identity-container"
@@ -44,6 +49,7 @@ class AccountItem extends Component {
           }}
           blockchain={account.blockchain}
           onCopyAddress={onCopyAddress}
+          colorTheme={colorTheme}
         />
         <BalanceDetails
           className="account-item-balance-section"

@@ -11,13 +11,14 @@ const mapStateToProps = state => ({
   isConnected: state.networkReducer.isConnected,
   account: state.accountReducer.account,
   tokens: state.dashboardReducer.tokens,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {
   changePage,
   createToast,
   addToken,
-  updateTokenList
+  updateTokenList,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddToken);

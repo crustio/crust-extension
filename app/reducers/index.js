@@ -9,6 +9,7 @@ import createAccountReducer from '../views/create-account/reducer';
 import unlockCrustReducer from '../views/sign-in/reducer';
 import transferReducer from '../views/transfer/reducer';
 import dashboardReducer from '../views/dashboard/reducer';
+import manageAccountReducer from '../views/manage-account/reducer';
 import connectRequestReducer from '../views/connect-request/reducer';
 import dAppReducer from './dapp';
 import addressBookReducer from './address-book';
@@ -26,6 +27,7 @@ export default combineReducers({
   unlockCrustReducer,
   transferReducer,
   dashboardReducer,
+  manageAccountReducer,
   connectRequestReducer,
   dAppReducer,
   addressBookReducer,

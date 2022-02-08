@@ -3,9 +3,9 @@ import ExportAccout from './export-account.component';
 import { changePage, updateBackupPage, updateAppLoading } from '../../containers/actions';
 import { createToast } from '../../constants/toast';
 
-
 const mapStateToProps = state => ({
   account: state.exportAccountReducer.account,
+  accounts: state.accountReducer.accounts,
   network: state.networkReducer.network,
 });
 

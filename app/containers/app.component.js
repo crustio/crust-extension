@@ -13,7 +13,11 @@ import {
   CREATE_ACCOUNT_ENTRY_PAGE,
   IMPORT_JSON_PAGE,
   CREATE_ACCOUNT_PAGE,
+  TRANSFER_PAGE,
+  QR_CODE_PAGE,
+  MANAGE_ACCOUNT_PAGE,
 } from '../constants/navigation';
+import { copyAccountMessage } from '../../lib/services/static-message-factory-service';
 import CrustApp from '../components/crust-app';
 import './styles.css';
 
@@ -28,6 +32,7 @@ class App extends Component {
       showSettings: false,
       showGrayHeader: false,
       showGrayBg: false,
+      showUserId: false,
     };
   }
 
@@ -56,6 +61,7 @@ class App extends Component {
             showNetwork: false,
             showSettings: false,
             showGrayHeader: false,
+            showUserId: false,
           };
         }
 
@@ -66,7 +72,8 @@ class App extends Component {
             showBanner: true,
             showNetwork: false,
             showSettings: false,
-            showGrayHeader: true,
+            showGrayHeader: false,
+            showUserId: false,
           };
         }
         if (prevProps.page === CREATE_ACCOUNT_PAGE) {
@@ -76,8 +83,9 @@ class App extends Component {
             showBanner: true,
             showNetwork: false,
             showSettings: false,
-            showGrayHeader: true,
+            showGrayHeader: false,
             showGrayBg: true,
+            showUserId: false,
           };
         }
         return {
@@ -87,9 +95,10 @@ class App extends Component {
           showNetwork: false,
           showSettings: false,
           showGrayHeader: false,
+          showUserId: false,
         };
       }
-      if (prevProps.page === CONNECT_REQUEST_PAGE || prevProps.page === DAPP_REQUESTS_PAGE) {
+      if (prevProps.page === CONNECT_REQUEST_PAGE) {
         return {
           showHeader: true, // no change
           showLogo: true,
@@ -97,6 +106,51 @@ class App extends Component {
           showNetwork: false,
           showSettings: false,
           showGrayHeader: false,
+          showUserId: false,
+        };
+      }
+      if (prevProps.page === TRANSFER_PAGE) {
+        return {
+          showHeader: true, // no change
+          showLogo: true,
+          showBanner: false,
+          showNetwork: true,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: true,
+        };
+      }
+      if (prevProps.page === QR_CODE_PAGE) {
+        return {
+          showHeader: false, // no change
+          showLogo: false,
+          showBanner: false,
+          showNetwork: false,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: false,
+        };
+      }
+      if (prevProps.page === MANAGE_ACCOUNT_PAGE) {
+        return {
+          showHeader: false, // no change
+          showLogo: false,
+          showBanner: false,
+          showNetwork: false,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: false,
+        };
+      }
+      if (prevProps.page === DAPP_REQUESTS_PAGE) {
+        return {
+          showHeader: false, // no change
+          showLogo: false,
+          showBanner: false,
+          showNetwork: false,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: false,
         };
       }
       return {
@@ -105,7 +159,8 @@ class App extends Component {
         showBanner: false,
         showNetwork: true,
         showSettings: true,
-        showGrayHeader: true,
+        showGrayHeader: false,
+        showUserId: false,
       };
     }
 
@@ -121,15 +176,6 @@ class App extends Component {
     }
   };
 
-  handleOptionsChange = option => {
-    if (option.value === 'network_mode') {
-      this.props.setNetworkMode(!this.props.isOfflineMode);
-    } else {
-      this.props.updateBackupPage(this.props.page);
-      this.props.changePage(option.value);
-    }
-  };
-
   onToggleDeveloperMode = event => {
     const isDeveloperMode = event.target.checked;
     this.props.onToggleDeveloperMode(isDeveloperMode);
@@ -141,17 +187,26 @@ class App extends Component {
     this.props.changePage(DASHBOARD_PAGE);
   };
 
+  onCopyAddress = () => {
+    const { t } = this.props;
+    this.props.createToast({
+      message: t(copyAccountMessage()),
+      type: 'info',
+    });
+  };
+
   render() {
     const {
       props: {
+        account,
         page,
+        changePage,
         isLoading,
         networks,
         network,
         isConnected,
         isOfflineMode,
         isDeveloperMode,
-        options,
         language,
         t,
       },
@@ -163,18 +218,15 @@ class App extends Component {
         showHeader,
         showGrayHeader,
         showGrayBg,
+        showUserId,
       },
     } = this;
-    // eslint-disable-next-line no-restricted-syntax
-    for (const option of options) {
-      if (option.value === 'network_mode') {
-        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set To Offline Mode';
-      }
-    }
+
     return (
       <CrustApp
         className={showGrayBg ? 'app-gray' : 'app'}
         isLoading={isLoading}
+        account={account}
         page={page}
         networks={networks}
         network={network}
@@ -187,12 +239,13 @@ class App extends Component {
         showSettings={showSettings}
         showHeader={showHeader}
         showGrayHeader={showGrayHeader}
+        showUserId={showUserId}
         onLogoClick={this.onClick}
-        options={options}
-        onOptionsChange={this.handleOptionsChange}
         isDeveloperMode={isDeveloperMode}
         onToggleDeveloperMode={this.onToggleDeveloperMode}
         language={language}
+        changePage={changePage}
+        onCopyAddress={this.onCopyAddress}
         t={t}
       />
     );

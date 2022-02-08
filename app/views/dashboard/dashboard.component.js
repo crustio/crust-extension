@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import {
   Dialog,
   DialogActions,
@@ -9,18 +8,25 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import TokenDetails from '../../components/token/token-details';
 import Wallet from '../../components/wallet';
-import { QR_CODE_PAGE, TOKEN_DETAILS_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
+import {
+  CREATE_ACCOUNT_PAGE,
+  QR_CODE_PAGE,
+  TOKEN_DETAILS_PAGE,
+  TRANSFER_PAGE,
+} from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
-import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
-import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
+import {
+  copyAccountMessage,
+  getTransfersWithMoment,
+} from '../../../lib/services/static-message-factory-service';
 import './styles.css';
 import { RENAME } from '../../constants/options';
 import TokenList from '../../components/token-list';
 import CrustTabs from '../../components/common/crust-tabs';
-import ButtonSquare from '../../components/common/buttons/button-square';
 import { HelpCircle, NetworkOfflineIcon } from '../../components/common/icon';
+import FooterWithTwoButton from '../../components/common/footer-with-two-button';
+import { colorTheme } from '../../../lib/constants/colors';
 
 const MP = withStyles({
   root: {
@@ -44,6 +50,7 @@ const MDialogTitle = withStyles({
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+    this.timer = setInterval(() => this.props.fetchTransactionHistory(this.props.network), 30000);
     this.textInput = React.createRef();
     this.state = {
       labels: ['Assets', 'Activities'],
@@ -52,16 +59,18 @@ class Dashboard extends Component {
     };
   }
 
-  setDefaultToken = () => {
-    const defaultToken = this.props.tokens.find(token => token.address === undefined);
-    this.props.onTokenSelected(defaultToken);
-  };
+  componentDidMount() {
+    this.props.fetchTransactionHistory();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
 
   handleSend = () => {
     // if (!this.props.isConnected) {
     //   this.props.connectionError();
     // } else {
-    this.setDefaultToken();
     // this.props.getUnits();
     this.props.resetToAddress();
     this.props.updateBackupPage(this.props.page);
@@ -120,20 +129,24 @@ class Dashboard extends Component {
     this.props.lockApp();
   };
 
+  onCreateAccountClick = async () => {
+    await this.props.addAccount();
+    this.props.changePage(CREATE_ACCOUNT_PAGE);
+  };
+
   render() {
     const {
       accounts,
       account,
       balances,
-      transactions,
-      balance: { balanceFormatted, marketData, amount },
+      transactionHistory,
+      balance: { balanceFormatted },
       isLinkToFaucet,
       network,
       isConnected,
       isOfflineMode,
       // isError,
       // isErrorByType,
-      unit,
       accountMenu,
       tokens,
       t,
@@ -141,50 +154,44 @@ class Dashboard extends Component {
     const { labels, value } = this.state;
     const tLabels = labels.map(l => t(l));
     const theme = 'substrate';
-    const defaultToken = tokens.find(token => token.address === undefined);
     const showOffline = !isConnected || isOfflineMode;
     return (
-      <div className="dashboard-container">
+      <div
+        className="dashboard-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         <div>
-          <div className="account-content-container">
+          <div
+            className="account-content-container"
+            style={{ background: colorTheme[network.value].card }}
+          >
             <Wallet
               className="wallet-container"
               inputRef={this.textInput}
               accounts={accounts}
               balances={balances}
               balance={balanceFormatted}
+              network={network}
               selectedAccount={account}
               theme={theme}
+              colorTheme={colorTheme[network.value]}
               onAliasChange={this.handleAliasChange}
               onAliasInputBlur={this.handleAliasInputBlur}
               onAliasInputKeyPress={this.handleOnKeyPress}
               onCopyAddress={this.onCopyAddress}
               accountMenu={accountMenu}
               onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
+              onCreateAccountClick={this.onCreateAccountClick}
+              style={{
+                color: colorTheme[network.value].text.secondary,
+                boxShadow: network.value === 'crust maxwell' ? 'none' : '',
+              }}
             />
-            {!showOffline && (
-              <TokenDetails
-                unit={
-                  network.unit !== undefined ? network.unit : unit !== undefined ? unit.text : ''
-                }
-                className="token-container"
-                balance={
-                  defaultToken.balance === '-'
-                    ? '-'
-                    : convertBalanceToShow(defaultToken.balance, defaultToken.decimals)
-                }
-                marketData={marketData && marketData}
-                amount={amount}
-                handleSend={this.handleSend}
-                handleDeposit={this.handleDeposit}
-                labelText={t('Transferable')}
-              />
-            )}
           </div>
         </div>
         {showOffline && (
           <div className="crust-offline-container">
-            <NetworkOfflineIcon />
+            <NetworkOfflineIcon colorTheme={colorTheme[network.value]} />
             <span className="offline-hint">
               {t('OfflineDescription')}
               <HelpCircle
@@ -233,13 +240,21 @@ class Dashboard extends Component {
         )}
         {!showOffline && (
           <>
-            <CrustTabs value={value} onChange={this.handleChange} labels={tLabels} />
+            <CrustTabs
+              value={value}
+              onChange={this.handleChange}
+              labels={tLabels}
+              parent="home"
+              colorTheme={colorTheme[network.value]}
+              network={network}
+            />
             {value === 0 && (
               <div>
                 <TokenList
                   tokens={tokens}
                   className="token-list-container"
                   onTokenSelected={this.onTokenSelected}
+                  colorTheme={colorTheme[network.value]}
                 />
               </div>
             )}
@@ -247,45 +262,27 @@ class Dashboard extends Component {
               <Transaction
                 className="transaction-container"
                 network={network}
+                account={account}
                 isLinkToFaucet={isLinkToFaucet}
-                transactions={transactions}
+                transactions={getTransfersWithMoment(transactionHistory)}
+                colorTheme={colorTheme[network.value]}
               />
             )}
           </>
         )}
-        <div
-          style={{
-            position: 'absolute',
-            top: '544px',
-            justifyContent: 'space-between',
-            display: 'flex',
-            width: '100%',
-            padding: '0 16px',
-            height: '38px',
-          }}
-        >
-          <a
-            className="dashboard-footer"
-            target="_blank"
-            href={network.url_apps ? network.url_apps : 'https://apps.crust.network/'}
-            rel="noopener noreferrer"
-          >
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <div>{network.url_name ? network.url_name : 'Crust Apps'}</div>
-              <div style={{ display: 'flex' }}>
-                <ArrowForwardIosOutlinedIcon className="dashboard-icon" />
-              </div>
-            </div>
-          </a>
-          <ButtonSquare iconName="lock" onClick={this.handleLock} />
-        </div>
+
+        {!showOffline && (
+          <FooterWithTwoButton
+            onNextClick={this.handleSend}
+            onBackClick={this.handleDeposit}
+            backButtonName={t('Receive')}
+            nextButtonName={t('Send')}
+            nextColor={colorTheme[network.value].button.primary.text}
+            nextBackground={colorTheme[network.value].button.primary.main}
+            backColor={colorTheme[network.value].button.secondary.text}
+            backBackground={colorTheme[network.value].button.secondary.main}
+          />
+        )}
       </div>
     );
   }

@@ -2,35 +2,27 @@ import React, { Component } from 'react';
 import FontMedium from '../../common/fonts/font-medium';
 import TransactionItemStatus from '../transaction-item-status';
 import './styles.css';
-import { DAPP } from '../../../../lib/constants/transaction';
 
 export default class TransactionItemDetails extends Component {
   render() {
     const {
-      amount, address, moment, status, color, ...otherProps
+      amount, address, moment, colorTheme, ...otherProps
     } = this.props;
     return (
       <div className="transfer-item-details" {...otherProps}>
         <div className="transaction-item-status-container">
-          <FontMedium className="transaction-item-details-amount" text={amount} />
-          {status !== DAPP && (
-            <FontMedium
-              className=""
-              text={status}
-              style={{
-                color,
-                fontSize: '14px',
-              }}
-            />
-          )}
+          <FontMedium
+            className="transaction-item-details-amount"
+            text={amount}
+            style={{ color: colorTheme.text.primary }}
+          />
         </div>
 
         <TransactionItemStatus
           address={address}
           moment={moment}
-          status={status}
-          color={color}
           className="transaction-item-info-container"
+          style={{ color: colorTheme.text.quaternary }}
         />
       </div>
     );

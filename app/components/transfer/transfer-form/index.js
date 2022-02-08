@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import TransferFromTo from '../transfer-from-to';
-import FooterButton from '../../common/footer-button';
+import FooterWithTwoButton from '../../common/footer-with-two-button';
 import TransferFormAmount from '../transfer-form-amount';
 import './styles.css';
 
@@ -13,6 +13,7 @@ class TransferForm extends Component {
       alias,
       to,
       amount,
+      setAmount,
       units,
       toRef,
       amountRef,
@@ -22,15 +23,18 @@ class TransferForm extends Component {
       isAmountError,
       amountErrorText,
       unit,
-      buttonText,
+      nextButtonText,
+      backButtonText,
       amountPropName,
       toPropName,
       handleAmountChange,
       handleToChange,
       handleSendButton,
+      handleBackButton,
       handleUnitOnChange,
       onAddressBookClick,
-      t
+      colorTheme,
+      t,
     } = this.props;
     return (
       <div className="transfer-form-container">
@@ -47,6 +51,7 @@ class TransferForm extends Component {
             toErrorText={toErrorText}
             handleToChange={handleToChange}
             onAddressBookClick={onAddressBookClick}
+            colorTheme={colorTheme}
           />
         </div>
         <TransferFormAmount
@@ -54,6 +59,7 @@ class TransferForm extends Component {
           error={isAmountError}
           label={t('Amount')}
           value={amount}
+          setValue={setAmount}
           helperText={amountErrorText}
           onChange={handleAmountChange}
           propName={amountPropName}
@@ -61,8 +67,18 @@ class TransferForm extends Component {
           options={units}
           dropDownValue={unit}
           onDropDownChange={handleUnitOnChange}
+          colorTheme={colorTheme}
         />
-        <FooterButton onClick={handleSendButton} name={buttonText} />
+        <FooterWithTwoButton
+          onNextClick={handleSendButton}
+          onBackClick={handleBackButton}
+          backButtonName={backButtonText}
+          nextButtonName={nextButtonText}
+          nextColor="white"
+          nextBackground="#FF8D00"
+          backColor="black"
+          backBackground="#FFFFFF"
+        />
       </div>
     );
   }

@@ -6,6 +6,7 @@ import SubHeader from '../../components/common/sub-header';
 import TransferForm from '../../components/transfer/transfer-form';
 import * as NavConstants from '../../constants/navigation';
 import { INPUT_NUMBER_REGEX } from '../../../lib/constants/regex';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class Transfer extends Component {
@@ -24,7 +25,8 @@ class Transfer extends Component {
       unit: metadata ? metadata.unit : '',
       alias: metadata ? metadata.account.alias : account.alias,
       from: metadata ? metadata.account.address : account.address,
-      buttonText: 'Next',
+      nextButtonText: 'Next',
+      backButtonText: 'Cancel',
       dropDownSelected: { ...token, value: token.tokenSymbol, text: token.tokenSymbol },
       dropDownList: tokens.map(t => {
         /* eslint-disable */
@@ -66,7 +68,7 @@ class Transfer extends Component {
     }
   }
 
-  handleSubheaderBackBtn = () => {
+  handleBackButton = () => {
     this.props.resetConfirmOnBoarding();
     this.props.clearTransferDetails();
     this.props.changePage(this.props.backupPage);
@@ -95,6 +97,12 @@ class Transfer extends Component {
       });
       this.setState({ [prop]: e.target.value });
     }
+  };
+
+  setAmount = value => {
+    this.setState({
+      amount: value,
+    });
   };
 
   onAddressBookClick = () => {
@@ -152,6 +160,7 @@ class Transfer extends Component {
 
   render() {
     const {
+      network,
       isToAddressError,
       toAddressErrorMessage,
       isAmountError,
@@ -160,16 +169,31 @@ class Transfer extends Component {
       t,
     } = this.props;
     const {
-      to, amount, alias, from, buttonText, dropDownList, dropDownSelected
+      to,
+      amount,
+      alias,
+      from,
+      nextButtonText,
+      backButtonText,
+      dropDownList,
+      dropDownSelected,
     } = this.state;
     const theme = 'substrate';
-    const buttonTextT = t(buttonText);
+    const nextButtonTextT = t(nextButtonText);
+    const backButtonTextT = t(backButtonText);
     return (
-      <div className="tranfer-page-container">
+      <div
+        className="tranfer-page-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Send')}
-          backBtnOnClick={this.handleSubheaderBackBtn}
+          backBtnOnClick={this.handleBackButton}
+          align="left"
+          margin="30px"
+          isBackIcon={false}
+          colorTheme={colorTheme[network.value]}
         />
         <TransferForm
           theme={theme}
@@ -187,7 +211,9 @@ class Transfer extends Component {
             this.amountInput = input;
           }}
           amount={amount}
-          buttonText={buttonTextT}
+          setAmount={this.setAmount}
+          nextButtonText={nextButtonTextT}
+          backButtonText={backButtonTextT}
           isToError={isToAddressError}
           toErrorText={t(toAddressErrorMessage)}
           isAmountError={isAmountError}
@@ -195,8 +221,10 @@ class Transfer extends Component {
           handleAmountChange={this.handleAmountChange}
           handleToChange={this.handleToChange}
           handleSendButton={this.handleSendButton}
+          handleBackButton={this.handleBackButton}
           handleUnitOnChange={this.handleUnitChange}
           onAddressBookClick={this.onAddressBookClick}
+          colorTheme={colorTheme[network.value]}
         />
       </div>
     );

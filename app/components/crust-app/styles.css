@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: row;
   background-color: transparent;
-  padding: 11px 17.1px 11px 15px;
+  padding: 16px 16px 11px 15px;
   height: 50px;
   width: 360px;
   align-items: center;
@@ -38,9 +38,10 @@
 }
 
 .crust-network {
-  border: 1px solid #666666;
-  border-radius: 4px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
   padding: 2px 4px;
+  width: 160px;
 }
 
 .crust-network-status {
@@ -51,14 +52,27 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .crust-settings {
-  margin-left: 8px;
+  margin-left: auto;
   align-self: center;
   display: flex;
   flex-direction: row;
   cursor: pointer;
+  justify-content: flex-end;
+  font-size: 18px;
+}
+
+.crust-user-id {
+  margin-left: auto;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  justify-content: flex-end;
 }
 
 .crust-header-text {

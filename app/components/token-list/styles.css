@@ -19,25 +19,22 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 15px 16px;
-  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
   cursor: pointer;
-}
-
-.token-item-container:hover {
-  background: #ECECEC;
 }
 
 .token-item-details-amount {
   flex: 1;
   text-align: end;
   font-size: 16px;
-  color: #858B9C;
   line-height: 22px;
 }
 
 .token-item-details-symbol {
   font-size: 16px;
-  color: #858B9C;
+  color: #1A1B24;
 }
 
 .token-item-icon {
@@ -80,6 +77,7 @@
   text-align: end;
   font-size: 16px;
   line-height: 22px;
+  color: #CCCCCC;
   font-family: 'Roboto-Regular';
 }
 

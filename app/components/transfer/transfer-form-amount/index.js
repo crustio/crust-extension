@@ -7,6 +7,14 @@ import { convertBalanceToShow } from '../../../../lib/services/numberFormatter';
 import './styles.css';
 
 class TransferFormAmount extends Component {
+  onClickMax = () => {
+    this.props.setValue(
+      this.props.dropDownValue.balance === '-'
+        ? 0
+        : convertBalanceToShow(this.props.dropDownValue.balance, this.props.dropDownValue.decimals),
+    );
+  };
+
   render() {
     const {
       error,
@@ -19,6 +27,7 @@ class TransferFormAmount extends Component {
       dropDownValue,
       propName,
       onDropDownChange,
+      colorTheme,
       t,
       ...otherProps
     } = this.props;
@@ -31,18 +40,37 @@ class TransferFormAmount extends Component {
         {...otherProps}
       >
         <div className="transfer-form-amount-dropdown-container">
-          <FontRegular className="transfer-form-amount-dropdown-label" text={`${t('Assets')}:`} />
-          <DropDown className="transfer-form-amount-dropdown" options={options} value={dropDownValue} onChange={onDropDownChange} />
+          <DropDown
+            className="transfer-form-amount-dropdown"
+            style={{ background: colorTheme.card }}
+            options={options}
+            value={dropDownValue}
+            onChange={onDropDownChange}
+            colorTheme={colorTheme}
+          />
         </div>
 
-        <FontRegular className="transfer-form-amount-balance" text={`${t('Balance')}:  ${dropDownValue.balance === '-' ? '-' : convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)}`} />
-
         <div className="transfer-form-amount-input-container">
-          <FontRegular className="transfer-form-amount-input-label" text={`${t('Amount')}:`} />
           <CrustInput
             className="transfer-from-amount-input"
             onChange={onChange(propName)}
             value={value}
+            placeholder={t('Amount')}
+            style={{ background: colorTheme.card }}
+            endAdornment={
+              <FontRegular
+                text={t('Max')}
+                style={{
+                  marginRight: 8,
+                  position: 'relative',
+                  cursor: 'pointer',
+                  color: colorTheme.text.secondary,
+                  fontSize: 14,
+                  width: 32,
+                }}
+                onClick={this.onClickMax}
+              />
+            }
           />
         </div>
         {error ? (
@@ -50,6 +78,16 @@ class TransferFormAmount extends Component {
         ) : (
           <span className="transfer-from-amount-input-place-holder "> </span>
         )}
+
+        <FontRegular
+          className="transfer-form-amount-balance"
+          text={`${t('Balance')}:  ${
+            dropDownValue.balance === '-'
+              ? '-'
+              : convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)
+          }`}
+          style={{ color: colorTheme.text.quaternary }}
+        />
       </div>
     );
   }

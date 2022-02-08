@@ -15,12 +15,19 @@ export default class TokenDetailFooter extends Component {
         <ButtonCustom
           onClick={handleDeposit}
           border="1px solid #FF8D00"
-          width="142px"
+          width="155px"
           height="38px"
+          marginRight="10px"
         >
           {receiveButtonName}
         </ButtonCustom>
-        <ButtonCustom onClick={handleSend} border="1px solid #FF8D00" width="142px" height="38px">
+        <ButtonCustom
+          onClick={handleSend}
+          border="1px solid #FF8D00"
+          width="155px"
+          height="38px"
+          marginLeft="10px"
+        >
           {sendButtonName}
         </ButtonCustom>
       </div>

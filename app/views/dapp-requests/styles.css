@@ -1,3 +1,7 @@
+.dapp-request {
+  height: 100vh;
+}
+
 .dapp-requests-container {
   height: 505px;
   overflow-x: hidden;

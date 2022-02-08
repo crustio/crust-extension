@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import FontMedium from '../common/fonts/font-medium';
 import FontRegular from '../common/fonts/font-regular';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
-import CruTokenIcon from '../../images/crust-logo.png';
+import CruTokenIcon from '../../images/crust-logo-light.svg';
 import CandyTokenIcon from '../../images/candy-icon.svg';
 import CSMTokenIcon from '../../images/csm-icon.svg';
 import './styles.css';
@@ -40,7 +39,7 @@ const createBalance = (type, token, t) => {
 
 class TokenList extends Component {
   renderBalances(token) {
-    const { t } = this.props;
+    const { t, colorTheme } = this.props;
     const balance = createBalance('balance', token, t);
     const locked = createBalance('locked', token, t);
     const reserved = createBalance('reserved', token, t);
@@ -48,14 +47,29 @@ class TokenList extends Component {
     return (
       <div className="token-balances-container">
         <div className="token-balance-title-container">
-          <div className="token-balance-item-title">
+          <div className="token-balance-item-title" style={{ color: colorTheme.text.tertiary }}>
             {`${balance.title}${balance.title ? ':' : ''}`}
           </div>
-          {token.locked && <div className="token-balance-item-title">{`${locked.title}:`}</div>}
-          {token.reserved && <div className="token-balance-item-title">{`${reserved.title}:`}</div>}
-          {token.total && <div className="token-balance-item-title">{`${total.title}:`}</div>}
+          {token.locked && (
+            <div
+              className="token-balance-item-title"
+              style={{ color: colorTheme.text.tertiary }}
+            >{`${locked.title}:`}</div>
+          )}
+          {token.reserved && (
+            <div
+              className="token-balance-item-title"
+              style={{ color: colorTheme.text.tertiary }}
+            >{`${reserved.title}:`}</div>
+          )}
+          {token.total && (
+            <div
+              className="token-balance-item-title"
+              style={{ color: colorTheme.text.tertiary }}
+            >{`${total.title}:`}</div>
+          )}
         </div>
-        <div className="token-balance-value-container">
+        <div className="token-balance-value-container" style={{ color: colorTheme.text.primary }}>
           <FontRegular className="token-item-details-amount" text={balance.value} />
           {token.locked && (
             <FontRegular className="token-item-details-amount" text={locked.value} />
@@ -70,7 +84,9 @@ class TokenList extends Component {
   }
 
   render() {
-    const { tokens, onTokenSelected, ...otherProps } = this.props;
+    const {
+      tokens, onTokenSelected, colorTheme, ...otherProps
+    } = this.props;
     return (
       <div {...otherProps}>
         {tokens.map(token => (
@@ -78,16 +94,21 @@ class TokenList extends Component {
             key={token.tokenSymbol}
             className="token-item-container"
             onClick={() => onTokenSelected(token)}
+            style={{ background: colorTheme.card }}
           >
             <div className="token-item-left">
               <img alt="token-symbol" src={iconMap[token.tokenSymbol]} className="token-icon" />
-              <FontMedium text={token.tokenSymbol} className="token-item-details-symbol" />
+              <FontMedium
+                text={token.tokenSymbol}
+                className="token-item-details-symbol"
+                style={{ color: colorTheme.text.primary }}
+              />
             </div>
             <div className="token-item-right">
               {this.renderBalances(token)}
-              <div style={{ display: 'flex' }}>
+              {/* <div style={{ display: 'flex' }}>
                 <ArrowForwardIosOutlinedIcon className="token-item-icon" />
-              </div>
+              </div> */}
             </div>
           </div>
         ))}

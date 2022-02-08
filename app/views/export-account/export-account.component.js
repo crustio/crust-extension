@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { saveAs } from 'file-saver';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import { FormControlLabel, Checkbox } from '@material-ui/core';
 import CrustPassword from '../../components/common/password/crust-password';
 import AccountInfo from '../../components/account/account-info';
 import * as Account from '../../api/account';
@@ -17,6 +18,7 @@ class ExportAccout extends Component {
     this.state = {
       password: '',
       errorText: '',
+      isBatch: false,
     };
   }
 
@@ -51,22 +53,56 @@ class ExportAccout extends Component {
       this.props.updateAppLoading(false);
       return;
     }
-    setTimeout(() => {
-      Account.exportAccount(this.props.account.address, password)
-        .then(json => {
-          this.props.updateAppLoading(false);
-          const blob = new Blob([json.result.exportedJson], {
-            type: 'application/json; charset=utf-8',
-          });
-          saveAs(blob, `${this.props.account.address}.json`);
-        })
-        .catch(() => {
-          this.props.updateAppLoading(false);
-          this.setState({
-            errorText: 'Password is incorrect.',
-          });
+
+    if (this.state.isBatch) {
+      let result = '';
+      setTimeout(async () => {
+        await this.props.accounts.map((account, index) => {
+          Account.exportAccount(account.address, password)
+            .then(json => {
+              result += `${json.result.exportedJson}\n`;
+              console.log(result, this.props.accounts.length);
+              if (index === this.props.accounts.length - 1) {
+                console.log(this.props.accounts.length);
+                const blob = new Blob([result], {
+                  type: 'application/json; charset=utf-8',
+                });
+                saveAs(blob, `${this.props.account.address}.json`);
+                this.props.updateAppLoading(false);
+              }
+            })
+            .catch(() => {
+              this.props.updateAppLoading(false);
+              this.setState({
+                errorText: 'Password is incorrect.',
+              });
+            });
         });
-    }, 0);
+      }, 0);
+    } else {
+      setTimeout(() => {
+        Account.exportAccount(this.props.account.address, password)
+          .then(json => {
+            this.props.updateAppLoading(false);
+            const blob = new Blob([json.result.exportedJson], {
+              type: 'application/json; charset=utf-8',
+            });
+            saveAs(blob, `${this.props.account.address}.json`);
+          })
+          .catch(() => {
+            this.props.updateAppLoading(false);
+            this.setState({
+              errorText: 'Password is incorrect.',
+            });
+          });
+      }, 0);
+    }
+  };
+
+  handleChangeBatch = event => {
+    this.setState({
+      isBatch: event.target.checked,
+    });
   };
 
   render() {
@@ -86,6 +122,16 @@ class ExportAccout extends Component {
               )}
             />
           </div>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={this.state.isBatch}
+                onChange={this.handleChangeBatch}
+                color="primary"
+              />
+            }
+            label="Batch Account Export"
+          />
           <CrustPassword
             className="export-account-password"
             onChange={this.handleOnChange}

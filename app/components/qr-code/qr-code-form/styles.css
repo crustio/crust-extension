@@ -4,6 +4,13 @@
   position: relative;
 }
 
+.qr-copy-address {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .qr-button-container {
   margin-left: 4px;
 }

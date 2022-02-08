@@ -6,14 +6,12 @@ const mapStateToProps = state => ({
   manifest: state.appStateReducer.manifest,
   links: state.appStateReducer.links,
   backupPage: state.appStateReducer.backupPage,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {
   changePage,
-  updateBackupPage
+  updateBackupPage,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(About);
+export default connect(mapStateToProps, mapDispatchToProps)(About);

@@ -7,8 +7,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 21px 16px 21px 0px;
-  height: 55.53px;
+  padding: 18px 16px 0px 0px;
+  height: 48px;
   color: #858B9C;
 }
 
@@ -20,9 +20,9 @@
 .sub-header-title {
   align-self: center;
   justify-content: flex-start;
-  font-size: 14px;
-  margin-left: 5px;
-  width: 240px;
+  font-size: 20px;
+  width: 270px;
+  color: #191919;
 }
 
 .sub-header-icon {

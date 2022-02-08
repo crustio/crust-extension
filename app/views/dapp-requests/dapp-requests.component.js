@@ -10,6 +10,8 @@ import Send from '../../components/dapp/send';
 import SignMessage from '../../components/dapp/sign-message';
 import UpMetadata from '../../components/dapp/up-metadata';
 import { createTxnUI } from '../../services/wallet-service';
+import { colorTheme } from '../../../lib/constants/colors';
+
 import './styles.css';
 
 class DAppRequests extends Component {
@@ -77,12 +79,15 @@ class DAppRequests extends Component {
 
   renderRequests() {
     const {
-      requests, accounts, balances, t
+      requests, accounts, balances, network, t
     } = this.props;
     // Use for toggle
     const { isInfoExpanded, errorText, password } = this.state;
     return (
-      <div className="dapp-requests-container">
+      <div
+        className="dapp-requests-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         {requests.map(request => {
           switch (request.request.requestType) {
             case RequestType.SEND:
@@ -112,6 +117,8 @@ class DAppRequests extends Component {
                   password={password}
                   errorText={errorText}
                   handleOnChange={this.handleOnChange}
+                  colorTheme={colorTheme[network.value]}
+                  style={{ background: colorTheme[network.value].background }}
                 />
               );
             case RequestType.SIGN_MESSAGE:
@@ -134,7 +141,9 @@ class DAppRequests extends Component {
                   password={password}
                   errorText={errorText}
                   handleOnChange={this.handleOnChange}
+                  colorTheme={colorTheme[network.value]}
                   t={t}
+                  style={{ background: colorTheme[network.value].background }}
                 />
               );
             case RequestType.GET_METADATA_PROVIDE:
@@ -150,7 +159,9 @@ class DAppRequests extends Component {
                   onCopyData={this.onCopyData}
                   className="dapp-requests-card"
                   errorText={errorText}
+                  colorTheme={colorTheme[network.value]}
                   t={t}
+                  style={{ background: colorTheme[network.value].background }}
                 />
               );
             default:
@@ -162,10 +173,16 @@ class DAppRequests extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, network } = this.props;
     return (
-      <div>
-        <SubHeader title={t('Pending Requests')} />
+      <div className="dapp-request" style={{ background: colorTheme[network.value].background }}>
+        <SubHeader
+          title={t('Pending Requests')}
+          colorTheme={colorTheme[network.value]}
+          align="left"
+          margin="15px"
+          isBackIcon={false}
+        />
         {this.props.requests && this.renderRequests()}
       </div>
     );

@@ -10,7 +10,7 @@ import {
   // setAppShowValidatePass,
   updateAppLoading,
 } from '../containers/actions';
-import { getTransactions, getTokens } from '../views/dashboard/actions';
+import { getTransactions, getTokens, fetchTransactionHistory } from '../views/dashboard/actions';
 import { createFullNetworkURL } from '../../lib/services/network-validator';
 import AppConfig from '../../lib/constants/config';
 import { FAILURE } from '../../lib/constants/api';
@@ -111,6 +111,7 @@ export const propagateUpdates = async dispatch => {
   dispatch(AccountActions.setInitialBalance);
   await dispatch(AccountActions.fetchAndSetBalances);
   dispatch(getTransactions);
+  dispatch(fetchTransactionHistory);
   dispatch(getUnits());
   dispatch(getTokens);
   dispatch(updateAppLoading(false));
@@ -121,6 +122,7 @@ export const switchNetwork = network => async dispatch => {
     await Network.updateCurrentNetwork(network);
     dispatch(changeNetwork(network));
     dispatch(propagateUpdates);
+    dispatch(fetchTransactionHistory(network));
   } catch (e) {
     dispatch();
   }

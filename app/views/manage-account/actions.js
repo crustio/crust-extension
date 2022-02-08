@@ -1,8 +1,9 @@
 import { Account } from '../../api';
+import * as ManageAccountActionTypes from './action-types';
 import * as AccountActions from '../../actions/account';
 import * as AppActions from '../../containers/actions';
 import { createToast } from '../../constants/toast';
-import { getTransactions, getTokens } from '../dashboard/actions';
+import { getTransactions, getTokens, fetchTransactionHistory } from '../dashboard/actions';
 
 export const resetSeedWordsBeforeImport = () => async dispatch => {
   dispatch(AccountActions.resetSeedWords());
@@ -22,6 +23,7 @@ export const changeAccount = (account, t) => async dispatch => {
     await AccountActions.fetchAndSetAccounts(dispatch);
     await dispatch(AccountActions.fetchAndSetBalances);
     await dispatch(getTransactions);
+    await dispatch(fetchTransactionHistory);
     await dispatch(getTokens);
     dispatch(AppActions.updateAppLoading(false));
     dispatch(
@@ -41,4 +43,11 @@ export const removeAccount = (accountToRemove, t) => async dispatch => {
   } catch (e) {
     dispatch(createToast({ message: 'Error removing account', type: 'error' }));
   }
+};
+
+export const updateCurrentTab = currentTab => async dispatch => {
+  dispatch({
+    type: ManageAccountActionTypes.UPDATE_CURRENT_TAB,
+    currentTab,
+  });
 };

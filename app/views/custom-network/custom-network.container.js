@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
   customNetworkSuccess: state.networkReducer.customNetworkSuccess,
   customNetworkError: state.networkReducer.customNetworkError,
   backupPage: state.appStateReducer.backupPage,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {
@@ -21,7 +22,4 @@ const mapDispatchToProps = {
   customNetworkValidationSuccess,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CustomNetwork);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomNetwork);
