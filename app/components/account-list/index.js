@@ -60,6 +60,7 @@ class AccountList extends Component {
               style={{ background: colorTheme.card }}
               colorTheme={colorTheme}
               network={network}
+              customModal={false}
             />
           ))}
         </List>

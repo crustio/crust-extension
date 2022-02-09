@@ -29,14 +29,6 @@ export default class FooterWithTwoButton extends Component {
         {...otherProps}
       >
         <ButtonCustom
-          onClick={onNextClick}
-          width="150px"
-          color={nextColor}
-          background={nextBackground}
-        >
-          {nextButtonName}
-        </ButtonCustom>
-        <ButtonCustom
           onClick={onBackClick}
           width="150px"
           color={backColor}
@@ -44,6 +36,14 @@ export default class FooterWithTwoButton extends Component {
           custom
         >
           {backButtonName}
+        </ButtonCustom>
+        <ButtonCustom
+          onClick={onNextClick}
+          width="150px"
+          color={nextColor}
+          background={nextBackground}
+        >
+          {nextButtonName}
         </ButtonCustom>
       </div>
     );

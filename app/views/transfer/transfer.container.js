@@ -28,6 +28,7 @@ const mapStateToProps = state => ({
   network: state.networkReducer.network,
   tokens: state.dashboardReducer.tokens,
   token: state.dashboardReducer.token,
+  language: state.appStateReducer.language,
 });
 
 const mapDispatchToProps = {
@@ -39,7 +40,7 @@ const mapDispatchToProps = {
   resetConfirmOnBoarding,
   dispatchSetTransferDetails,
   updateToAddress,
-  setTransferValidationError
+  setTransferValidationError,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Transfer);

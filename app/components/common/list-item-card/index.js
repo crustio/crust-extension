@@ -59,6 +59,7 @@ class ListItemCard extends Component {
       theme,
       colorTheme,
       network,
+      customModal,
       ...otherProps
     } = this.props;
     const { showModal } = this.state;
@@ -120,6 +121,7 @@ class ListItemCard extends Component {
             topButton="Remove"
             bottomButton="Export Account"
             network={network}
+            oneAction={customModal}
           />
         </ListItem>
       </div>

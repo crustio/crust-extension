@@ -26,6 +26,7 @@ export default class CreateAccountSettings extends Component {
       password,
       isPasswordError,
       passwordErrorMessage,
+      colorTheme,
       ...otherProps
     } = this.props;
     this.aliasRef = aliasRef;
@@ -36,6 +37,7 @@ export default class CreateAccountSettings extends Component {
           onChange={handleAliasChange(aliasPropName)}
           placeholder={aliasLabel}
           value={alias}
+          colorTheme={colorTheme}
         />
         {isAliasError ? (
           <span className="error-msg">{aliasErrorMessage}</span>
@@ -48,6 +50,7 @@ export default class CreateAccountSettings extends Component {
           onChange={handlePasswordChange}
           password={password}
           placeholder={passwordLabel}
+          colorTheme={colorTheme}
         />
         {isPasswordError ? (
           <span className="error-msg">{passwordErrorMessage}</span>

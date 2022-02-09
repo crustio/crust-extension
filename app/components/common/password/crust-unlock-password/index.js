@@ -31,6 +31,7 @@ class CrustUnlockPassword extends Component {
       className,
       handleUnlock,
       errorText,
+      colorTheme,
       t,
       ...otherProps
     } = this.props;
@@ -45,6 +46,7 @@ class CrustUnlockPassword extends Component {
           type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={onChange('password')}
+          colorTheme={colorTheme}
           endAdornment={
             <PasswordAdornment
               position="end"

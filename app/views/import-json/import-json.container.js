@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
   walletPwdError: state.importJsonReducer.walletPwdError,
   backupPage: state.appStateReducer.backupPage,
   language: state.appStateReducer.language,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {

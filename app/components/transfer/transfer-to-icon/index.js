@@ -34,9 +34,13 @@ export default class TransferToIcon extends Component {
           className="transfer-to-icon-input"
           value={toValue}
           onChange={onChange(propName)}
-          placeholder={label}
+          placeholderText={label}
           spellCheck={false}
-          style={{ background: colorTheme.card }}
+          colorTheme={colorTheme}
+          style={{
+            background: colorTheme.card,
+            '&::placeholder': { color: colorTheme.text.tertiary },
+          }}
           endAdornment={
             <AddressBookAdorment
               position="end"

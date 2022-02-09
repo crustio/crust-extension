@@ -5,7 +5,10 @@ import TokenDetails from '../../components/token/token-details';
 import Wallet from '../../components/wallet';
 import { DASHBOARD_PAGE, QR_CODE_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
-import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
+import {
+  copyAccountMessage,
+  getTransfersWithMoment,
+} from '../../../lib/services/static-message-factory-service';
 import './styles.css';
 import { RENAME } from '../../constants/options';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
@@ -77,7 +80,7 @@ class TokenDetailsPage extends Component {
     const {
       accounts,
       account,
-      transactions,
+      transactionHistory,
       isLinkToFaucet,
       network,
       accountMenu,
@@ -85,9 +88,8 @@ class TokenDetailsPage extends Component {
       t,
     } = this.props;
     const theme = 'substrate';
-    const transDisplay = transactions.filter(
-      trans => trans.metadata.tokenSelected !== undefined
-        && trans.metadata.tokenSelected.tokenSymbol === token.tokenSymbol,
+    const transDisplay = transactionHistory.filter(
+      trans => trans.tokenSymbol === token.tokenSymbol,
     );
     return (
       <div className="token-details-page-container">
@@ -132,9 +134,10 @@ class TokenDetailsPage extends Component {
           className="transaction-container"
           network={network}
           isLinkToFaucet={isLinkToFaucet}
-          transactions={transDisplay}
+          transactions={getTransfersWithMoment(transDisplay)}
           listHeight="280px"
           colorTheme={colorTheme[network.value]}
+          account={account}
         />
       </div>
     );

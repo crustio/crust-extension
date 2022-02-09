@@ -18,6 +18,7 @@ class DropDown extends Component {
             select: classes.select,
             icon: classes.icon,
           }}
+          style={{ color: colorTheme.text.primary }}
           onChange={onChange}
           value={value.value}
           disableUnderline
@@ -31,7 +32,7 @@ class DropDown extends Component {
           )}
         >
           {options.map(opt => (
-            <option key={opt.value} value={opt.value}>
+            <option key={opt.value} value={opt.value} style={{ color: 'black' }}>
               {opt.text}
             </option>
           ))}

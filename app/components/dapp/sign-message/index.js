@@ -101,6 +101,7 @@ export default class SignMessage extends Component {
             password={password}
             placeholder={t('Wallet Password')}
             style={{ background: colorTheme.card, color: colorTheme.text.secondary }}
+            colorTheme={colorTheme}
           />
           {errorText !== '' ? (
             <div className="error-msg">{t(errorText)}</div>

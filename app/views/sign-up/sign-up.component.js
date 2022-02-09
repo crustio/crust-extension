@@ -6,6 +6,8 @@ import CrustInput from '../../components/common/crust-input';
 import ContentHeader from '../../components/common/content-header';
 import FooterButton from '../../components/common/footer-button';
 import LogoBig from '../../images/crust-logo-big.svg';
+import { colorTheme } from '../../../lib/constants/colors';
+import { CRUST_NETWORK } from '../../../lib/constants/networks';
 import './styles.css';
 
 const errorMessage = 'Must be 8 characters or more in length.';
@@ -131,6 +133,7 @@ class SignUp extends Component {
           onChange={e => this.handleOnChange('password', e)}
           password={password}
           placeholder={this.props.t('Password')}
+          colorTheme={colorTheme[CRUST_NETWORK.value]}
         />
         {isPasswordError ? (
           <span className="error-msg">{passwordError}</span>
@@ -143,6 +146,7 @@ class SignUp extends Component {
           type="password"
           placeholder={this.props.t('Repeat Password')}
           value={passwordRepeat}
+          colorTheme={colorTheme[CRUST_NETWORK.value]}
         />
         {isPasswordRepeatError ? (
           <span className="error-msg">{passwordRepeatError}</span>

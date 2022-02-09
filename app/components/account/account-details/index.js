@@ -41,6 +41,7 @@ export default class AccountDetails extends Component {
             onBlur={onAliasInputBlur}
             value={aliasValue}
             inputRef={inputRef}
+            colorTheme={colorTheme}
           />
         )}
         {!editMode && (

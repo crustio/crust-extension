@@ -16,6 +16,7 @@ function ModalWithThreeButton(props) {
     handleTopClick,
     handleBottomClick,
     network,
+    oneAction,
     classes,
   } = props;
 
@@ -43,15 +44,17 @@ function ModalWithThreeButton(props) {
             {t(topButton)}
           </ButtonCustom>
         </div>
-        <div>
-          <ButtonCustom
-            color={colorTheme.button.secondary.text}
-            background={colorTheme.button.secondary.main}
-            onClick={handleBottomClick}
-          >
-            {t(bottomButton)}
-          </ButtonCustom>
-        </div>
+        {!oneAction && (
+          <div>
+            <ButtonCustom
+              color={colorTheme.button.secondary.text}
+              background={colorTheme.button.secondary.main}
+              onClick={handleBottomClick}
+            >
+              {t(bottomButton)}
+            </ButtonCustom>
+          </div>
+        )}
       </DialogContent>
       <DialogActions
         classes={{
@@ -68,7 +71,7 @@ function ModalWithThreeButton(props) {
           color={colorTheme.text.primary}
           background="transparent"
         >
-          Cancel
+          {t('Cancel')}
         </ButtonCustom>
       </DialogActions>
     </Dialog>

@@ -181,6 +181,15 @@ export const fetchTransactionHistory = () => async (dispatch, getState) => {
     }
   }
 
+  for (let i = 0; i < response.length; i++) {
+    if (response[i].module === 'balances') {
+      response[i].tokenSymbol = 'CRU';
+    } else if (response[i].module === 'csm') {
+      response[i].tokenSymbol = 'CSM';
+    } else if (response[i].module === 'candy') {
+      response[i].tokenSymbol = 'Candy';
+    }
+  }
   dispatch(updateTransactionHistory(response));
   return response;
 };

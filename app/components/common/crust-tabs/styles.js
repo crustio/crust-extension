@@ -26,7 +26,7 @@ export const styles = () => ({
   },
   tabRootHomeMainnet: {
     color: '#CCCCCC',
-    width: '100px',
+    width: '105px',
     height: '48px',
     textTransform: 'none',
     fontSize: '20px',
@@ -46,7 +46,7 @@ export const styles = () => ({
   },
   tabRootHomeMaxwell: {
     color: '#4F4D59',
-    width: '100px',
+    width: '105px',
     height: '48px',
     textTransform: 'none',
     fontSize: '20px',

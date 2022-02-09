@@ -8,6 +8,7 @@ import * as Account from '../../constants/account';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { shortenFilename } from '../../services/wallet-service';
 import { CHINESE } from '../../constants/language';
+import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class ImportJson extends Component {
@@ -82,7 +83,7 @@ class ImportJson extends Component {
 
   render() {
     const {
-      t, jsonPwdError, walletPwdError, language
+      t, jsonPwdError, walletPwdError, language, network
     } = this.props;
     const {
       filename, jsonPwd, walletPwd, fileError
@@ -123,6 +124,7 @@ class ImportJson extends Component {
             onChange={e => this.handleOnChange('jsonPwd', e)}
             password={jsonPwd}
             placeholder={t('Password')}
+            colorTheme={colorTheme[network.value]}
           />
           {jsonPwdError !== '' ? (
             <div className="error-msg">{t(jsonPwdError)}</div>
@@ -150,6 +152,7 @@ class ImportJson extends Component {
             onChange={e => this.handleOnChange('walletPwd', e)}
             password={walletPwd}
             placeholder={t('Password')}
+            colorTheme={colorTheme[network.value]}
           />
           <FontRegular
             className="import-json-text import-json-text-margin2 json-file-text-color"

@@ -91,6 +91,7 @@ export default class AddToken extends Component {
               this.inputRef = input;
             }}
             onBlur={this.handleOnBlur}
+            colorTheme={colorTheme[network.value]}
           />
           <FooterButton onClick={this.handleAddToken} name="OK" />
         </div>

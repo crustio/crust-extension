@@ -25,6 +25,7 @@ class ConfirmForm extends Component {
       password,
       errorText,
       handleOnChange,
+      colorTheme,
       t,
     } = this.props;
     return (
@@ -62,6 +63,7 @@ class ConfirmForm extends Component {
               onChange={e => handleOnChange('password', e)}
               password={password}
               placeholder={t('Wallet Password')}
+              colorTheme={colorTheme}
             />
             {errorText !== '' ? (
               <div className="error-msg">{t(errorText)}</div>

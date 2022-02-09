@@ -11,6 +11,7 @@ import FontRegular from '../../components/common/fonts/font-regular';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { DASHBOARD_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 import { BACK_BUTTON_TEXT, TO_CONFIRM_BUTTON_TEXT } from '../../constants/account';
+import { colorTheme } from '../../../lib/constants/colors';
 
 class ExportAccout extends Component {
   constructor(props) {
@@ -107,7 +108,7 @@ class ExportAccout extends Component {
 
   render() {
     const { password, errorText } = this.state;
-    const { t, account } = this.props;
+    const { t, account, network } = this.props;
     const theme = 'substrate';
     return (
       <div className="export-account-container">
@@ -137,6 +138,7 @@ class ExportAccout extends Component {
             onChange={this.handleOnChange}
             password={password}
             placeholder={t('Password')}
+            colorTheme={colorTheme[network.value]}
           />
           <FontRegular
             className="export-account-info-text export-account-margin"

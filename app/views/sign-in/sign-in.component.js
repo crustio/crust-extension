@@ -5,6 +5,8 @@ import CrustUnlockPassword from '../../components/common/password/crust-unlock-p
 import FontRegular from '../../components/common/fonts/font-regular';
 import FooterButton from '../../components/common/footer-button';
 import LogoBig from '../../images/crust-logo-big.svg';
+import { colorTheme } from '../../../lib/constants/colors';
+import { CRUST_NETWORK } from '../../../lib/constants/networks';
 import './styles.css';
 
 class SignIn extends Component {
@@ -72,6 +74,7 @@ class SignIn extends Component {
               password={password}
               placeholder={t('Password')}
               handleUnlock={this.handleClick}
+              colorTheme={colorTheme[CRUST_NETWORK.value]}
             />
           </div>
 

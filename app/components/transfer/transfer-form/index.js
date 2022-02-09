@@ -17,6 +17,7 @@ class TransferForm extends Component {
       units,
       toRef,
       amountRef,
+      language,
       isAddressEncoded,
       isToError,
       toErrorText,
@@ -44,6 +45,7 @@ class TransferForm extends Component {
             theme={theme}
             alias={alias}
             isToError={isToError}
+            label={t('To Address')}
             isAddressEncoded={isAddressEncoded}
             toPropName={toPropName}
             to={to}
@@ -68,6 +70,7 @@ class TransferForm extends Component {
           dropDownValue={unit}
           onDropDownChange={handleUnitOnChange}
           colorTheme={colorTheme}
+          language={language}
         />
         <FooterWithTwoButton
           onNextClick={handleSendButton}

@@ -19,6 +19,7 @@ export default class AccountPanel extends Component {
   render() {
     const { showModal } = this.state;
     const {
+      t,
       selectedAccount,
       onCopyAddress,
       onAccountMenuOptionsChange,
@@ -30,6 +31,7 @@ export default class AccountPanel extends Component {
       colorTheme,
       network,
       onCreateAccountClick,
+      onImportAccountClick,
       ...otherProps
     } = this.props;
 
@@ -70,10 +72,11 @@ export default class AccountPanel extends Component {
           colorTheme={colorTheme}
           handleCancel={this.handleCancel}
           handleTopClick={onCreateAccountClick}
-          handleBottomClick={null}
+          handleBottomClick={onImportAccountClick}
           topButton="Create Account"
           bottomButton="Import Account"
           network={network}
+          oneAction={false}
         />
       </div>
     );

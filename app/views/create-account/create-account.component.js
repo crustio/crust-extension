@@ -10,6 +10,8 @@ import FooterWithTwoButton from '../../components/common/footer-with-two-button'
 import * as Account from '../../constants/account';
 import './styles.css';
 import AlertDailog from '../../components/common/alert-dialog';
+import { colorTheme } from '../../../lib/constants/colors';
+import { CRUST_NETWORK } from '../../../lib/constants/networks';
 
 class CreateAccount extends Component {
   constructor(props) {
@@ -401,6 +403,7 @@ class CreateAccount extends Component {
           aliasRef={input => {
             this.aliasInput = input;
           }}
+          colorTheme={colorTheme[CRUST_NETWORK.value]}
           handleAliasOnBlur={this.handleAliasOnBlur}
           handlePasswordChange={this.handlePasswordChange}
           aliasPassworkPropName="passoword"

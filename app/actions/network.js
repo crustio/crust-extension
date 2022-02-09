@@ -117,12 +117,16 @@ export const propagateUpdates = async dispatch => {
   dispatch(updateAppLoading(false));
 };
 
-export const switchNetwork = network => async dispatch => {
+export const switchNetwork = newNetwork => async (dispatch, getState) => {
   try {
-    await Network.updateCurrentNetwork(network);
-    dispatch(changeNetwork(network));
+    const { network, isConnected } = getState().networkReducer;
+    await Network.updateCurrentNetwork(newNetwork);
+    dispatch(changeNetwork(newNetwork));
     dispatch(propagateUpdates);
-    dispatch(fetchTransactionHistory(network));
+    dispatch(fetchTransactionHistory(newNetwork));
+    if (network.value === newNetwork.value) {
+      dispatch(updateNetworkStatus(!isConnected));
+    }
   } catch (e) {
     dispatch();
   }

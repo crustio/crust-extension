@@ -67,6 +67,7 @@ export default class CustomNetwork extends Component {
           urlRef={input => {
             this.urlField = input;
           }}
+          colorTheme={colorTheme[network.value]}
         />
       </div>
     );

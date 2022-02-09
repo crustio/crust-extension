@@ -18,6 +18,7 @@ export default class Wallet extends Component {
       colorTheme,
       network,
       onCreateAccountClick,
+      onImportAccountClick,
       ...otherProps
     } = this.props;
 
@@ -42,6 +43,7 @@ export default class Wallet extends Component {
           colorTheme={colorTheme}
           network={network}
           onCreateAccountClick={onCreateAccountClick}
+          onImportAccountClick={onImportAccountClick}
         />
       </div>
     );

@@ -245,6 +245,7 @@ class CreateAddressBook extends Component {
           networks={networks}
           network={network}
           onNetworkChange={this.handelNetworkChange}
+          colorTheme={colorTheme[network.value]}
         />
       </div>
     );

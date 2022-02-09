@@ -14,6 +14,7 @@ import {
   QR_CODE_PAGE,
   TOKEN_DETAILS_PAGE,
   TRANSFER_PAGE,
+  IMPORT_JSON_PAGE,
 } from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
 import {
@@ -134,6 +135,10 @@ class Dashboard extends Component {
     this.props.changePage(CREATE_ACCOUNT_PAGE);
   };
 
+  onImportAccountClick = () => {
+    this.props.changePage(IMPORT_JSON_PAGE);
+  };
+
   render() {
     const {
       accounts,
@@ -182,6 +187,7 @@ class Dashboard extends Component {
               accountMenu={accountMenu}
               onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
               onCreateAccountClick={this.onCreateAccountClick}
+              onImportAccountClick={this.onImportAccountClick}
               style={{
                 color: colorTheme[network.value].text.secondary,
                 boxShadow: network.value === 'crust maxwell' ? 'none' : '',

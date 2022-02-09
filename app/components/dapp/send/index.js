@@ -95,6 +95,7 @@ class Send extends Component {
           onChange={e => handleOnChange('password', e)}
           password={password}
           placeholder={t('Wallet Password')}
+          colorTheme={colorTheme}
         />
         {errorText !== '' ? (
           <div className="error-msg">{t(errorText)}</div>

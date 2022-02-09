@@ -4,6 +4,7 @@ import CrustInput from '../../common/crust-input';
 import DropDown from '../../common/drop-down';
 import FontRegular from '../../common/fonts/font-regular';
 import { convertBalanceToShow } from '../../../../lib/services/numberFormatter';
+import { CHINESE } from '../../../constants/language';
 import './styles.css';
 
 class TransferFormAmount extends Component {
@@ -17,6 +18,7 @@ class TransferFormAmount extends Component {
 
   render() {
     const {
+      language,
       error,
       label,
       value,
@@ -57,6 +59,7 @@ class TransferFormAmount extends Component {
             value={value}
             placeholder={t('Amount')}
             style={{ background: colorTheme.card }}
+            colorTheme={colorTheme}
             endAdornment={
               <FontRegular
                 text={t('Max')}
@@ -66,7 +69,7 @@ class TransferFormAmount extends Component {
                   cursor: 'pointer',
                   color: colorTheme.text.secondary,
                   fontSize: 14,
-                  width: 32,
+                  width: language === CHINESE ? 55 : 32,
                 }}
                 onClick={this.onClickMax}
               />

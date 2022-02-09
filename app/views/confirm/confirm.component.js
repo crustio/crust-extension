@@ -88,6 +88,7 @@ class Confirm extends Component {
           password={password}
           handleOnChange={this.handleOnChange}
           errorText={errorText}
+          colorTheme={colorTheme[network.value]}
         />
       </div>
     );

@@ -6,6 +6,7 @@ import {
   CREATE_ACCOUNT_PAGE,
   DASHBOARD_PAGE,
   EXPORT_ACCOUNT_PAGE,
+  IMPORT_JSON_PAGE,
 } from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AccountList from '../../components/account-list';
@@ -30,10 +31,11 @@ import './styles.css';
 class ManageAccount extends Component {
   constructor(props) {
     super(props);
+    const { t } = this.props;
     this.textInput = React.createRef();
     this.state = {
       isOpen: false,
-      labels: ['My Account', 'Settings'],
+      labels: [t('My Account'), t('Settings')],
       allowUpdate: true,
     };
   }
@@ -108,6 +110,10 @@ class ManageAccount extends Component {
     this.props.changePage(CREATE_ACCOUNT_PAGE);
   };
 
+  handleImportAccount = async () => {
+    await this.props.changePage(IMPORT_JSON_PAGE);
+  };
+
   handleOptionsChange = (e, option) => {
     if (option.value === 'network_mode') {
       this.props.updateAppLoading(true);
@@ -141,7 +147,9 @@ class ManageAccount extends Component {
     // eslint-disable-next-line no-restricted-syntax
     for (const option of AccountOptions) {
       if (option.value === 'network_mode') {
-        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set To Offline Mode';
+        option.text = isOfflineMode ? t('Set To Online Mode') : t('Set To Offline Mode');
+      } else {
+        option.text = t(option.text);
       }
     }
 
@@ -222,7 +230,7 @@ class ManageAccount extends Component {
         {currentTab === 0 && (
           <FooterWithTwoButton
             onNextClick={this.handleAddAccount}
-            onBackClick={null} //Currently we need to clear import method.
+            onBackClick={this.handleImportAccount} //Currently we need to clear import method.
             backButtonName={t('Import Account')}
             nextButtonName={t('Create Account')}
             nextColor={colorTheme[network.value].button.primary.text}

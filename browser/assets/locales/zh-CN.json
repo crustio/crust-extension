@@ -46,6 +46,7 @@
   "Please make sure you have saved the seed phrase or private key for this account before continuing.": "继续删除操作之前，请确认您已经备份了这个账户的助记词或私钥。",
   "Make sure you have saved the seed phrase.": "请确认您已经备份了这个账户的助记词。",
 
+  "Account": "账户",
   "Remove": "移除",
   "Add Address": "添加地址",
   "Export Account": "导出账户",
@@ -67,6 +68,7 @@
 
   "OK": "好的",
   "Cancel": "取消",
+  "Import Account": "导入账户",
 
   "Sign": "签名",
 
@@ -156,5 +158,16 @@
   "Possible reasons": "可能的原因",
   "reasons_1": "1.您手动将钱包切换为\"离线模式\"。在该模式下，钱包总是主动保持离线。您可以在设定菜单中切换离线/在线模式。",
   "reasons_2": "2.钱包未升级到最新版本。您可能需要更新版本，或等待新版本发布。",
-  "reasons_3": "3.网络或服务器连接出现错误。"
+  "reasons_3": "3.网络或服务器连接出现错误。",
+
+  "Crust Mainnet": "Crust主网",
+  "Crust Maxwell": "Maxwell预览网",
+
+  "My Account": "我的账户",
+  "Settings": "设置项",
+  "Lock": "锁定钱包",
+  "Get CRU": "获取CRU",
+
+  "To Address": "转至地址",
+  "Max": "最大值"
 }

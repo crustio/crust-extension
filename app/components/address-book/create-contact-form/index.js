@@ -29,6 +29,7 @@ class CreateContactForm extends Component {
       handleLnameChange,
       onSubmit,
       buttonName,
+      colorTheme,
       t,
     } = this.props;
     return (
@@ -45,6 +46,7 @@ class CreateContactForm extends Component {
             errorMessage={addressErrorMessage}
             onChange={handleToChange}
             inputRef={addressInputRef}
+            colorTheme={colorTheme}
           />
           <div className="contact-fname-input-container">
             <CrustInput
@@ -52,6 +54,7 @@ class CreateContactForm extends Component {
               value={fname}
               onChange={handleFnameChange(fnamePropName)}
               placeholder={fnameLabel}
+              colorTheme={colorTheme}
             />
             {isFnameError ? (
               <span className="error-msg">{fnameErrorMessage}</span>
@@ -65,6 +68,7 @@ class CreateContactForm extends Component {
               value={lname}
               onChange={handleLnameChange(lnamePropName)}
               placeholder={lnameLabel}
+              colorTheme={colorTheme}
             />
             {isLnameError ? (
               <span className="error-msg">{lnameErrorMessage}</span>

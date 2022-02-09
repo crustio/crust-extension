@@ -42,6 +42,7 @@ class AddressList extends Component {
               handleListItemClick={handelChangeToAddress}
               network={network}
               colorTheme={colorTheme}
+              customModal
             />
           ))}
         </List>

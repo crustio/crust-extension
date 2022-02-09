@@ -166,6 +166,7 @@ class Transfer extends Component {
       isAmountError,
       toAmountErrorMessage,
       toAddress,
+      language,
       t,
     } = this.props;
     const {
@@ -225,6 +226,7 @@ class Transfer extends Component {
           handleUnitOnChange={this.handleUnitChange}
           onAddressBookClick={this.onAddressBookClick}
           colorTheme={colorTheme[network.value]}
+          language={language}
         />
       </div>
     );
