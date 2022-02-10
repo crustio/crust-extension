@@ -26,6 +26,7 @@ class AddressBook extends Component {
       isMoreVertIconVisible: true,
       showSettings: true,
       headerText: 'Address Book',
+      showFooterModal: false,
     };
   }
 
@@ -43,6 +44,16 @@ class AddressBook extends Component {
   async componentDidMount() {
     await this.props.getContacts();
   }
+
+  handleFooterClick = event => {
+    this.setState({ showFooterModal: true });
+    console.log('clicked');
+  };
+
+  handleFooterCancel = () => {
+    this.setState({ showFooterModal: false });
+    console.log('cancel Clicked');
+  };
 
   handleSubheaderBackBtn = () => {
     this.props.changePage(this.props.backupPage);
@@ -98,12 +109,13 @@ class AddressBook extends Component {
     const { removeContact, t } = this.props;
     removeContact(contact, t);
     this.setState({ isOpen: false });
+    this.handleFooterCancel();
   };
 
   render() {
     const { addressBook, network, t } = this.props;
     const {
-      isOpen, showSettings, headerText, isMoreVertIconVisible
+      isOpen, showSettings, headerText, isMoreVertIconVisible, showFooterModal
     } = this.state;
     const theme = 'substrate';
     const optionsHeader = ADDRESS_BOOK_MENU_OPTIONS.map(o => ({ ...o, text: o.text }));
@@ -136,6 +148,9 @@ class AddressBook extends Component {
                 handelChangeToAddress={this.handelChangeToAddress}
                 network={network}
                 colorTheme={colorTheme[network.value]}
+                showFooterModal={showFooterModal}
+                handleFooterClick={this.handleFooterClick}
+                handleFooterCancel={this.handleFooterCancel}
               />
             ) : (
               <div className="empty-address-book-container">

@@ -34,6 +34,9 @@ class AccountList extends Component {
       colorTheme,
       theme,
       network,
+      showFooterModal,
+      handleFooterClick,
+      handleFooterCancel,
       ...otherProps
     } = this.props;
     return (
@@ -61,6 +64,10 @@ class AccountList extends Component {
               colorTheme={colorTheme}
               network={network}
               customModal={false}
+              showRadio
+              showFooterModal={showFooterModal}
+              handleFooterClick={handleFooterClick}
+              handleFooterCancel={handleFooterCancel}
             />
           ))}
         </List>

@@ -13,18 +13,6 @@ import './styles.css';
 import { EXPORT_ACCOUNT, REMOVE } from '../../../constants/options';
 
 class ListItemCard extends Component {
-  state = {
-    showModal: false,
-  };
-
-  handleClick = event => {
-    this.setState({ showModal: true });
-  };
-
-  handleCancel = () => {
-    this.setState({ showModal: false });
-  };
-
   handleNullBalanceObject = (balObj, account) => {
     if (!balObj) {
       return {
@@ -60,25 +48,30 @@ class ListItemCard extends Component {
       colorTheme,
       network,
       customModal,
+      showRadio,
+      showFooterModal,
+      handleFooterClick,
+      handleFooterCancel,
       ...otherProps
     } = this.props;
-    const { showModal } = this.state;
     return (
       <div {...otherProps}>
         <ListItem>
-          <ListItemAvatar onClick={event => handleListItemAvatarClick(event, listItem)}>
-            {isActive ? (
-              <CheckCircleIcon
-                className="accout-card-icon"
-                style={{ color: colorTheme.icon.primary }}
-              />
-            ) : (
-              <RadioButtonUncheckedIcon
-                className="accout-card-icon"
-                style={{ color: colorTheme.icon.secondary }}
-              />
-            )}
-          </ListItemAvatar>
+          {showRadio && (
+            <ListItemAvatar onClick={event => handleListItemAvatarClick(event, listItem)}>
+              {isActive ? (
+                <CheckCircleIcon
+                  className="accout-card-icon"
+                  style={{ color: colorTheme.icon.primary }}
+                />
+              ) : (
+                <RadioButtonUncheckedIcon
+                  className="accout-card-icon"
+                  style={{ color: colorTheme.icon.secondary }}
+                />
+              )}
+            </ListItemAvatar>
+          )}
           <ListItemText
             onClick={event => handleListItemClick(event, listItem)}
             primary={
@@ -106,18 +99,18 @@ class ListItemCard extends Component {
           {isMoreVertIconVisible && (
             <MoreHorizIcon
               color={colorTheme.text.secondary}
-              onClick={this.handleClick}
+              onClick={handleFooterClick}
               className="more-list-icon"
             />
           )}
           <ModalWithThreeButton
-            show={showModal}
+            show={showFooterModal}
             colorTheme={colorTheme}
             firstOption={EXPORT_ACCOUNT}
             secondOption={REMOVE}
             handleTopClick={this.handleTopClick}
             handleBottomClick={this.handleBottomClick}
-            handleCancel={this.handleCancel}
+            handleCancel={handleFooterCancel}
             topButton="Remove"
             bottomButton="Export Account"
             network={network}

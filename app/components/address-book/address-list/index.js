@@ -18,6 +18,9 @@ class AddressList extends Component {
       theme,
       network,
       colorTheme,
+      showFooterModal,
+      handleFooterCancel,
+      handleFooterClick,
       ...otherProps
     } = this.props;
     return (
@@ -43,6 +46,10 @@ class AddressList extends Component {
               network={network}
               colorTheme={colorTheme}
               customModal
+              showRadio={false}
+              showFooterModal={showFooterModal}
+              handleFooterClick={handleFooterClick}
+              handleFooterCancel={handleFooterCancel}
             />
           ))}
         </List>

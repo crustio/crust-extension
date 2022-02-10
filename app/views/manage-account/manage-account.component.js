@@ -37,6 +37,7 @@ class ManageAccount extends Component {
       isOpen: false,
       labels: [t('My Account'), t('Settings')],
       allowUpdate: true,
+      showFooterModal: false,
     };
   }
 
@@ -46,6 +47,14 @@ class ManageAccount extends Component {
 
   handleSubheaderBackBtn = () => {
     this.props.changePage(DASHBOARD_PAGE);
+  };
+
+  handleFooterClick = event => {
+    this.setState({ showFooterModal: true });
+  };
+
+  handleFooterCancel = () => {
+    this.setState({ showFooterModal: false });
   };
 
   onCopy = () => {
@@ -99,6 +108,7 @@ class ManageAccount extends Component {
     const { removeAccount, t } = this.props;
     removeAccount(account, t);
     this.setState({ isOpen: false });
+    this.handleFooterCancel();
   };
 
   handleTabChange = (e, value) => {
@@ -135,7 +145,9 @@ class ManageAccount extends Component {
     const {
       accounts, account, t, language, isOfflineMode, currentTab, network
     } = this.props;
-    const { isOpen, labels, allowUpdate } = this.state;
+    const {
+      isOpen, labels, allowUpdate, showFooterModal
+    } = this.state;
     const theme = 'substrate';
     const options = accounts.length > 1
       ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => ({ ...o, text: t(o.text) }))
@@ -147,9 +159,7 @@ class ManageAccount extends Component {
     // eslint-disable-next-line no-restricted-syntax
     for (const option of AccountOptions) {
       if (option.value === 'network_mode') {
-        option.text = isOfflineMode ? t('Set To Online Mode') : t('Set To Offline Mode');
-      } else {
-        option.text = t(option.text);
+        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set To Offline Mode';
       }
     }
 
@@ -194,6 +204,9 @@ class ManageAccount extends Component {
                     handleChangeAccount={this.handleChangeAccount}
                     colorTheme={colorTheme[network.value]}
                     network={network}
+                    handleFooterClick={this.handleFooterClick}
+                    handleFooterCancel={this.handleFooterCancel}
+                    showFooterModal={showFooterModal}
                   />
                 ) : null}
                 <div>

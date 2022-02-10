@@ -62,32 +62,32 @@ export const getBalance = async address => {
   try {
     const api = getApi();
     const ret = await api.derive.balances.all(address);
+    const { data } = await api.query.system.account(address);
+
     const balance = ret.availableBalance;
     const balanceFormatted = formatBalance(ret.availableBalance, true, ChainApi.getTokenDecimals());
+    const lockAmount = Math.min(data.miscFrozen, data.feeFrozen);
+
     const balanceObj = {
       address,
       balance: balance.toString(),
       balanceFormatted,
       status: SUCCESS,
     };
-    if (ret.lockedBalance && !ret.lockedBalance.isZero()) {
-      balanceObj.locked = ret.lockedBalance.toString();
-      balanceObj.lockedFormatted = formatBalance(
-        ret.lockedBalance,
-        true,
-        ChainApi.getTokenDecimals(),
-      );
+    if (lockAmount && !lockAmount.isZero()) {
+      balanceObj.locked = lockAmount.toString();
+      balanceObj.lockedFormatted = formatBalance(lockAmount, true, ChainApi.getTokenDecimals());
     }
-    if (ret.reservedBalance && !ret.reservedBalance.isZero()) {
-      balanceObj.reserved = ret.reservedBalance.toString();
+    if (data.reserved && !data.reserved.isZero()) {
+      balanceObj.reserved = data.reserved.toString();
       balanceObj.reservedFormatted = formatBalance(
-        ret.reservedBalance,
+        data.reserved,
         true,
         ChainApi.getTokenDecimals(),
       );
     }
     if (balanceObj.reserved || balanceObj.locked) {
-      const total = ret.freeBalance.add(ret.reservedBalance);
+      const total = data.free.add(data.reserved);
       balanceObj.total = total.toString();
       balanceObj.totalFormatted = formatBalance(total, true, ChainApi.getTokenDecimals());
     }
