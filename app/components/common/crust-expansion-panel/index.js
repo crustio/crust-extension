@@ -22,7 +22,7 @@ class CrustExpansionPanel extends Component {
   render() {
     const { expanded } = this.state;
     const {
-      classes, title, children, ...otherProps
+      classes, title, children, colorTheme, ...otherProps
     } = this.props;
     return (
       <ExpansionPanel
@@ -32,7 +32,9 @@ class CrustExpansionPanel extends Component {
         {...otherProps}
       >
         <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={
+            <ExpandMoreIcon style={{ color: colorTheme ? colorTheme.text.primary : null }} />
+          }
           classes={{
             content: classes.content,
             expanded: classes.expanded,
@@ -40,7 +42,16 @@ class CrustExpansionPanel extends Component {
             expandIcon: classes.expandIcon,
           }}
           // eslint-disable-next-line react/no-children-prop
-          children={<FontRegular text={title} style={{ fontSize: 14, fontWeight: 'bolder' }} />}
+          children={
+            <FontRegular
+              text={title}
+              style={{
+                fontSize: 14,
+                fontWeight: 'bolder',
+                color: colorTheme ? colorTheme.text.primary : null,
+              }}
+            />
+          }
         />
         <ExpansionPanelDetails
           classes={{ root: classes.detailsRoot }}

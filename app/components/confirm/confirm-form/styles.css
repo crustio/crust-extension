@@ -1,6 +1,7 @@
 .confirm-form-container {
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
 }
 
 .confirm-form-top-container {
@@ -45,7 +46,6 @@
 
 .confirm-form-password-container {
   width: 100%;
-  padding: 0 16px;
 }
 
 .confirm-form-password {

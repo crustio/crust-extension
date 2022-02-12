@@ -21,6 +21,7 @@ export const LANGUAGE_SETTING_PAGE = 'language_setting_page';
 export const EXPORT_ACCOUNT_PAGE = 'export_account_page';
 export const CREATE_ACCOUNT_ENTRY_PAGE = 'create_account_entry_page';
 export const IMPORT_JSON_PAGE = 'import_json_page';
+export const IMPORT_PHRASE_PAGE = 'import_phrase_page';
 
 export const ONBOARDING_PAGES_GROUP = [
   TERMS_PAGE,

@@ -15,17 +15,17 @@ class About extends Component {
     this.props.updateBackupPage(NavConstants.DASHBOARD_PAGE);
   };
 
-  renderInfoLinks() {
+  renderInfoLinks(color) {
     const { t } = this.props;
     return (
       <div className="info-container">
-        <FontRegular className="about-link-title" text={t('Link')} />
+        <FontRegular className="about-link-title" text={t('Link')} style={{ color }} />
         {this.props.links.map(link => (
           <div key={link.url} className={link.value === 'tou' ? 'about-tou' : 'about-link'}>
             <Link
               href={link.url}
               style={{
-                color: '#037DD6',
+                color: '#FF8D00',
               }}
             >
               {t(`${link.text}`)}
@@ -39,7 +39,7 @@ class About extends Component {
   render() {
     const { manifest, network, t } = this.props;
     return (
-      <div>
+      <div style={{ height: 550, background: `${colorTheme[network.value].background}` }}>
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('About')}
@@ -48,9 +48,17 @@ class About extends Component {
           colorTheme={colorTheme[network.value]}
         />
         <div className="about-container">
-          <FontRegular className="about-title" text={manifest.name} />
-          <FontRegular className="about-version" text={`Version ${manifest.version}`} />
-          {this.renderInfoLinks()}
+          <FontRegular
+            className="about-title"
+            text={manifest.name}
+            style={{ color: colorTheme[network.value].text.primary }}
+          />
+          <FontRegular
+            className="about-version"
+            text={`Version ${manifest.version}`}
+            style={{ color: colorTheme[network.value].text.quaternary }}
+          />
+          {this.renderInfoLinks(colorTheme[network.value].text.primary)}
           <div className="about-button">
             <FooterButton
               style={{

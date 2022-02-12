@@ -15,6 +15,7 @@ class CrustMultilineInput extends Component {
       value,
       helperText,
       name,
+      colorTheme,
       ...otherProps
     } = this.props;
     return (
@@ -44,6 +45,13 @@ class CrustMultilineInput extends Component {
               root: classes.inputRoot,
               input: classes.input,
               error: classes.inputError,
+            },
+            style: {
+              background: colorTheme ? colorTheme.card : null,
+              color: colorTheme ? colorTheme.text.primary : null,
+              '&::placeholder': {
+                color: colorTheme ? colorTheme.text.primary : null,
+              },
             },
           }}
         />

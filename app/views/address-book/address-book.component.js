@@ -123,7 +123,10 @@ class AddressBook extends Component {
     const options = ADDRESS_BOOK_OPTIONS.map(o => ({ ...o, text: o.text }));
     const headerTextT = t(headerText);
     return (
-      <div className="address-book-root-container">
+      <div
+        className="address-book-root-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={headerTextT}

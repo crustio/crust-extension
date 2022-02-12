@@ -51,3 +51,10 @@ export const updateCurrentTab = currentTab => async dispatch => {
     currentTab,
   });
 };
+
+export const updateSelectedAccounts = selectedAccounts => async dispatch => {
+  dispatch({
+    type: ManageAccountActionTypes.UPDATE_SELECTED_ACCOUNTS,
+    selectedAccounts,
+  });
+};

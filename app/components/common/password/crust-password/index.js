@@ -42,6 +42,7 @@ export default class CrustPassword extends Component {
           value={password}
           onChange={onChange('password')}
           colorTheme={colorTheme}
+          style={{ background: colorTheme.card }}
           endAdornment={
             <PasswordAdornment
               position="end"

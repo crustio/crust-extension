@@ -21,7 +21,7 @@ class CrustRadioButtonGroup extends Component {
           <FormControlLabel
             key={option.value}
             value={option.value}
-            control={(
+            control={
               <Radio
                 classes={{
                   colorSecondary: classes.colorSecondary,
@@ -29,7 +29,7 @@ class CrustRadioButtonGroup extends Component {
                   root: classes.radioRoot,
                 }}
               />
-            )}
+            }
             label={option.text}
             classes={{
               root: vertical ? classes.rootVertical : classes.root,

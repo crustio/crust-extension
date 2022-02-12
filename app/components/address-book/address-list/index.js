@@ -50,6 +50,7 @@ class AddressList extends Component {
               showFooterModal={showFooterModal}
               handleFooterClick={handleFooterClick}
               handleFooterCancel={handleFooterCancel}
+              style={{ background: colorTheme.card }}
             />
           ))}
         </List>

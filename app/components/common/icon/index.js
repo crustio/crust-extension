@@ -46,7 +46,7 @@ const IconTransferFromTo = props => (
     <FontAwesomeIcon
       icon={faArrowCircleDown}
       style={{
-        color: '#000000',
+        color: props.colorTheme ? props.colorTheme.icon.primary : null,
         opacity: 1,
         fontSize: 21.2,
       }}

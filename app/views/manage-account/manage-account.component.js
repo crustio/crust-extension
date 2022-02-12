@@ -7,6 +7,7 @@ import {
   DASHBOARD_PAGE,
   EXPORT_ACCOUNT_PAGE,
   IMPORT_JSON_PAGE,
+  IMPORT_PHRASE_PAGE,
 } from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AccountList from '../../components/account-list';
@@ -27,17 +28,19 @@ import FooterWithTwoButton from '../../components/common/footer-with-two-button'
 import { ENGLISH } from '../../constants/language';
 import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
+import ModalWithThreeButton from '../../components/common/modal-with-three-button';
 
 class ManageAccount extends Component {
   constructor(props) {
     super(props);
-    const { t } = this.props;
+    const { t, selectedAccounts } = this.props;
     this.textInput = React.createRef();
     this.state = {
       isOpen: false,
       labels: [t('My Account'), t('Settings')],
       allowUpdate: true,
       showFooterModal: false,
+      selectedAccountList: selectedAccounts,
     };
   }
 
@@ -45,15 +48,17 @@ class ManageAccount extends Component {
     this.props.updateBackupPage(DASHBOARD_PAGE);
   }
 
+  componentDidUpdate() {}
+
   handleSubheaderBackBtn = () => {
     this.props.changePage(DASHBOARD_PAGE);
   };
 
-  handleFooterClick = event => {
+  handleOpenImportModal = () => {
     this.setState({ showFooterModal: true });
   };
 
-  handleFooterCancel = () => {
+  handleCancelImportModal = () => {
     this.setState({ showFooterModal: false });
   };
 
@@ -91,11 +96,17 @@ class ManageAccount extends Component {
 
   handleAccountMenuOptionsChange = async (option, account) => {
     if (option.value === REMOVE.value) {
-      this.setState({ isOpen: true, account });
+      this.setState({ isOpen: true });
     } else if (option.value === EXPORT_ACCOUNT.value) {
       this.props.updateExportingAccount(account);
       this.props.changePage(EXPORT_ACCOUNT_PAGE);
     }
+  };
+
+  handleExportAccount = () => {
+    const { account } = this.props;
+    this.props.updateExportingAccount(account);
+    this.props.changePage(EXPORT_ACCOUNT_PAGE);
   };
 
   handleCloseDialog = () => {
@@ -104,10 +115,13 @@ class ManageAccount extends Component {
   };
 
   handleYes = () => {
-    const { account } = this.state;
-    const { removeAccount, t } = this.props;
-    removeAccount(account, t);
-    this.setState({ isOpen: false });
+    const { removeAccount, selectedAccounts, t } = this.props;
+    for (let i = 0; i < selectedAccounts.length; i++) {
+      removeAccount(selectedAccounts[i], t);
+    }
+    this.props.updateSelectedAccounts([]);
+    //    removeAccount(account, t);
+    this.setState({ isOpen: false, selectedAccountList: [] });
     this.handleFooterCancel();
   };
 
@@ -115,13 +129,33 @@ class ManageAccount extends Component {
     this.props.updateCurrentTab(value);
   };
 
+  handleSelectedAccountsChange = (e, account) => {
+    const { selectedAccounts } = this.props;
+    const selectedAccountList = selectedAccounts;
+    const index = selectedAccountList.findIndex(e => e.address === account.address);
+    if (index !== -1) {
+      selectedAccountList.splice(index, 1);
+    } else {
+      selectedAccountList.push(account);
+    }
+    this.props.updateSelectedAccounts(selectedAccountList);
+    this.setState({
+      selectedAccountList,
+    });
+  };
+
   handleAddAccount = async () => {
     await this.props.addAccount();
     this.props.changePage(CREATE_ACCOUNT_PAGE);
   };
 
-  handleImportAccount = async () => {
+  handleImportJson = async () => {
     await this.props.changePage(IMPORT_JSON_PAGE);
+  };
+
+  handleImportPhrase = async () => {
+    await this.props.resetSeedWordsBeforeImport();
+    await this.props.changePage(IMPORT_PHRASE_PAGE);
   };
 
   handleOptionsChange = (e, option) => {
@@ -143,10 +177,17 @@ class ManageAccount extends Component {
 
   render() {
     const {
-      accounts, account, t, language, isOfflineMode, currentTab, network
+      accounts,
+      account,
+      t,
+      language,
+      isOfflineMode,
+      currentTab,
+      network,
+      selectedAccounts,
     } = this.props;
     const {
-      isOpen, labels, allowUpdate, showFooterModal
+      isOpen, labels, allowUpdate, showFooterModal, selectedAccountList
     } = this.state;
     const theme = 'substrate';
     const options = accounts.length > 1
@@ -195,10 +236,10 @@ class ManageAccount extends Component {
                   <AccountList
                     className="accounts-container"
                     accounts={accounts}
+                    selectedAccounts={selectedAccounts}
                     currentAccount={account}
-                    isMoreVertIconVisible
+                    isMoreVertIconVisible={false}
                     moreMenu={options}
-                    onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
                     theme={theme}
                     onCopyAddress={this.onCopyAddress}
                     handleChangeAccount={this.handleChangeAccount}
@@ -206,7 +247,7 @@ class ManageAccount extends Component {
                     network={network}
                     handleFooterClick={this.handleFooterClick}
                     handleFooterCancel={this.handleFooterCancel}
-                    showFooterModal={showFooterModal}
+                    updateSelectedAccounts={this.handleSelectedAccountsChange}
                   />
                 ) : null}
                 <div>
@@ -216,7 +257,7 @@ class ManageAccount extends Component {
                     handleYes={this.handleYes}
                     noText={t('No')}
                     yesText={t('Yes')}
-                    title={t('Remove account')}
+                    title={t('Remove accounts')}
                     msg={t(
                       'Please make sure you have saved the seed phrase or private key for this account before continuing.',
                     )}
@@ -240,10 +281,10 @@ class ManageAccount extends Component {
             </div>
           )}
         </>
-        {currentTab === 0 && (
+        {currentTab === 0 && selectedAccountList.length === 0 && (
           <FooterWithTwoButton
             onNextClick={this.handleAddAccount}
-            onBackClick={this.handleImportAccount} //Currently we need to clear import method.
+            onBackClick={this.handleOpenImportModal} //Currently we need to clear import method.
             backButtonName={t('Import Account')}
             nextButtonName={t('Create Account')}
             nextColor={colorTheme[network.value].button.primary.text}
@@ -252,6 +293,28 @@ class ManageAccount extends Component {
             backBackground={colorTheme[network.value].button.secondary.main}
           />
         )}
+        {currentTab === 0 && selectedAccountList.length !== 0 && (
+          <FooterWithTwoButton
+            onNextClick={this.handleExportAccount}
+            onBackClick={() => this.setState({ isOpen: true })}
+            backButtonName={t('Remove')}
+            nextButtonName={t('Export Account')}
+            nextColor={colorTheme[network.value].button.primary.text}
+            nextBackground={colorTheme[network.value].button.primary.main}
+            backColor={colorTheme[network.value].button.secondary.text}
+            backBackground={colorTheme[network.value].button.secondary.main}
+          />
+        )}
+        <ModalWithThreeButton
+          show={showFooterModal}
+          colorTheme={colorTheme[network.value]}
+          handleTopClick={this.handleImportJson}
+          handleBottomClick={this.handleImportPhrase}
+          handleCancel={this.handleCancelImportModal}
+          topButton={t('Import From Json')}
+          bottomButton={t('Import From Phrase')}
+          network={network}
+        />
       </div>
     );
   }

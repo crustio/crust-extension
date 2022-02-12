@@ -7,17 +7,16 @@
   width: 100%;
   display: flex;
   height: 44px;
+  border-radius: 12px;
 }
 
 .account-alias-input fieldset {
   border: 0;
   font-size: 14px;
-  background: #F0F1F5;
 }
 
 .account-alias-input:focus-within fieldset {
   background-color: transparent;
-  border: 2px solid #ECEDEF !important;
 }
 
 .input-margin {
@@ -39,20 +38,19 @@
 
 .account-password-input {
   display: flex;
-  width: 297px;
+  width: 328px;
   color: #858B9C;
   margin-top: 7px;
   height: 44px;
   margin-bottom: 10px;
+  border-radius: 12px;
 }
 
 .account-password-input fieldset {
   border: 0;
   font-size: 14px;
-  background: #F0F1F5;
 }
 
 .account-password-input:focus-within fieldset {
   background-color: transparent;
-  border: 2px solid #ECEDEF !important;
 }

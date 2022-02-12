@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import { withTranslation } from 'react-i18next';
 import ReactTooltip from 'react-tooltip';
 import FileInput from 'react-simple-file-input';
+import SubHeader from '../../components/common/sub-header';
 import FontRegular from '../../components/common/fonts/font-regular';
 import CrustPassword from '../../components/common/password/crust-password';
-import * as Account from '../../constants/account';
-import FooterWithTwoButton from '../../components/common/footer-with-two-button';
+import FooterButton from '../../components/common/footer-button';
 import { shortenFilename } from '../../services/wallet-service';
 import { CHINESE } from '../../constants/language';
 import { colorTheme } from '../../../lib/constants/colors';
@@ -45,7 +47,7 @@ class ImportJson extends Component {
     });
   };
 
-  handelBack = () => {
+  handleBack = () => {
     this.props.changePage(this.props.backupPage);
   };
 
@@ -90,8 +92,24 @@ class ImportJson extends Component {
     } = this.state;
     const filenameShow = filename && filename.length > 18 ? shortenFilename(filename) : filename;
     return (
-      <div className="import-json-container">
-        <div className="import-json-content-container">
+      <div
+        className="import-json-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
+        <SubHeader
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
+          title={t('Import From Json')}
+          backBtnOnClick={this.handleBack}
+          subMenu={null}
+          showSettings={false}
+          onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
+          isBackIcon
+          colorTheme={colorTheme[network.value]}
+        />
+        <div
+          className="import-json-content-container"
+          style={{ background: colorTheme[network.value].background }}
+        >
           <div className="import-json-select-container">
             <label className="import-json-label" htmlFor="file">
               <FileInput
@@ -103,11 +121,19 @@ class ImportJson extends Component {
                 }}
                 accept="application/json"
               />
-              <div className="import-json-file-container">{t('Choose File')}</div>
+              <div
+                className="import-json-file-container"
+                style={{
+                  backgroundColor: colorTheme[network.value].card,
+                  color: colorTheme[network.value].text.tertiary,
+                }}
+              >
+                <p>{filenameShow || t('No file chosen')}</p>
+                <InsertDriveFileIcon
+                  style={{ fontSize: 16, color: colorTheme[network.value].text.tertiary }}
+                />
+              </div>
             </label>
-            <div data-tip={filename || t('No file chosen')} className="import-json-filename">
-              {filenameShow || t('No file chosen')}
-            </div>
           </div>
           <ReactTooltip effect="solid" place="bottom" className="import-json-tooltip" />
           {fileError !== '' ? (
@@ -125,6 +151,11 @@ class ImportJson extends Component {
             password={jsonPwd}
             placeholder={t('Password')}
             colorTheme={colorTheme[network.value]}
+            style={{
+              borderRadius: 12,
+              background: colorTheme[network.value].card,
+              '&::placeholder': { color: colorTheme[network.value].text.tertiary },
+            }}
           />
           {jsonPwdError !== '' ? (
             <div className="error-msg">{t(jsonPwdError)}</div>
@@ -153,6 +184,11 @@ class ImportJson extends Component {
             password={walletPwd}
             placeholder={t('Password')}
             colorTheme={colorTheme[network.value]}
+            style={{
+              borderRadius: 12,
+              background: colorTheme[network.value].card,
+              '&::placeholder': { color: colorTheme[network.value].text.tertiary },
+            }}
           />
           <FontRegular
             className="import-json-text import-json-text-margin2 json-file-text-color"
@@ -164,12 +200,7 @@ class ImportJson extends Component {
             <div className="place-holder"> </div>
           )}
         </div>
-        <FooterWithTwoButton
-          onNextClick={this.handleClick}
-          onBackClick={this.handelBack}
-          backButtonName={t(Account.BACK_BUTTON_TEXT)}
-          nextButtonName={t(Account.TO_CONFIRM_BUTTON_TEXT)}
-        />
+        <FooterButton name={t('Next')} onClick={this.handleClick} />
       </div>
     );
   }

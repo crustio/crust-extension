@@ -1,24 +1,24 @@
-.create-account-container {
-  height: 469px;
+.import-phrase-container {
+  height: 600px;
   background: #fff;
 }
 
-.create-account-form {
+.import-phrase-form {
   display: flex;
   flex-direction: column;
   text-align: left;
   padding-top: 17px;
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
-.create-account-settings-import {
+.import-phrase-settings-import {
   width: 328px;
   margin-top: 20px;
   margin-left: 16px;
 }
 
-.create-account-settings {
+.import-phrase-settings {
   width: 328px;
   margin-top: 20px;
   margin-left: 16px;

@@ -30,8 +30,14 @@ class ConfirmForm extends Component {
     } = this.props;
     return (
       <div className="confirm-form-container">
-        <div className="confirm-form-top-container">
-          <ConfirmFromTo to={to} theme={theme} from={address} alias={alias} />
+        <div className="confirm-form-top-container" style={{ background: colorTheme.background }}>
+          <ConfirmFromTo
+            to={to}
+            theme={theme}
+            from={address}
+            alias={alias}
+            colorTheme={colorTheme}
+          />
           <DarkDivider
             className="confirm-form-amount-divider"
             background="#E2E4EA"

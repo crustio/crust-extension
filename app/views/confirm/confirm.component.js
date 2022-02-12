@@ -72,7 +72,10 @@ class Confirm extends Component {
     const { errorText, password } = this.state;
     const theme = 'substrate';
     return (
-      <div className="confirm-container">
+      <div
+        className="confirm-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '18px' }} />}
           title={t('Send')}

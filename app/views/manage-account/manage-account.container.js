@@ -8,6 +8,7 @@ import {
   removeAccount,
   resetSeedWordsBeforeImport,
   updateCurrentTab,
+  updateSelectedAccounts,
 } from './actions';
 import { updateExportingAccount } from '../export-account/actions';
 import { setNetworkMode } from '../../actions/network';
@@ -22,6 +23,7 @@ const mapStateToProps = state => ({
   language: state.appStateReducer.language,
   isOfflineMode: state.networkReducer.isOfflineMode,
   currentTab: state.manageAccountReducer.currentTab,
+  selectedAccounts: state.manageAccountReducer.selectedAccounts,
 });
 
 const mapDispatchToProps = {
@@ -37,6 +39,7 @@ const mapDispatchToProps = {
   lockApp,
   updateCurrentTab,
   updateAppLoading,
+  updateSelectedAccounts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAccount);

@@ -43,7 +43,11 @@ class SettingsItemCard extends Component {
             }
             className={classes.primaryWidth}
           />
-          <ArrowForwardIosIcon color="rgba(0, 0, 0, 1)" className="arrow-list-icon" />
+          <ArrowForwardIosIcon
+            color="rgba(0, 0, 0, 1)"
+            className="arrow-list-icon"
+            style={{ color: colorTheme.text.primary }}
+          />
         </ListItem>
       </div>
     );

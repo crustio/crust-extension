@@ -16,6 +16,8 @@ import {
   TRANSFER_PAGE,
   QR_CODE_PAGE,
   MANAGE_ACCOUNT_PAGE,
+  IMPORT_PHRASE_PAGE,
+  CONFIRM_PAGE,
 } from '../constants/navigation';
 import { copyAccountMessage } from '../../lib/services/static-message-factory-service';
 import CrustApp from '../components/crust-app';
@@ -67,7 +69,7 @@ class App extends Component {
 
         if (prevProps.page === IMPORT_JSON_PAGE) {
           return {
-            showHeader: true, // no change
+            showHeader: false, // no change
             showLogo: false,
             showBanner: true,
             showNetwork: false,
@@ -76,6 +78,7 @@ class App extends Component {
             showUserId: false,
           };
         }
+
         if (prevProps.page === CREATE_ACCOUNT_PAGE) {
           return {
             showHeader: true, // no change
@@ -153,6 +156,31 @@ class App extends Component {
           showUserId: false,
         };
       }
+
+      if (prevProps.page === IMPORT_PHRASE_PAGE) {
+        return {
+          showHeader: false, // no change
+          showLogo: false,
+          showBanner: false,
+          showNetwork: false,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: false,
+        };
+      }
+
+      if (prevProps.page === CONFIRM_PAGE) {
+        return {
+          showHeader: false, // no change
+          showLogo: false,
+          showBanner: false,
+          showNetwork: false,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: false,
+        };
+      }
+
       return {
         showHeader: true, // no change
         showLogo: true,

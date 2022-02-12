@@ -23,6 +23,7 @@ class ImportSeedPhrase extends Component {
       importSeedPhraseInputName,
       seedRef,
       handleSeedWordsOnBlur,
+      colorTheme,
       t,
     } = this.props;
     return (
@@ -32,6 +33,7 @@ class ImportSeedPhrase extends Component {
           description={t(
             "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.",
           )}
+          colorTheme={colorTheme}
         />
         <CrustMultilineInput
           className="import-seed-phrase-input"
@@ -43,6 +45,7 @@ class ImportSeedPhrase extends Component {
           name={importSeedPhraseInputName}
           inputRef={seedRef}
           onBlur={handleSeedWordsOnBlur}
+          colorTheme={colorTheme}
         />
       </div>
     );

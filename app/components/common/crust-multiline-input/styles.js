@@ -17,18 +17,17 @@ export const styles = () => ({
   },
   inputRoot: {
     background: '#F0F1F5',
-    borderRadius: '4px',
+    borderRadius: '12px',
     paddingTop: '18px',
     paddingLeft: '18px',
     paddingRight: '18px',
     color: 'rgba(0, 0, 0, 0.87)',
     fontFamily: 'Roboto-Regular',
     fontSize: '16px',
-    width: '297px',
+    width: '328px',
   },
   input: {
     '&::placeholder': {
-      color: '#000000',
       opacity: '0.6',
       fontSize: '14px',
       fontFamily: 'Roboto-Regular',

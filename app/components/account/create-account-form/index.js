@@ -21,6 +21,7 @@ export default class CreateAccountForm extends Component {
       handleSeedWordsOnBlur,
       handleConfirmSeedWordsOnBlur,
       confirmedSeedWords,
+      colorTheme,
       alias,
       ...otherProps
     } = this.props;
@@ -37,6 +38,7 @@ export default class CreateAccountForm extends Component {
             importSeedPhraseInputName={importSeedPhraseInputName}
             seedRef={seedRef}
             handleSeedWordsOnBlur={handleSeedWordsOnBlur}
+            colorTheme={colorTheme}
           />
         )}
         {value === Account.CONFIRM_ACCOUNT && (

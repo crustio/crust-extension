@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
@@ -6,14 +7,14 @@ import CrustValidator from '../../utils/crust-validator';
 import validator from '../../utils/crust-validator/validator';
 import CreateAccountForm from '../../components/account/create-account-form';
 import CreateAccountSettings from '../../components/account/create-account-settings';
-import FooterWithTwoButton from '../../components/common/footer-with-two-button';
+import FooterButton from '../../components/common/footer-button';
 import * as Account from '../../constants/account';
 import './styles.css';
 import AlertDailog from '../../components/common/alert-dialog';
 import { colorTheme } from '../../../lib/constants/colors';
-import { CRUST_NETWORK } from '../../../lib/constants/networks';
+import SubHeader from '../../components/common/sub-header';
 
-class CreateAccount extends Component {
+class ImportPhrase extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -279,6 +280,10 @@ class CreateAccount extends Component {
     }
   };
 
+  handleBack = () => {
+    this.props.changePage(this.props.backupPage);
+  };
+
   validateAlias(alias) {
     let { isAliasError, aliasErrorMessage } = this.state;
     if (alias !== '') {
@@ -342,7 +347,7 @@ class CreateAccount extends Component {
 
   render() {
     const {
-      seedWords, keypairType, keypairTypes, t
+      seedWords, keypairType, keypairTypes, network, t
     } = this.props;
     const {
       formValue,
@@ -365,7 +370,20 @@ class CreateAccount extends Component {
       phraseErrorMsg,
     } = this.state;
     return (
-      <div className="create-account-container">
+      <div
+        className="import-phrase-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
+        <SubHeader
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
+          title={t('Import From Phrase')}
+          backBtnOnClick={this.handelBack}
+          subMenu={null}
+          showSettings={false}
+          onSubMenuOptionsChange={null}
+          isBackIcon
+          colorTheme={colorTheme[network.value]}
+        />
         <CreateAccountForm
           value={formValue}
           generatedSeedWords={seedWords}
@@ -386,7 +404,8 @@ class CreateAccount extends Component {
           }}
           handleSeedWordsOnBlur={this.handleSeedWordsOnBlur}
           handleConfirmSeedWordsOnBlur={this.handleConfirmSeedWordsOnBlur}
-          className="create-account-form"
+          className="import-phrase-form"
+          colorTheme={colorTheme[network.value]}
         />
         <CreateAccountSettings
           disableAccountSettings={disableAccountSettings}
@@ -403,7 +422,7 @@ class CreateAccount extends Component {
           aliasRef={input => {
             this.aliasInput = input;
           }}
-          colorTheme={colorTheme[CRUST_NETWORK.value]}
+          colorTheme={colorTheme[network.value]}
           handleAliasOnBlur={this.handleAliasOnBlur}
           handlePasswordChange={this.handlePasswordChange}
           aliasPassworkPropName="passoword"
@@ -413,16 +432,14 @@ class CreateAccount extends Component {
           passwordErrorMessage={t(errorMessage)}
           className={
             formValue === Account.IMPORT_ACCOUNT
-              ? 'create-account-settings-import'
-              : 'create-account-settings'
+              ? 'import-phrase-settings-import'
+              : 'import-phrase-settings'
           }
         />
-        <FooterWithTwoButton
-          style={{ bottom: '16px' }}
-          onNextClick={onSubmit}
-          onBackClick={this.handelBack}
-          backButtonName={t(backButtonName)}
-          nextButtonName={t(buttonName)}
+        <FooterButton
+          name={t(buttonName)}
+          onClick={onSubmit}
+          style={{ paddingLeft: 20, paddingRight: 16 }}
         />
         <AlertDailog
           isOpen={this.state.isOpen}
@@ -440,16 +457,16 @@ class CreateAccount extends Component {
   }
 }
 
-export default withTranslation()(CreateAccount);
+export default withTranslation()(ImportPhrase);
 
-CreateAccount.defaultProps = {
+ImportPhrase.defaultProps = {
   seedWords: '',
   createFirstAccountWithSeedPhrase: undefined,
   error: null,
   resetImportAccountWithSeedPhraseError: undefined,
 };
 
-CreateAccount.propTypes = {
+ImportPhrase.propTypes = {
   createFirstAccountWithSeedPhrase: PropTypes.func,
   error: PropTypes.string,
   resetImportAccountWithSeedPhraseError: PropTypes.func,
