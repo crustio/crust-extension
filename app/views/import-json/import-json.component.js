@@ -12,6 +12,7 @@ import { shortenFilename } from '../../services/wallet-service';
 import { CHINESE } from '../../constants/language';
 import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
+import { MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 
 class ImportJson extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class ImportJson extends Component {
   };
 
   handleBack = () => {
-    this.props.changePage(this.props.backupPage);
+    this.props.changePage(MANAGE_ACCOUNT_PAGE);
   };
 
   handleClick = () => {

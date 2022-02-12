@@ -13,6 +13,7 @@ import './styles.css';
 import AlertDailog from '../../components/common/alert-dialog';
 import { colorTheme } from '../../../lib/constants/colors';
 import SubHeader from '../../components/common/sub-header';
+import { MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 
 class ImportPhrase extends Component {
   constructor(props) {
@@ -161,8 +162,7 @@ class ImportPhrase extends Component {
   };
 
   handelBack = () => {
-    const { backupPage } = this.props;
-    this.props.changePage(backupPage);
+    this.props.changePage(MANAGE_ACCOUNT_PAGE);
     this.props.resetImportAccountWithSeedPhraseError();
   };
 

@@ -43,7 +43,7 @@ export default class SubHeader extends Component {
         </div>
         {subMenu && subMenu.length > 0 && (
           <div>
-            <MoreVertIcon onClick={this.handleClick} color="#858B9C" className="more-list-icon" />
+            {/* <MoreVertIcon onClick={this.handleClick} color="#858B9C" className="more-list-icon" /> */}
             <CrustMenu
               options={subMenu}
               onChange={option => {

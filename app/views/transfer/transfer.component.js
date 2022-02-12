@@ -147,6 +147,15 @@ class Transfer extends Component {
     }
   };
 
+  handleMaxError = () => {
+    const error = {};
+
+    error.isAmountError = true;
+    error.toAmountErrorMessage = this.props.t('Insufficient Balance');
+
+    this.props.setTransferValidationError(error);
+  };
+
   handleUnitChange = e => {
     const dropDownSelected = this.state.dropDownList.find(u => u.value === e.target.value);
     this.props.dispatchSetTransferDetails({
@@ -227,6 +236,7 @@ class Transfer extends Component {
           onAddressBookClick={this.onAddressBookClick}
           colorTheme={colorTheme[network.value]}
           language={language}
+          handleMaxError={this.handleMaxError}
         />
       </div>
     );

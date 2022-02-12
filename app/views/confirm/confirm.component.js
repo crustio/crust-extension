@@ -80,12 +80,15 @@ class Confirm extends Component {
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '18px' }} />}
           title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
+          align="left"
+          margin="30px"
+          isBackIcon={false}
           colorTheme={colorTheme[network.value]}
-          isBackIcon
         />
         <ConfirmForm
           confirmDetails={confirmDetails}
           handleSend={this.handleSend}
+          handleBack={this.handleSubheaderBackBtn}
           buttonText={t('Send')}
           theme={theme}
           password={password}

@@ -84,16 +84,13 @@ class TokenList extends Component {
   }
 
   render() {
-    const {
-      tokens, onTokenSelected, colorTheme, ...otherProps
-    } = this.props;
+    const { tokens, colorTheme, ...otherProps } = this.props;
     return (
       <div {...otherProps}>
         {tokens.map(token => (
           <div
             key={token.tokenSymbol}
             className="token-item-container"
-            onClick={() => onTokenSelected(token)}
             style={{ background: colorTheme.card }}
           >
             <div className="token-item-left">

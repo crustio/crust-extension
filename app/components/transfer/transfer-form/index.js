@@ -35,6 +35,7 @@ class TransferForm extends Component {
       handleUnitOnChange,
       onAddressBookClick,
       colorTheme,
+      handleMaxError,
       t,
     } = this.props;
     return (
@@ -71,6 +72,7 @@ class TransferForm extends Component {
           onDropDownChange={handleUnitOnChange}
           colorTheme={colorTheme}
           language={language}
+          handleMaxError={handleMaxError}
         />
         <FooterWithTwoButton
           onNextClick={handleSendButton}

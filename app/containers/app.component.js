@@ -18,6 +18,7 @@ import {
   MANAGE_ACCOUNT_PAGE,
   IMPORT_PHRASE_PAGE,
   CONFIRM_PAGE,
+  LANGUAGE_SETTING_PAGE,
 } from '../constants/navigation';
 import { copyAccountMessage } from '../../lib/services/static-message-factory-service';
 import CrustApp from '../components/crust-app';
@@ -170,6 +171,18 @@ class App extends Component {
       }
 
       if (prevProps.page === CONFIRM_PAGE) {
+        return {
+          showHeader: true, // no change
+          showLogo: true,
+          showBanner: false,
+          showNetwork: true,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: true,
+        };
+      }
+
+      if (prevProps.page === LANGUAGE_SETTING_PAGE) {
         return {
           showHeader: false, // no change
           showLogo: false,

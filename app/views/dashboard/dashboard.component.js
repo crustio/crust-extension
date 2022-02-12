@@ -115,10 +115,10 @@ class Dashboard extends Component {
     });
   };
 
-  onTokenSelected = token => {
-    this.props.onTokenSelected(token);
-    this.props.changePage(TOKEN_DETAILS_PAGE);
-  };
+  // onTokenSelected = token => {
+  //   this.props.onTokenSelected(token);
+  //   this.props.changePage(TOKEN_DETAILS_PAGE);
+  // };
 
   handleChange = (e, value) => {
     this.setState({
@@ -259,7 +259,7 @@ class Dashboard extends Component {
                 <TokenList
                   tokens={tokens}
                   className="token-list-container"
-                  onTokenSelected={this.onTokenSelected}
+                  // onTokenSelected={this.onTokenSelected}
                   colorTheme={colorTheme[network.value]}
                 />
               </div>

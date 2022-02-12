@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import DarkDivider from '../../common/divider/dark-divider';
 import FooterButton from '../../common/footer-button';
 import ConfirmParticular from '../confirm-particular';
-import ConfirmFromTo from '../confirm-from-to';
 import CrustPassword from '../../common/password/crust-password';
+import { shortenAddress } from '../../../services/wallet-service';
+import FooterWithTwoButton from '../../common/footer-with-two-button';
 import './styles.css';
 
 class ConfirmForm extends Component {
@@ -20,6 +20,7 @@ class ConfirmForm extends Component {
         },
       },
       handleSend,
+      handleBack,
       buttonText,
       theme,
       password,
@@ -30,38 +31,30 @@ class ConfirmForm extends Component {
     } = this.props;
     return (
       <div className="confirm-form-container">
-        <div className="confirm-form-top-container" style={{ background: colorTheme.background }}>
-          <ConfirmFromTo
-            to={to}
-            theme={theme}
-            from={address}
-            alias={alias}
+        <div className="confirm-form-top-container" style={{ background: colorTheme.card }}>
+          <ConfirmParticular
+            className="confirm-form-to-container"
+            description={t('To')}
+            price={`${shortenAddress(to)}`}
             colorTheme={colorTheme}
-          />
-          <DarkDivider
-            className="confirm-form-amount-divider"
-            background="#E2E4EA"
-            style={{ width: '100%' }}
           />
           <ConfirmParticular
             className="confirm-form-amount-container"
             description={t('Amount')}
             price={`${transferAmount}`}
+            colorTheme={colorTheme}
           />
           <ConfirmParticular
             className="confirm-form-fee-container"
             description={t('Fee')}
             price={`${transferFee}`}
+            colorTheme={colorTheme}
           />
           <ConfirmParticular
             className="confirm-form-total-container"
             description={t('Total')}
             price={`${totalTransferAmount}`}
-          />
-          <DarkDivider
-            className="confirm-form-total-amount-divider"
-            background="#E2E4EA"
-            style={{ width: '100%' }}
+            colorTheme={colorTheme}
           />
           <div className="confirm-form-password-container">
             <CrustPassword
@@ -78,7 +71,16 @@ class ConfirmForm extends Component {
             )}
           </div>
         </div>
-        <FooterButton onClick={handleSend} name={buttonText} />
+        <FooterWithTwoButton
+          onNextClick={handleSend}
+          onBackClick={handleBack}
+          backButtonName={t('Cancel')}
+          nextButtonName={t('Send')}
+          nextColor={colorTheme.button.primary.text}
+          nextBackground={colorTheme.button.primary.main}
+          backColor={colorTheme.button.secondary.text}
+          backBackground={colorTheme.button.secondary.main}
+        />
       </div>
     );
   }

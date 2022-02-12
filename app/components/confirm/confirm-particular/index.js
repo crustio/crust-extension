@@ -5,11 +5,21 @@ import './styles.css';
 
 export default class ConfirmQuote extends Component {
   render() {
-    const { description, price, ...otherProps } = this.props;
+    const {
+      description, price, colorTheme, ...otherProps
+    } = this.props;
     return (
       <div {...otherProps}>
-        <FontMedium className="confirm-quote-description" text={description} />
-        <FontRegular className="confirm-quote-price" text={price} />
+        <FontMedium
+          className="confirm-quote-description"
+          text={description}
+          style={{ color: colorTheme.text.primary }}
+        />
+        <FontRegular
+          className="confirm-quote-price"
+          text={price}
+          style={{ color: colorTheme.text.fifth }}
+        />
       </div>
     );
   }

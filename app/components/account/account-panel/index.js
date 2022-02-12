@@ -60,13 +60,13 @@ export default class AccountPanel extends Component {
             onAliasInputBlur(selectedAccount);
           }}
         />
-        {accountMenu && accountMenu.length > 0 && (
+        {/* {accountMenu && accountMenu.length > 0 && (
           <WalletDropDownIcon
             onClick={this.handleClick}
             className="account-list-icon"
             colorTheme={colorTheme}
           />
-        )}
+        )} */}
         <ModalWithThreeButton
           show={showModal}
           colorTheme={colorTheme}

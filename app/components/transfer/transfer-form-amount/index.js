@@ -14,6 +14,7 @@ class TransferFormAmount extends Component {
         ? 0
         : convertBalanceToShow(this.props.dropDownValue.balance, this.props.dropDownValue.decimals),
     );
+    this.props.handleMaxError();
   };
 
   render() {

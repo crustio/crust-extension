@@ -14,7 +14,9 @@
   overflow: hidden;
   position: relative;
   margin: 0 16px;
+  margin-top: 15px;
 }
+
 .manage-address-book-container {
   position: absolute;
   top: 0;
@@ -23,6 +25,7 @@
   right: -5px; /* Increase/Decrease this value for cross-browser compatibility */
   overflow-y: scroll;
 }
+
 .address-book-container {
   display: flex;
   flex-direction: column;

@@ -8,7 +8,9 @@
   background: #FFFFFF;
   border-radius: 8px;
   margin: 0 16px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  height: 180px;
 }
 
 .confirm-form-amount-divider {
@@ -21,6 +23,7 @@
   margin-bottom: 16px;
 }
 
+.confirm-form-to-container,
 .confirm-form-amount-container,
 .confirm-form-fee-container,
 .confirm-form-total-container {
@@ -32,8 +35,12 @@
   padding-right: 16px;
 }
 
-.confirm-form-amount-container {
+.confirm-form-to-container {
   margin-top: 10;
+}
+
+.confirm-form-amount-container {
+  margin-top: 0;
 }
 
 .confirm-form-fee-container {
