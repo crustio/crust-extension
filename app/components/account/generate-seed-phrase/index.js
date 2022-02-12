@@ -10,16 +10,29 @@ import { styles } from './styles';
 class GenerateSeedPhrase extends Component {
   render() {
     const {
-      classes, seedWords, t, ...otherProps
+      classes, seedWords, t, colorTheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
         <ContentHeader
           title={t('Generate Seed Phrase')}
-          description={t("This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.")}
+          description={t(
+            "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.",
+          )}
+          colorTheme={colorTheme}
         />
-        <SeedWordsBox className="seed-phrase-text-area" value={seedWords} />
-        <ClickToCopy className={classes.seedPhraseCopy} text={t('Click to copy')} value={seedWords} />
+        <SeedWordsBox
+          className="seed-phrase-text-area"
+          value={seedWords}
+          colorTheme={colorTheme}
+          style={{ background: colorTheme ? colorTheme.card : null }}
+        />
+        <ClickToCopy
+          className={classes.seedPhraseCopy}
+          text={t('Click to copy')}
+          value={seedWords}
+          colorTheme={colorTheme}
+        />
       </div>
     );
   }

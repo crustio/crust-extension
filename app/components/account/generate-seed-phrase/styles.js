@@ -2,7 +2,7 @@ import { CRUST_COLOR1 } from '../../../constants/colors';
 
 export const styles = () => ({
   seedPhraseCopy: {
-    '&:hover': { color: CRUST_COLOR1, },
+    '&:hover': { color: CRUST_COLOR1 },
     '&:active': {
       opacity: 1,
     },
@@ -12,7 +12,7 @@ export const styles = () => ({
     cursor: 'pointer',
     height: '16px',
     width: '74px',
-    color: '#000000',
+    color: CRUST_COLOR1,
     marginTop: '5px',
-  }
+  },
 });

@@ -67,6 +67,8 @@ class CreateAccount extends Component {
         disableAccountSettings: false,
       });
     }
+
+    console.log(this.props.network, 'network');
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -342,7 +344,7 @@ class CreateAccount extends Component {
 
   render() {
     const {
-      seedWords, keypairType, keypairTypes, t
+      seedWords, keypairType, keypairTypes, network, t
     } = this.props;
     const {
       formValue,
@@ -365,7 +367,10 @@ class CreateAccount extends Component {
       phraseErrorMsg,
     } = this.state;
     return (
-      <div className="create-account-container">
+      <div
+        className="create-account-container"
+        style={{ background: colorTheme[network ? network.value : CRUST_NETWORK.value].background }}
+      >
         <CreateAccountForm
           value={formValue}
           generatedSeedWords={seedWords}
@@ -387,6 +392,7 @@ class CreateAccount extends Component {
           handleSeedWordsOnBlur={this.handleSeedWordsOnBlur}
           handleConfirmSeedWordsOnBlur={this.handleConfirmSeedWordsOnBlur}
           className="create-account-form"
+          colorTheme={colorTheme[network ? network.value : CRUST_NETWORK.value]}
         />
         <CreateAccountSettings
           disableAccountSettings={disableAccountSettings}
@@ -403,7 +409,7 @@ class CreateAccount extends Component {
           aliasRef={input => {
             this.aliasInput = input;
           }}
-          colorTheme={colorTheme[CRUST_NETWORK.value]}
+          colorTheme={colorTheme[network ? network.value : CRUST_NETWORK.value]}
           handleAliasOnBlur={this.handleAliasOnBlur}
           handlePasswordChange={this.handlePasswordChange}
           aliasPassworkPropName="passoword"
@@ -418,7 +424,7 @@ class CreateAccount extends Component {
           }
         />
         <FooterWithTwoButton
-          style={{ bottom: '16px' }}
+          style={{ bottom: '11px' }}
           onNextClick={onSubmit}
           onBackClick={this.handelBack}
           backButtonName={t(backButtonName)}

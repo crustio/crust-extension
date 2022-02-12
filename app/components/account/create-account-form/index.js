@@ -27,7 +27,9 @@ export default class CreateAccountForm extends Component {
     } = this.props;
     return (
       <div {...otherProps}>
-        {value === Account.CREATE_ACCOUNT && <GenerateSeedPhrase seedWords={generatedSeedWords} />}
+        {value === Account.CREATE_ACCOUNT && (
+          <GenerateSeedPhrase seedWords={generatedSeedWords} colorTheme={colorTheme} />
+        )}
         {value === Account.IMPORT_ACCOUNT && (
           <ImportSeedPhrase
             onChange={onChange}
@@ -52,6 +54,7 @@ export default class CreateAccountForm extends Component {
             confirmSeedPhraseInputName={confirmSeedPhraseInputName}
             confirmSeedRef={confirmSeedRef}
             handleConfirmSeedWordsOnBlur={handleConfirmSeedWordsOnBlur}
+            colorTheme={colorTheme}
           />
         )}
       </div>

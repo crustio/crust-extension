@@ -18,6 +18,7 @@ const mapStateToProps = state => ({
   keypairType: state.createAccountReducer.keypairType,
   keypairTypes: state.createAccountReducer.keypairTypes,
   backupPage: state.appStateReducer.backupPage,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {
