@@ -58,3 +58,10 @@ export const updateSelectedAccounts = selectedAccounts => async dispatch => {
     selectedAccounts,
   });
 };
+
+export const updateSelectedAddress = selectedAddress => async dispatch => {
+  dispatch({
+    type: ManageAccountActionTypes.UPDATE_SELECTED_ADDRESS,
+    selectedAddress,
+  });
+};

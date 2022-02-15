@@ -67,31 +67,6 @@ class App extends Component {
             showUserId: false,
           };
         }
-
-        if (prevProps.page === IMPORT_JSON_PAGE) {
-          return {
-            showHeader: false, // no change
-            showLogo: false,
-            showBanner: true,
-            showNetwork: false,
-            showSettings: false,
-            showGrayHeader: false,
-            showUserId: false,
-          };
-        }
-
-        if (prevProps.page === CREATE_ACCOUNT_PAGE) {
-          return {
-            showHeader: true, // no change
-            showLogo: false,
-            showBanner: true,
-            showNetwork: false,
-            showSettings: false,
-            showGrayHeader: false,
-            showGrayBg: true,
-            showUserId: false,
-          };
-        }
         return {
           showHeader: true, // no change
           showLogo: false,
@@ -102,10 +77,26 @@ class App extends Component {
           showUserId: false,
         };
       }
+
+      if (
+        prevProps.page === IMPORT_JSON_PAGE
+        || prevProps.page === IMPORT_PHRASE_PAGE
+        || prevProps.page === CREATE_ACCOUNT_PAGE
+      ) {
+        return {
+          showHeader: false, // no change
+          showLogo: false,
+          showBanner: false,
+          showNetwork: false,
+          showSettings: false,
+          showGrayHeader: false,
+          showUserId: false,
+        };
+      }
       if (prevProps.page === CONNECT_REQUEST_PAGE) {
         return {
-          showHeader: true, // no change
-          showLogo: true,
+          showHeader: false, // no change
+          showLogo: false,
           showBanner: false,
           showNetwork: false,
           showSettings: false,
@@ -158,18 +149,6 @@ class App extends Component {
         };
       }
 
-      if (prevProps.page === IMPORT_PHRASE_PAGE) {
-        return {
-          showHeader: false, // no change
-          showLogo: false,
-          showBanner: false,
-          showNetwork: false,
-          showSettings: false,
-          showGrayHeader: false,
-          showUserId: false,
-        };
-      }
-
       if (prevProps.page === CONFIRM_PAGE) {
         return {
           showHeader: true, // no change
@@ -193,11 +172,10 @@ class App extends Component {
           showUserId: false,
         };
       }
-
       return {
         showHeader: true, // no change
-        showLogo: true,
-        showBanner: false,
+        showLogo: false,
+        showBanner: true,
         showNetwork: true,
         showSettings: true,
         showGrayHeader: false,

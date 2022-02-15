@@ -9,20 +9,31 @@ import { SolidWallet, SolidPlug, File } from '../../components/common/icon';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
+import LogoBig from '../../images/crust-logo-big.svg';
+import LogoBigWhite from '../../images/crust-logo-big-white.svg';
+import { CONNECT_REQUEST_PAGE } from '../../constants/navigation';
+import { CRUST_MAXWELL_NETWORK } from '../../../lib/constants/networks';
 
-const DAppURL = ({ favIconUrl, url, ...otherProps }) => (
+const DAppURL = ({
+  favIconUrl, url, textColor, ...otherProps
+}) => (
   <div {...otherProps}>
     {favIconUrl ? (
       <FavIcon favIconUrl={favIconUrl} width="44" height="44" className="connect-request-favicon" />
     ) : (
       <File className="connect-request-favicon" />
     )}
-    <FontRegular text={trimUrl(url)} className="connect-request-favicon-url" />
+    <FontRegular
+      text={trimUrl(url)}
+      className="connect-request-favicon-url"
+      style={{ color: textColor }}
+    />
   </div>
 );
 
 class ConnectRequest extends Component {
   componentDidMount() {
+    this.props.updateBackupPage(CONNECT_REQUEST_PAGE);
     this.props.updateAppLoading(true);
     this.props.initializeRequest();
     this.props.updateAppLoading(false);
@@ -46,16 +57,23 @@ class ConnectRequest extends Component {
   };
 
   renderHeader() {
-    const { request } = this.props;
+    const { request, network } = this.props;
     return (
       <div className="connect-request-header">
         <DAppURL
-          favIconUrl={request.sender.tab.favIconUrl}
+          favIconUrl={network.value === CRUST_MAXWELL_NETWORK.value ? LogoBigWhite : LogoBig}
           url={request.request.metadata.url}
           className="connect-request-dapp-url-container"
+          colorTheme={colorTheme[network.value]}
+          style={{ border: `1px solid ${colorTheme[network.value].border}` }}
+          textColor={colorTheme[network.value].text.primary}
         />
-        <SolidPlug className="connect-request-plug-icon" />
-        <SolidWallet className="connect-request-wallet-icon" />
+        <SolidPlug className="connect-request-plug-icon" colorTheme={colorTheme[network.value]} />
+        <SolidWallet
+          className="connect-request-wallet-icon"
+          colorTheme={colorTheme[network.value]}
+          style={{ border: `1px solid ${colorTheme[network.value].border}` }}
+        />
       </div>
     );
   }
@@ -66,18 +84,29 @@ class ConnectRequest extends Component {
     } = this.props;
     const content = 'is requesting access to an account. Click Allow to grant access any account or click Deny to prevent access to any account.';
     return (
-      <div>
-        <SubHeader title={t(title)} isBackIcon colorTheme={colorTheme[network.value]} />
+      <div style={{ height: 600, background: colorTheme[network.value].background }}>
+        <SubHeader
+          title={t(title)}
+          isBackIcon={false}
+          colorTheme={colorTheme[network.value]}
+          align="left"
+          margin="30px"
+        />
         {this.renderHeader()}
         <FontRegular
           text={<div>{`${request.request.metadata.url} ${t(content)}`}</div>}
           className="connect-request-center connect-request-account-selection-header"
+          style={{ color: colorTheme[network.value].text.sixth }}
         />
         <FooterWithTwoButton
           onNextClick={this.onAllow}
           onBackClick={this.onDeny}
           backButtonName={t('Deny')}
           nextButtonName={t('Allow')}
+          nextColor={colorTheme[network.value].button.primary.text}
+          nextBackground={colorTheme[network.value].button.primary.main}
+          backColor={colorTheme[network.value].button.tertiary.text}
+          backBackground={colorTheme[network.value].button.tertiary.main}
         />
       </div>
     );

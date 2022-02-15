@@ -12,7 +12,7 @@ import { shortenFilename } from '../../services/wallet-service';
 import { CHINESE } from '../../constants/language';
 import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
-import { MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
+import { CREATE_ACCOUNT_ENTRY_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 
 class ImportJson extends Component {
   constructor(props) {
@@ -27,6 +27,7 @@ class ImportJson extends Component {
   }
 
   componentDidMount() {
+    this.props.updateBackupPage(this.props.page);
     this.props.updateJsonPwdError('');
     this.props.updateWalletPwdError('');
   }
@@ -49,7 +50,12 @@ class ImportJson extends Component {
   };
 
   handleBack = () => {
-    this.props.changePage(MANAGE_ACCOUNT_PAGE);
+    const { account } = this.props;
+    if (account) {
+      this.props.changePage(MANAGE_ACCOUNT_PAGE);
+    } else {
+      this.props.changePage(CREATE_ACCOUNT_ENTRY_PAGE);
+    }
   };
 
   handleClick = () => {
@@ -103,7 +109,7 @@ class ImportJson extends Component {
           backBtnOnClick={this.handleBack}
           subMenu={null}
           showSettings={false}
-          onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
+          onSubMenuOptionsChange={null}
           isBackIcon
           colorTheme={colorTheme[network.value]}
         />

@@ -2,11 +2,10 @@ import * as MessageTypes from '../../lib/constants/message-types';
 import { sendMessage } from '../../lib/services/extension/messages';
 import { throwIfNoSuccess } from './helper';
 
-export const getTransactionFee = async (txnType, toAddress) => {
+export const getTransactionFee = async transaction => {
   const { message, status, result } = await sendMessage({
     type: MessageTypes.BG_TXN_FEE,
-    txnType,
-    toAddress,
+    transaction,
   });
   throwIfNoSuccess({ message, status });
   return { result };

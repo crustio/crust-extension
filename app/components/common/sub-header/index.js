@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FontMedium from '../fonts/font-medium';
 import IconContainer from '../icon-container';
-import { MoreVertIcon } from '../icon';
 import CrustMenu from '../crust-menu';
 import './styles.css';
 

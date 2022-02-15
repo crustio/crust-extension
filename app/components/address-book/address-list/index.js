@@ -13,7 +13,7 @@ class AddressList extends Component {
       onCopyAddress,
       moreMenu,
       onMoreMenuOptionsChange,
-      isMoreVertIconVisible,
+      isSelectIcon,
       handelChangeToAddress,
       theme,
       network,
@@ -21,6 +21,8 @@ class AddressList extends Component {
       showFooterModal,
       handleFooterCancel,
       handleFooterClick,
+      selectedAddress,
+      updateSelectedAddress,
       ...otherProps
     } = this.props;
     return (
@@ -39,18 +41,18 @@ class AddressList extends Component {
               onCopyAddress={onCopyAddress}
               moreMenu={moreMenu}
               className="address-card-container"
-              isMoreVertIconVisible={isMoreVertIconVisible}
               onMoreMenuOptionsChange={onMoreMenuOptionsChange}
-              handleListItemAvatarClick={handelChangeToAddress}
+              handleListItemAvatarClick={updateSelectedAddress}
               handleListItemClick={handelChangeToAddress}
               network={network}
               colorTheme={colorTheme}
               customModal
-              showRadio={false}
+              showRadio={isSelectIcon}
               showFooterModal={showFooterModal}
               handleFooterClick={handleFooterClick}
               handleFooterCancel={handleFooterCancel}
               style={{ background: colorTheme.card }}
+              isSelected={selectedAddress.findIndex(e => e.address === address.address) !== -1}
             />
           ))}
         </List>

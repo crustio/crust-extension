@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import FooterButton from '../../common/footer-button';
 import QR from '../../common/qr';
 import './styles.css';
@@ -26,7 +27,9 @@ class QRCodeForm extends Component {
           style={{ color: colorTheme.text.primary }}
         />
         <div className="qr-button-container">
-          <FooterButton name={t('Copy Address')} onClick={onCopyAddress} />
+          <CopyToClipboard text={account.address} onCopy={onCopyAddress}>
+            <FooterButton name={t('Copy Address')} />
+          </CopyToClipboard>
         </div>
       </div>
     );

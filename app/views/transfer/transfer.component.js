@@ -7,6 +7,7 @@ import TransferForm from '../../components/transfer/transfer-form';
 import * as NavConstants from '../../constants/navigation';
 import { INPUT_NUMBER_REGEX } from '../../../lib/constants/regex';
 import { colorTheme } from '../../../lib/constants/colors';
+import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import './styles.css';
 
 class Transfer extends Component {
@@ -99,9 +100,24 @@ class Transfer extends Component {
     }
   };
 
-  setAmount = value => {
+  setAmount = async value => {
+    const { unit, dropDownSelected } = this.state;
+    const { toAddress } = this.props;
+    await this.props.getTransferFee(
+      toAddress,
+      this.props.account,
+      dropDownSelected.balance,
+      unit,
+      dropDownSelected,
+    );
+
+    const { transferFee } = this.props;
+    const availableAmount = convertBalanceToShow(
+      dropDownSelected.balance - transferFee,
+      dropDownSelected.decimals,
+    );
     this.setState({
-      amount: value,
+      amount: availableAmount,
     });
   };
 
@@ -147,14 +163,7 @@ class Transfer extends Component {
     }
   };
 
-  handleMaxError = () => {
-    const error = {};
-
-    error.isAmountError = true;
-    error.toAmountErrorMessage = this.props.t('Insufficient Balance');
-
-    this.props.setTransferValidationError(error);
-  };
+  handleMaxError = () => {};
 
   handleUnitChange = e => {
     const dropDownSelected = this.state.dropDownList.find(u => u.value === e.target.value);

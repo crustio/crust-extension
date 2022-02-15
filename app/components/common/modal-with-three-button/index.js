@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dialog, DialogActions, DialogContent } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -13,10 +13,12 @@ function ModalWithThreeButton(props) {
     handleCancel,
     topButton,
     bottomButton,
+    cancelButton,
     handleTopClick,
     handleBottomClick,
     network,
     oneAction,
+    sameStyleButton,
     classes,
   } = props;
 
@@ -37,8 +39,12 @@ function ModalWithThreeButton(props) {
       <DialogContent classes={{ root: classes.contentRoot }}>
         <div style={{ marginBottom: 10 }}>
           <ButtonCustom
-            color={colorTheme.button.primary.text}
-            background={colorTheme.button.primary.main}
+            color={
+              sameStyleButton ? colorTheme.button.secondary.text : colorTheme.button.primary.text
+            }
+            background={
+              sameStyleButton ? colorTheme.button.secondary.main : colorTheme.button.primary.main
+            }
             onClick={handleTopClick}
           >
             {t(topButton)}
@@ -71,7 +77,7 @@ function ModalWithThreeButton(props) {
           color={colorTheme.text.primary}
           background="transparent"
         >
-          {t('Cancel')}
+          {cancelButton ? t(cancelButton) : t('Cancel')}
         </ButtonCustom>
       </DialogActions>
     </Dialog>

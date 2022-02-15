@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import CrustPassword from '../../components/common/password/crust-password';
 import CrustInput from '../../components/common/crust-input';
+import PasswordAdornment from '../../components/common/password/password-adornment';
 import ContentHeader from '../../components/common/content-header';
 import FooterButton from '../../components/common/footer-button';
 import LogoBig from '../../images/crust-logo-big.svg';
@@ -12,6 +13,14 @@ import './styles.css';
 
 const errorMessage = 'Must be 8 characters or more in length.';
 const requiredErrorMessage = 'Password required';
+const showColor = {
+  color: '#666F83',
+};
+
+const hideColor = {
+  color: '#666F83',
+};
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +28,7 @@ class SignUp extends Component {
       password: '',
       isPasswordError: true,
       passwordError: '',
+      showPassword: false,
       // password repeat
       passwordRepeat: '',
       isPasswordRepeatError: true,
@@ -73,6 +83,10 @@ class SignUp extends Component {
     }
   };
 
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
   handleOnBlur = () => {
     const { password } = this.state;
     let { errorText } = this.state;
@@ -109,6 +123,7 @@ class SignUp extends Component {
   render() {
     const {
       isPasswordError,
+      showPassword,
       password,
       passwordError,
       passwordRepeat,
@@ -134,6 +149,7 @@ class SignUp extends Component {
           password={password}
           placeholder={this.props.t('Password')}
           colorTheme={colorTheme[CRUST_NETWORK.value]}
+          border
         />
         {isPasswordError ? (
           <span className="error-msg">{passwordError}</span>
@@ -143,10 +159,20 @@ class SignUp extends Component {
         <CrustInput
           className="sign-up-password"
           onChange={this.handleOnChange('passwordRepeat')}
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           placeholder={this.props.t('Repeat Password')}
           value={passwordRepeat}
           colorTheme={colorTheme[CRUST_NETWORK.value]}
+          style={{ border: `1px solid ${colorTheme[CRUST_NETWORK.value].border}`, borderRadius: 8 }}
+          endAdornment={
+            <PasswordAdornment
+              position="end"
+              onClick={this.handleClickShowPassword}
+              showPassword={showPassword}
+              showColor={showColor}
+              hideColor={hideColor}
+            />
+          }
         />
         {isPasswordRepeatError ? (
           <span className="error-msg">{passwordRepeatError}</span>

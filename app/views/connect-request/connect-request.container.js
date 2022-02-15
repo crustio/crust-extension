@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ConnectRequest from './connect-request.component';
-import { changePage, updateAppLoading } from '../../containers/actions';
+import { changePage, updateAppLoading, updateBackupPage } from '../../containers/actions';
 import {
   initializeRequest,
   allowAccountAuthorization,
@@ -27,6 +27,7 @@ const mapDispatchToProps = {
   updateSelectedAccount,
   createToast,
   fetchNetwork,
+  updateBackupPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConnectRequest);

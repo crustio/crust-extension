@@ -29,6 +29,7 @@ export default class CrustPassword extends Component {
       className,
       handleClickShowPassword,
       colorTheme,
+      border,
       ...otherProps
     } = this.props;
     const { showPassword } = this.state;
@@ -42,7 +43,11 @@ export default class CrustPassword extends Component {
           value={password}
           onChange={onChange('password')}
           colorTheme={colorTheme}
-          style={{ background: colorTheme.card }}
+          style={{
+            background: colorTheme.card,
+            border: border ? `1px solid ${colorTheme.border}` : null,
+            borderRadius: 8,
+          }}
           endAdornment={
             <PasswordAdornment
               position="end"

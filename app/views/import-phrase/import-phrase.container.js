@@ -7,7 +7,7 @@ import {
   setAndStartOnBoarding,
   createFirstAccountWithSeedPhraseSuccess,
 } from './actions';
-import { updateAppLoading, changePage } from '../../containers/actions';
+import { updateAppLoading, changePage, updateBackupPage } from '../../containers/actions';
 
 const mapStateToProps = state => ({
   seedWords: state.accountReducer.seedWords,
@@ -19,6 +19,7 @@ const mapStateToProps = state => ({
   keypairTypes: state.createAccountReducer.keypairTypes,
   backupPage: state.appStateReducer.backupPage,
   network: state.networkReducer.network,
+  page: state.appStateReducer.page,
 });
 
 const mapDispatchToProps = {
@@ -28,6 +29,7 @@ const mapDispatchToProps = {
   setAndStartOnBoarding,
   createFirstAccountWithSeedPhraseSuccess,
   updateAppLoading,
+  updateBackupPage,
   changePage,
 };
 

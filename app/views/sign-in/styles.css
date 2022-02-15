@@ -1,4 +1,5 @@
 .sign-in-container {
+  height: 600px;
   padding: 40px 18px 0px 18px;
   display: flex;
   flex-direction: column;
@@ -16,18 +17,13 @@
   display: flex;
   width: 321px;
   height: 45.82px;
-  color: #858B9C
+  color: #858B9C;
+  border-radius: 8px;
 }
 
 .sign-in-password-container fieldset {
   border: 0;
   font-size: 14px;
-  background: #F0F1F5;
-}
-
-.sign-in-password-container:focus-within fieldset {
-  background-color: transparent;
-  border: 2px solid #ECEDEF !important;
 }
 
 .input-margin {

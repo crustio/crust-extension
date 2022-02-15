@@ -18,7 +18,8 @@ const Dialog = withStyles(() => ({
   paper: {
     margin: 0,
     width: '296px',
-    height: '211px',
+    height: '180px',
+    borderRadius: '12px',
   },
 }))(MuiDialog);
 
@@ -43,10 +44,23 @@ const DialogContent = withStyles(() => ({
   },
 }))(MuiDialogContent);
 
-const Button = withStyles(() => ({
+const BackButton = withStyles(() => ({
   root: {
     textTransform: 'none',
     width: '128px !important',
+    color: 'white !important',
+    background: '#2C2B32 !important',
+    borderRadius: '12px',
+  },
+}))(MuiButton);
+
+const NextButton = withStyles(() => ({
+  root: {
+    textTransform: 'none',
+    width: '128px !important',
+    color: 'white !important',
+    background: '#FF8D00 !important',
+    borderRadius: '12px',
   },
 }))(MuiButton);
 
@@ -91,14 +105,12 @@ export default function AlertDailog({
         </DialogContent>
         <DialogActions>
           <div className="button-primary">
-            <Button onClick={handleClose} color="primary" variant="contained" autoFocus>
+            <BackButton onClick={handleClose} autoFocus>
               {noText}
-            </Button>
+            </BackButton>
           </div>
           <div className="button-secondary">
-            <Button onClick={handleYes} color="primary">
-              {yesText}
-            </Button>
+            <NextButton onClick={handleYes}>{yesText}</NextButton>
           </div>
         </DialogActions>
       </Dialog>

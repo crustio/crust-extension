@@ -29,12 +29,9 @@ class AccountList extends Component {
       moreMenu,
       currentAccount,
       handleChangeAccount,
-      isMoreVertIconVisible,
       colorTheme,
       theme,
       network,
-      handleFooterClick,
-      handleFooterCancel,
       selectedAccounts,
       updateSelectedAccounts,
       ...otherProps
@@ -56,7 +53,6 @@ class AccountList extends Component {
               address={account.address}
               onCopyAddress={onCopyAddress}
               moreMenu={moreMenu}
-              isMoreVertIconVisible={isMoreVertIconVisible}
               isActive={currentAccount.address === account.address}
               className="account-card-container"
               style={{
@@ -67,8 +63,6 @@ class AccountList extends Component {
               network={network}
               customModal={false}
               showRadio
-              handleFooterClick={handleFooterClick}
-              handleFooterCancel={handleFooterCancel}
               isSelected={selectedAccounts.findIndex(e => e.address === account.address) !== -1}
             />
           ))}

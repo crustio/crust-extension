@@ -13,7 +13,7 @@ import './styles.css';
 import AlertDailog from '../../components/common/alert-dialog';
 import { colorTheme } from '../../../lib/constants/colors';
 import SubHeader from '../../components/common/sub-header';
-import { MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
+import { CREATE_ACCOUNT_ENTRY_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 
 class ImportPhrase extends Component {
   constructor(props) {
@@ -48,6 +48,7 @@ class ImportPhrase extends Component {
 
   componentDidMount() {
     const { aliasError, seedWords, resetImportAccountWithSeedPhraseError } = this.props;
+    this.props.updateBackupPage(this.props.page);
     if (aliasError) {
       resetImportAccountWithSeedPhraseError();
       this.setState({
@@ -161,9 +162,14 @@ class ImportPhrase extends Component {
     });
   };
 
-  handelBack = () => {
-    this.props.changePage(MANAGE_ACCOUNT_PAGE);
+  handleBack = () => {
+    const { account } = this.props;
     this.props.resetImportAccountWithSeedPhraseError();
+    if (account) {
+      this.props.changePage(MANAGE_ACCOUNT_PAGE);
+    } else {
+      this.props.changePage(CREATE_ACCOUNT_ENTRY_PAGE);
+    }
   };
 
   handleCloseDialog = () => {
@@ -280,10 +286,6 @@ class ImportPhrase extends Component {
     }
   };
 
-  handleBack = () => {
-    this.props.changePage(this.props.backupPage);
-  };
-
   validateAlias(alias) {
     let { isAliasError, aliasErrorMessage } = this.state;
     if (alias !== '') {
@@ -377,7 +379,7 @@ class ImportPhrase extends Component {
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Import From Phrase')}
-          backBtnOnClick={this.handelBack}
+          backBtnOnClick={this.handleBack}
           subMenu={null}
           showSettings={false}
           onSubMenuOptionsChange={null}

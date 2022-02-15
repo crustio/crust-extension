@@ -12,9 +12,9 @@ import Wallet from '../../components/wallet';
 import {
   CREATE_ACCOUNT_PAGE,
   QR_CODE_PAGE,
-  TOKEN_DETAILS_PAGE,
   TRANSFER_PAGE,
   IMPORT_JSON_PAGE,
+  CREATE_ACCOUNT_ENTRY_PAGE,
 } from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
 import {
@@ -31,7 +31,6 @@ import { colorTheme } from '../../../lib/constants/colors';
 
 const MP = withStyles({
   root: {
-    color: '#111A34',
     fontSize: 14,
     fontWeight: 400,
     padding: '4px 0',
@@ -42,7 +41,6 @@ const MDialogTitle = withStyles({
   root: {
     fontSize: 16,
     fontWeight: 500,
-    color: '#111A34',
     textAlign: 'center',
     padding: '16px',
   },
@@ -58,6 +56,9 @@ class Dashboard extends Component {
       value: 0,
       showOfflineDescription: false,
     };
+    if (this.props.accounts.length === 0) {
+      this.props.changePage(CREATE_ACCOUNT_ENTRY_PAGE);
+    }
   }
 
   componentDidMount() {
@@ -207,6 +208,7 @@ class Dashboard extends Component {
                   marginLeft: 10,
                   marginBottom: -3,
                   cursor: 'pointer',
+                  stroke: colorTheme[network.value].text.primary,
                 }}
                 onClick={() => this.setState({ showOfflineDescription: true })}
               />
@@ -215,7 +217,9 @@ class Dashboard extends Component {
               PaperProps={{
                 style: {
                   margin: 30,
-                  borderRadius: 8,
+                  borderRadius: 24,
+                  background: colorTheme[network.value].modal,
+                  color: colorTheme[network.value].text.primary,
                 },
               }}
               open={this.state.showOfflineDescription}
@@ -224,14 +228,58 @@ class Dashboard extends Component {
               aria-describedby="alert-dialog-description"
             >
               {/* eslint-disable-next-line react/no-unescaped-entities */}
-              <MDialogTitle disableTypography id="alert-dialog-title">
-                {t('Why my wallet is offline?')}
+              <MDialogTitle
+                disableTypography
+                id="alert-dialog-title"
+                PaperProps={{
+                  style: {
+                    color: `${colorTheme[network.value].text.primary} !important`,
+                  },
+                }}
+              >
+                <span>{t('Why my wallet is offline?')}</span>
               </MDialogTitle>
-              <DialogContent color="#111A34" style={{ padding: '0 16px 16px' }}>
-                <MP>{`${t('Possible reasons')}:`}</MP>
-                <MP>{t('reasons_1')}</MP>
-                <MP style={{ marginTop: 12 }}>{t('reasons_2')}</MP>
-                <MP style={{ marginTop: 12 }}>{t('reasons_3')}</MP>
+              <DialogContent
+                color={colorTheme[network.value].text.primary}
+                style={{ padding: '0 16px 16px' }}
+              >
+                <p
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 400,
+                    adding: '4px 0',
+                  }}
+                >{`${t('Possible reasons')}:`}</p>
+                <p
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 400,
+                    adding: '4px 0',
+                    marginTop: 12,
+                  }}
+                >
+                  {t('reasons_1')}
+                </p>
+                <p
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 400,
+                    adding: '4px 0',
+                    marginTop: 12,
+                  }}
+                >
+                  {t('reasons_2')}
+                </p>
+                <p
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 400,
+                    adding: '4px 0',
+                    marginTop: 12,
+                  }}
+                >
+                  {t('reasons_3')}
+                </p>
               </DialogContent>
               <DialogActions style={{ margin: '16px' }}>
                 <div

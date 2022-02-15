@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import CrustValidator from '../../utils/crust-validator';
 import validator from '../../utils/crust-validator/validator';
 import CreateAccountForm from '../../components/account/create-account-form';
 import CreateAccountSettings from '../../components/account/create-account-settings';
-import FooterWithTwoButton from '../../components/common/footer-with-two-button';
+import FooterButton from '../../components/common/footer-button';
+import SubHeader from '../../components/common/sub-header';
 import * as Account from '../../constants/account';
 import './styles.css';
 import AlertDailog from '../../components/common/alert-dialog';
 import { colorTheme } from '../../../lib/constants/colors';
 import { CRUST_NETWORK } from '../../../lib/constants/networks';
+import { CREATE_ACCOUNT_ENTRY_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 
 class CreateAccount extends Component {
   constructor(props) {
@@ -46,6 +49,7 @@ class CreateAccount extends Component {
 
   componentDidMount() {
     const { aliasError, seedWords, resetImportAccountWithSeedPhraseError } = this.props;
+    this.props.updateBackupPage(this.props.page);
     if (aliasError) {
       resetImportAccountWithSeedPhraseError();
       this.setState({
@@ -67,8 +71,6 @@ class CreateAccount extends Component {
         disableAccountSettings: false,
       });
     }
-
-    console.log(this.props.network, 'network');
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -281,6 +283,16 @@ class CreateAccount extends Component {
     }
   };
 
+  handleBack = () => {
+    const { account } = this.props;
+    this.props.resetImportAccountWithSeedPhraseError();
+    if (account) {
+      this.props.changePage(MANAGE_ACCOUNT_PAGE);
+    } else {
+      this.props.changePage(CREATE_ACCOUNT_ENTRY_PAGE);
+    }
+  };
+
   validateAlias(alias) {
     let { isAliasError, aliasErrorMessage } = this.state;
     if (alias !== '') {
@@ -371,6 +383,16 @@ class CreateAccount extends Component {
         className="create-account-container"
         style={{ background: colorTheme[network ? network.value : CRUST_NETWORK.value].background }}
       >
+        <SubHeader
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
+          title={t('Generate')}
+          backBtnOnClick={this.handleBack}
+          subMenu={null}
+          showSettings={false}
+          onSubMenuOptionsChange={null}
+          isBackIcon
+          colorTheme={colorTheme[network ? network.value : CRUST_NETWORK.value]}
+        />
         <CreateAccountForm
           value={formValue}
           generatedSeedWords={seedWords}
@@ -423,12 +445,10 @@ class CreateAccount extends Component {
               : 'create-account-settings'
           }
         />
-        <FooterWithTwoButton
-          style={{ bottom: '11px' }}
-          onNextClick={onSubmit}
-          onBackClick={this.handelBack}
-          backButtonName={t(backButtonName)}
-          nextButtonName={t(buttonName)}
+        <FooterButton
+          name={t(buttonName)}
+          onClick={onSubmit}
+          style={{ paddingLeft: 20, paddingRight: 16 }}
         />
         <AlertDailog
           isOpen={this.state.isOpen}
@@ -437,7 +457,7 @@ class CreateAccount extends Component {
           noText={t('Go Back')}
           yesText={t('Next')}
           importVaultFileName={
-            <ErrorOutlineOutlinedIcon style={{ color: '#858B9C', fontSize: '70px' }} />
+            <ErrorOutlineOutlinedIcon style={{ color: '#000000', fontSize: '44px' }} />
           }
           msg={t('Make sure you have saved the seed phrase.')}
         />

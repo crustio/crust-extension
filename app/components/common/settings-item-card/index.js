@@ -19,7 +19,6 @@ class SettingsItemCard extends Component {
       moreMenu,
       handleListItemAvatarClick,
       handleListItemClick,
-      isMoreVertIconVisible,
       isActive,
       colorTheme,
       t,

@@ -6,7 +6,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ReactTooltip from 'react-tooltip';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import { MoreHorizIcon } from '../icon';
 import ClickToCopyAddress from '../click-to-copy-address';
 import './styles.css';
 
@@ -28,10 +27,8 @@ class ListItemCard extends Component {
       listItem,
       primaryText,
       onCopyAddress,
-      moreMenu,
       handleListItemAvatarClick,
       handleListItemClick,
-      isMoreVertIconVisible,
       isActive,
       isSelected,
       theme,
@@ -39,8 +36,6 @@ class ListItemCard extends Component {
       network,
       customModal,
       showRadio,
-      handleFooterClick,
-      handleFooterCancel,
       ...otherProps
     } = this.props;
     return (
@@ -70,13 +65,6 @@ class ListItemCard extends Component {
               />
             }
           />
-          {isMoreVertIconVisible && (
-            <MoreHorizIcon
-              color={colorTheme.text.secondary}
-              onClick={handleFooterClick}
-              className="more-list-icon"
-            />
-          )}
           {showRadio && (
             <ListItemAvatar onClick={event => handleListItemAvatarClick(event, listItem)}>
               {isSelected ? (

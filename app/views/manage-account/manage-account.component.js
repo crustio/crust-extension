@@ -3,11 +3,13 @@ import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import {
+  CREATE_ACCOUNT_ENTRY_PAGE,
   CREATE_ACCOUNT_PAGE,
   DASHBOARD_PAGE,
   EXPORT_ACCOUNT_PAGE,
   IMPORT_JSON_PAGE,
   IMPORT_PHRASE_PAGE,
+  MANAGE_ACCOUNT_PAGE,
 } from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AccountList from '../../components/account-list';
@@ -45,7 +47,7 @@ class ManageAccount extends Component {
   }
 
   componentDidMount() {
-    this.props.updateBackupPage(DASHBOARD_PAGE);
+    this.props.updateBackupPage(MANAGE_ACCOUNT_PAGE);
   }
 
   componentDidUpdate() {}
@@ -115,14 +117,19 @@ class ManageAccount extends Component {
   };
 
   handleYes = () => {
-    const { removeAccount, selectedAccounts, t } = this.props;
+    const {
+      removeAccount, selectedAccounts, accounts, t
+    } = this.props;
     for (let i = 0; i < selectedAccounts.length; i++) {
+      console.log(selectedAccounts[i], i);
       removeAccount(selectedAccounts[i], t);
     }
     this.props.updateSelectedAccounts([]);
     //    removeAccount(account, t);
     this.setState({ isOpen: false, selectedAccountList: [] });
-    this.handleFooterCancel();
+    if (accounts.length === selectedAccounts.length) {
+      this.props.changePage(CREATE_ACCOUNT_ENTRY_PAGE);
+    }
   };
 
   handleTabChange = (e, value) => {
@@ -169,6 +176,8 @@ class ManageAccount extends Component {
       }, 1000);
     } else if (option.value === 'lock') {
       this.props.lockApp();
+    } else if (option.value === 'get_cru') {
+      window.open('https://swap.crustapps.net/');
     } else {
       this.props.updateBackupPage(this.props.page);
       this.props.changePage(option.value);
@@ -238,15 +247,12 @@ class ManageAccount extends Component {
                     accounts={accounts}
                     selectedAccounts={selectedAccounts}
                     currentAccount={account}
-                    isMoreVertIconVisible={false}
                     moreMenu={options}
                     theme={theme}
                     onCopyAddress={this.onCopyAddress}
                     handleChangeAccount={this.handleChangeAccount}
                     colorTheme={colorTheme[network.value]}
                     network={network}
-                    handleFooterClick={this.handleFooterClick}
-                    handleFooterCancel={this.handleFooterCancel}
                     updateSelectedAccounts={this.handleSelectedAccountsChange}
                   />
                 ) : null}

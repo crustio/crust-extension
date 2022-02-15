@@ -86,17 +86,6 @@ export const filterTransactions = async (transactions, network, address) => {
   return newTransactions;
 };
 
-export const getTransactionFees = async (txnType, senderAddress, toAddress, transactionLength) => {
-  switch (txnType) {
-    case Transaction.TRANSFER_COINS: {
-      const fees = await FeeService.getTransferFees(senderAddress, toAddress, transactionLength);
-      return fees;
-    }
-    default:
-      throw new Error('Wrong Transaction Type');
-  }
-};
-
 export const sendOSNotification = async transaction => {
   const { message } = createTransactionToastMessage(transaction);
   const txnDetailURl = `${transaction.internal.network.transactionUrl}/${transaction.txnHash}`;
@@ -335,4 +324,31 @@ export const confirmTransaction = async (
     txnError.toAddressErrorMessage = 'Invalid Address';
   }
   return { ...newTransaction, ...txnError };
+};
+
+export const getTransactionFees = async (
+  senderAddress,
+  network,
+  transaction,
+  seedWords,
+  keypairType,
+) => {
+  const vTransaction = validateTxnObject(transaction);
+  if (vTransaction !== undefined) return vTransaction;
+
+  let fees;
+  const txnError = getTxnError();
+  const {
+    to, account, amount, unit, txnType, tokenSelected
+  } = transaction;
+  const fAmount = convertShowToBalance(amount.toString(), tokenSelected);
+  if (isValidAddress(transaction.to)) {
+    fees = await getFeesByPaymentInfo(txnType, senderAddress, to, new BN(fAmount), tokenSelected);
+  } else {
+    txnError.isError = true;
+    txnError.isToAddressError = true;
+    txnError.toAddressErrorMessage = 'Invalid Address';
+  }
+
+  return { ...fees, ...txnError };
 };

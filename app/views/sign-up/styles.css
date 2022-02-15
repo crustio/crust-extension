@@ -1,5 +1,5 @@
 .sign-up-container {
-  padding: 40px 18px 0px 18px;
+  padding: 70px 18px 0px 18px;
   display: flex;
   flex-direction: column;
 }
@@ -12,24 +12,20 @@
 }
 
 .sign-up-content-header {
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 }
 
 .sign-up-password {
   display: flex;
   width: 320px;
-  color: #858B9C
+  height: 50px;
+  color: #858B9C;
+  background-color: #FFFFFF;
 }
 
 .sign-up-password fieldset {
   border: 0;
   font-size: 14px;
-  background: #F0F1F5;
-}
-
-.sign-up-password:focus-within fieldset {
-  background-color: transparent;
-  border: 2px solid #ECEDEF !important;
 }
 
 .input-margin {

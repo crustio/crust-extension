@@ -1,5 +1,5 @@
 .entry-container {
-  padding: 40px 18px 0px 18px;
+  padding: 95px 18px 0px 18px;
   display: flex;
   flex-direction: column;
 }
@@ -57,8 +57,8 @@
 .entry-img-contianer {
   align-self: center;
   width: 98px;
-  margin-top: 68px;
-  margin-bottom: 20px;
+  margin-top: 18px;
+  margin-bottom: 30px;
 }
 
 .entry-title {

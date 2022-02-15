@@ -53,19 +53,16 @@ class ExportAccout extends Component {
       return;
     }
 
-    let result = '';
     setTimeout(async () => {
       await this.props.selectedAccounts.map((account, index) => {
         Account.exportAccount(account.address, password)
           .then(json => {
-            result += `${json.result.exportedJson}\n`;
-            if (index === this.props.selectedAccounts.length - 1) {
-              const blob = new Blob([result], {
-                type: 'application/json; charset=utf-8',
-              });
-              saveAs(blob, `${this.props.account.address}.json`);
-              this.props.updateAppLoading(false);
-            }
+            const blob = new Blob([json.result.exportedJson], {
+              type: 'application/json; charset=utf-8',
+            });
+            saveAs(blob, `${account.address}.json`);
+            this.props.updateAppLoading(false);
+            this.props.changePage(MANAGE_ACCOUNT_PAGE);
           })
           .catch(() => {
             this.props.updateAppLoading(false);

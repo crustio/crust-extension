@@ -6,6 +6,7 @@ import { onBoard } from '../../actions/initialize';
 const mapStateToProps = state => ({
   error: state.unlockCrustReducer.error,
   success: state.unlockCrustReducer.success,
+  network: state.networkReducer.network,
 });
 
 const mapDispatchToProps = {
@@ -13,7 +14,4 @@ const mapDispatchToProps = {
   onBoard,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
