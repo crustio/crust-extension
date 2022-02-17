@@ -38,6 +38,7 @@ export default class TransferTo extends Component {
             value={toValue}
             spellCheck={false}
             colorTheme={colorTheme}
+            style={{ background: colorTheme.card }}
           />
           {isError ? (
             <span className="tranfer-to-error-msg">{errorMessage}</span>

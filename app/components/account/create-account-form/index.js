@@ -23,12 +23,17 @@ export default class CreateAccountForm extends Component {
       confirmedSeedWords,
       colorTheme,
       alias,
+      onCopySeed,
       ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
         {value === Account.CREATE_ACCOUNT && (
-          <GenerateSeedPhrase seedWords={generatedSeedWords} colorTheme={colorTheme} />
+          <GenerateSeedPhrase
+            seedWords={generatedSeedWords}
+            colorTheme={colorTheme}
+            onCopySeed={onCopySeed}
+          />
         )}
         {value === Account.IMPORT_ACCOUNT && (
           <ImportSeedPhrase

@@ -34,7 +34,7 @@ class CreateContactForm extends Component {
     } = this.props;
     return (
       <div className="create-address-book-form">
-        <div className="create-address-book-top">
+        <div className="create-address-book-top" style={{ background: colorTheme.background }}>
           <TransferTo
             className="contact-to-container"
             addressValue={address}
@@ -55,6 +55,7 @@ class CreateContactForm extends Component {
               onChange={handleFnameChange(fnamePropName)}
               placeholder={fnameLabel}
               colorTheme={colorTheme}
+              style={{ background: colorTheme.card }}
             />
             {isFnameError ? (
               <span className="error-msg">{fnameErrorMessage}</span>
@@ -69,6 +70,7 @@ class CreateContactForm extends Component {
               onChange={handleLnameChange(lnamePropName)}
               placeholder={lnameLabel}
               colorTheme={colorTheme}
+              style={{ background: colorTheme.card }}
             />
             {isLnameError ? (
               <span className="error-msg">{lnameErrorMessage}</span>

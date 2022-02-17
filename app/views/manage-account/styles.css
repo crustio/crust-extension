@@ -15,6 +15,7 @@
   left: 0;
   right: -10px; /* Increase/Decrease this value for cross-browser compatibility */
   overflow-y: scroll;
+  height: 400px;
 }
 .accounts-container {
   display: flex;

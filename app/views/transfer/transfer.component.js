@@ -103,6 +103,11 @@ class Transfer extends Component {
   setAmount = async value => {
     const { unit, dropDownSelected } = this.state;
     const { toAddress } = this.props;
+    const error = {
+      isToAddressError: false,
+      toAddressErrorMessage: '',
+    };
+    await this.props.setTransferValidationError(error);
     await this.props.getTransferFee(
       toAddress,
       this.props.account,
@@ -112,13 +117,24 @@ class Transfer extends Component {
     );
 
     const { transferFee } = this.props;
-    const availableAmount = convertBalanceToShow(
-      dropDownSelected.balance - transferFee,
-      dropDownSelected.decimals,
-    );
-    this.setState({
-      amount: availableAmount,
-    });
+    if (transferFee === undefined) {
+      if (toAddress === '') {
+        error.isToAddressError = true;
+        error.toAddressErrorMessage = this.props.t('Please input address.');
+      } else {
+        error.isToAddressError = true;
+        error.toAddressErrorMessage = this.props.t('Please input valid address.');
+      }
+      this.props.setTransferValidationError(error);
+    } else {
+      const availableAmount = convertBalanceToShow(
+        dropDownSelected.balance - transferFee,
+        dropDownSelected.decimals,
+      );
+      this.setState({
+        amount: availableAmount,
+      });
+    }
   };
 
   onAddressBookClick = () => {

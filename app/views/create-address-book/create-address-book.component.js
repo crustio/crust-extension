@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import CreateContactForm from '../../components/address-book/create-contact-form';
 import CrustValidator from '../../utils/crust-validator';
-import { DASHBOARD_PAGE } from '../../constants/navigation';
+import { ADDRESS_BOOK_PAGE } from '../../constants/navigation';
 import validator from '../../utils/crust-validator/validator';
 import { colorTheme } from '../../../lib/constants/colors';
 import './styles.css';
@@ -103,7 +103,7 @@ class CreateAddressBook extends Component {
   };
 
   handleSubheaderBackBtn = () => {
-    this.props.changePage(DASHBOARD_PAGE);
+    this.props.changePage(ADDRESS_BOOK_PAGE);
   };
 
   handleInputChange = prop => e => {
@@ -201,7 +201,10 @@ class CreateAddressBook extends Component {
     const lnameLabelT = t('Lastname');
     const buttonTextT = t('Submit');
     return (
-      <div className="create-address-book-container">
+      <div
+        className="create-address-book-container"
+        style={{ background: colorTheme[network.value].background }}
+      >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Address Book')}

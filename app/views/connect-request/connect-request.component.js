@@ -84,7 +84,9 @@ class ConnectRequest extends Component {
     } = this.props;
     const content = 'is requesting access to an account. Click Allow to grant access any account or click Deny to prevent access to any account.';
     return (
-      <div style={{ height: 600, background: colorTheme[network.value].background }}>
+      <div
+        style={{ height: 600, width: '100vw', background: colorTheme[network.value].background }}
+      >
         <SubHeader
           title={t(title)}
           isBackIcon={false}
@@ -107,6 +109,7 @@ class ConnectRequest extends Component {
           nextBackground={colorTheme[network.value].button.primary.main}
           backColor={colorTheme[network.value].button.tertiary.text}
           backBackground={colorTheme[network.value].button.tertiary.main}
+          style={{ maxWidth: 300, marginRight: 'auto', marginLeft: 'auto' }}
         />
       </div>
     );

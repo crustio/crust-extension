@@ -10,7 +10,7 @@ import { styles } from './styles';
 class GenerateSeedPhrase extends Component {
   render() {
     const {
-      classes, seedWords, t, colorTheme, ...otherProps
+      classes, seedWords, t, colorTheme, onCopySeed, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -32,6 +32,7 @@ class GenerateSeedPhrase extends Component {
           text={t('Click to copy')}
           value={seedWords}
           colorTheme={colorTheme}
+          onClick={onCopySeed}
         />
       </div>
     );

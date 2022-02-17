@@ -58,6 +58,7 @@
   font-size: 16px;
   margin-top: 16.34px;
   padding: 0px 18px 0px 18px;
+  word-break: normal !important;
 }
 
 .connect-request-account-selection-header-blockchain {

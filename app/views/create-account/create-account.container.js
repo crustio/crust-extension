@@ -8,6 +8,7 @@ import {
   createFirstAccountWithSeedPhraseSuccess,
 } from './actions';
 import { updateAppLoading, changePage, updateBackupPage } from '../../containers/actions';
+import { createToast } from '../../constants/toast';
 
 const mapStateToProps = state => ({
   seedWords: state.accountReducer.seedWords,
@@ -31,6 +32,7 @@ const mapDispatchToProps = {
   updateAppLoading,
   changePage,
   updateBackupPage,
+  createToast,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateAccount);

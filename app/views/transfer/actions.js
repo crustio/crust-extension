@@ -103,6 +103,7 @@ export const getTransferFee = (
   tokenSelected,
   network,
 ) => async dispatch => {
+  dispatch(updateAppLoading(true));
   const { result } = await Transaction.getTransactionFee({
     txnType: TRANSFER_COINS,
     to,
@@ -113,4 +114,5 @@ export const getTransferFee = (
   });
 
   dispatch(dispatchSetTransferFee(result.totalFee));
+  dispatch(updateAppLoading(false));
 };

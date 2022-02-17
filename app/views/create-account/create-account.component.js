@@ -15,6 +15,7 @@ import AlertDailog from '../../components/common/alert-dialog';
 import { colorTheme } from '../../../lib/constants/colors';
 import { CRUST_NETWORK } from '../../../lib/constants/networks';
 import { CREATE_ACCOUNT_ENTRY_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
+import { copySeedPhraseMessage } from '../../../lib/services/static-message-factory-service';
 
 class CreateAccount extends Component {
   constructor(props) {
@@ -22,7 +23,6 @@ class CreateAccount extends Component {
     this.state = {
       formValue: Account.CREATE_ACCOUNT,
       buttonName: Account.TO_CONFIRM_BUTTON_TEXT,
-      backButtonName: Account.BACK_BUTTON_TEXT,
       onSubmit: this.handleNext,
       importedSeedPhrase: '',
       confirmSeedPhrase: '',
@@ -293,6 +293,11 @@ class CreateAccount extends Component {
     }
   };
 
+  onCopySeed = () => {
+    const { t } = this.props;
+    this.props.createToast({ message: t(copySeedPhraseMessage()), type: 'info' });
+  };
+
   validateAlias(alias) {
     let { isAliasError, aliasErrorMessage } = this.state;
     if (alias !== '') {
@@ -374,7 +379,6 @@ class CreateAccount extends Component {
       importSeedPhraseInputName,
       confirmSeedPhraseInputName,
       aliasInputName,
-      backButtonName,
       isPhraseError,
       phraseErrorMsg,
     } = this.state;
@@ -415,6 +419,7 @@ class CreateAccount extends Component {
           handleConfirmSeedWordsOnBlur={this.handleConfirmSeedWordsOnBlur}
           className="create-account-form"
           colorTheme={colorTheme[network ? network.value : CRUST_NETWORK.value]}
+          onCopySeed={this.onCopySeed}
         />
         <CreateAccountSettings
           disableAccountSettings={disableAccountSettings}
