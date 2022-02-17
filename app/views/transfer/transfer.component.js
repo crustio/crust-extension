@@ -106,6 +106,8 @@ class Transfer extends Component {
     const error = {
       isToAddressError: false,
       toAddressErrorMessage: '',
+      isAmountError: false,
+      toAmountErrorMessage: '',
     };
     await this.props.setTransferValidationError(error);
     await this.props.getTransferFee(
@@ -125,6 +127,10 @@ class Transfer extends Component {
         error.isToAddressError = true;
         error.toAddressErrorMessage = this.props.t('Please input valid address.');
       }
+      this.props.setTransferValidationError(error);
+    } else if (dropDownSelected.balance - transferFee < 0) {
+      error.isAmountError = true;
+      error.toAmountErrorMessage = this.props.t('Insufficient balance.');
       this.props.setTransferValidationError(error);
     } else {
       const availableAmount = convertBalanceToShow(
