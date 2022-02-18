@@ -152,7 +152,7 @@
 
   "Offline": "未连接",
   "Set To Online Mode": "设为在线模式",
-  "Set To Offline Mode": "设为离线模式",
+  "Set to Signer Mode": "设为签名模式",
   "OfflineDescription": "钱包处于离线状态。\n当钱包处于离线状态时，您仍然可以使用钱包签名交易。\n了解钱包离线的原因？",
   "Why my wallet is offline?": "为什么我的钱包离线了？",
   "Possible reasons": "可能的原因",

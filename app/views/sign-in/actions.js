@@ -24,30 +24,30 @@ export const unlockCrustSuccessFalse = () => ({
 });
 
 export const unlockCrust = password => async dispatch => {
-  try {
-    dispatch(updateAppLoading(true));
-    const ret = await promiseTimeout(
-      60000,
-      APITypes.OnBoarding.setHashKey(keccak512(password)),
-      false,
-    );
-    if (ret.result === false) {
-      throw new Error('Time out.');
-    }
-    dispatch(clearUnlockError());
-    dispatch(unlockCrustSuccess());
-  } catch (e) {
-    dispatch(updateAppLoading(false));
-    const error = {
-      message: e.message,
-      stack: e.stack || {},
-    };
-    switch (e.code) {
-      case APIConstants.FAILURE:
-        error.message = password !== '' ? 'Password is incorrect.' : 'Password is required.';
-        break;
-      default:
-    }
+  if (password === '') {
+    const error = {};
+    error.message = 'Password is required.';
     dispatch(unlockCrustError(error));
+  } else {
+    try {
+      dispatch(updateAppLoading(true));
+      const ret = await promiseTimeout(
+        5000,
+        APITypes.OnBoarding.setHashKey(keccak512(password)),
+        false,
+      );
+      if (ret.result === false) {
+        throw new Error('Time out.');
+      }
+      dispatch(clearUnlockError());
+      dispatch(unlockCrustSuccess());
+    } catch (e) {
+      dispatch(updateAppLoading(false));
+      const error = {
+        message: 'Password is incorrect.',
+        stack: e.stack || {},
+      };
+      dispatch(unlockCrustError(error));
+    }
   }
 };

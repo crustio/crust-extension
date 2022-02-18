@@ -21,7 +21,6 @@ const mapStateToProps = state => ({
   isConnected: state.networkReducer.isConnected,
   isOfflineMode: state.networkReducer.isOfflineMode,
   isDeveloperMode: state.networkReducer.isDeveloperMode,
-  options: state.appStateReducer.options,
   language: state.appStateReducer.language,
 });
 

@@ -168,6 +168,7 @@ export const fetchTransactionHistory = () => async (dispatch, getState) => {
     : network.value === CRUST_NETWORK.value
       ? 'crust'
       : '';
+  dispatch(AppActions.updateAppLoading(true));
   while (true) {
     // eslint-disable-next-line
     const result = await fetchTransactionHistoryByPage(startPage, networkUrl, address);
@@ -191,5 +192,6 @@ export const fetchTransactionHistory = () => async (dispatch, getState) => {
     }
   }
   dispatch(updateTransactionHistory(response));
+  dispatch(AppActions.updateAppLoading(false));
   return response;
 };

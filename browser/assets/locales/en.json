@@ -152,7 +152,7 @@
 
   "Offline": "Offline",
   "Set To Online Mode": "Set To Online Mode",
-  "Set To Offline Mode": "Set To Offline Mode",
+  "Set to Signer Mode": "Set to Signer Mode",
   "OfflineDescription": "The wallet is now offline. \nWhen offline, you can still sign transactions with the wallet. \nWhy my wallet is offline?",
   "Why my wallet is offline?": "Why my wallet is offline?",
   "Possible reasons": "Possible reasons",

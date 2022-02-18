@@ -209,7 +209,7 @@ class ManageAccount extends Component {
     // eslint-disable-next-line no-restricted-syntax
     for (const option of AccountOptions) {
       if (option.value === 'network_mode') {
-        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set To Offline Mode';
+        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set to Signer Mode';
       }
     }
 

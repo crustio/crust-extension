@@ -46,7 +46,7 @@ class TransferForm extends Component {
             theme={theme}
             alias={alias}
             isToError={isToError}
-            label={t('To Address')}
+            label={t('Account')}
             isAddressEncoded={isAddressEncoded}
             toPropName={toPropName}
             to={to}

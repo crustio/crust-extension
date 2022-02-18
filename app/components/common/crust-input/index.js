@@ -29,7 +29,7 @@ class CrustInput extends Component {
       />
     ) : (
       <OutlinedInput
-        placeholder="add"
+        placeholder={placeholderText}
         labelWidth={0}
         classes={{
           adornedEnd: classes.rootEndAdornment,
