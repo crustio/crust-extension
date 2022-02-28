@@ -10,7 +10,7 @@ import CrustPassword from '../../components/common/password/crust-password';
 import FooterButton from '../../components/common/footer-button';
 import { shortenFilename } from '../../services/wallet-service';
 import { CHINESE } from '../../constants/language';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
 import { CREATE_ACCOUNT_ENTRY_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 
@@ -101,7 +101,7 @@ class ImportJson extends Component {
     return (
       <div
         className="import-json-container"
-        style={{ background: colorTheme[network.value].background }}
+        style={{ background: colortheme[network.value].background }}
       >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
@@ -111,11 +111,11 @@ class ImportJson extends Component {
           showSettings={false}
           onSubMenuOptionsChange={null}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <div
           className="import-json-content-container"
-          style={{ background: colorTheme[network.value].background }}
+          style={{ background: colortheme[network.value].background }}
         >
           <div className="import-json-select-container">
             <label className="import-json-label" htmlFor="file">
@@ -131,13 +131,13 @@ class ImportJson extends Component {
               <div
                 className="import-json-file-container"
                 style={{
-                  backgroundColor: colorTheme[network.value].card,
-                  color: colorTheme[network.value].text.tertiary,
+                  backgroundColor: colortheme[network.value].card,
+                  color: colortheme[network.value].text.tertiary,
                 }}
               >
                 <p>{filenameShow || t('No file chosen')}</p>
                 <InsertDriveFileIcon
-                  style={{ fontSize: 16, color: colorTheme[network.value].text.tertiary }}
+                  style={{ fontSize: 16, color: colortheme[network.value].text.tertiary }}
                 />
               </div>
             </label>
@@ -157,11 +157,11 @@ class ImportJson extends Component {
             onChange={e => this.handleOnChange('jsonPwd', e)}
             password={jsonPwd}
             placeholder={t('Password')}
-            colorTheme={colorTheme[network.value]}
+            colortheme={colortheme[network.value]}
             style={{
               borderRadius: 12,
-              background: colorTheme[network.value].card,
-              '&::placeholder': { color: colorTheme[network.value].text.tertiary },
+              background: colortheme[network.value].card,
+              '&::placeholder': { color: colortheme[network.value].text.tertiary },
             }}
           />
           {jsonPwdError !== '' ? (
@@ -190,11 +190,11 @@ class ImportJson extends Component {
             onChange={e => this.handleOnChange('walletPwd', e)}
             password={walletPwd}
             placeholder={t('Password')}
-            colorTheme={colorTheme[network.value]}
+            colortheme={colortheme[network.value]}
             style={{
               borderRadius: 12,
-              background: colorTheme[network.value].card,
-              '&::placeholder': { color: colorTheme[network.value].text.tertiary },
+              background: colortheme[network.value].card,
+              '&::placeholder': { color: colortheme[network.value].text.tertiary },
             }}
           />
           <FontRegular

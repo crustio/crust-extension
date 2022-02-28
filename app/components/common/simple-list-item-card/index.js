@@ -17,7 +17,7 @@ class SimpleListItemCard extends Component {
       handleListItemAvatarClick,
       handleListItemClick,
       isActive,
-      colorTheme,
+      colortheme,
       ...otherProps
     } = this.props;
     return (
@@ -30,7 +30,7 @@ class SimpleListItemCard extends Component {
                 <span
                   className="language-card-text"
                   data-tip={primaryText}
-                  style={{ color: colorTheme.text.primary }}
+                  style={{ color: colortheme.text.primary }}
                 >
                   {primaryText}
                 </span>
@@ -44,12 +44,12 @@ class SimpleListItemCard extends Component {
             {isActive ? (
               <CheckCircleIcon
                 className="language-card-icon"
-                style={{ color: colorTheme.icon.primary }}
+                style={{ color: colortheme.icon.primary }}
               />
             ) : (
               <RadioButtonUncheckedIcon
                 className="language-card-icon"
-                style={{ color: colorTheme.icon.secondary }}
+                style={{ color: colortheme.icon.secondary }}
               />
             )}
           </ListItemAvatar>

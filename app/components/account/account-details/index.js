@@ -18,7 +18,7 @@ export default class AccountDetails extends Component {
       onAliasInputKeyPress,
       fontSize,
       inputRef,
-      colorTheme,
+      colortheme,
       ...otherProps
     } = this.props;
     return (
@@ -29,7 +29,7 @@ export default class AccountDetails extends Component {
               className="account-alias"
               text={alias}
               data-tip={alias}
-              style={(fontSize && { fontSize }, { color: colorTheme.text.primary })}
+              style={(fontSize && { fontSize }, { color: colortheme.text.primary })}
             />
             <ReactTooltip effect="solid" place="bottom" />
           </div>
@@ -41,7 +41,7 @@ export default class AccountDetails extends Component {
             onBlur={onAliasInputBlur}
             value={aliasValue}
             inputRef={inputRef}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
         )}
         {!editMode && (
@@ -49,7 +49,7 @@ export default class AccountDetails extends Component {
             className="account-address clickable-icon"
             onCopyAddress={onCopyAddress}
             address={address}
-            style={{ color: colorTheme.text.secondary }}
+            style={{ color: colortheme.text.secondary }}
           />
         )}
       </div>

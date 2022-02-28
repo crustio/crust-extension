@@ -18,7 +18,7 @@ import {
 } from '../../constants/account';
 import { CRUST_NETWORK } from '../../../lib/constants/networks';
 import './styles.css';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 
 class CreateAccountEntry extends Component {
   constructor(props) {
@@ -76,7 +76,7 @@ class CreateAccountEntry extends Component {
           <div className="entry-container-entries">
             <ModalWithThreeButton
               show={!showImport && !isLoading}
-              colorTheme={colorTheme[CRUST_NETWORK.value]}
+              colortheme={colortheme[CRUST_NETWORK.value]}
               handleCancel={this.handleCancel}
               handleTopClick={() => this.handleClick(GENERATE_BUTTON_TEXT)}
               handleBottomClick={() => this.handleClick(IMPORT_BUTTON_TEXT)}
@@ -87,7 +87,7 @@ class CreateAccountEntry extends Component {
             />
             <ModalWithThreeButton
               show={showImport && !isLoading}
-              colorTheme={colorTheme[CRUST_NETWORK.value]}
+              colortheme={colortheme[CRUST_NETWORK.value]}
               handleCancel={() => this.handleClick(BACK_BUTTON_TEXT)}
               handleTopClick={() => this.handleClick(IMPORT_FROM_JSON_BUTTON_TEXT)}
               handleBottomClick={() => this.handleClick(IMPORT_FROM_PHRASE_BUTTON_TEXT)}

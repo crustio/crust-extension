@@ -20,7 +20,7 @@ class SettingsItemCard extends Component {
       handleListItemAvatarClick,
       handleListItemClick,
       isActive,
-      colorTheme,
+      colortheme,
       t,
       ...otherProps
     } = this.props;
@@ -33,7 +33,7 @@ class SettingsItemCard extends Component {
                 <span
                   className="settings-card-text"
                   data-tip={listItem.text}
-                  style={{ color: colorTheme.text.primary }}
+                  style={{ color: colortheme.text.primary }}
                 >
                   {t(listItem.text)}
                 </span>
@@ -45,7 +45,7 @@ class SettingsItemCard extends Component {
           <ArrowForwardIosIcon
             color="rgba(0, 0, 0, 1)"
             className="arrow-list-icon"
-            style={{ color: colorTheme.text.primary }}
+            style={{ color: colortheme.text.primary }}
           />
         </ListItem>
       </div>

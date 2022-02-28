@@ -11,13 +11,12 @@ class AddressList extends Component {
       classes,
       addressBook,
       onCopyAddress,
-      moreMenu,
       onMoreMenuOptionsChange,
       isSelectIcon,
       handelChangeToAddress,
       theme,
       network,
-      colorTheme,
+      colortheme,
       showFooterModal,
       handleFooterCancel,
       handleFooterClick,
@@ -32,26 +31,26 @@ class AddressList extends Component {
             root: classes.root,
           }}
         >
-          {addressBook.map(address => (
+          {addressBook.map((address, index) => (
             <ListItemCard
+              key={index}
               listItem={address}
               theme={theme}
               primaryText={`${address.fname}  ${address.lname}`}
               address={address.address}
               onCopyAddress={onCopyAddress}
-              moreMenu={moreMenu}
               className="address-card-container"
               onMoreMenuOptionsChange={onMoreMenuOptionsChange}
               handleListItemAvatarClick={updateSelectedAddress}
               handleListItemClick={handelChangeToAddress}
               network={network}
-              colorTheme={colorTheme}
+              colortheme={colortheme}
               customModal
               showRadio={isSelectIcon}
               showFooterModal={showFooterModal}
               handleFooterClick={handleFooterClick}
               handleFooterCancel={handleFooterCancel}
-              style={{ background: colorTheme.card }}
+              style={{ background: colortheme.card }}
               isSelected={selectedAddress.findIndex(e => e.address === address.address) !== -1}
             />
           ))}

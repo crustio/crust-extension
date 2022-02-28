@@ -11,7 +11,7 @@ export default class MultilineInput extends PureComponent {
       errorText,
       value,
       onChange,
-      colorTheme,
+      colortheme,
       ...otherProps
     } = this.props;
 
@@ -25,8 +25,8 @@ export default class MultilineInput extends PureComponent {
         style={{
           height,
           width,
-          color: colorTheme ? colorTheme.text.primary : null,
-          border: colorTheme ? 'none' : null,
+          color: colortheme ? colortheme.text.primary : null,
+          border: colortheme ? 'none' : null,
         }}
         className={walletInputClassNames}
         onChange={onChange}

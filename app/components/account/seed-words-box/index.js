@@ -3,10 +3,10 @@ import MultilineInput from '../../common/multiline-input';
 
 export default class SeedWordsBox extends Component {
   render() {
-    const { value, colorTheme, ...otherProps } = this.props;
+    const { value, colortheme, ...otherProps } = this.props;
     return (
       <div {...otherProps}>
-        <MultilineInput value={value} colorTheme={colorTheme} />
+        <MultilineInput value={value} colortheme={colortheme} />
       </div>
     );
   }

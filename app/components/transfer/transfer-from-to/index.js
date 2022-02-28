@@ -18,7 +18,7 @@ export default class TransferFromTo extends Component {
       handleToChange,
       page,
       onAddressBookClick,
-      colorTheme,
+      colortheme,
       ...otherProps
     } = this.props;
     return (
@@ -35,7 +35,7 @@ export default class TransferFromTo extends Component {
           onChange={handleToChange}
           inputRef={toRef}
           onAddressBookClick={onAddressBookClick}
-          colorTheme={colorTheme}
+          colortheme={colortheme}
         />
       </div>
     );

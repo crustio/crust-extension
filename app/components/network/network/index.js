@@ -6,6 +6,7 @@ import FontRegular from '../../common/fonts/font-regular';
 import { DISABLE_NETWORKS_PAGES_GROUP } from '../../../constants/navigation';
 // import { shortenName } from '../../../services/wallet-service';
 import './styles.css';
+import { CRUST_NETWORK } from '../../../../lib/constants/networks';
 
 class Network extends Component {
   state = {
@@ -26,17 +27,17 @@ class Network extends Component {
   render() {
     const { anchorEl } = this.state;
     const {
-      networks, network, onNetworkChange, colorTheme, t, ...otherProps
+      networks, network, onNetworkChange, colortheme, t
     } = this.props;
     return (
-      <div {...otherProps}>
+      <div>
         <div className="network-text-container" onClick={this.handleClick}>
           <FontRegular
             className="network-text"
-            text={t(network.text)}
-            style={{ color: colorTheme.text.secondary }}
+            text={t(network.value === CRUST_NETWORK.value ? CRUST_NETWORK.text : network.text)}
+            style={{ color: colortheme.text.secondary }}
           />
-          <ChevronDown size={14} color={colorTheme.text.secondary} />
+          <ChevronDown size={14} color={colortheme.text.secondary} />
         </div>
         <CrustMenu
           selected={network}

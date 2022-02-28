@@ -6,12 +6,12 @@ import ConfirmTo from '../confirm-to';
 export default class ConfirmFromTo extends Component {
   render() {
     const {
-      to, alias, from, theme, colorTheme, ...otherProps
+      to, alias, from, theme, colortheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
-        <TransferFrom address={from} alias={alias} theme={theme} colorTheme={colorTheme} />
-        <IconTransferFromTo colorTheme={colorTheme} />
+        <TransferFrom address={from} alias={alias} theme={theme} colortheme={colortheme} />
+        <IconTransferFromTo colortheme={colortheme} />
         <ConfirmTo
           style={{
             marginTop: '10.8px',
@@ -19,12 +19,12 @@ export default class ConfirmFromTo extends Component {
             alignItems: 'center',
             padding: '16px',
             height: '54.8px',
-            background: colorTheme.card,
+            background: colortheme.card,
             borderRadius: '12px',
           }}
           address={to}
           theme={theme}
-          colorTheme={colorTheme}
+          colortheme={colortheme}
         />
       </div>
     );

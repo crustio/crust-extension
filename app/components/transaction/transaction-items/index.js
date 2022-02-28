@@ -6,7 +6,7 @@ import './styles.css';
 export default class TransactionItems extends Component {
   render() {
     const {
-      transactions, network, account, colorTheme, ...otherProps
+      transactions, network, account, colortheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -17,9 +17,9 @@ export default class TransactionItems extends Component {
               transaction={transaction}
               network={network}
               account={account}
-              colorTheme={colorTheme}
+              colortheme={colortheme}
               style={{
-                background: colorTheme.card,
+                background: colortheme.card,
                 boxShadow: network.value === CRUST_MAXWELL_NETWORK.value ? 'none' : '',
               }}
             />

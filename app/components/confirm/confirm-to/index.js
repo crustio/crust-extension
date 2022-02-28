@@ -5,13 +5,13 @@ import Address from '../../common/address';
 export default class ConfirmTo extends Component {
   render() {
     const {
-      address, theme, colorTheme, ...otherProps
+      address, theme, colortheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
         <Avatar theme={theme} size={44} value={address} />
         <Address
-          style={{ marginLeft: '22px', fontSize: '14px', color: colorTheme.text.quaternary }}
+          style={{ marginLeft: '22px', fontSize: '14px', color: colortheme.text.quaternary }}
           hash={address}
         />
       </div>

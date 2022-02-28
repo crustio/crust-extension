@@ -9,7 +9,7 @@ import { CRUST_MAXWELL_NETWORK, CRUST_NETWORK } from '../../../../lib/constants/
 function ModalWithThreeButton(props) {
   const {
     show,
-    colorTheme,
+    colortheme,
     handleCancel,
     topButton,
     bottomButton,
@@ -39,11 +39,11 @@ function ModalWithThreeButton(props) {
       <DialogContent classes={{ root: classes.contentRoot }}>
         <div style={{ marginBottom: 10 }}>
           <ButtonCustom
-            color={
-              sameStyleButton ? colorTheme.button.secondary.text : colorTheme.button.primary.text
+            textColor={
+              sameStyleButton ? colortheme.button.secondary.text : colortheme.button.primary.text
             }
             background={
-              sameStyleButton ? colorTheme.button.secondary.main : colorTheme.button.primary.main
+              sameStyleButton ? colortheme.button.secondary.main : colortheme.button.primary.main
             }
             onClick={handleTopClick}
           >
@@ -53,8 +53,8 @@ function ModalWithThreeButton(props) {
         {!oneAction && (
           <div>
             <ButtonCustom
-              color={colorTheme.button.secondary.text}
-              background={colorTheme.button.secondary.main}
+              textColor={colortheme.button.secondary.text}
+              background={colortheme.button.secondary.main}
               onClick={handleBottomClick}
             >
               {t(bottomButton)}
@@ -74,7 +74,7 @@ function ModalWithThreeButton(props) {
       >
         <ButtonCustom
           onClick={handleCancel}
-          color={colorTheme.text.primary}
+          textColor={colortheme.text.primary}
           background="transparent"
         >
           {cancelButton ? t(cancelButton) : t('Cancel')}

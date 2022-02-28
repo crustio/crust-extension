@@ -6,7 +6,7 @@ import SubHeader from '../../components/common/sub-header';
 import TransferForm from '../../components/transfer/transfer-form';
 import * as NavConstants from '../../constants/navigation';
 import { INPUT_NUMBER_REGEX } from '../../../lib/constants/regex';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import './styles.css';
 
@@ -225,7 +225,7 @@ class Transfer extends Component {
     return (
       <div
         className="tranfer-page-container"
-        style={{ background: colorTheme[network.value].background }}
+        style={{ background: colortheme[network.value].background }}
       >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
@@ -234,7 +234,7 @@ class Transfer extends Component {
           align="left"
           margin="30px"
           isBackIcon={false}
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <TransferForm
           theme={theme}
@@ -265,7 +265,7 @@ class Transfer extends Component {
           handleBackButton={this.handleBackButton}
           handleUnitOnChange={this.handleUnitChange}
           onAddressBookClick={this.onAddressBookClick}
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
           language={language}
           handleMaxError={this.handleMaxError}
         />

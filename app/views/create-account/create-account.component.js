@@ -12,7 +12,7 @@ import SubHeader from '../../components/common/sub-header';
 import * as Account from '../../constants/account';
 import './styles.css';
 import AlertDailog from '../../components/common/alert-dialog';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import { CRUST_NETWORK } from '../../../lib/constants/networks';
 import { CREATE_ACCOUNT_ENTRY_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 import { copySeedPhraseMessage } from '../../../lib/services/static-message-factory-service';
@@ -385,7 +385,7 @@ class CreateAccount extends Component {
     return (
       <div
         className="create-account-container"
-        style={{ background: colorTheme[network ? network.value : CRUST_NETWORK.value].background }}
+        style={{ background: colortheme[network ? network.value : CRUST_NETWORK.value].background }}
       >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
@@ -395,7 +395,7 @@ class CreateAccount extends Component {
           showSettings={false}
           onSubMenuOptionsChange={null}
           isBackIcon
-          colorTheme={colorTheme[network ? network.value : CRUST_NETWORK.value]}
+          colortheme={colortheme[network ? network.value : CRUST_NETWORK.value]}
         />
         <CreateAccountForm
           value={formValue}
@@ -418,7 +418,7 @@ class CreateAccount extends Component {
           handleSeedWordsOnBlur={this.handleSeedWordsOnBlur}
           handleConfirmSeedWordsOnBlur={this.handleConfirmSeedWordsOnBlur}
           className="create-account-form"
-          colorTheme={colorTheme[network ? network.value : CRUST_NETWORK.value]}
+          colortheme={colortheme[network ? network.value : CRUST_NETWORK.value]}
           onCopySeed={this.onCopySeed}
         />
         <CreateAccountSettings
@@ -436,7 +436,7 @@ class CreateAccount extends Component {
           aliasRef={input => {
             this.aliasInput = input;
           }}
-          colorTheme={colorTheme[network ? network.value : CRUST_NETWORK.value]}
+          colortheme={colortheme[network ? network.value : CRUST_NETWORK.value]}
           handleAliasOnBlur={this.handleAliasOnBlur}
           handlePasswordChange={this.handlePasswordChange}
           aliasPassworkPropName="passoword"

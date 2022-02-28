@@ -14,7 +14,7 @@ import {
 } from '../../constants/options';
 import FooterButton from '../../components/common/footer-button';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class AddressBook extends Component {
@@ -148,7 +148,7 @@ class AddressBook extends Component {
     return (
       <div
         className="address-book-root-container"
-        style={{ background: colorTheme[network.value].background }}
+        style={{ background: colortheme[network.value].background }}
       >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
@@ -158,7 +158,7 @@ class AddressBook extends Component {
           showSettings={showSettings}
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <div className="manage-address-book">
           <div className="manage-address-book-container">
@@ -167,14 +167,13 @@ class AddressBook extends Component {
                 className="address-book-container"
                 addressBook={addressBook}
                 selectedAddress={selectedAddress}
-                moreMenu={options}
                 onMoreMenuOptionsChange={this.handleAddressBookOptionsChange}
                 theme={theme}
                 isSelectIcon={isSelectIcon}
                 onCopyAddress={this.onCopyAddress}
                 handelChangeToAddress={this.handelChangeToAddress}
                 network={network}
-                colorTheme={colorTheme[network.value]}
+                colortheme={colortheme[network.value]}
                 showFooterModal={showFooterModal}
                 handleFooterClick={this.handleFooterClick}
                 handleFooterCancel={this.handleFooterCancel}
@@ -219,10 +218,10 @@ class AddressBook extends Component {
             onBackClick={() => this.setState({ isOpen: true })}
             backButtonName={t('Remove')}
             nextButtonName={t('Create')}
-            nextColor={colorTheme[network.value].button.primary.text}
-            nextBackground={colorTheme[network.value].button.primary.main}
-            backColor={colorTheme[network.value].button.secondary.text}
-            backBackground={colorTheme[network.value].button.secondary.main}
+            nextColor={colortheme[network.value].button.primary.text}
+            nextBackground={colortheme[network.value].button.primary.main}
+            backColor={colortheme[network.value].button.secondary.text}
+            backBackground={colortheme[network.value].button.secondary.main}
           />
         )}
       </div>

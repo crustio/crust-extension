@@ -8,7 +8,7 @@ import ClickToCopyAddress from '../../common/click-to-copy-address';
 export default class TransferFromAddress extends Component {
   render() {
     const {
-      alias, address, canCopy, onCopyAddress, colorTheme, ...otherProps
+      alias, address, canCopy, onCopyAddress, colortheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -16,7 +16,7 @@ export default class TransferFromAddress extends Component {
           <FontRegular
             className="transfer-form-address-alias"
             text={alias}
-            style={{ color: colorTheme.text.primary }}
+            style={{ color: colortheme.text.primary }}
           />
         </Tooltip>
         {canCopy ? (
@@ -24,13 +24,13 @@ export default class TransferFromAddress extends Component {
             className="transfer-form-address-text clickable-icon"
             onCopyAddress={onCopyAddress}
             address={address}
-            style={{ color: colorTheme.text.quaternary }}
+            style={{ color: colortheme.text.quaternary }}
           />
         ) : (
           <Address
             className="transfer-form-address-text"
             hash={address}
-            style={{ color: colorTheme.text.quaternary }}
+            style={{ color: colortheme.text.quaternary }}
           />
         )}
       </div>

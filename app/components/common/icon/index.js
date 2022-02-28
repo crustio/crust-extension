@@ -47,7 +47,7 @@ const IconTransferFromTo = props => (
     <FontAwesomeIcon
       icon={faArrowCircleDown}
       style={{
-        color: props.colorTheme ? props.colorTheme.icon.primary : null,
+        color: props.colortheme ? props.colortheme.icon.primary : null,
         opacity: 1,
         fontSize: 21.2,
       }}
@@ -77,7 +77,7 @@ const WalletDropDownIcon = props => (
     <MoreHoriz
       style={{
         fontSize: '1.5em',
-        color: props.colorTheme.text.secondary,
+        color: props.colortheme.text.secondary,
       }}
     />
   </div>
@@ -88,7 +88,7 @@ const MoreVertIcon = props => (
     <MoreVert
       style={{
         fontSize: '1.5em',
-        color: props.color ? props.color : 'rgba(255, 255, 255, 1)',
+        color: props.iconColor ? props.iconColor : 'rgba(255, 255, 255, 1)',
       }}
     />
   </div>
@@ -119,7 +119,7 @@ const NetworkDisconnectionIcon = props => (
     <WifiOff
       style={{
         fontSize: '1.5em',
-        color: props.colorTheme.text.secondary,
+        color: props.colortheme.text.secondary,
       }}
     />
   </div>
@@ -140,7 +140,7 @@ const SolidWallet = props => (
       }}
       alt=""
     />
-    <FontRegular text="crust wallet" style={{ color: props.colorTheme.text.primary }} />
+    <FontRegular text="crust wallet" style={{ color: props.colortheme.text.primary }} />
   </div>
 );
 

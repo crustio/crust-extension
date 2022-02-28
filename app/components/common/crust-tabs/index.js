@@ -13,7 +13,7 @@ class CrustTabs extends Component {
       classes,
       labels,
       parent,
-      colorTheme,
+      colortheme,
       network,
       ...otherProps
     } = this.props;

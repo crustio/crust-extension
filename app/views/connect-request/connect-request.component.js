@@ -7,7 +7,7 @@ import { trimUrl } from '../../services/wallet-service';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { SolidWallet, SolidPlug, File } from '../../components/common/icon';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
 import LogoBig from '../../images/crust-logo-big.svg';
 import LogoBigWhite from '../../images/crust-logo-big-white.svg';
@@ -64,15 +64,15 @@ class ConnectRequest extends Component {
           favIconUrl={network.value === CRUST_MAXWELL_NETWORK.value ? LogoBigWhite : LogoBig}
           url={request.request.metadata.url}
           className="connect-request-dapp-url-container"
-          colorTheme={colorTheme[network.value]}
-          style={{ border: `1px solid ${colorTheme[network.value].border}` }}
-          textColor={colorTheme[network.value].text.primary}
+          colortheme={colortheme[network.value]}
+          style={{ border: `1px solid ${colortheme[network.value].border}` }}
+          textColor={colortheme[network.value].text.primary}
         />
-        <SolidPlug className="connect-request-plug-icon" colorTheme={colorTheme[network.value]} />
+        <SolidPlug className="connect-request-plug-icon" colortheme={colortheme[network.value]} />
         <SolidWallet
           className="connect-request-wallet-icon"
-          colorTheme={colorTheme[network.value]}
-          style={{ border: `1px solid ${colorTheme[network.value].border}` }}
+          colortheme={colortheme[network.value]}
+          style={{ border: `1px solid ${colortheme[network.value].border}` }}
         />
       </div>
     );
@@ -85,12 +85,12 @@ class ConnectRequest extends Component {
     const content = 'is requesting access to an account. Click Allow to grant access any account or click Deny to prevent access to any account.';
     return (
       <div
-        style={{ height: 600, width: '100vw', background: colorTheme[network.value].background }}
+        style={{ height: 600, width: '100vw', background: colortheme[network.value].background }}
       >
         <SubHeader
           title={t(title)}
           isBackIcon={false}
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
           align="left"
           margin="30px"
         />
@@ -98,17 +98,17 @@ class ConnectRequest extends Component {
         <FontRegular
           text={<div>{`${request.request.metadata.url} ${t(content)}`}</div>}
           className="connect-request-center connect-request-account-selection-header"
-          style={{ color: colorTheme[network.value].text.sixth }}
+          style={{ color: colortheme[network.value].text.sixth }}
         />
         <FooterWithTwoButton
           onNextClick={this.onAllow}
           onBackClick={this.onDeny}
           backButtonName={t('Deny')}
           nextButtonName={t('Allow')}
-          nextColor={colorTheme[network.value].button.primary.text}
-          nextBackground={colorTheme[network.value].button.primary.main}
-          backColor={colorTheme[network.value].button.tertiary.text}
-          backBackground={colorTheme[network.value].button.tertiary.main}
+          nextColor={colortheme[network.value].button.primary.text}
+          nextBackground={colortheme[network.value].button.primary.main}
+          backColor={colortheme[network.value].button.tertiary.text}
+          backBackground={colortheme[network.value].button.tertiary.main}
           style={{ maxWidth: 300, marginRight: 'auto', marginLeft: 'auto' }}
         />
       </div>

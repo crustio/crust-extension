@@ -13,7 +13,7 @@ export default class CustomNetworkForm extends Component {
       isURLValid,
       urlInvalidMessage,
       urlRef,
-      colorTheme,
+      colortheme,
       ...otherProps
     } = this.props;
     return (
@@ -27,7 +27,7 @@ export default class CustomNetworkForm extends Component {
           helperText={urlInvalidMessage}
           error={!isURLValid}
           inputRef={urlRef}
-          colorTheme={colorTheme}
+          colortheme={colortheme}
         />
         <FooterButton onClick={onSave} name="save" />
       </div>

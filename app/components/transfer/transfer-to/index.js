@@ -17,7 +17,7 @@ export default class TransferTo extends Component {
       onChange,
       onBlur,
       inputRef,
-      colorTheme,
+      colortheme,
       ...otherProps
     } = this.props;
     return (
@@ -37,8 +37,8 @@ export default class TransferTo extends Component {
             placeholder={label}
             value={toValue}
             spellCheck={false}
-            colorTheme={colorTheme}
-            style={{ background: colorTheme.card }}
+            colortheme={colortheme}
+            style={{ background: colortheme.card }}
           />
           {isError ? (
             <span className="tranfer-to-error-msg">{errorMessage}</span>

@@ -7,7 +7,7 @@ import PasswordAdornment from '../../components/common/password/password-adornme
 import ContentHeader from '../../components/common/content-header';
 import FooterButton from '../../components/common/footer-button';
 import LogoBig from '../../images/crust-logo-big.svg';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import { CRUST_NETWORK } from '../../../lib/constants/networks';
 import './styles.css';
 
@@ -148,7 +148,7 @@ class SignUp extends Component {
           onChange={e => this.handleOnChange('password', e)}
           password={password}
           placeholder={this.props.t('Password')}
-          colorTheme={colorTheme[CRUST_NETWORK.value]}
+          colortheme={colortheme[CRUST_NETWORK.value]}
           border
         />
         {isPasswordError ? (
@@ -162,8 +162,8 @@ class SignUp extends Component {
           type={showPassword ? 'text' : 'password'}
           placeholder={this.props.t('Repeat Password')}
           value={passwordRepeat}
-          colorTheme={colorTheme[CRUST_NETWORK.value]}
-          style={{ border: `1px solid ${colorTheme[CRUST_NETWORK.value].border}`, borderRadius: 8 }}
+          colortheme={colortheme[CRUST_NETWORK.value]}
+          style={{ border: `1px solid ${colortheme[CRUST_NETWORK.value].border}`, borderRadius: 8 }}
           endAdornment={
             <PasswordAdornment
               position="end"

@@ -4,14 +4,14 @@ import './styles.css';
 
 export default class Disclaimer extends Component {
   render() {
-    const { notice, colorTheme, ...otherProps } = this.props;
+    const { notice, colortheme, ...otherProps } = this.props;
     return (
       <div {...otherProps}>
         {/* <ExclamationTriangle className="disclaimer-icon" /> */}
         <FontRegular
           text={notice}
           className="disclaimer-text"
-          style={{ color: colorTheme.text.secondary }}
+          style={{ color: colortheme.text.secondary }}
         />
       </div>
     );

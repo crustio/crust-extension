@@ -7,7 +7,7 @@ import './styles.css';
 import * as NavConstants from '../../constants/navigation';
 import { CHINESE, ENGLISH } from '../../constants/language';
 import SimpleListItemCard from '../../components/common/simple-list-item-card';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 
 class LanguageSetting extends Component {
   constructor(props) {
@@ -44,27 +44,28 @@ class LanguageSetting extends Component {
     return (
       <div
         className="language-setting-container"
-        style={{ background: `${colorTheme[network.value].background}` }}
+        style={{ background: `${colortheme[network.value].background}` }}
       >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Language Setting')}
           backBtnOnClick={this.onClick}
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
           isBackIcon
         />
         <div className="language-setting-option-container">
           <List classes={{}}>
-            {options.map(option => (
+            {options.map((option, index) => (
               <SimpleListItemCard
+                key={index}
                 listItem={option}
                 handleListItemAvatarClick={this.onLanguageChange}
                 handleListItemClick={this.onLanguageChange}
                 primaryText={option.text}
                 isActive={language === option.value}
                 className="language-card-container"
-                style={{ background: colorTheme[network.value].card }}
-                colorTheme={colorTheme[network.value]}
+                style={{ background: colortheme[network.value].card }}
+                colortheme={colortheme[network.value]}
               />
             ))}
           </List>

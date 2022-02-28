@@ -13,7 +13,7 @@ class Transaction extends Component {
       network,
       t,
       listHeight,
-      colorTheme,
+      colortheme,
       ...otherProps
     } = this.props;
     return (
@@ -25,7 +25,7 @@ class Transaction extends Component {
             style={{ height: listHeight || '350px' }}
             className="transaction-list-container"
             transactions={transactions}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
         ) : (
           <TransactionMessage

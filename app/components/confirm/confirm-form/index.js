@@ -26,35 +26,35 @@ class ConfirmForm extends Component {
       password,
       errorText,
       handleOnChange,
-      colorTheme,
+      colortheme,
       t,
     } = this.props;
     return (
       <div className="confirm-form-container">
-        <div className="confirm-form-top-container" style={{ background: colorTheme.card }}>
+        <div className="confirm-form-top-container" style={{ background: colortheme.card }}>
           <ConfirmParticular
             className="confirm-form-to-container"
             description={t('To')}
             price={`${shortenAddress(to)}`}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
           <ConfirmParticular
             className="confirm-form-amount-container"
             description={t('Amount')}
             price={`${transferAmount}`}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
           <ConfirmParticular
             className="confirm-form-fee-container"
             description={t('Fee')}
             price={`${transferFee}`}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
           <ConfirmParticular
             className="confirm-form-total-container"
             description={t('Total')}
             price={`${totalTransferAmount}`}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
           <div className="confirm-form-password-container">
             <CrustPassword
@@ -62,7 +62,7 @@ class ConfirmForm extends Component {
               onChange={e => handleOnChange('password', e)}
               password={password}
               placeholder={t('Wallet Password')}
-              colorTheme={colorTheme}
+              colortheme={colortheme}
             />
             {errorText !== '' ? (
               <div className="error-msg">{t(errorText)}</div>
@@ -76,10 +76,10 @@ class ConfirmForm extends Component {
           onBackClick={handleBack}
           backButtonName={t('Cancel')}
           nextButtonName={t('Send')}
-          nextColor={colorTheme.button.primary.text}
-          nextBackground={colorTheme.button.primary.main}
-          backColor={colorTheme.button.secondary.text}
-          backBackground={colorTheme.button.secondary.main}
+          nextColor={colortheme.button.primary.text}
+          nextBackground={colortheme.button.primary.main}
+          backColor={colortheme.button.secondary.text}
+          backBackground={colortheme.button.secondary.main}
         />
       </div>
     );

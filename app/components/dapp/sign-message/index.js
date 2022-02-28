@@ -15,14 +15,14 @@ const Summary = props => (
       type={props.t('Sign')}
       blockchain={props.blockchain}
       className="sign-message-summary-request-type"
-      colorTheme={props.colorTheme}
+      colortheme={props.colortheme}
     />
     <AccountItem
       className="sign-message-summary-account-item"
       account={props.account}
       balance={props.balance}
       onCopyAddress={props.onCopyAddress}
-      colorTheme={props.colorTheme}
+      colortheme={props.colortheme}
     />
   </div>
 );
@@ -34,7 +34,7 @@ const SignedMessage = props => (
       text={props.data}
       value={props.data}
       onCopy={props.onCopyData}
-      style={{ background: props.colorTheme.card, color: props.colorTheme.text.secondary }}
+      style={{ background: props.colortheme.card, color: props.colortheme.text.secondary }}
     />
   </div>
 );
@@ -55,7 +55,7 @@ export default class SignMessage extends Component {
       password,
       handleOnChange,
       errorText,
-      colorTheme,
+      colortheme,
       t,
       ...otherProps
     } = this.props;
@@ -66,8 +66,8 @@ export default class SignMessage extends Component {
           notice={t(
             'Signing can provide access to the value of your account. Only sign this if you know and trust the requesting source.',
           )}
-          style={{ background: colorTheme.card }}
-          colorTheme={colorTheme}
+          style={{ background: colortheme.card }}
+          colortheme={colortheme}
         />
         <WalletExpansionPanel
           isBelowExpandIcon
@@ -80,28 +80,28 @@ export default class SignMessage extends Component {
               account={account}
               balance={balance}
               onCopyAddress={onCopyAddress}
-              colorTheme={colorTheme}
+              colortheme={colortheme}
             />
           }
         >
           <FontRegular
             className="sign-message-title"
             text={t('Sign the following data')}
-            style={{ color: colorTheme.text.primary }}
+            style={{ color: colortheme.text.primary }}
           />
           <SignedMessage
             className="sign-message-body"
             data={data}
             onCopyData={onCopyData}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
           <CrustPassword
             className="confirm-form-password"
             onChange={e => handleOnChange('password', e)}
             password={password}
             placeholder={t('Wallet Password')}
-            style={{ background: colorTheme.card, color: colorTheme.text.secondary }}
-            colorTheme={colorTheme}
+            style={{ background: colortheme.card, color: colortheme.text.secondary }}
+            colortheme={colortheme}
           />
           {errorText !== '' ? (
             <div className="error-msg">{t(errorText)}</div>
@@ -113,10 +113,10 @@ export default class SignMessage extends Component {
             onBackClick={onCancel}
             backButtonName={t('Cancel')}
             nextButtonName={t('Sign')}
-            nextColor={colorTheme.button.primary.text}
-            nextBackground={colorTheme.button.primary.main}
-            backColor={colorTheme.button.tertiary.text}
-            backBackground={colorTheme.button.tertiary.main}
+            nextColor={colortheme.button.primary.text}
+            nextBackground={colortheme.button.primary.main}
+            backColor={colortheme.button.tertiary.text}
+            backBackground={colortheme.button.tertiary.main}
           />
         </WalletExpansionPanel>
       </div>

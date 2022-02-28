@@ -13,7 +13,7 @@ import './styles.css';
 import { RENAME } from '../../constants/options';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import SubHeader from '../../components/common/sub-header';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 
 class TokenDetailsPage extends Component {
   constructor(props) {
@@ -98,7 +98,7 @@ class TokenDetailsPage extends Component {
           title={t('Token Details')}
           backBtnOnClick={this.onClick}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <div className="account-content-container">
           <Wallet
@@ -112,7 +112,7 @@ class TokenDetailsPage extends Component {
             onAliasInputKeyPress={this.handleOnKeyPress}
             onCopyAddress={this.onCopyAddress}
             accountMenu={accountMenu}
-            colorTheme={colorTheme[network.value]}
+            colortheme={colortheme[network.value]}
             onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
             network={network}
           />
@@ -136,7 +136,7 @@ class TokenDetailsPage extends Component {
           isLinkToFaucet={isLinkToFaucet}
           transactions={getTransfersWithMoment(transDisplay)}
           listHeight="280px"
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
           account={account}
         />
       </div>

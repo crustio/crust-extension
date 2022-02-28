@@ -6,7 +6,7 @@ import FontRegular from '../../components/common/fonts/font-regular';
 import FooterButton from '../../components/common/footer-button';
 import LogoBig from '../../images/crust-logo-big.svg';
 import LogoBigWhite from '../../images/crust-logo-big-white.svg';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import { CRUST_NETWORK } from '../../../lib/constants/networks';
 import './styles.css';
 
@@ -61,7 +61,7 @@ class SignIn extends Component {
               this.handleClick();
             }
           }}
-          style={{ background: colorTheme[network.value].background }}
+          style={{ background: colortheme[network.value].background }}
         >
           <div className="sign-in-img-contianer">
             <img src={network.value === CRUST_NETWORK.value ? LogoBig : LogoBigWhite} alt="logo2" />
@@ -69,7 +69,7 @@ class SignIn extends Component {
           <FontRegular
             className="sign-in-title"
             text="Web 3.0 Storage for Metaverse"
-            style={{ color: colorTheme[network.value].text.primary }}
+            style={{ color: colortheme[network.value].text.primary }}
           />
           <div className="sign-in-container-password">
             <CrustUnlockPassword
@@ -80,7 +80,7 @@ class SignIn extends Component {
               password={password}
               placeholder={t('Password')}
               handleUnlock={this.handleClick}
-              colorTheme={colorTheme[network.value]}
+              colortheme={colortheme[network.value]}
             />
           </div>
 

@@ -5,7 +5,7 @@ import ConfirmForm from '../../components/confirm/confirm-form';
 import SubHeader from '../../components/common/sub-header';
 import { CREATE_ADDRESS_BOOK_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import { shortenAddress } from '../../services/wallet-service';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class Confirm extends Component {
@@ -74,7 +74,7 @@ class Confirm extends Component {
     return (
       <div
         className="confirm-container"
-        style={{ background: colorTheme[network.value].background }}
+        style={{ background: colortheme[network.value].background }}
       >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '18px' }} />}
@@ -83,7 +83,7 @@ class Confirm extends Component {
           align="left"
           margin="30px"
           isBackIcon={false}
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <ConfirmForm
           confirmDetails={confirmDetails}
@@ -94,7 +94,7 @@ class Confirm extends Component {
           password={password}
           handleOnChange={this.handleOnChange}
           errorText={errorText}
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
       </div>
     );

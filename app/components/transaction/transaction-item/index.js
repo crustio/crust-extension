@@ -9,7 +9,7 @@ import './styles.css';
 export default class TransactionItem extends Component {
   render() {
     const {
-      transaction, network, colorTheme, account, ...otherProps
+      transaction, network, colortheme, account, ...otherProps
     } = this.props;
     return (
       <div>
@@ -24,7 +24,7 @@ export default class TransactionItem extends Component {
               <div {...otherProps}>
                 <CallMadeIcon
                   className="transfer-item-icon"
-                  style={{ color: colorTheme.text.primary }}
+                  style={{ color: colortheme.text.primary }}
                 />
                 <TransactionItemDetails
                   amount={`Send ${transaction.amount}${
@@ -38,14 +38,14 @@ export default class TransactionItem extends Component {
                   }`}
                   address={transaction.to}
                   moment={transaction.modifiedDate}
-                  colorTheme={colorTheme}
+                  colortheme={colortheme}
                 />
               </div>
             ) : (
               <div {...otherProps}>
                 <CallReceivedIcon
                   className="transfer-item-icon"
-                  style={{ color: colorTheme.text.primary }}
+                  style={{ color: colortheme.text.primary }}
                 />
                 <TransactionItemDetails
                   amount={`Received ${transaction.amount}${
@@ -59,7 +59,7 @@ export default class TransactionItem extends Component {
                   }`}
                   address={transaction.from}
                   moment={transaction.modifiedDate}
-                  colorTheme={colorTheme}
+                  colortheme={colortheme}
                 />
               </div>
             )}
@@ -68,7 +68,7 @@ export default class TransactionItem extends Component {
           <div {...otherProps}>
             <CallMadeIcon
               className="transfer-item-icon"
-              style={{ color: colorTheme.text.primary }}
+              style={{ color: colortheme.text.primary }}
             />
             <TransactionItemDetails
               amount={transaction.transferAmount}
@@ -76,7 +76,7 @@ export default class TransactionItem extends Component {
               moment={transaction.modifiedDate}
               status={transaction.status}
               color={transaction.color}
-              colorTheme={colorTheme}
+              colortheme={colortheme}
             />
           </div>
         )}

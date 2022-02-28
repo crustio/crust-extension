@@ -32,7 +32,7 @@ class ListItemCard extends Component {
       isActive,
       isSelected,
       theme,
-      colorTheme,
+      colortheme,
       network,
       customModal,
       showRadio,
@@ -48,7 +48,7 @@ class ListItemCard extends Component {
                 <span
                   className="account-card-text"
                   data-tip={primaryText}
-                  style={{ color: colorTheme.text.primary }}
+                  style={{ color: colortheme.text.primary }}
                 >
                   {primaryText}
                 </span>
@@ -61,7 +61,7 @@ class ListItemCard extends Component {
                 className="account-address clickable-icon"
                 onCopyAddress={onCopyAddress}
                 address={address}
-                style={{ color: colorTheme.text.tertiary }}
+                style={{ color: colortheme.text.tertiary }}
               />
             }
           />
@@ -70,12 +70,12 @@ class ListItemCard extends Component {
               {isSelected ? (
                 <CheckCircleIcon
                   className="accout-card-icon"
-                  style={{ color: colorTheme.icon.primary }}
+                  style={{ color: colortheme.icon.primary }}
                 />
               ) : (
                 <RadioButtonUncheckedIcon
                   className="accout-card-icon"
-                  style={{ color: colorTheme.icon.secondary }}
+                  style={{ color: colortheme.icon.secondary }}
                 />
               )}
             </ListItemAvatar>

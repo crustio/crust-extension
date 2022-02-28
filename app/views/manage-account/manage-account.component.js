@@ -28,7 +28,7 @@ import {
 import CrustTabs from '../../components/common/crust-tabs';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { ENGLISH } from '../../constants/language';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
 import ModalWithThreeButton from '../../components/common/modal-with-three-button';
 
@@ -216,7 +216,7 @@ class ManageAccount extends Component {
     return (
       <div
         className="manage-accounts-root-container"
-        style={{ background: colorTheme[network.value].background }}
+        style={{ background: colortheme[network.value].background }}
       >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
@@ -227,7 +227,7 @@ class ManageAccount extends Component {
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
           menuWidth={language === ENGLISH ? 150 : undefined}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <>
           <CrustTabs
@@ -235,7 +235,7 @@ class ManageAccount extends Component {
             onChange={this.handleTabChange}
             labels={tLabels}
             parent="account"
-            style={{ background: colorTheme[network.value].card }}
+            style={{ background: colortheme[network.value].card }}
             network={network}
           />
           {currentTab === 0 && (
@@ -247,11 +247,10 @@ class ManageAccount extends Component {
                     accounts={accounts}
                     selectedAccounts={selectedAccounts}
                     currentAccount={account}
-                    moreMenu={options}
                     theme={theme}
                     onCopyAddress={this.onCopyAddress}
                     handleChangeAccount={this.handleChangeAccount}
-                    colorTheme={colorTheme[network.value]}
+                    colortheme={colortheme[network.value]}
                     network={network}
                     updateSelectedAccounts={this.handleSelectedAccountsChange}
                   />
@@ -280,7 +279,7 @@ class ManageAccount extends Component {
                     className="accounts-container"
                     options={AccountOptions}
                     onOptionsChange={allowUpdate ? this.handleOptionsChange : null}
-                    colorTheme={colorTheme[network.value]}
+                    colortheme={colortheme[network.value]}
                   />
                 ) : null}
               </div>
@@ -293,10 +292,10 @@ class ManageAccount extends Component {
             onBackClick={this.handleOpenImportModal} //Currently we need to clear import method.
             backButtonName={t('Import Account')}
             nextButtonName={t('Create Account')}
-            nextColor={colorTheme[network.value].button.primary.text}
-            nextBackground={colorTheme[network.value].button.primary.main}
-            backColor={colorTheme[network.value].button.secondary.text}
-            backBackground={colorTheme[network.value].button.secondary.main}
+            nextColor={colortheme[network.value].button.primary.text}
+            nextBackground={colortheme[network.value].button.primary.main}
+            backColor={colortheme[network.value].button.secondary.text}
+            backBackground={colortheme[network.value].button.secondary.main}
           />
         )}
         {currentTab === 0 && selectedAccountList.length !== 0 && (
@@ -305,15 +304,15 @@ class ManageAccount extends Component {
             onBackClick={() => this.setState({ isOpen: true })}
             backButtonName={t('Remove')}
             nextButtonName={t('Export Account')}
-            nextColor={colorTheme[network.value].button.primary.text}
-            nextBackground={colorTheme[network.value].button.primary.main}
-            backColor={colorTheme[network.value].button.secondary.text}
-            backBackground={colorTheme[network.value].button.secondary.main}
+            nextColor={colortheme[network.value].button.primary.text}
+            nextBackground={colortheme[network.value].button.primary.main}
+            backColor={colortheme[network.value].button.secondary.text}
+            backBackground={colortheme[network.value].button.secondary.main}
           />
         )}
         <ModalWithThreeButton
           show={showFooterModal}
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
           handleTopClick={this.handleImportJson}
           handleBottomClick={this.handleImportPhrase}
           handleCancel={this.handleCancelImportModal}

@@ -16,7 +16,7 @@ class AccountItem extends Component {
       onAliasInputBlur,
       onAliasInputKeyPress,
       inputRef,
-      colorTheme,
+      colortheme,
       t,
       ...otherProps
     } = this.props;
@@ -28,7 +28,7 @@ class AccountItem extends Component {
       <div
         className={accountItemClassNames}
         {...otherProps}
-        style={{ background: colorTheme.card }}
+        style={{ background: colortheme.card }}
       >
         <Avatar className="account-avatar" onCopyAddress={onCopyAddress} value={account.address} />
         <AccountDetails
@@ -49,7 +49,7 @@ class AccountItem extends Component {
           }}
           blockchain={account.blockchain}
           onCopyAddress={onCopyAddress}
-          colorTheme={colorTheme}
+          colortheme={colortheme}
         />
         <BalanceDetails
           className="account-item-balance-section"

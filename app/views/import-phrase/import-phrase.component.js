@@ -11,7 +11,7 @@ import FooterButton from '../../components/common/footer-button';
 import * as Account from '../../constants/account';
 import './styles.css';
 import AlertDailog from '../../components/common/alert-dialog';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import SubHeader from '../../components/common/sub-header';
 import { CREATE_ACCOUNT_ENTRY_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 
@@ -374,7 +374,7 @@ class ImportPhrase extends Component {
     return (
       <div
         className="import-phrase-container"
-        style={{ background: colorTheme[network.value].background }}
+        style={{ background: colortheme[network.value].background }}
       >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
@@ -384,7 +384,7 @@ class ImportPhrase extends Component {
           showSettings={false}
           onSubMenuOptionsChange={null}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <CreateAccountForm
           value={formValue}
@@ -407,7 +407,7 @@ class ImportPhrase extends Component {
           handleSeedWordsOnBlur={this.handleSeedWordsOnBlur}
           handleConfirmSeedWordsOnBlur={this.handleConfirmSeedWordsOnBlur}
           className="import-phrase-form"
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <CreateAccountSettings
           disableAccountSettings={disableAccountSettings}
@@ -424,7 +424,7 @@ class ImportPhrase extends Component {
           aliasRef={input => {
             this.aliasInput = input;
           }}
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
           handleAliasOnBlur={this.handleAliasOnBlur}
           handlePasswordChange={this.handlePasswordChange}
           aliasPassworkPropName="passoword"

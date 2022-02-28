@@ -27,7 +27,7 @@ import TokenList from '../../components/token-list';
 import CrustTabs from '../../components/common/crust-tabs';
 import { HelpCircle, NetworkOfflineIcon } from '../../components/common/icon';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 
 const MP = withStyles({
   root: {
@@ -164,12 +164,12 @@ class Dashboard extends Component {
     return (
       <div
         className="dashboard-container"
-        style={{ background: colorTheme[network.value].background }}
+        style={{ background: colortheme[network.value].background }}
       >
         <div>
           <div
             className="account-content-container"
-            style={{ background: colorTheme[network.value].card }}
+            style={{ background: colortheme[network.value].card }}
           >
             <Wallet
               className="wallet-container"
@@ -180,7 +180,7 @@ class Dashboard extends Component {
               network={network}
               selectedAccount={account}
               theme={theme}
-              colorTheme={colorTheme[network.value]}
+              colortheme={colortheme[network.value]}
               onAliasChange={this.handleAliasChange}
               onAliasInputBlur={this.handleAliasInputBlur}
               onAliasInputKeyPress={this.handleOnKeyPress}
@@ -190,7 +190,7 @@ class Dashboard extends Component {
               onCreateAccountClick={this.onCreateAccountClick}
               onImportAccountClick={this.onImportAccountClick}
               style={{
-                color: colorTheme[network.value].text.secondary,
+                color: colortheme[network.value].text.secondary,
                 boxShadow: network.value === 'crust maxwell' ? 'none' : '',
               }}
             />
@@ -198,7 +198,7 @@ class Dashboard extends Component {
         </div>
         {showOffline && (
           <div className="crust-offline-container">
-            <NetworkOfflineIcon colorTheme={colorTheme[network.value]} />
+            <NetworkOfflineIcon colortheme={colortheme[network.value]} />
             <span className="offline-hint">
               {t('OfflineDescription')}
               <HelpCircle
@@ -208,7 +208,7 @@ class Dashboard extends Component {
                   marginLeft: 10,
                   marginBottom: -3,
                   cursor: 'pointer',
-                  stroke: colorTheme[network.value].text.primary,
+                  stroke: colortheme[network.value].text.primary,
                 }}
                 onClick={() => this.setState({ showOfflineDescription: true })}
               />
@@ -218,8 +218,8 @@ class Dashboard extends Component {
                 style: {
                   margin: 30,
                   borderRadius: 24,
-                  background: colorTheme[network.value].modal,
-                  color: colorTheme[network.value].text.primary,
+                  background: colortheme[network.value].modal,
+                  color: colortheme[network.value].text.primary,
                 },
               }}
               open={this.state.showOfflineDescription}
@@ -233,14 +233,14 @@ class Dashboard extends Component {
                 id="alert-dialog-title"
                 PaperProps={{
                   style: {
-                    color: `${colorTheme[network.value].text.primary} !important`,
+                    color: `${colortheme[network.value].text.primary} !important`,
                   },
                 }}
               >
                 <span>{t('Why my wallet is offline?')}</span>
               </MDialogTitle>
               <DialogContent
-                color={colorTheme[network.value].text.primary}
+                color={colortheme[network.value].text.primary}
                 style={{ padding: '0 16px 16px' }}
               >
                 <p
@@ -299,7 +299,7 @@ class Dashboard extends Component {
               onChange={this.handleChange}
               labels={tLabels}
               parent="home"
-              colorTheme={colorTheme[network.value]}
+              colortheme={colortheme[network.value]}
               network={network}
             />
             {value === 0 && (
@@ -308,7 +308,7 @@ class Dashboard extends Component {
                   tokens={tokens}
                   className="token-list-container"
                   // onTokenSelected={this.onTokenSelected}
-                  colorTheme={colorTheme[network.value]}
+                  colortheme={colortheme[network.value]}
                 />
               </div>
             )}
@@ -319,7 +319,7 @@ class Dashboard extends Component {
                 account={account}
                 isLinkToFaucet={isLinkToFaucet}
                 transactions={getTransfersWithMoment(transactionHistory)}
-                colorTheme={colorTheme[network.value]}
+                colortheme={colortheme[network.value]}
               />
             )}
           </>
@@ -331,10 +331,10 @@ class Dashboard extends Component {
             onBackClick={this.handleDeposit}
             backButtonName={t('Receive')}
             nextButtonName={t('Send')}
-            nextColor={colorTheme[network.value].button.primary.text}
-            nextBackground={colorTheme[network.value].button.primary.main}
-            backColor={colorTheme[network.value].button.secondary.text}
-            backBackground={colorTheme[network.value].button.secondary.main}
+            nextColor={colortheme[network.value].button.primary.text}
+            nextBackground={colortheme[network.value].button.primary.main}
+            backColor={colortheme[network.value].button.secondary.text}
+            backBackground={colortheme[network.value].button.secondary.main}
           />
         )}
       </div>

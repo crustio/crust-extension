@@ -13,7 +13,7 @@ class CreateAccountAdvancedConfig extends Component {
       keypairTypes,
       onKeypairTypeChange,
       disableAccountSettings,
-      colorTheme,
+      colortheme,
       t,
       ...otherProps
     } = this.props;
@@ -22,7 +22,7 @@ class CreateAccountAdvancedConfig extends Component {
         <CrustExpansionPanel
           disabled={disableAccountSettings}
           title={t('Advanced')}
-          colorTheme={colorTheme}
+          colortheme={colortheme}
         >
           <FontRegular
             text={t('Keypair Crypto Type')}
@@ -30,11 +30,11 @@ class CreateAccountAdvancedConfig extends Component {
               fontSize: 14,
               fontWeight: 'bolder',
               margin: '14px 0px 14px 0px',
-              color: colorTheme ? colorTheme.text.primary : null,
+              color: colortheme ? colortheme.text.primary : null,
             }}
           />
           <List style={{ display: 'flex', marginTop: '-25px' }}>
-            {keypairTypes.map(option => (
+            {keypairTypes.map((option, index) => (
               <KeyPairItemCard
                 listItem={option}
                 handleListItemAvatarClick={onKeypairTypeChange}
@@ -42,7 +42,8 @@ class CreateAccountAdvancedConfig extends Component {
                 primaryText={option.text}
                 isActive={keypairType.value === option.value}
                 className="key-pair-card-container"
-                colorTheme={colorTheme}
+                colortheme={colortheme}
+                key={index}
               />
             ))}
           </List>

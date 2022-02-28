@@ -7,7 +7,7 @@ import { styles } from './styles';
 class DropDown extends Component {
   render() {
     const {
-      classes, options, value, onChange, disabled, colorTheme, ...otherProps
+      classes, options, value, onChange, disabled, colortheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -18,7 +18,7 @@ class DropDown extends Component {
             select: classes.select,
             icon: classes.icon,
           }}
-          style={{ color: colorTheme.text.primary }}
+          style={{ color: colortheme.text.primary }}
           onChange={onChange}
           value={value.value}
           disableUnderline
@@ -27,7 +27,7 @@ class DropDown extends Component {
             <ExpandMoreIcon
               {...props}
               className={`material-icons ${props.className}`}
-              style={{ color: colorTheme.text.secondary }}
+              style={{ color: colortheme.text.secondary }}
             />
           )}
         >

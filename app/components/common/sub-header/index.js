@@ -19,10 +19,11 @@ export default class SubHeader extends Component {
 
   render() {
     const { anchorEl } = this.state;
+    const { colortheme } = this.props;
     const style = {
       textAlign: `${this.props.align ? this.props.align : 'center'}`,
       marginLeft: `${this.props.margin ? this.props.margin : 'none'}`,
-      color: this.props.colorTheme.text.primary,
+      color: colortheme.text.primary,
     };
     const {
       icon, subMenu, onSubMenuOptionsChange, menuWidth, isBackIcon

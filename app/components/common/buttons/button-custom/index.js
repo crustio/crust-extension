@@ -15,7 +15,7 @@ class ButtonCustom extends Component {
   };
 
   render() {
-    const { custom, ...otherProps } = this.props;
+    const { custom, textColor, ...otherProps } = this.props;
     const styles = {
       fontSize: '18px',
       fontFamily: 'Roboto-Medium',
@@ -25,7 +25,7 @@ class ButtonCustom extends Component {
       border: `${this.props.border ? this.props.border : 'none'}`,
       width: `${this.props.width ? this.props.width : '320px'}`,
       background: `${this.props.background ? this.props.background : 'white'}`,
-      color: `${this.props.color ? this.props.color : '#FF8D00'}`,
+      color: `${textColor || '#FF8D00'}`,
     };
 
     const buttonCustomClassNames = classNames({

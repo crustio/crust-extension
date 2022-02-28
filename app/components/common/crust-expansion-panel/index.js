@@ -22,7 +22,7 @@ class CrustExpansionPanel extends Component {
   render() {
     const { expanded } = this.state;
     const {
-      classes, title, children, colorTheme, ...otherProps
+      classes, title, children, colortheme, ...otherProps
     } = this.props;
     return (
       <ExpansionPanel
@@ -33,7 +33,7 @@ class CrustExpansionPanel extends Component {
       >
         <ExpansionPanelSummary
           expandIcon={
-            <ExpandMoreIcon style={{ color: colorTheme ? colorTheme.text.primary : null }} />
+            <ExpandMoreIcon style={{ color: colortheme ? colortheme.text.primary : null }} />
           }
           classes={{
             content: classes.content,
@@ -48,7 +48,7 @@ class CrustExpansionPanel extends Component {
               style={{
                 fontSize: 14,
                 fontWeight: 'bolder',
-                color: colorTheme ? colorTheme.text.primary : null,
+                color: colortheme ? colortheme.text.primary : null,
               }}
             />
           }

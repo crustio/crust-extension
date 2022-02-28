@@ -17,22 +17,22 @@ class KeyPairItemCard extends Component {
       handleListItemAvatarClick,
       handleListItemClick,
       isActive,
-      colorTheme,
-      ...otherProps
+      colortheme,
+      className,
     } = this.props;
     return (
-      <div {...otherProps}>
+      <div className={className}>
         <ListItem className="key-pair-card-item">
           <ListItemAvatar onClick={event => handleListItemAvatarClick(event, listItem)}>
             {isActive ? (
               <CheckCircleIcon
                 className="key-pair-card-icon"
-                style={{ color: colorTheme.icon.primary }}
+                style={{ color: colortheme.icon.primary }}
               />
             ) : (
               <RadioButtonUncheckedIcon
                 className="key-pair-card-icon"
-                style={{ color: colorTheme.icon.secondary }}
+                style={{ color: colortheme.icon.secondary }}
               />
             )}
           </ListItemAvatar>
@@ -43,7 +43,7 @@ class KeyPairItemCard extends Component {
                 <span
                   className="key-pair-card-text"
                   data-tip={primaryText}
-                  style={{ color: colorTheme ? colorTheme.text.quaternary : null }}
+                  style={{ color: colortheme ? colortheme.text.quaternary : null }}
                 >
                   {primaryText}
                 </span>
