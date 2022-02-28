@@ -29,6 +29,8 @@ const initialState = {
   pendingTransfers: [],
   tokens: [cruDefault, candyDefault, csmDefault],
   token: undefined,
+  transactionPage: 0,
+  loadMore: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -66,6 +68,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...{
           transactionHistory: action.transactionHistory,
+        },
+      };
+    case Types.UPDATE_TRANSACTION_PAGE:
+      return {
+        ...state,
+        ...{
+          transactionPage: action.transactionPage,
+        },
+      };
+    case Types.UPDATE_LOAD_MORE:
+      return {
+        ...state,
+        ...{
+          loadMore: action.loadMore,
         },
       };
     default:

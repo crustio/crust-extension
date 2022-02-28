@@ -14,6 +14,8 @@ class Transaction extends Component {
       t,
       listHeight,
       colortheme,
+      fetchMore,
+      loadMore,
       ...otherProps
     } = this.props;
     return (
@@ -26,6 +28,8 @@ class Transaction extends Component {
             className="transaction-list-container"
             transactions={transactions}
             colortheme={colortheme}
+            fetchMore={fetchMore}
+            loadMore={loadMore}
           />
         ) : (
           <TransactionMessage

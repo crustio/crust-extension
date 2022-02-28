@@ -23,6 +23,7 @@ const mapStateToProps = state => ({
   isLinkToFaucet: state.accountReducer.isLinkToFaucet,
   transactions: state.dashboardReducer.transactions,
   transactionHistory: state.dashboardReducer.transactionHistory,
+  loadMore: state.dashboardReducer.loadMore,
   network: state.networkReducer.network,
   unit: state.networkReducer.unit,
   isConnected: state.networkReducer.isConnected,

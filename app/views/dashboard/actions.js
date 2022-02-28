@@ -42,6 +42,16 @@ const updatePendingTransfers = pendingTransfers => ({
   pendingTransfers,
 });
 
+const updateTransactionPage = transactionPage => ({
+  type: DashboardActionTypes.UPDATE_TRANSACTION_PAGE,
+  transactionPage,
+});
+
+const updateLoadMore = loadMore => ({
+  type: DashboardActionTypes.UPDATE_LOAD_MORE,
+  loadMore,
+});
+
 export const configEditAccount = (option, account) => async dispatch => {
   if (option.value === RENAME.value) {
     const modifiedAccount = {
@@ -139,7 +149,7 @@ export const lockApp = () => async dispatch => {
 
 const fetchTransactionHistoryByPage = async (page, network, address) => {
   const body = {
-    row: 10,
+    row: 6,
     page,
     address,
   };
@@ -155,31 +165,35 @@ const fetchTransactionHistoryByPage = async (page, network, address) => {
   return result;
 };
 
-export const fetchTransactionHistory = () => async (dispatch, getState) => {
+export const fetchTransactionHistory = isInit => async (dispatch, getState) => {
   const {
     account: { address },
   } = getState().accountReducer;
   const { network } = getState().networkReducer;
+  const { transactionHistory, transactionPage } = getState().dashboardReducer;
 
-  let startPage = 0;
-  const response = [];
+  const response = isInit ? [] : transactionHistory;
   const networkUrl = network.value === CRUST_MAXWELL_NETWORK.value
     ? 'maxwell'
     : network.value === CRUST_NETWORK.value
       ? 'crust'
       : '';
+  if (isInit) {
+    dispatch(updateLoadMore(true));
+  }
   dispatch(AppActions.updateAppLoading(true));
-  while (true) {
-    // eslint-disable-next-line
-    const result = await fetchTransactionHistoryByPage(startPage, networkUrl, address);
-    if (result.data.data) {
-      if (!result.data.data.transfers) {
-        break;
-      }
-      // eslint-disable-next-line
-      response.push.apply(response, result.data.data.transfers);
-      startPage++;
+  const result = await fetchTransactionHistoryByPage(
+    isInit ? 0 : transactionPage,
+    networkUrl,
+    address,
+  );
+  if (result.data.data) {
+    if (!result.data.data.transfers) {
+      dispatch(updateLoadMore(false));
     }
+    // eslint-disable-next-line
+    response.push.apply(response, result.data.data.transfers);
+    dispatch(updateTransactionPage(isInit ? 1 : transactionPage + 1));
   }
 
   for (let i = 0; i < response.length; i++) {

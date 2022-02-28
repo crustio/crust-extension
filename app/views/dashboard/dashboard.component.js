@@ -29,14 +29,6 @@ import { HelpCircle, NetworkOfflineIcon } from '../../components/common/icon';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { colortheme } from '../../../lib/constants/colors';
 
-const MP = withStyles({
-  root: {
-    fontSize: 14,
-    fontWeight: 400,
-    padding: '4px 0',
-  },
-})(DialogContentText);
-
 const MDialogTitle = withStyles({
   root: {
     fontSize: 16,
@@ -49,7 +41,7 @@ const MDialogTitle = withStyles({
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.timer = setInterval(() => this.props.fetchTransactionHistory(this.props.network), 30000);
+    this.timer = setInterval(() => this.props.fetchTransactionHistory(true), 30000);
     this.textInput = React.createRef();
     this.state = {
       labels: ['Assets', 'Activities'],
@@ -62,12 +54,16 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchTransactionHistory();
+    this.props.fetchTransactionHistory(true);
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
   }
+
+  fetchMoreTransaction = () => {
+    this.props.fetchTransactionHistory(false);
+  };
 
   handleSend = () => {
     // if (!this.props.isConnected) {
@@ -155,6 +151,7 @@ class Dashboard extends Component {
       // isErrorByType,
       accountMenu,
       tokens,
+      loadMore,
       t,
     } = this.props;
     const { labels, value } = this.state;
@@ -314,6 +311,8 @@ class Dashboard extends Component {
             )}
             {value === 1 && (
               <Transaction
+                loadMore={loadMore}
+                fetchMore={this.fetchMoreTransaction}
                 className="transaction-container"
                 network={network}
                 account={account}
