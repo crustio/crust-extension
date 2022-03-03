@@ -181,7 +181,6 @@ export const fetchTransactionHistory = isInit => async (dispatch, getState) => {
   if (isInit) {
     dispatch(updateLoadMore(true));
   }
-  dispatch(AppActions.updateAppLoading(true));
   const result = await fetchTransactionHistoryByPage(
     isInit ? 0 : transactionPage,
     networkUrl,
@@ -206,6 +205,5 @@ export const fetchTransactionHistory = isInit => async (dispatch, getState) => {
     }
   }
   dispatch(updateTransactionHistory(response));
-  dispatch(AppActions.updateAppLoading(false));
   return response;
 };

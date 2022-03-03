@@ -165,6 +165,8 @@ class Transfer extends Component {
         dropDownSelected,
         this.props.network,
       );
+      // eslint-disable-next-line
+      console.log('Address: ', toAddress, 'Network: ', this.props.network, 'Amount: ', amount);
     } else {
       const error = {};
       if (toAddress === '') {

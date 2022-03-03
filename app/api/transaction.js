@@ -17,6 +17,18 @@ export const submitTransaction = async (transferDetails, password) => {
     transaction: transferDetails,
     password,
   });
+
+  // eslint-disable-next-line
+  console.log(
+    'submit result from transaction api - ',
+    'message: ',
+    message,
+    ' status: ',
+    status,
+    ' result: ',
+    result,
+  );
+
   throwIfNoSuccess({ message, status });
   return { result };
 };

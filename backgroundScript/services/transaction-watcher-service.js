@@ -118,6 +118,8 @@ export const transferCSMAndWatch = async (transaction, password) => {
 
 export const submitTransaction = async (transactionObj, password) => {
   const { tokenSelected } = transactionObj.metadata;
+  // eslint-disable-next-line
+  console.log('token selected: ', tokenSelected);
 
   if (Transaction.TRANSFER_COINS === transactionObj.txnType) {
     if (tokenSelected.tokenSymbol === ChainApi.getTokenSymbol()) {

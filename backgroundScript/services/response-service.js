@@ -300,6 +300,8 @@ export const submitTransaction = async (request, sendResponse) => {
       transaction,
       password,
     );
+    // eslint-disable-next-line
+    console.log('transaction Status: ', transactionStatus);
     sendResponse({ ...success, result: transactionStatus });
   } catch (err) {
     sendResponse({ ...failure, message: 'Error in submitting  Transaction ' });
