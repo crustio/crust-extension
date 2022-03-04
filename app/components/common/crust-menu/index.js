@@ -37,7 +37,7 @@ class CrustMenu extends Component {
           style: {
             marginTop: 33,
             maxHeight: 176,
-            width: width !== undefined ? width : 128,
+            width: width !== undefined ? width : 145,
             fontFamily: 'Roboto-Regular',
             fontSize: 14,
             backgroundColor: 'rgba(38, 38, 38, 1)',

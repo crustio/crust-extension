@@ -22,7 +22,8 @@
   display: block;
   color: #FA5050;
   height: 20px;
-  margin-left: 80px;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .transfer-from-amount-input-place-holder {

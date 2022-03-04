@@ -26,14 +26,13 @@ class AccountList extends Component {
       classes,
       accounts,
       onCopyAddress,
-      moreMenu,
       currentAccount,
       handleChangeAccount,
-      onAccountMenuOptionsChange,
-      isMoreVertIconVisible,
-      colorTheme,
+      colortheme,
       theme,
       network,
+      selectedAccounts,
+      updateSelectedAccounts,
       ...otherProps
     } = this.props;
     return (
@@ -43,23 +42,27 @@ class AccountList extends Component {
             root: classes.root,
           }}
         >
-          {accounts.map(account => (
+          {accounts.map((account, index) => (
             <ListItemCard
+              key={index}
               theme={theme}
               listItem={account}
-              handleListItemAvatarClick={handleChangeAccount}
+              handleListItemAvatarClick={updateSelectedAccounts}
               handleListItemClick={handleChangeAccount}
               primaryText={account.alias}
               address={account.address}
               onCopyAddress={onCopyAddress}
-              moreMenu={moreMenu}
-              isMoreVertIconVisible={isMoreVertIconVisible}
-              onMoreMenuOptionsChange={onAccountMenuOptionsChange}
               isActive={currentAccount.address === account.address}
               className="account-card-container"
-              style={{ background: colorTheme.card }}
-              colorTheme={colorTheme}
+              style={{
+                background: colortheme.card,
+                border: currentAccount.address === account.address ? '1px solid #4F4D59' : 'none',
+              }}
+              colortheme={colortheme}
               network={network}
+              customModal={false}
+              showRadio
+              isSelected={selectedAccounts.findIndex(e => e.address === account.address) !== -1}
             />
           ))}
         </List>

@@ -49,7 +49,7 @@ class Send extends Component {
       password,
       errorText,
       handleOnChange,
-      colorTheme,
+      colortheme,
       t,
       ...otherProps
     } = this.props;
@@ -64,7 +64,7 @@ class Send extends Component {
             from={txnForUI.url}
             chain={txnForUI.chain}
             version={txnForUI.sVersion}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
           {items.map((item, index) => (
             <div key={`items_${index}`} className="send_item">
@@ -76,7 +76,7 @@ class Send extends Component {
                     fromAccount={fromAccount}
                     onCopyAddress={onCopyAddress}
                     className="send_tx_from_to"
-                    colorTheme={colorTheme}
+                    colortheme={colortheme}
                   />
                   <div>Amount: {item.args[1]}</div>
                 </>
@@ -95,6 +95,7 @@ class Send extends Component {
           onChange={e => handleOnChange('password', e)}
           password={password}
           placeholder={t('Wallet Password')}
+          colortheme={colortheme}
         />
         {errorText !== '' ? (
           <div className="error-msg">{t(errorText)}</div>

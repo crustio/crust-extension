@@ -7,7 +7,7 @@ import './styles.css';
 export default class SendToFrom extends Component {
   render() {
     const {
-      toAccount, fromAccount, onCopyAddress, colorTheme, ...otherProps
+      toAccount, fromAccount, onCopyAddress, colortheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -23,7 +23,7 @@ export default class SendToFrom extends Component {
             alias={fromAccount.alias}
             address={fromAccount.address}
             onCopyAddress={onCopyAddress}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
             fontSize="18px"
           />
         </div>
@@ -44,7 +44,7 @@ export default class SendToFrom extends Component {
               address={toAccount.address}
               onCopyAddress={onCopyAddress}
               fontSize="18px"
-              colorTheme={colorTheme}
+              colortheme={colortheme}
             />
           </div>
         )}

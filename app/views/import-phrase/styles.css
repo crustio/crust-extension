@@ -1,0 +1,40 @@
+.import-phrase-container {
+  height: 600px;
+  background: #fff;
+}
+
+.import-phrase-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-top: 17px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.import-phrase-settings-import {
+  width: 328px;
+  margin-top: 20px;
+  margin-left: 16px;
+}
+
+.import-phrase-settings {
+  width: 328px;
+  margin-top: 20px;
+  margin-left: 16px;
+}
+
+.create-account-button {
+  margin-left: 18px;
+}
+
+.create-account-btns {
+  display: grid;
+  position: absolute;
+  top: 487px
+}
+
+.dialog-msg {
+  font-family: PingFangSC-Regular, PingFang SC !important;
+  color: #111A34 !important;
+}

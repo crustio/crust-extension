@@ -5,7 +5,7 @@ import ConfirmForm from '../../components/confirm/confirm-form';
 import SubHeader from '../../components/common/sub-header';
 import { CREATE_ADDRESS_BOOK_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import { shortenAddress } from '../../services/wallet-service';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class Confirm extends Component {
@@ -72,22 +72,29 @@ class Confirm extends Component {
     const { errorText, password } = this.state;
     const theme = 'substrate';
     return (
-      <div className="confirm-container">
+      <div
+        className="confirm-container"
+        style={{ background: colortheme[network.value].background }}
+      >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '18px' }} />}
           title={t('Send')}
           backBtnOnClick={this.handleSubheaderBackBtn}
-          colorTheme={colorTheme[network.value]}
-          isBackIcon
+          align="left"
+          margin="30px"
+          isBackIcon={false}
+          colortheme={colortheme[network.value]}
         />
         <ConfirmForm
           confirmDetails={confirmDetails}
           handleSend={this.handleSend}
+          handleBack={this.handleSubheaderBackBtn}
           buttonText={t('Send')}
           theme={theme}
           password={password}
           handleOnChange={this.handleOnChange}
           errorText={errorText}
+          colortheme={colortheme[network.value]}
         />
       </div>
     );

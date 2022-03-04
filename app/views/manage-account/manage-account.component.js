@@ -3,9 +3,13 @@ import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import {
+  CREATE_ACCOUNT_ENTRY_PAGE,
   CREATE_ACCOUNT_PAGE,
   DASHBOARD_PAGE,
   EXPORT_ACCOUNT_PAGE,
+  IMPORT_JSON_PAGE,
+  IMPORT_PHRASE_PAGE,
+  MANAGE_ACCOUNT_PAGE,
 } from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AccountList from '../../components/account-list';
@@ -24,26 +28,40 @@ import {
 import CrustTabs from '../../components/common/crust-tabs';
 import FooterWithTwoButton from '../../components/common/footer-with-two-button';
 import { ENGLISH } from '../../constants/language';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
+import ModalWithThreeButton from '../../components/common/modal-with-three-button';
 
 class ManageAccount extends Component {
   constructor(props) {
     super(props);
+    const { t, selectedAccounts } = this.props;
     this.textInput = React.createRef();
     this.state = {
       isOpen: false,
-      labels: ['My Account', 'Settings'],
+      labels: [t('My Account'), t('Settings')],
       allowUpdate: true,
+      showFooterModal: false,
+      selectedAccountList: selectedAccounts,
     };
   }
 
   componentDidMount() {
-    this.props.updateBackupPage(DASHBOARD_PAGE);
+    this.props.updateBackupPage(MANAGE_ACCOUNT_PAGE);
   }
+
+  componentDidUpdate() {}
 
   handleSubheaderBackBtn = () => {
     this.props.changePage(DASHBOARD_PAGE);
+  };
+
+  handleOpenImportModal = () => {
+    this.setState({ showFooterModal: true });
+  };
+
+  handleCancelImportModal = () => {
+    this.setState({ showFooterModal: false });
   };
 
   onCopy = () => {
@@ -80,11 +98,17 @@ class ManageAccount extends Component {
 
   handleAccountMenuOptionsChange = async (option, account) => {
     if (option.value === REMOVE.value) {
-      this.setState({ isOpen: true, account });
+      this.setState({ isOpen: true });
     } else if (option.value === EXPORT_ACCOUNT.value) {
       this.props.updateExportingAccount(account);
       this.props.changePage(EXPORT_ACCOUNT_PAGE);
     }
+  };
+
+  handleExportAccount = () => {
+    const { account } = this.props;
+    this.props.updateExportingAccount(account);
+    this.props.changePage(EXPORT_ACCOUNT_PAGE);
   };
 
   handleCloseDialog = () => {
@@ -93,19 +117,52 @@ class ManageAccount extends Component {
   };
 
   handleYes = () => {
-    const { account } = this.state;
-    const { removeAccount, t } = this.props;
-    removeAccount(account, t);
-    this.setState({ isOpen: false });
+    const {
+      removeAccount, selectedAccounts, accounts, t
+    } = this.props;
+    for (let i = 0; i < selectedAccounts.length; i++) {
+      console.log(selectedAccounts[i], i);
+      removeAccount(selectedAccounts[i], t);
+    }
+    this.props.updateSelectedAccounts([]);
+    //    removeAccount(account, t);
+    this.setState({ isOpen: false, selectedAccountList: [] });
+    if (accounts.length === selectedAccounts.length) {
+      this.props.changePage(CREATE_ACCOUNT_ENTRY_PAGE);
+    }
   };
 
   handleTabChange = (e, value) => {
     this.props.updateCurrentTab(value);
   };
 
+  handleSelectedAccountsChange = (e, account) => {
+    const { selectedAccounts } = this.props;
+    const selectedAccountList = selectedAccounts;
+    const index = selectedAccountList.findIndex(e => e.address === account.address);
+    if (index !== -1) {
+      selectedAccountList.splice(index, 1);
+    } else {
+      selectedAccountList.push(account);
+    }
+    this.props.updateSelectedAccounts(selectedAccountList);
+    this.setState({
+      selectedAccountList,
+    });
+  };
+
   handleAddAccount = async () => {
     await this.props.addAccount();
     this.props.changePage(CREATE_ACCOUNT_PAGE);
+  };
+
+  handleImportJson = async () => {
+    await this.props.changePage(IMPORT_JSON_PAGE);
+  };
+
+  handleImportPhrase = async () => {
+    await this.props.resetSeedWordsBeforeImport();
+    await this.props.changePage(IMPORT_PHRASE_PAGE);
   };
 
   handleOptionsChange = (e, option) => {
@@ -119,6 +176,8 @@ class ManageAccount extends Component {
       }, 1000);
     } else if (option.value === 'lock') {
       this.props.lockApp();
+    } else if (option.value === 'get_cru') {
+      window.open('https://swap.crustapps.net/');
     } else {
       this.props.updateBackupPage(this.props.page);
       this.props.changePage(option.value);
@@ -127,9 +186,18 @@ class ManageAccount extends Component {
 
   render() {
     const {
-      accounts, account, t, language, isOfflineMode, currentTab, network
+      accounts,
+      account,
+      t,
+      language,
+      isOfflineMode,
+      currentTab,
+      network,
+      selectedAccounts,
     } = this.props;
-    const { isOpen, labels, allowUpdate } = this.state;
+    const {
+      isOpen, labels, allowUpdate, showFooterModal, selectedAccountList
+    } = this.state;
     const theme = 'substrate';
     const options = accounts.length > 1
       ? ACCOUNT_MANAGEMENT_OPTIONS.map(o => ({ ...o, text: t(o.text) }))
@@ -141,14 +209,14 @@ class ManageAccount extends Component {
     // eslint-disable-next-line no-restricted-syntax
     for (const option of AccountOptions) {
       if (option.value === 'network_mode') {
-        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set To Offline Mode';
+        option.text = isOfflineMode ? 'Set To Online Mode' : 'Set to Signer Mode';
       }
     }
 
     return (
       <div
         className="manage-accounts-root-container"
-        style={{ background: colorTheme[network.value].background }}
+        style={{ background: colortheme[network.value].background }}
       >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
@@ -159,7 +227,7 @@ class ManageAccount extends Component {
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
           menuWidth={language === ENGLISH ? 150 : undefined}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <>
           <CrustTabs
@@ -167,7 +235,7 @@ class ManageAccount extends Component {
             onChange={this.handleTabChange}
             labels={tLabels}
             parent="account"
-            style={{ background: colorTheme[network.value].card }}
+            style={{ background: colortheme[network.value].card }}
             network={network}
           />
           {currentTab === 0 && (
@@ -177,15 +245,14 @@ class ManageAccount extends Component {
                   <AccountList
                     className="accounts-container"
                     accounts={accounts}
+                    selectedAccounts={selectedAccounts}
                     currentAccount={account}
-                    isMoreVertIconVisible
-                    moreMenu={options}
-                    onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
                     theme={theme}
                     onCopyAddress={this.onCopyAddress}
                     handleChangeAccount={this.handleChangeAccount}
-                    colorTheme={colorTheme[network.value]}
+                    colortheme={colortheme[network.value]}
                     network={network}
+                    updateSelectedAccounts={this.handleSelectedAccountsChange}
                   />
                 ) : null}
                 <div>
@@ -195,7 +262,7 @@ class ManageAccount extends Component {
                     handleYes={this.handleYes}
                     noText={t('No')}
                     yesText={t('Yes')}
-                    title={t('Remove account')}
+                    title={t('Remove accounts')}
                     msg={t(
                       'Please make sure you have saved the seed phrase or private key for this account before continuing.',
                     )}
@@ -212,25 +279,47 @@ class ManageAccount extends Component {
                     className="accounts-container"
                     options={AccountOptions}
                     onOptionsChange={allowUpdate ? this.handleOptionsChange : null}
-                    colorTheme={colorTheme[network.value]}
+                    colortheme={colortheme[network.value]}
                   />
                 ) : null}
               </div>
             </div>
           )}
         </>
-        {currentTab === 0 && (
+        {currentTab === 0 && selectedAccountList.length === 0 && (
           <FooterWithTwoButton
             onNextClick={this.handleAddAccount}
-            onBackClick={null} //Currently we need to clear import method.
+            onBackClick={this.handleOpenImportModal} //Currently we need to clear import method.
             backButtonName={t('Import Account')}
             nextButtonName={t('Create Account')}
-            nextColor={colorTheme[network.value].button.primary.text}
-            nextBackground={colorTheme[network.value].button.primary.main}
-            backColor={colorTheme[network.value].button.secondary.text}
-            backBackground={colorTheme[network.value].button.secondary.main}
+            nextColor={colortheme[network.value].button.primary.text}
+            nextBackground={colortheme[network.value].button.primary.main}
+            backColor={colortheme[network.value].button.secondary.text}
+            backBackground={colortheme[network.value].button.secondary.main}
           />
         )}
+        {currentTab === 0 && selectedAccountList.length !== 0 && (
+          <FooterWithTwoButton
+            onNextClick={this.handleExportAccount}
+            onBackClick={() => this.setState({ isOpen: true })}
+            backButtonName={t('Remove')}
+            nextButtonName={t('Export Account')}
+            nextColor={colortheme[network.value].button.primary.text}
+            nextBackground={colortheme[network.value].button.primary.main}
+            backColor={colortheme[network.value].button.secondary.text}
+            backBackground={colortheme[network.value].button.secondary.main}
+          />
+        )}
+        <ModalWithThreeButton
+          show={showFooterModal}
+          colortheme={colortheme[network.value]}
+          handleTopClick={this.handleImportJson}
+          handleBottomClick={this.handleImportPhrase}
+          handleCancel={this.handleCancelImportModal}
+          topButton={t('Import From Json')}
+          bottomButton={t('Import From Phrase')}
+          network={network}
+        />
       </div>
     );
   }

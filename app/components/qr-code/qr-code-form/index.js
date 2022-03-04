@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import FooterButton from '../../common/footer-button';
 import QR from '../../common/qr';
 import './styles.css';
@@ -8,7 +9,7 @@ import ClickToCopyAddress from '../../common/click-to-copy-address';
 class QRCodeForm extends Component {
   render() {
     const {
-      account, theme, onClick, onCopyAddress, colorTheme, t, ...otherProps
+      account, theme, onClick, onCopyAddress, colortheme, t, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
@@ -23,10 +24,12 @@ class QRCodeForm extends Component {
           className="qr-copy-address clickable-icon"
           onCopyAddress={onCopyAddress}
           address={account.address}
-          style={{ color: colorTheme.text.primary }}
+          style={{ color: colortheme.text.primary }}
         />
         <div className="qr-button-container">
-          <FooterButton name={t('Copy Address')} onClick={onCopyAddress} />
+          <CopyToClipboard text={account.address} onCopy={onCopyAddress}>
+            <FooterButton name={t('Copy Address')} />
+          </CopyToClipboard>
         </div>
       </div>
     );

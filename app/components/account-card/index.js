@@ -57,17 +57,17 @@ export default class AccountCard extends Component {
           <ListItemText
             onClick={event => handleChangeAccount(event, account)}
             primary={account.alias}
-            secondary={(
+            secondary={
               <ClickToCopyAddress
                 className="account-address clickable-icon"
                 onCopyAddress={onCopyAddress}
                 address={account.address}
               />
-            )}
+            }
           />
           {isMoreVertIconVisible && (
             <MoreVertIcon
-              color="rgba(0, 0, 0, 1)"
+              iconColor="rgba(0, 0, 0, 1)"
               onClick={this.handleClick}
               className="more-list-icon"
             />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dialog, DialogActions, DialogContent } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -9,13 +9,16 @@ import { CRUST_MAXWELL_NETWORK, CRUST_NETWORK } from '../../../../lib/constants/
 function ModalWithThreeButton(props) {
   const {
     show,
-    colorTheme,
+    colortheme,
     handleCancel,
     topButton,
     bottomButton,
+    cancelButton,
     handleTopClick,
     handleBottomClick,
     network,
+    oneAction,
+    sameStyleButton,
     classes,
   } = props;
 
@@ -36,22 +39,28 @@ function ModalWithThreeButton(props) {
       <DialogContent classes={{ root: classes.contentRoot }}>
         <div style={{ marginBottom: 10 }}>
           <ButtonCustom
-            color={colorTheme.button.primary.text}
-            background={colorTheme.button.primary.main}
+            textColor={
+              sameStyleButton ? colortheme.button.secondary.text : colortheme.button.primary.text
+            }
+            background={
+              sameStyleButton ? colortheme.button.secondary.main : colortheme.button.primary.main
+            }
             onClick={handleTopClick}
           >
             {t(topButton)}
           </ButtonCustom>
         </div>
-        <div>
-          <ButtonCustom
-            color={colorTheme.button.secondary.text}
-            background={colorTheme.button.secondary.main}
-            onClick={handleBottomClick}
-          >
-            {t(bottomButton)}
-          </ButtonCustom>
-        </div>
+        {!oneAction && (
+          <div>
+            <ButtonCustom
+              textColor={colortheme.button.secondary.text}
+              background={colortheme.button.secondary.main}
+              onClick={handleBottomClick}
+            >
+              {t(bottomButton)}
+            </ButtonCustom>
+          </div>
+        )}
       </DialogContent>
       <DialogActions
         classes={{
@@ -65,10 +74,10 @@ function ModalWithThreeButton(props) {
       >
         <ButtonCustom
           onClick={handleCancel}
-          color={colorTheme.text.primary}
+          textColor={colortheme.text.primary}
           background="transparent"
         >
-          Cancel
+          {cancelButton ? t(cancelButton) : t('Cancel')}
         </ButtonCustom>
       </DialogActions>
     </Dialog>

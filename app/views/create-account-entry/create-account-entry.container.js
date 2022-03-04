@@ -5,6 +5,7 @@ import { addAccount, resetSeedWordsBeforeImport } from '../manage-account/action
 
 const mapStateToProps = state => ({
   page: state.appStateReducer.page,
+  isLoading: state.appStateReducer.isLoading || state.networkReducer.isLoadingNetwork,
 });
 
 const mapDispatchToProps = {

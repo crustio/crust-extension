@@ -4,6 +4,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ReactTooltip from 'react-tooltip';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { withTranslation } from 'react-i18next';
 import './styles.css';
 
 class SettingsItemCard extends Component {
@@ -18,9 +19,9 @@ class SettingsItemCard extends Component {
       moreMenu,
       handleListItemAvatarClick,
       handleListItemClick,
-      isMoreVertIconVisible,
       isActive,
-      colorTheme,
+      colortheme,
+      t,
       ...otherProps
     } = this.props;
     return (
@@ -32,16 +33,20 @@ class SettingsItemCard extends Component {
                 <span
                   className="settings-card-text"
                   data-tip={listItem.text}
-                  style={{ color: colorTheme.text.primary }}
+                  style={{ color: colortheme.text.primary }}
                 >
-                  {listItem.text}
+                  {t(listItem.text)}
                 </span>
                 <ReactTooltip effect="solid" place="bottom" />
               </span>
             }
             className={classes.primaryWidth}
           />
-          <ArrowForwardIosIcon color="rgba(0, 0, 0, 1)" className="arrow-list-icon" />
+          <ArrowForwardIosIcon
+            color="rgba(0, 0, 0, 1)"
+            className="arrow-list-icon"
+            style={{ color: colortheme.text.primary }}
+          />
         </ListItem>
       </div>
     );
@@ -55,4 +60,4 @@ const styles = () => ({
   },
 });
 
-export default withStyles(styles)(SettingsItemCard);
+export default withStyles(styles)(withTranslation()(SettingsItemCard));

@@ -8,11 +8,13 @@ import {
   resetConfirmOnBoarding,
   dispatchSetTransferDetails,
   setTransferValidationError,
+  getTransferFee,
 } from './actions';
 
 const mapStateToProps = state => ({
   account: state.accountReducer.account,
   confirmDetails: state.transferReducer.confirmDetails,
+  transferFee: state.transferReducer.transferFee,
   balance: state.accountReducer.balance,
   unit: state.networkReducer.unit,
   units: state.networkReducer.units,
@@ -28,6 +30,7 @@ const mapStateToProps = state => ({
   network: state.networkReducer.network,
   tokens: state.dashboardReducer.tokens,
   token: state.dashboardReducer.token,
+  language: state.appStateReducer.language,
 });
 
 const mapDispatchToProps = {
@@ -39,7 +42,8 @@ const mapDispatchToProps = {
   resetConfirmOnBoarding,
   dispatchSetTransferDetails,
   updateToAddress,
-  setTransferValidationError
+  setTransferValidationError,
+  getTransferFee,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Transfer);

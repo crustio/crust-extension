@@ -6,7 +6,7 @@ import FontRegular from '../../components/common/fonts/font-regular';
 import FooterButton from '../../components/common/footer-button';
 import './styles.css';
 import Link from '../../components/common/link';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import * as NavConstants from '../../constants/navigation';
 
 class About extends Component {
@@ -15,17 +15,17 @@ class About extends Component {
     this.props.updateBackupPage(NavConstants.DASHBOARD_PAGE);
   };
 
-  renderInfoLinks() {
+  renderInfoLinks(color) {
     const { t } = this.props;
     return (
       <div className="info-container">
-        <FontRegular className="about-link-title" text={t('Link')} />
+        <FontRegular className="about-link-title" text={t('Link')} style={{ color }} />
         {this.props.links.map(link => (
           <div key={link.url} className={link.value === 'tou' ? 'about-tou' : 'about-link'}>
             <Link
               href={link.url}
               style={{
-                color: '#037DD6',
+                color: '#FF8D00',
               }}
             >
               {t(`${link.text}`)}
@@ -39,18 +39,26 @@ class About extends Component {
   render() {
     const { manifest, network, t } = this.props;
     return (
-      <div>
+      <div style={{ height: 550, background: `${colortheme[network.value].background}` }}>
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('About')}
           backBtnOnClick={this.onClick}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <div className="about-container">
-          <FontRegular className="about-title" text={manifest.name} />
-          <FontRegular className="about-version" text={`Version ${manifest.version}`} />
-          {this.renderInfoLinks()}
+          <FontRegular
+            className="about-title"
+            text={manifest.name}
+            style={{ color: colortheme[network.value].text.primary }}
+          />
+          <FontRegular
+            className="about-version"
+            text={`Version ${manifest.version}`}
+            style={{ color: colortheme[network.value].text.quaternary }}
+          />
+          {this.renderInfoLinks(colortheme[network.value].text.primary)}
           <div className="about-button">
             <FooterButton
               style={{

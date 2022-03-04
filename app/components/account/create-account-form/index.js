@@ -21,12 +21,20 @@ export default class CreateAccountForm extends Component {
       handleSeedWordsOnBlur,
       handleConfirmSeedWordsOnBlur,
       confirmedSeedWords,
+      colortheme,
       alias,
+      onCopySeed,
       ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
-        {value === Account.CREATE_ACCOUNT && <GenerateSeedPhrase seedWords={generatedSeedWords} />}
+        {value === Account.CREATE_ACCOUNT && (
+          <GenerateSeedPhrase
+            seedWords={generatedSeedWords}
+            colortheme={colortheme}
+            onCopySeed={onCopySeed}
+          />
+        )}
         {value === Account.IMPORT_ACCOUNT && (
           <ImportSeedPhrase
             onChange={onChange}
@@ -37,6 +45,7 @@ export default class CreateAccountForm extends Component {
             importSeedPhraseInputName={importSeedPhraseInputName}
             seedRef={seedRef}
             handleSeedWordsOnBlur={handleSeedWordsOnBlur}
+            colortheme={colortheme}
           />
         )}
         {value === Account.CONFIRM_ACCOUNT && (
@@ -50,6 +59,7 @@ export default class CreateAccountForm extends Component {
             confirmSeedPhraseInputName={confirmSeedPhraseInputName}
             confirmSeedRef={confirmSeedRef}
             handleConfirmSeedWordsOnBlur={handleConfirmSeedWordsOnBlur}
+            colortheme={colortheme}
           />
         )}
       </div>

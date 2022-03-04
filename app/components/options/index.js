@@ -10,16 +10,12 @@ export default class Options extends Component {
 
   render() {
     const {
-      isDeveloperMode,
-      onToggleDeveloperMode,
-      colorTheme,
-      menuWidth,
-      ...otherProps
+      isDeveloperMode, onToggleDeveloperMode, colortheme, menuWidth
     } = this.props;
     return (
-      <div {...otherProps}>
+      <div>
         <IconSettings
-          style={{ color: colorTheme.text.secondary, fontSize: '18px' }}
+          style={{ color: colortheme.text.secondary, fontSize: '18px' }}
           onClick={this.handleClick}
         />
       </div>

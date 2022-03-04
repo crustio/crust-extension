@@ -19,6 +19,7 @@ export default class AccountPanel extends Component {
   render() {
     const { showModal } = this.state;
     const {
+      t,
       selectedAccount,
       onCopyAddress,
       onAccountMenuOptionsChange,
@@ -27,9 +28,10 @@ export default class AccountPanel extends Component {
       onAliasInputBlur,
       onAliasInputKeyPress,
       inputRef,
-      colorTheme,
+      colortheme,
       network,
       onCreateAccountClick,
+      onImportAccountClick,
       ...otherProps
     } = this.props;
 
@@ -42,7 +44,7 @@ export default class AccountPanel extends Component {
           onCopyAddress={onCopyAddress}
           inputRef={inputRef}
           editMode={selectedAccount.editMode ? selectedAccount.editMode : false}
-          colorTheme={colorTheme}
+          colortheme={colortheme}
           onAliasChange={event => {
             onAliasChange(event.target.value, selectedAccount);
           }}
@@ -58,22 +60,23 @@ export default class AccountPanel extends Component {
             onAliasInputBlur(selectedAccount);
           }}
         />
-        {accountMenu && accountMenu.length > 0 && (
+        {/* {accountMenu && accountMenu.length > 0 && (
           <WalletDropDownIcon
             onClick={this.handleClick}
             className="account-list-icon"
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
-        )}
+        )} */}
         <ModalWithThreeButton
           show={showModal}
-          colorTheme={colorTheme}
+          colortheme={colortheme}
           handleCancel={this.handleCancel}
           handleTopClick={onCreateAccountClick}
-          handleBottomClick={null}
+          handleBottomClick={onImportAccountClick}
           topButton="Create Account"
           bottomButton="Import Account"
           network={network}
+          oneAction={false}
         />
       </div>
     );

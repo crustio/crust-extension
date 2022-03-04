@@ -39,7 +39,7 @@ const createBalance = (type, token, t) => {
 
 class TokenList extends Component {
   renderBalances(token) {
-    const { t, colorTheme } = this.props;
+    const { t, colortheme } = this.props;
     const balance = createBalance('balance', token, t);
     const locked = createBalance('locked', token, t);
     const reserved = createBalance('reserved', token, t);
@@ -47,29 +47,29 @@ class TokenList extends Component {
     return (
       <div className="token-balances-container">
         <div className="token-balance-title-container">
-          <div className="token-balance-item-title" style={{ color: colorTheme.text.tertiary }}>
+          <div className="token-balance-item-title" style={{ color: colortheme.text.tertiary }}>
             {`${balance.title}${balance.title ? ':' : ''}`}
           </div>
           {token.locked && (
             <div
               className="token-balance-item-title"
-              style={{ color: colorTheme.text.tertiary }}
+              style={{ color: colortheme.text.tertiary }}
             >{`${locked.title}:`}</div>
           )}
           {token.reserved && (
             <div
               className="token-balance-item-title"
-              style={{ color: colorTheme.text.tertiary }}
+              style={{ color: colortheme.text.tertiary }}
             >{`${reserved.title}:`}</div>
           )}
           {token.total && (
             <div
               className="token-balance-item-title"
-              style={{ color: colorTheme.text.tertiary }}
+              style={{ color: colortheme.text.tertiary }}
             >{`${total.title}:`}</div>
           )}
         </div>
-        <div className="token-balance-value-container" style={{ color: colorTheme.text.primary }}>
+        <div className="token-balance-value-container" style={{ color: colortheme.text.primary }}>
           <FontRegular className="token-item-details-amount" text={balance.value} />
           {token.locked && (
             <FontRegular className="token-item-details-amount" text={locked.value} />
@@ -84,24 +84,21 @@ class TokenList extends Component {
   }
 
   render() {
-    const {
-      tokens, onTokenSelected, colorTheme, ...otherProps
-    } = this.props;
+    const { tokens, colortheme, ...otherProps } = this.props;
     return (
       <div {...otherProps}>
         {tokens.map(token => (
           <div
             key={token.tokenSymbol}
             className="token-item-container"
-            onClick={() => onTokenSelected(token)}
-            style={{ background: colorTheme.card }}
+            style={{ background: colortheme.card }}
           >
             <div className="token-item-left">
               <img alt="token-symbol" src={iconMap[token.tokenSymbol]} className="token-icon" />
               <FontMedium
                 text={token.tokenSymbol}
                 className="token-item-details-symbol"
-                style={{ color: colorTheme.text.primary }}
+                style={{ color: colortheme.text.primary }}
               />
             </div>
             <div className="token-item-right">

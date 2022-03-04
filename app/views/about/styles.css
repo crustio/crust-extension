@@ -7,13 +7,13 @@
 }
 
 .about-title {
-  font-size: 24px;
+  font-size: 20px;
   color: rgba(0, 0, 0, 0.87);
 }
 
 .about-version {
   color: rgba(0, 0, 0, 0.87);
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 10px;
 }
 
@@ -34,14 +34,19 @@
 
 .about-link-title {
   margin-top: 25px;
+  font-size: 20px;
 }
 
 .about-link {
-  margin-top: 15px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #FF8D00 !important;
 }
 
 .about-tou {
   margin-top: 10px;  
+  font-size: 16px;
+  color: #FF8D00 !important;
 }
 
 .about-button {

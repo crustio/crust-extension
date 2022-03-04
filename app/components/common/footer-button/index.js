@@ -22,7 +22,7 @@ export default class FooterButton extends Component {
           disabled={disabled}
           onClick={onClick}
           custom={custom}
-          color="white"
+          textColor="white"
           background="#FF8D00"
         >
           {name}

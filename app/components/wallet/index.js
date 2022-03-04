@@ -15,9 +15,10 @@ export default class Wallet extends Component {
       onAliasInputKeyPress,
       inputRef,
       theme,
-      colorTheme,
+      colortheme,
       network,
       onCreateAccountClick,
+      onImportAccountClick,
       ...otherProps
     } = this.props;
 
@@ -26,7 +27,7 @@ export default class Wallet extends Component {
         <Avatar
           className="account-avatar"
           onCopyAddress={onCopyAddress}
-          value={selectedAccount.address}
+          value={selectedAccount ? selectedAccount.address : ''}
           theme={theme}
         />
         <AccountPanel
@@ -39,9 +40,10 @@ export default class Wallet extends Component {
           className="account-detail-container"
           accountMenu={accountMenu}
           onAccountMenuOptionsChange={onAccountMenuOptionsChange}
-          colorTheme={colorTheme}
+          colortheme={colortheme}
           network={network}
           onCreateAccountClick={onCreateAccountClick}
+          onImportAccountClick={onImportAccountClick}
         />
       </div>
     );

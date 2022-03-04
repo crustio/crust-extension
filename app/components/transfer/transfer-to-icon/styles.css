@@ -5,6 +5,10 @@
   border-radius: 12px;
 }
 
+.transfer-to-icon-input::placeholder {
+  color: #FA5050
+}
+
 .transfer-to-icon-input fieldset {
   border: 0;
   font-size: 14px;
@@ -22,7 +26,8 @@
 .tranfer-to-icon-error-msg {
   color: #FA5050;
   height: 20px;
-  margin-left: 80px;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .place-holder {

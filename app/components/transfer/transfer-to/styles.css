@@ -4,18 +4,13 @@
 }
 .transfer-to-input {
   width: 100%;
+  border-radius: 12px;
+  height: 50px;
 }
 
 .transfer-to-input fieldset {
   border: 0;
   font-size: 14px;
-  background-color: transparent;
-  border: 2px solid #ECEDEF !important;
-}
-
-.transfer-to-input:focus-within fieldset {
-  background-color: transparent;
-  border: 2px solid #ECEDEF !important;
 }
 
 .input-margin {

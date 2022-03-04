@@ -6,7 +6,7 @@ import './styles.css';
 export default class TransactionItemDetails extends Component {
   render() {
     const {
-      amount, address, moment, colorTheme, ...otherProps
+      amount, address, moment, colortheme, ...otherProps
     } = this.props;
     return (
       <div className="transfer-item-details" {...otherProps}>
@@ -14,7 +14,7 @@ export default class TransactionItemDetails extends Component {
           <FontMedium
             className="transaction-item-details-amount"
             text={amount}
-            style={{ color: colorTheme.text.primary }}
+            style={{ color: colortheme.text.primary }}
           />
         </div>
 
@@ -22,7 +22,7 @@ export default class TransactionItemDetails extends Component {
           address={address}
           moment={moment}
           className="transaction-item-info-container"
-          style={{ color: colorTheme.text.quaternary }}
+          style={{ color: colortheme.text.quaternary }}
         />
       </div>
     );

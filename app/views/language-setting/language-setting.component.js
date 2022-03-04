@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
+import List from '@material-ui/core/List';
 import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import './styles.css';
 import * as NavConstants from '../../constants/navigation';
 import { CHINESE, ENGLISH } from '../../constants/language';
-import CrustRadioButtonGroup from '../../components/common/crust-radio-button-group';
-import { colorTheme } from '../../../lib/constants/colors';
+import SimpleListItemCard from '../../components/common/simple-list-item-card';
+import { colortheme } from '../../../lib/constants/colors';
 
 class LanguageSetting extends Component {
   constructor(props) {
@@ -19,9 +20,10 @@ class LanguageSetting extends Component {
     this.props.updateBackupPage(NavConstants.DASHBOARD_PAGE);
   };
 
-  onLanguageChange = (e, i18n) => {
-    if (e.target.value === CHINESE || e.target.value === ENGLISH) {
-      this.props.updateAppLanguage(e.target.value, i18n);
+  onLanguageChange = (event, option) => {
+    const { i18n } = this.props;
+    if (option.value === CHINESE || option.value === ENGLISH) {
+      this.props.updateAppLanguage(option.value, i18n);
     }
   };
 
@@ -34,30 +36,46 @@ class LanguageSetting extends Component {
   };
 
   render() {
-    const {
-      t, i18n, language, network
-    } = this.props;
+    const { t, language, network } = this.props;
     const options = [
       { value: ENGLISH, text: t('English') },
       { value: CHINESE, text: t('Chinese') },
     ];
     return (
-      <div className="language-setting-container">
+      <div
+        className="language-setting-container"
+        style={{ background: `${colortheme[network.value].background}` }}
+      >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={t('Language Setting')}
           backBtnOnClick={this.onClick}
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
           isBackIcon
         />
         <div className="language-setting-option-container">
-          <CrustRadioButtonGroup
+          <List classes={{}}>
+            {options.map((option, index) => (
+              <SimpleListItemCard
+                key={index}
+                listItem={option}
+                handleListItemAvatarClick={this.onLanguageChange}
+                handleListItemClick={this.onLanguageChange}
+                primaryText={option.text}
+                isActive={language === option.value}
+                className="language-card-container"
+                style={{ background: colortheme[network.value].card }}
+                colortheme={colortheme[network.value]}
+              />
+            ))}
+          </List>
+          {/* <CrustRadioButtonGroup
             // eslint-disable-next-line
             vertical={true}
             options={options}
             value={options.find(o => o.value === language)}
             onChange={e => this.onLanguageChange(e, i18n)}
-          />
+          /> */}
         </div>
       </div>
     );

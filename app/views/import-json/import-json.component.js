@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import { withTranslation } from 'react-i18next';
 import ReactTooltip from 'react-tooltip';
 import FileInput from 'react-simple-file-input';
+import SubHeader from '../../components/common/sub-header';
 import FontRegular from '../../components/common/fonts/font-regular';
 import CrustPassword from '../../components/common/password/crust-password';
-import * as Account from '../../constants/account';
-import FooterWithTwoButton from '../../components/common/footer-with-two-button';
+import FooterButton from '../../components/common/footer-button';
 import { shortenFilename } from '../../services/wallet-service';
 import { CHINESE } from '../../constants/language';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
+import { CREATE_ACCOUNT_ENTRY_PAGE, MANAGE_ACCOUNT_PAGE } from '../../constants/navigation';
 
 class ImportJson extends Component {
   constructor(props) {
@@ -23,6 +27,7 @@ class ImportJson extends Component {
   }
 
   componentDidMount() {
+    this.props.updateBackupPage(this.props.page);
     this.props.updateJsonPwdError('');
     this.props.updateWalletPwdError('');
   }
@@ -44,8 +49,13 @@ class ImportJson extends Component {
     });
   };
 
-  handelBack = () => {
-    this.props.changePage(this.props.backupPage);
+  handleBack = () => {
+    const { account } = this.props;
+    if (account) {
+      this.props.changePage(MANAGE_ACCOUNT_PAGE);
+    } else {
+      this.props.changePage(CREATE_ACCOUNT_ENTRY_PAGE);
+    }
   };
 
   handleClick = () => {
@@ -82,15 +92,31 @@ class ImportJson extends Component {
 
   render() {
     const {
-      t, jsonPwdError, walletPwdError, language
+      t, jsonPwdError, walletPwdError, language, network
     } = this.props;
     const {
       filename, jsonPwd, walletPwd, fileError
     } = this.state;
     const filenameShow = filename && filename.length > 18 ? shortenFilename(filename) : filename;
     return (
-      <div className="import-json-container">
-        <div className="import-json-content-container">
+      <div
+        className="import-json-container"
+        style={{ background: colortheme[network.value].background }}
+      >
+        <SubHeader
+          icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
+          title={t('Import From Json')}
+          backBtnOnClick={this.handleBack}
+          subMenu={null}
+          showSettings={false}
+          onSubMenuOptionsChange={null}
+          isBackIcon
+          colortheme={colortheme[network.value]}
+        />
+        <div
+          className="import-json-content-container"
+          style={{ background: colortheme[network.value].background }}
+        >
           <div className="import-json-select-container">
             <label className="import-json-label" htmlFor="file">
               <FileInput
@@ -102,11 +128,19 @@ class ImportJson extends Component {
                 }}
                 accept="application/json"
               />
-              <div className="import-json-file-container">{t('Choose File')}</div>
+              <div
+                className="import-json-file-container"
+                style={{
+                  backgroundColor: colortheme[network.value].card,
+                  color: colortheme[network.value].text.tertiary,
+                }}
+              >
+                <p>{filenameShow || t('No file chosen')}</p>
+                <InsertDriveFileIcon
+                  style={{ fontSize: 16, color: colortheme[network.value].text.tertiary }}
+                />
+              </div>
             </label>
-            <div data-tip={filename || t('No file chosen')} className="import-json-filename">
-              {filenameShow || t('No file chosen')}
-            </div>
           </div>
           <ReactTooltip effect="solid" place="bottom" className="import-json-tooltip" />
           {fileError !== '' ? (
@@ -123,6 +157,12 @@ class ImportJson extends Component {
             onChange={e => this.handleOnChange('jsonPwd', e)}
             password={jsonPwd}
             placeholder={t('Password')}
+            colortheme={colortheme[network.value]}
+            style={{
+              borderRadius: 12,
+              background: colortheme[network.value].card,
+              '&::placeholder': { color: colortheme[network.value].text.tertiary },
+            }}
           />
           {jsonPwdError !== '' ? (
             <div className="error-msg">{t(jsonPwdError)}</div>
@@ -150,6 +190,12 @@ class ImportJson extends Component {
             onChange={e => this.handleOnChange('walletPwd', e)}
             password={walletPwd}
             placeholder={t('Password')}
+            colortheme={colortheme[network.value]}
+            style={{
+              borderRadius: 12,
+              background: colortheme[network.value].card,
+              '&::placeholder': { color: colortheme[network.value].text.tertiary },
+            }}
           />
           <FontRegular
             className="import-json-text import-json-text-margin2 json-file-text-color"
@@ -161,12 +207,7 @@ class ImportJson extends Component {
             <div className="place-holder"> </div>
           )}
         </div>
-        <FooterWithTwoButton
-          onNextClick={this.handleClick}
-          onBackClick={this.handelBack}
-          backButtonName={t(Account.BACK_BUTTON_TEXT)}
-          nextButtonName={t(Account.TO_CONFIRM_BUTTON_TEXT)}
-        />
+        <FooterButton name={t('Next')} onClick={this.handleClick} />
       </div>
     );
   }

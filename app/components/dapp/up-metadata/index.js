@@ -11,7 +11,7 @@ const Summary = props => (
       type={props.t('Update Metadata')}
       blockchain={props.blockchain}
       className="sign-message-summary-request-type"
-      colorTheme={props.colorTheme}
+      colortheme={props.colortheme}
     />
   </div>
 );
@@ -41,7 +41,7 @@ export default class UpMetadata extends Component {
       password,
       handleOnChange,
       errorText,
-      colorTheme,
+      colortheme,
       t,
       ...otherProps
     } = this.props;
@@ -52,7 +52,7 @@ export default class UpMetadata extends Component {
           expanded={isSignMessageExpanded}
           handleChange={handleSignMessageExpansion}
           summary={
-            <Summary className="sign-message-summary-container" t={t} colorTheme={colorTheme} />
+            <Summary className="sign-message-summary-container" t={t} colortheme={colortheme} />
           }
         >
           <UpMessage className="sign-message-body" data={data} t={t} />

@@ -10,6 +10,7 @@ export const submitTransaction = (confirmDetails, password) => async dispatch =>
     dispatch(updateAppLoading(true));
     await Account.verifyPassword(password);
     const { result } = await Transaction.submitTransaction(confirmDetails, password);
+
     dispatch(getTransactions);
     dispatch(fetchTransactionHistory);
     dispatch(changePage(DASHBOARD_PAGE));

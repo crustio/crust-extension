@@ -1,9 +1,6 @@
 .create-account-container {
-  height: 469px;
+  height: 550px;
   background: #fff;
-  margin-left: 16px;
-  border-radius: 10px;
-  margin-right: 16px;
 }
 
 .create-account-form {
@@ -16,13 +13,13 @@
 }
 
 .create-account-settings-import {
-  width: 297px;
+  width: 328px;
   margin-top: 20px;
   margin-left: 16px;
 }
 
 .create-account-settings {
-  width: 297px;
+  width: 328px;
   margin-top: 20px;
   margin-left: 16px;
 }

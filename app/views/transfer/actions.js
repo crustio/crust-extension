@@ -24,6 +24,11 @@ const confirmTransactionError = error => ({
   error,
 });
 
+const dispatchSetTransferFee = transferFee => ({
+  type: TransferActionTypes.SET_TRANSFER_FEE,
+  transferFee,
+});
+
 export const setTransferValidationError = error => ({
   type: TransferActionTypes.SET_TRANSFER_VALIDATION_ERROR,
   error,
@@ -88,4 +93,26 @@ export const resetConfirmOnBoarding = () => async dispatch => {
   dispatch(confirmTransactionSuccess(false));
   dispatch(setTransferValidationError(null));
   dispatch(confirmTransactionError(null));
+};
+
+export const getTransferFee = (
+  to,
+  account,
+  amount,
+  unit,
+  tokenSelected,
+  network,
+) => async dispatch => {
+  dispatch(updateAppLoading(true));
+  const { result } = await Transaction.getTransactionFee({
+    txnType: TRANSFER_COINS,
+    to,
+    account,
+    amount,
+    unit,
+    tokenSelected,
+  });
+
+  dispatch(dispatchSetTransferFee(result.totalFee));
+  dispatch(updateAppLoading(false));
 };

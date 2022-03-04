@@ -8,6 +8,7 @@ const initialState = {
   toAddressErrorMessage: null,
   isAmountError: false,
   toAmountErrorMessage: null,
+  transferFee: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +39,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...{
           error: action.error,
+        },
+      };
+
+    case Types.SET_TRANSFER_FEE:
+      return {
+        ...state,
+        ...{
+          transferFee: action.transferFee,
         },
       };
 

@@ -6,16 +6,15 @@ import './styles.css';
 export default class TransferFrom extends Component {
   render() {
     const {
-      address, alias, theme, canCopy, onCopyAddress, ...otherProps
+      address, alias, theme, canCopy, onCopyAddress, colortheme, ...otherProps
     } = this.props;
     return (
       <div
         style={{
           display: 'flex',
-          flexDirection: 'row',
-          paddingLeft: '16px',
-          paddingRight: '16px',
-          paddingTop: '21.27px',
+          padding: '16px',
+          background: colortheme.card,
+          borderRadius: '12px',
         }}
         {...otherProps}
       >
@@ -32,6 +31,7 @@ export default class TransferFrom extends Component {
           className="transfer-from-address"
           alias={alias}
           address={address}
+          colortheme={colortheme}
         />
       </div>
     );

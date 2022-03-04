@@ -2,7 +2,6 @@ export const styles = () => ({
   root: {
     height: '54px',
     borderRadius: '4px',
-    color: 'rgba(0, 0, 0, 0.87)',
   },
   icon: {
     marginRight: '15px',

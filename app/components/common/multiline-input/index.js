@@ -5,7 +5,14 @@ import classNames from 'classnames';
 export default class MultilineInput extends PureComponent {
   render() {
     const {
-      width, height, error, errorText, value, onChange, ...otherProps
+      width,
+      height,
+      error,
+      errorText,
+      value,
+      onChange,
+      colortheme,
+      ...otherProps
     } = this.props;
 
     const walletInputClassNames = classNames({
@@ -15,7 +22,12 @@ export default class MultilineInput extends PureComponent {
 
     return (
       <div
-        style={{ height, width }}
+        style={{
+          height,
+          width,
+          color: colortheme ? colortheme.text.primary : null,
+          border: colortheme ? 'none' : null,
+        }}
         className={walletInputClassNames}
         onChange={onChange}
         {...otherProps}

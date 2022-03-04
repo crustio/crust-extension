@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import SubHeader from '../../components/common/sub-header';
 import QRCodeForm from '../../components/qr-code/qr-code-form';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class QRCode extends Component {
@@ -23,18 +23,18 @@ class QRCode extends Component {
     return (
       <div
         className="qr-code-container"
-        style={{ background: colorTheme[network.value].background }}
+        style={{ background: colortheme[network.value].background }}
       >
         <SubHeader
           icon={
             <ArrowBackIosOutlinedIcon
-              style={{ color: colorTheme[network.value].text.secondary, fontSize: '14px' }}
+              style={{ color: colortheme[network.value].text.secondary, fontSize: '14px' }}
             />
           }
           title={t('Receive')}
           backBtnOnClick={this.handleSubheaderBackBtn}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <QRCodeForm
           className="qr-code-form-container"
@@ -42,8 +42,8 @@ class QRCode extends Component {
           account={account}
           onCopyAddress={this.onCopy}
           onClick={this.handleSubheaderBackBtn}
-          colorTheme={colorTheme[network.value]}
-          style={{ background: colorTheme[network.value].background }}
+          colortheme={colortheme[network.value]}
+          style={{ background: colortheme[network.value].background }}
         />
       </div>
     );

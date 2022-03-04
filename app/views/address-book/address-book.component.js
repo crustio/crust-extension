@@ -5,8 +5,6 @@ import SubHeader from '../../components/common/sub-header';
 import * as NavConstants from '../../constants/navigation';
 import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
 import AddressList from '../../components/address-book/address-list';
-import EmptyDashboard from '../../components/empty-dashboard';
-import ButtonMD from '../../components/common/buttons/button-md';
 import DraggableDialog from '../../components/common/confirm-dialog';
 import {
   ADDRESS_BOOK_MENU_OPTIONS,
@@ -14,7 +12,9 @@ import {
   ADD_ADDRESS,
   REMOVE,
 } from '../../constants/options';
-import { colorTheme } from '../../../lib/constants/colors';
+import FooterButton from '../../components/common/footer-button';
+import FooterWithTwoButton from '../../components/common/footer-with-two-button';
+import { colortheme } from '../../../lib/constants/colors';
 import './styles.css';
 
 class AddressBook extends Component {
@@ -23,9 +23,11 @@ class AddressBook extends Component {
     this.textInput = React.createRef();
     this.state = {
       isOpen: false,
-      isMoreVertIconVisible: true,
+      isSelectIcon: true,
       showSettings: true,
       headerText: 'Address Book',
+      showFooterModal: false,
+      selectedAddressList: this.props.selectedAddress,
     };
   }
 
@@ -34,7 +36,7 @@ class AddressBook extends Component {
       return {
         headerText: 'Select To Address',
         showSettings: false,
-        isMoreVertIconVisible: false,
+        isSelectIcon: false,
       };
     }
     return state;
@@ -43,6 +45,14 @@ class AddressBook extends Component {
   async componentDidMount() {
     await this.props.getContacts();
   }
+
+  handleFooterClick = event => {
+    this.setState({ showFooterModal: true });
+  };
+
+  handleFooterCancel = () => {
+    this.setState({ showFooterModal: false });
+  };
 
   handleSubheaderBackBtn = () => {
     this.props.changePage(this.props.backupPage);
@@ -84,7 +94,7 @@ class AddressBook extends Component {
 
   handleAddressBookOptionsChange = async (option, contact) => {
     if (option.value === REMOVE.value) {
-      this.setState({ isOpen: true, contact });
+      this.setState({ isOpen: true });
     }
   };
 
@@ -94,16 +104,41 @@ class AddressBook extends Component {
   };
 
   handleYes = () => {
-    const { contact } = this.state;
-    const { removeContact, t } = this.props;
-    removeContact(contact, t);
-    this.setState({ isOpen: false });
+    const { removeContact, t, selectedAddress } = this.props;
+    for (let i = 0; i < selectedAddress.length; i++) {
+      removeContact(selectedAddress[i], t);
+    }
+    this.props.updateSelectedAddress([]);
+    this.setState({ isOpen: false, selectedAddressList: [] });
+    this.handleFooterCancel();
+  };
+
+  handleSelectedAddressChange = (e, addressItem) => {
+    const { selectedAddress } = this.props;
+    const selectedAddressList = selectedAddress;
+    const index = selectedAddressList.findIndex(e => e.address === addressItem.address);
+    if (index !== -1) {
+      selectedAddressList.splice(index, 1);
+    } else {
+      selectedAddressList.push(addressItem);
+    }
+    this.props.updateSelectedAddress(selectedAddressList);
+    this.setState({
+      selectedAddressList,
+    });
   };
 
   render() {
-    const { addressBook, network, t } = this.props;
     const {
-      isOpen, showSettings, headerText, isMoreVertIconVisible
+      addressBook, network, selectedAddress, t
+    } = this.props;
+    const {
+      isOpen,
+      showSettings,
+      headerText,
+      showFooterModal,
+      isSelectIcon,
+      selectedAddressList,
     } = this.state;
     const theme = 'substrate';
     const optionsHeader = ADDRESS_BOOK_MENU_OPTIONS.map(o => ({ ...o, text: o.text }));
@@ -111,7 +146,10 @@ class AddressBook extends Component {
     const options = ADDRESS_BOOK_OPTIONS.map(o => ({ ...o, text: o.text }));
     const headerTextT = t(headerText);
     return (
-      <div className="address-book-root-container">
+      <div
+        className="address-book-root-container"
+        style={{ background: colortheme[network.value].background }}
+      >
         <SubHeader
           icon={<ArrowBackIosOutlinedIcon style={{ color: '#858B9C', fontSize: '14px' }} />}
           title={headerTextT}
@@ -120,7 +158,7 @@ class AddressBook extends Component {
           showSettings={showSettings}
           onSubMenuOptionsChange={this.handleOnSubMenuOptionsChange}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <div className="manage-address-book">
           <div className="manage-address-book-container">
@@ -128,16 +166,19 @@ class AddressBook extends Component {
               <AddressList
                 className="address-book-container"
                 addressBook={addressBook}
-                moreMenu={options}
+                selectedAddress={selectedAddress}
                 onMoreMenuOptionsChange={this.handleAddressBookOptionsChange}
                 theme={theme}
-                isMoreVertIconVisible={isMoreVertIconVisible}
+                isSelectIcon={isSelectIcon}
                 onCopyAddress={this.onCopyAddress}
                 handelChangeToAddress={this.handelChangeToAddress}
                 network={network}
-                colorTheme={colorTheme[network.value]}
-              />
-            ) : (
+                colortheme={colortheme[network.value]}
+                showFooterModal={showFooterModal}
+                handleFooterClick={this.handleFooterClick}
+                handleFooterCancel={this.handleFooterCancel}
+                updateSelectedAddress={this.handleSelectedAddressChange}
+              /> /*(
               <div className="empty-address-book-container">
                 <EmptyDashboard
                   className="empty-list-text"
@@ -149,7 +190,8 @@ class AddressBook extends Component {
                   </ButtonMD>
                 </div>
               </div>
-            )}
+            )*/
+            ) : null}
 
             <div>
               <DraggableDialog
@@ -164,6 +206,24 @@ class AddressBook extends Component {
             </div>
           </div>
         </div>
+        {selectedAddressList.length === 0 ? (
+          <FooterButton
+            onClick={this.handleAddAddressClick}
+            name={t('Create')}
+            style={{ marginLeft: 20 }}
+          />
+        ) : (
+          <FooterWithTwoButton
+            onNextClick={this.handleAddAddressClick}
+            onBackClick={() => this.setState({ isOpen: true })}
+            backButtonName={t('Remove')}
+            nextButtonName={t('Create')}
+            nextColor={colortheme[network.value].button.primary.text}
+            nextBackground={colortheme[network.value].button.primary.main}
+            backColor={colortheme[network.value].button.secondary.text}
+            backBackground={colortheme[network.value].button.secondary.main}
+          />
+        )}
       </div>
     );
   }

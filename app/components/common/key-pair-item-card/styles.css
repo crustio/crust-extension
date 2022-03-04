@@ -1,0 +1,23 @@
+.key-pair-card-item {
+  margin-top: 10px;
+  padding-left: 0px !important;
+}
+.key-pair-card-text {
+  font-size: 13px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Roboto-Regular';
+  display: block;
+  font-weight: bold;
+}
+
+.key-pair-card-icon {
+  color: #4F4D59;
+  font-size: 16px !important;
+}
+
+.key-pair-card-container {
+  width: 165px;
+}

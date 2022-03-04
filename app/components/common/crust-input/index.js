@@ -7,7 +7,12 @@ import { styles } from './styles';
 class CrustInput extends Component {
   render() {
     const {
-      classes, InputProps, placeholderText, standardInput, ...otherProps
+      classes,
+      InputProps,
+      placeholderText,
+      standardInput,
+      colortheme,
+      ...otherProps
     } = this.props;
     return standardInput ? (
       <Input
@@ -15,6 +20,9 @@ class CrustInput extends Component {
         labelWidth={0}
         inputProps={{
           className: classes.crustInput,
+          style: {
+            color: colortheme.text.primary,
+          },
         }}
         disableUnderline
         {...otherProps}
@@ -28,6 +36,9 @@ class CrustInput extends Component {
         }}
         inputProps={{
           className: classes.crustInput,
+          style: {
+            color: colortheme.text.primary,
+          },
         }}
         {...otherProps}
       />

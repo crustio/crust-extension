@@ -6,25 +6,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ReactTooltip from 'react-tooltip';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import { MoreHorizIcon } from '../icon';
 import ClickToCopyAddress from '../click-to-copy-address';
-import ModalWithThreeButton from '../modal-with-three-button';
 import './styles.css';
-import { EXPORT_ACCOUNT, REMOVE } from '../../../constants/options';
 
 class ListItemCard extends Component {
-  state = {
-    showModal: false,
-  };
-
-  handleClick = event => {
-    this.setState({ showModal: true });
-  };
-
-  handleCancel = () => {
-    this.setState({ showModal: false });
-  };
-
   handleNullBalanceObject = (balObj, account) => {
     if (!balObj) {
       return {
@@ -35,14 +20,6 @@ class ListItemCard extends Component {
     return balObj;
   };
 
-  handleTopClick = async () => {
-    await this.props.onMoreMenuOptionsChange(REMOVE, this.props.listItem);
-  };
-
-  handleBottomClick = async () => {
-    await this.props.onMoreMenuOptionsChange(EXPORT_ACCOUNT, this.props.listItem);
-  };
-
   render() {
     const {
       classes,
@@ -50,34 +27,20 @@ class ListItemCard extends Component {
       listItem,
       primaryText,
       onCopyAddress,
-      onMoreMenuOptionsChange,
-      moreMenu,
       handleListItemAvatarClick,
       handleListItemClick,
-      isMoreVertIconVisible,
       isActive,
+      isSelected,
       theme,
-      colorTheme,
+      colortheme,
       network,
+      customModal,
+      showRadio,
       ...otherProps
     } = this.props;
-    const { showModal } = this.state;
     return (
       <div {...otherProps}>
         <ListItem>
-          <ListItemAvatar onClick={event => handleListItemAvatarClick(event, listItem)}>
-            {isActive ? (
-              <CheckCircleIcon
-                className="accout-card-icon"
-                style={{ color: colorTheme.icon.primary }}
-              />
-            ) : (
-              <RadioButtonUncheckedIcon
-                className="accout-card-icon"
-                style={{ color: colorTheme.icon.secondary }}
-              />
-            )}
-          </ListItemAvatar>
           <ListItemText
             onClick={event => handleListItemClick(event, listItem)}
             primary={
@@ -85,7 +48,7 @@ class ListItemCard extends Component {
                 <span
                   className="account-card-text"
                   data-tip={primaryText}
-                  style={{ color: colorTheme.text.primary }}
+                  style={{ color: colortheme.text.primary }}
                 >
                   {primaryText}
                 </span>
@@ -98,29 +61,25 @@ class ListItemCard extends Component {
                 className="account-address clickable-icon"
                 onCopyAddress={onCopyAddress}
                 address={address}
-                style={{ color: colorTheme.text.tertiary }}
+                style={{ color: colortheme.text.tertiary }}
               />
             }
           />
-          {isMoreVertIconVisible && (
-            <MoreHorizIcon
-              color={colorTheme.text.secondary}
-              onClick={this.handleClick}
-              className="more-list-icon"
-            />
+          {showRadio && (
+            <ListItemAvatar onClick={event => handleListItemAvatarClick(event, listItem)}>
+              {isSelected ? (
+                <CheckCircleIcon
+                  className="accout-card-icon"
+                  style={{ color: colortheme.icon.primary }}
+                />
+              ) : (
+                <RadioButtonUncheckedIcon
+                  className="accout-card-icon"
+                  style={{ color: colortheme.icon.secondary }}
+                />
+              )}
+            </ListItemAvatar>
           )}
-          <ModalWithThreeButton
-            show={showModal}
-            colorTheme={colorTheme}
-            firstOption={EXPORT_ACCOUNT}
-            secondOption={REMOVE}
-            handleTopClick={this.handleTopClick}
-            handleBottomClick={this.handleBottomClick}
-            handleCancel={this.handleCancel}
-            topButton="Remove"
-            bottomButton="Export Account"
-            network={network}
-          />
         </ListItem>
       </div>
     );

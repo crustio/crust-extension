@@ -17,6 +17,7 @@ class TransferForm extends Component {
       units,
       toRef,
       amountRef,
+      language,
       isAddressEncoded,
       isToError,
       toErrorText,
@@ -33,7 +34,8 @@ class TransferForm extends Component {
       handleBackButton,
       handleUnitOnChange,
       onAddressBookClick,
-      colorTheme,
+      colortheme,
+      handleMaxError,
       t,
     } = this.props;
     return (
@@ -44,6 +46,7 @@ class TransferForm extends Component {
             theme={theme}
             alias={alias}
             isToError={isToError}
+            label={t('Account')}
             isAddressEncoded={isAddressEncoded}
             toPropName={toPropName}
             to={to}
@@ -51,7 +54,7 @@ class TransferForm extends Component {
             toErrorText={toErrorText}
             handleToChange={handleToChange}
             onAddressBookClick={onAddressBookClick}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
         </div>
         <TransferFormAmount
@@ -67,7 +70,9 @@ class TransferForm extends Component {
           options={units}
           dropDownValue={unit}
           onDropDownChange={handleUnitOnChange}
-          colorTheme={colorTheme}
+          colortheme={colortheme}
+          language={language}
+          handleMaxError={handleMaxError}
         />
         <FooterWithTwoButton
           onNextClick={handleSendButton}

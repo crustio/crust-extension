@@ -5,12 +5,15 @@ import TokenDetails from '../../components/token/token-details';
 import Wallet from '../../components/wallet';
 import { DASHBOARD_PAGE, QR_CODE_PAGE, TRANSFER_PAGE } from '../../constants/navigation';
 import Transaction from '../../components/transaction/transaction';
-import { copyAccountMessage } from '../../../lib/services/static-message-factory-service';
+import {
+  copyAccountMessage,
+  getTransfersWithMoment,
+} from '../../../lib/services/static-message-factory-service';
 import './styles.css';
 import { RENAME } from '../../constants/options';
 import { convertBalanceToShow } from '../../../lib/services/numberFormatter';
 import SubHeader from '../../components/common/sub-header';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 
 class TokenDetailsPage extends Component {
   constructor(props) {
@@ -77,7 +80,7 @@ class TokenDetailsPage extends Component {
     const {
       accounts,
       account,
-      transactions,
+      transactionHistory,
       isLinkToFaucet,
       network,
       accountMenu,
@@ -85,9 +88,8 @@ class TokenDetailsPage extends Component {
       t,
     } = this.props;
     const theme = 'substrate';
-    const transDisplay = transactions.filter(
-      trans => trans.metadata.tokenSelected !== undefined
-        && trans.metadata.tokenSelected.tokenSymbol === token.tokenSymbol,
+    const transDisplay = transactionHistory.filter(
+      trans => trans.tokenSymbol === token.tokenSymbol,
     );
     return (
       <div className="token-details-page-container">
@@ -96,7 +98,7 @@ class TokenDetailsPage extends Component {
           title={t('Token Details')}
           backBtnOnClick={this.onClick}
           isBackIcon
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
         />
         <div className="account-content-container">
           <Wallet
@@ -110,7 +112,7 @@ class TokenDetailsPage extends Component {
             onAliasInputKeyPress={this.handleOnKeyPress}
             onCopyAddress={this.onCopyAddress}
             accountMenu={accountMenu}
-            colorTheme={colorTheme[network.value]}
+            colortheme={colortheme[network.value]}
             onAccountMenuOptionsChange={this.handleAccountMenuOptionsChange}
             network={network}
           />
@@ -132,9 +134,10 @@ class TokenDetailsPage extends Component {
           className="transaction-container"
           network={network}
           isLinkToFaucet={isLinkToFaucet}
-          transactions={transDisplay}
+          transactions={getTransfersWithMoment(transDisplay)}
           listHeight="280px"
-          colorTheme={colorTheme[network.value]}
+          colortheme={colortheme[network.value]}
+          account={account}
         />
       </div>
     );

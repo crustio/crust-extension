@@ -23,6 +23,7 @@ import LanguageSetting from '../../views/language-setting';
 import ExportAccount from '../../views/export-account';
 import CreateAccountEntry from '../../views/create-account-entry';
 import ImportJson from '../../views/import-json';
+import ImportPhrase from '../../views/import-phrase';
 
 const getView = page => {
   switch (page) {
@@ -72,6 +73,8 @@ const getView = page => {
       return <CreateAccountEntry />;
     case NavConstant.IMPORT_JSON_PAGE:
       return <ImportJson />;
+    case NavConstant.IMPORT_PHRASE_PAGE:
+      return <ImportPhrase />;
     default:
       return <Dashboard />;
   }

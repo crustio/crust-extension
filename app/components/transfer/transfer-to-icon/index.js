@@ -18,7 +18,7 @@ export default class TransferToIcon extends Component {
       onBlur,
       inputRef,
       onAddressBookClick,
-      colorTheme,
+      colortheme,
       ...otherProps
     } = this.props;
     return (
@@ -34,14 +34,18 @@ export default class TransferToIcon extends Component {
           className="transfer-to-icon-input"
           value={toValue}
           onChange={onChange(propName)}
-          placeholder={label}
+          placeholderText={label}
           spellCheck={false}
-          style={{ background: colorTheme.card }}
+          colortheme={colortheme}
+          style={{
+            background: colortheme.card,
+            '&::placeholder': { color: colortheme.text.tertiary },
+          }}
           endAdornment={
             <AddressBookAdorment
               position="end"
               onClick={onAddressBookClick}
-              colorTheme={colorTheme}
+              colortheme={colortheme}
             />
           }
         />

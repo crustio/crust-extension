@@ -4,6 +4,7 @@ import CrustInput from '../../common/crust-input';
 import DropDown from '../../common/drop-down';
 import FontRegular from '../../common/fonts/font-regular';
 import { convertBalanceToShow } from '../../../../lib/services/numberFormatter';
+import { CHINESE } from '../../../constants/language';
 import './styles.css';
 
 class TransferFormAmount extends Component {
@@ -13,10 +14,12 @@ class TransferFormAmount extends Component {
         ? 0
         : convertBalanceToShow(this.props.dropDownValue.balance, this.props.dropDownValue.decimals),
     );
+    this.props.handleMaxError();
   };
 
   render() {
     const {
+      language,
       error,
       label,
       value,
@@ -27,7 +30,7 @@ class TransferFormAmount extends Component {
       dropDownValue,
       propName,
       onDropDownChange,
-      colorTheme,
+      colortheme,
       t,
       ...otherProps
     } = this.props;
@@ -42,11 +45,11 @@ class TransferFormAmount extends Component {
         <div className="transfer-form-amount-dropdown-container">
           <DropDown
             className="transfer-form-amount-dropdown"
-            style={{ background: colorTheme.card }}
+            style={{ background: colortheme.card }}
             options={options}
             value={dropDownValue}
             onChange={onDropDownChange}
-            colorTheme={colorTheme}
+            colortheme={colortheme}
           />
         </div>
 
@@ -56,7 +59,8 @@ class TransferFormAmount extends Component {
             onChange={onChange(propName)}
             value={value}
             placeholder={t('Amount')}
-            style={{ background: colorTheme.card }}
+            style={{ background: colortheme.card }}
+            colortheme={colortheme}
             endAdornment={
               <FontRegular
                 text={t('Max')}
@@ -64,9 +68,9 @@ class TransferFormAmount extends Component {
                   marginRight: 8,
                   position: 'relative',
                   cursor: 'pointer',
-                  color: colorTheme.text.secondary,
+                  color: colortheme.text.secondary,
                   fontSize: 14,
-                  width: 32,
+                  width: language === CHINESE ? 55 : 32,
                 }}
                 onClick={this.onClickMax}
               />
@@ -86,7 +90,7 @@ class TransferFormAmount extends Component {
               ? '-'
               : convertBalanceToShow(dropDownValue.balance, dropDownValue.decimals)
           }`}
-          style={{ color: colorTheme.text.quaternary }}
+          style={{ color: colortheme.text.quaternary }}
         />
       </div>
     );

@@ -5,14 +5,14 @@ import './styles.css';
 export default class RequestType extends Component {
   render() {
     const {
-      type, blockchain, colorTheme, ...otherProps
+      type, blockchain, colortheme, ...otherProps
     } = this.props;
     return (
       <div {...otherProps}>
         <FontMedium
           text={type}
           className="request-type-text"
-          style={{ color: colorTheme.text.primary }}
+          style={{ color: colortheme.text.primary }}
         />
       </div>
     );

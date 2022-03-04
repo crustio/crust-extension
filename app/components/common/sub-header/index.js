@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FontMedium from '../fonts/font-medium';
 import IconContainer from '../icon-container';
-import { MoreVertIcon } from '../icon';
 import CrustMenu from '../crust-menu';
 import './styles.css';
 
@@ -20,10 +19,11 @@ export default class SubHeader extends Component {
 
   render() {
     const { anchorEl } = this.state;
+    const { colortheme } = this.props;
     const style = {
       textAlign: `${this.props.align ? this.props.align : 'center'}`,
       marginLeft: `${this.props.margin ? this.props.margin : 'none'}`,
-      color: this.props.colorTheme.text.primary,
+      color: colortheme.text.primary,
     };
     const {
       icon, subMenu, onSubMenuOptionsChange, menuWidth, isBackIcon
@@ -43,7 +43,7 @@ export default class SubHeader extends Component {
         </div>
         {subMenu && subMenu.length > 0 && (
           <div>
-            <MoreVertIcon onClick={this.handleClick} color="#858B9C" className="more-list-icon" />
+            {/* <MoreVertIcon onClick={this.handleClick} color="#858B9C" className="more-list-icon" /> */}
             <CrustMenu
               options={subMenu}
               onChange={option => {

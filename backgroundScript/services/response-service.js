@@ -252,11 +252,23 @@ export const getAccounts = async (request, sendResponse) => {
 
 export const getTransactionFees = async (request, sendResponse) => {
   try {
-    const { txnType, toAddress } = request;
-    const fees = await TransactionService.getTransactionFees(txnType, toAddress);
-    sendResponse({ ...success, result: fees });
+    const { transaction } = request;
+    const {
+      accountState: { currentAccount },
+      networkState: { currentNetwork },
+    } = getStore().getState();
+    // const address = AccountService.getAddress(seedWords, keypairType);
+    const address = AccountService.getAddressByAccount(currentAccount);
+    const result = await TransactionService.getTransactionFees(
+      address,
+      currentNetwork,
+      transaction,
+      currentAccount.seedWords,
+      currentAccount.keypairType,
+    );
+    sendResponse({ ...success, result });
   } catch (err) {
-    sendResponse({ ...failure, message: 'Error in getting  Transaction fees' });
+    sendResponse({ ...failure, message: 'Error in confirm  Transaction ' });
   }
 };
 

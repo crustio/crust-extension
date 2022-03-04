@@ -21,7 +21,11 @@
   "Transferable": "Transferable",
   "Locked": "Locked",
   "Reserved": "Reserved",
+  "Pending Requests": "Pending Requests",
+  "Update": "Update",
 
+  "Sign the following data": "Sign the following data",
+  "Update Metadata": "Update Metadata",
   "Create A Password To Secure Your Account": "Create A Password To Secure Your Account",
   "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.": "The password is used to protect your Enigma seed phrase(s) so that other Chrome extensions can't access them.",
   "Password": "Password",
@@ -42,6 +46,7 @@
   "Please make sure you have saved the seed phrase or private key for this account before continuing.": "Please make sure you have saved the seed phrase or private key for this account before continuing.",
   "Make sure you have saved the seed phrase.": "Make sure you have saved the seed phrase.",
 
+  "Account": "Account",
   "Remove": "Remove",
   "Add Address": "Add Address",
   "Export Account": "Export Account",
@@ -63,6 +68,9 @@
 
   "OK": "OK",
   "Cancel": "Cancel",
+  "Import Account": "Import Account",
+
+  "Sign": "Sign",
 
   "Token Details": "Token Details",
 
@@ -116,6 +124,7 @@
 
   "You are exporting your account. Keep it safe and don’t share it with anyone.": "You are exporting your account. Keep it safe and don’t share it with anyone.",
   "The password for the wallet.": "The password for the wallet.",
+  "Wallet Password": "Wallet Password",
 
   "Chinese": "Chinese",
   "English": "English",
@@ -137,12 +146,28 @@
   "Invalid Address": "Invalid Address",
   "Network error. Please check network.": "Network error. Please check network.",
 
+
+  "Signing can provide access to the value of your account. Only sign this if you know and trust the requesting source.": "Signing can provide access to the value of your account. Only sign this if you know and trust the requesting source.",
   "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.": "This seed phrase is used to generate your first account. Make sure it's saved somewhere safe and don't share it.",
 
   "Offline": "Offline",
+  "Set To Online Mode": "Set To Online Mode",
+  "Set to Signer Mode": "Set to Signer Mode",
   "OfflineDescription": "The wallet is now offline. \nWhen offline, you can still sign transactions with the wallet. \nWhy my wallet is offline?",
+  "Why my wallet is offline?": "Why my wallet is offline?",
   "Possible reasons": "Possible reasons",
   "reasons_1": "1. You have manually set the wallet to ‘Offline Mode’. In this mode, your wallet will always keep offline regardless of network connection. You can shift wallet mode (Online/Offline) in settings menu.",
   "reasons_2": "2. The wallet has not been updated to the latest version. You may need to update the wallet or wait for a new version release. ",
-  "reasons_3": "3. Something wrong with the network connection or the server."
+  "reasons_3": "3. Something wrong with the network connection or the server.",
+
+  "Crust Mainnet": "Crust Mainnet",
+  "Crust Maxwell": "Crust Maxwell",
+
+  "My Account": "My Account",
+  "Settings": "Settings",
+  "Lock": "Lock",
+  "Get CRU": "Get CRU",
+
+  "To Address": "To Address",
+  "Max": "Max"
 }

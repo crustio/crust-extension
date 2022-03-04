@@ -14,7 +14,7 @@ import './styles.css';
 import { CHINESE } from '../../constants/language';
 import ValidatePasswordModal from '../validate-password/modal';
 import FontMedium from '../common/fonts/font-medium';
-import { colorTheme } from '../../../lib/constants/colors';
+import { colortheme } from '../../../lib/constants/colors';
 
 export default class CrustApp extends Component {
   render() {
@@ -80,7 +80,7 @@ export default class CrustApp extends Component {
           <Header
             page={page}
             className={CrustHeaderClassNames}
-            style={{ background: colorTheme[network.value].background }}
+            style={{ background: colortheme[network.value].background }}
           >
             {/* <div className="crust-row">
               <CrustLogo className="crust-logo" />
@@ -92,7 +92,7 @@ export default class CrustApp extends Component {
                   <NetworkDisconnectionIcon
                     title="Network unavailable"
                     className={CrustNetworkDisClassNames}
-                    colorTheme={colorTheme[network.value]}
+                    colortheme={colortheme[network.value]}
                   />
                   <Network
                     networks={networks}
@@ -100,8 +100,8 @@ export default class CrustApp extends Component {
                     onNetworkChange={onNetworkChange}
                     className={CrustNetworkClassNames}
                     page={page}
-                    style={{ border: `1px solid ${colorTheme[network.value].border}` }}
-                    colorTheme={colorTheme[network.value]}
+                    style={{ border: `1px solid ${colortheme[network.value].border}` }}
+                    colortheme={colortheme[network.value]}
                   />
                 </>
               )}
@@ -126,7 +126,8 @@ export default class CrustApp extends Component {
                 page={page}
                 changePage={changePage}
                 menuWidth={language === CHINESE ? 120 : 170}
-                colorTheme={colorTheme[network.value]}
+                colortheme={colortheme[network.value]}
+                {...otherProps}
               />
               <CopyToClipboard text={account ? account.address : ''}>
                 <FontMedium
@@ -134,7 +135,7 @@ export default class CrustApp extends Component {
                   text={account ? account.alias : ''}
                   page={page}
                   onClick={onCopyAddress}
-                  colorTheme={colorTheme[network.value]}
+                  colortheme={colortheme[network.value]}
                 />
               </CopyToClipboard>
             </div>

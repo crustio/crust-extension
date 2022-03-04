@@ -10,18 +10,13 @@
 
 .contact-fname-input {
   width: 100%;
+  border-radius: 12px;
+  height: 50px;
 }
 
 .contact-fname-input fieldset {
   border: 0;
   font-size: 14px;
-  background-color: transparent;
-  border: 2px solid #ECEDEF !important;
-}
-
-.contact-fname-input:focus-within fieldset {
-  background-color: transparent;
-  border: 2px solid #ECEDEF !important;
 }
 
 .contact-fname-input-meter {
@@ -34,18 +29,13 @@
 
 .contact-lname-input {
   width: 100%;
+  border-radius: 12px;
+  height: 50px;
 }
 
 .contact-lname-input fieldset {
   border: 0;
   font-size: 14px;
-  background-color: transparent;
-  border: 2px solid #ECEDEF !important;
-}
-
-.contact-lname-input:focus-within fieldset {
-  background-color: transparent;
-  border: 2px solid #ECEDEF !important;
 }
 
 .contact-lname-input-meter {
