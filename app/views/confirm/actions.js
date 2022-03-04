@@ -10,8 +10,7 @@ export const submitTransaction = (confirmDetails, password) => async dispatch =>
     dispatch(updateAppLoading(true));
     await Account.verifyPassword(password);
     const { result } = await Transaction.submitTransaction(confirmDetails, password);
-    // eslint-disable-next-line
-    console.log('submit result from confirm action: ', result);
+
     dispatch(getTransactions);
     dispatch(fetchTransactionHistory);
     dispatch(changePage(DASHBOARD_PAGE));

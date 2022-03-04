@@ -38,8 +38,6 @@ class Confirm extends Component {
     } = this.props;
     const { password } = this.state;
     const tx = await submitTransaction(confirmDetails, password);
-    // eslint-disable-next-line
-    console.log('submit result from confirm component: ', tx);
 
     if (tx === 'Password is incorrect.') {
       this.setState({
