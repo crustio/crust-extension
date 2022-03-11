@@ -438,11 +438,7 @@ class ImportPhrase extends Component {
               : 'import-phrase-settings'
           }
         />
-        <FooterButton
-          name={t(buttonName)}
-          onClick={onSubmit}
-          style={{ paddingLeft: 20, paddingRight: 16 }}
-        />
+        <FooterButton name={t(buttonName)} onClick={onSubmit} />
         <AlertDailog
           isOpen={this.state.isOpen}
           handleClose={this.handleCloseDialog}

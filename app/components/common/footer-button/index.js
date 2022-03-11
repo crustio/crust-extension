@@ -10,10 +10,12 @@ export default class FooterButton extends Component {
       <div
         style={{
           position: 'absolute',
-          top: '544px',
+          bottom: '11px',
           alignSelf: 'center',
           justifyContent: 'center',
           display: 'flex',
+          width: '100%',
+          left: 0,
           ...style,
         }}
         {...otherProps}

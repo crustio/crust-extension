@@ -1,24 +1,27 @@
 .sign-in-container {
   height: 600px;
-  padding: 40px 18px 0px 18px;
+  padding: 40px 0px 0px 0px;
   display: flex;
   flex-direction: column;
 }
 
 .sign-in-container-password {
   position: absolute;
-  top: 472px;
+  bottom: 83px;
   align-self: center;
   justify-content: center;
   display: flex;
+  width: 100%;
+  left: 0;
 }
 
 .sign-in-password-container {
   display: flex;
-  width: 321px;
+  width: 95%;
   height: 45.82px;
   color: #858B9C;
   border-radius: 8px;
+  margin: 0 auto;
 }
 
 .sign-in-password-container fieldset {

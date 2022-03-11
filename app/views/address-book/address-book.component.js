@@ -207,11 +207,7 @@ class AddressBook extends Component {
           </div>
         </div>
         {selectedAddressList.length === 0 ? (
-          <FooterButton
-            onClick={this.handleAddAddressClick}
-            name={t('Create')}
-            style={{ marginLeft: 20 }}
-          />
+          <FooterButton onClick={this.handleAddAddressClick} name={t('Create')} />
         ) : (
           <FooterWithTwoButton
             onNextClick={this.handleAddAddressClick}

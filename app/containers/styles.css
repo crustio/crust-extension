@@ -7,12 +7,6 @@
 
 body {
   background: white;
-  min-height: 600px !important;
-  height: 600px !important;
-  max-height: 600px !important;
-  width: 360px;
-  max-width: 360px;
-  min-width: 360px;
   overflow: hidden;
   margin: 0px;
   padding: 0px;

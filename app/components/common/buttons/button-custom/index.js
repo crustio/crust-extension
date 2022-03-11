@@ -23,8 +23,9 @@ class ButtonCustom extends Component {
       borderRadius: '12px',
       height: `${this.props.height ? this.props.height : '45px'}`,
       border: `${this.props.border ? this.props.border : 'none'}`,
-      width: `${this.props.width ? this.props.width : '320px'}`,
+      width: `${this.props.width ? this.props.width : '94%'}`,
       background: `${this.props.background ? this.props.background : 'white'}`,
+      margin: '0 auto',
       color: `${textColor || '#FF8D00'}`,
     };
 
@@ -33,7 +34,10 @@ class ButtonCustom extends Component {
       'button-custom1': custom,
     });
     return (
-      <div className={buttonCustomClassNames}>
+      <div
+        className={buttonCustomClassNames}
+        style={{ width: '96%', display: 'flex', margin: '0 auto' }}
+      >
         <Button
           disabled={this.props.disabled}
           style={styles}
