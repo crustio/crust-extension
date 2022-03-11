@@ -35,6 +35,7 @@ export const handleError = (err, data) => {
 };
 
 export const authorizeDApp = async data => {
+  console.log('dapp data: ', data);
   const response = await sendMessage({
     ...data,
     type: MessageTypes.BG_DAPP_AUTHORIZE,

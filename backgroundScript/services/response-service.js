@@ -242,8 +242,6 @@ export const getAccounts = async (request, sendResponse) => {
       sendResponse({ ...success, result });
     }
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('getAccountStateForUi::', err);
     sendResponse({ ...failure, message: 'Error in getting accounts' });
   }
 };
