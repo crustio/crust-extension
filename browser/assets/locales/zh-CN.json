@@ -85,7 +85,7 @@
   "Generate Seed Phrase": "生成助记词",
   "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.": "这个助记词用来生成您的首个账户。安全地保存好并且不要分享给别人。",
   "Nickname": "昵称",
-  "Keypair Crypto Type": "Keypair加密类型",
+  "Keypair Encryption Type": "Keypair加密类型",
   "Import Seed Phrase": "导入助记词",
   "Please input your seed phrase to import account.": "请您输入助记词来导入账户",
   "Type or paste your seed phrase...": "输入或粘贴你的助记词...",

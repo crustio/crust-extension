@@ -85,7 +85,7 @@
     "Generate Seed Phrase": "Generate Seed Phrase",
     "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.": "This seed phrase is used to generate your first account. Save this somewhere safe and don't share it.",
     "Nickname": "Nickname",
-    "Keypair Crypto Type": "Keypair Crypto Type",
+    "Keypair Encryption Type": "Keypair Encryption Type",
     "Import Seed Phrase": "Import Seed Phrase",
     "Please input your seed phrase to import account.": "Please input your seed phrase to import account.",
     "Type or paste your seed phrase...": "Type or paste your seed phrase...",

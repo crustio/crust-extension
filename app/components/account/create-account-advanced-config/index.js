@@ -25,7 +25,7 @@ class CreateAccountAdvancedConfig extends Component {
           colortheme={colortheme}
         >
           <FontRegular
-            text={t('Keypair Crypto Type')}
+            text={t('Keypair Encryption Type')}
             style={{
               fontSize: 14,
               fontWeight: 'bolder',

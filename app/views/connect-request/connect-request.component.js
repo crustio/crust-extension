@@ -109,7 +109,7 @@ class ConnectRequest extends Component {
           nextBackground={colortheme[network.value].button.primary.main}
           backColor={colortheme[network.value].button.tertiary.text}
           backBackground={colortheme[network.value].button.tertiary.main}
-          style={{ maxWidth: 300, marginRight: 'auto', marginLeft: 'auto' }}
+          style={{ marginRight: 'auto', marginLeft: 'auto' }}
         />
       </div>
     );
