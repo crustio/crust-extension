@@ -171,6 +171,7 @@ export const fetchTransactionHistory = isInit => async (dispatch, getState) => {
   } = getState().accountReducer;
   const { network } = getState().networkReducer;
   const { transactionHistory, transactionPage } = getState().dashboardReducer;
+  dispatch(AppActions.updateAppLoading(true));
 
   const response = isInit ? [] : transactionHistory;
   const networkUrl = network.value === CRUST_MAXWELL_NETWORK.value
@@ -179,6 +180,7 @@ export const fetchTransactionHistory = isInit => async (dispatch, getState) => {
       ? 'crust'
       : '';
   if (isInit) {
+    dispatch(updateTransactionHistory([]));
     dispatch(updateLoadMore(true));
   }
   const result = await fetchTransactionHistoryByPage(
@@ -205,5 +207,6 @@ export const fetchTransactionHistory = isInit => async (dispatch, getState) => {
     }
   }
   dispatch(updateTransactionHistory(response));
+  dispatch(AppActions.updateAppLoading(false));
   return response;
 };
