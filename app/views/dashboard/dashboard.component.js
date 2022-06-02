@@ -153,6 +153,7 @@ class Dashboard extends Component {
       tokens,
       loadMore,
       t,
+      fetchTransactionHistory,
     } = this.props;
     const { labels, value } = this.state;
     const tLabels = labels.map(l => t(l));
@@ -319,6 +320,7 @@ class Dashboard extends Component {
                 isLinkToFaucet={isLinkToFaucet}
                 transactions={getTransfersWithMoment(transactionHistory)}
                 colortheme={colortheme[network.value]}
+                fetchTransactionHistory={fetchTransactionHistory}
               />
             )}
           </>
